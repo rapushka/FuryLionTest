@@ -10,10 +10,12 @@ namespace Code.Infrastructure
 		[SerializeField] private OverlapMouse _overlapMouse;
 		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
+		[SerializeField] private Token.Token[] _tokens;
 
 		private void Awake()
 		{
-			_field.Construct(_lineRenderer);
+			var chain = new Chain(_tokens);
+			_field.Construct(_lineRenderer, chain);
 		}
 
 		private void OnEnable()
