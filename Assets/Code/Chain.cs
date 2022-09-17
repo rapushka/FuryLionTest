@@ -9,8 +9,9 @@ namespace Code
 	{
 		private readonly Token.Token[] _tokens;
 
-		private bool _chainStarted;
+		private bool _chainComposing;
 		private readonly List<Token.Token> _addedTokens;
+		private Token.Token _cachedToken;
 
 		public Chain(Token.Token[] tokens)
 		{
@@ -20,7 +21,7 @@ namespace Code
 
 		public void StartComposing(Vector2 position)
 		{
-			_chainStarted = true;
+			_chainComposing = true;
 			AddTokenAt(position);
 		}
 
@@ -34,11 +35,11 @@ namespace Code
 		public void EndComposing()
 		{
 			_addedTokens.Clear();
-			_chainStarted = false;
+			_chainComposing = false;
 		}
 
 		private bool TokenCanBeAdded(Vector2 position)
-			=> _chainStarted && TokenNotYetAdded(position) && TokenIsFittingType(position);
+			=> _chainComposing && TokenNotYetAdded(position) && TokenIsFittingType(position);
 
 		private void AddTokenAt(Vector2 position) => _addedTokens.Add(GetTokenByPosition(position));
 
@@ -49,6 +50,14 @@ namespace Code
 			=> GetTokenByPosition(position).TokenType == _addedTokens.First().TokenType;
 
 		private Token.Token GetTokenByPosition(Vector2 position)
-			=> _tokens.First((token) => (Vector2)token.transform.position == position);
+		{
+			if (_cachedToken == false
+			    || (Vector2)_cachedToken.transform.position != position)
+			{
+				_cachedToken = _tokens.First((token) => (Vector2)token.transform.position == position);
+			}
+
+			return _cachedToken;
+		}
 	}
 }
