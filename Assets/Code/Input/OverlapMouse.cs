@@ -1,9 +1,8 @@
 using System;
-using Code.Services;
 using Code.Workflow.Extensions;
 using UnityEngine;
 
-namespace Code
+namespace Code.Input
 {
 	public class OverlapMouse : MonoBehaviour
 	{
@@ -12,7 +11,7 @@ namespace Code
 
 		private Camera _camera;
 		private bool _isPressed;
-		private Collider2D[] _results;
+		private Collider2D[] _overlapResults;
 
 		public event Action<Vector2> TokenTouched;
 
@@ -28,7 +27,7 @@ namespace Code
 
 		private void Start()
 		{
-			_results = new Collider2D[1];
+			_overlapResults = new Collider2D[1];
 			_camera = Camera.main;
 		}
 
@@ -37,17 +36,17 @@ namespace Code
 		private void OverlapMousePosition()
 		{
 			if (_isPressed
-			    && AnyHit())
+			    && AnyColliderHit())
 			{
-				_results.ForEach((r) => TokenTouched?.Invoke(r.transform.position));
+				_overlapResults.ForEach((r) => TokenTouched?.Invoke(r.transform.position));
 			}
 		}
 
-		private bool AnyHit() => Overlap() != 0;
+		private bool AnyColliderHit() => Overlap() != 0;
 
-		private int Overlap() => Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _results);
+		private int Overlap() => Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _overlapResults);
 
-		private Vector2 MouseWorldPosition() => _camera.ScreenToWorldPoint(Input.mousePosition);
+		private Vector2 MouseWorldPosition() => _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
 
 		private void OnDisable()
 		{

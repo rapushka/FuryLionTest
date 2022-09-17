@@ -2,7 +2,7 @@ using System;
 using Code.Workflow.Extensions;
 using UnityEngine;
 
-namespace Code.Services
+namespace Code.Input
 {
 	public class InputService : MonoBehaviour
 	{
@@ -11,8 +11,8 @@ namespace Code.Services
 
 		private void Update()
 		{
-			this.Do((_) => MouseDown?.Invoke(), @if: Input.GetMouseButtonDown(0));
-			this.Do((_) => MouseUp?.Invoke(), @if: Input.GetMouseButtonUp(0));
+			this.Do((_) => MouseDown?.Invoke(), @if: UnityEngine.Input.GetMouseButtonDown(0));
+			this.Do((_) => MouseUp?.Invoke(), @if: UnityEngine.Input.GetMouseButtonUp(0));
 		}
 	}
 }

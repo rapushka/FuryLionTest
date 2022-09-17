@@ -1,4 +1,4 @@
-namespace Code
+namespace Code.Token
 {
 	public enum TokenType
 	{

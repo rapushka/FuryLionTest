@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Code.Workflow.Extensions;
 using UnityEngine;
 
-namespace Code
+namespace Code.Environment
 {
 	public class LineDrawer
 	{
