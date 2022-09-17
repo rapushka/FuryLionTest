@@ -7,23 +7,16 @@ namespace Code.Input
 	public class OverlapMouse : MonoBehaviour
 	{
 		[SerializeField] private float _overlapRadius = 0.01f;
-		[SerializeField] private InputService _inputService;
 
 		private Camera _camera;
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
 		public event Action<Vector2> TokenTouched;
+		
+		public void OnInputServiceOnMouseDown() => _isPressed = true;
 
-		private void OnEnable()
-		{
-			_inputService.MouseDown += OnInputServiceOnMouseDown;
-			_inputService.MouseUp += OnInputServiceOnMouseUp;
-		}
-
-		private void OnInputServiceOnMouseDown() => _isPressed = true;
-
-		private void OnInputServiceOnMouseUp() => _isPressed = false;
+		public void OnInputServiceOnMouseUp() => _isPressed = false;
 
 		private void Start()
 		{
@@ -47,11 +40,5 @@ namespace Code.Input
 		private int Overlap() => Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _overlapResults);
 
 		private Vector2 MouseWorldPosition() => _camera.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
-
-		private void OnDisable()
-		{
-			_inputService.MouseDown -= OnInputServiceOnMouseDown;
-			_inputService.MouseUp -= OnInputServiceOnMouseUp;
-		}
 	}
 }

@@ -8,12 +8,28 @@ namespace Code.Infrastructure
 	{
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private OverlapMouse _overlapMouse;
+		[SerializeField] private InputService _inputService;
 		
-		private void Awake()
-		{
-			var lineDrawer = new LineDrawer(_lineRenderer);
+		private LineDrawer _lineDrawer;
 
-			_overlapMouse.TokenTouched += lineDrawer.OnTokenTouched;
+		private void Awake() => _lineDrawer = new LineDrawer(_lineRenderer);
+
+		private void OnEnable()
+		{
+			_inputService.MouseDown += _overlapMouse.OnInputServiceOnMouseDown;
+			_inputService.MouseUp += _overlapMouse.OnInputServiceOnMouseUp;
+			
+			_overlapMouse.TokenTouched += _lineDrawer.AddTokenPosition;
+			_inputService.MouseUp += _lineDrawer.ClearTokens;
+		}
+
+		private void OnDisable()
+		{
+			_inputService.MouseDown -= _overlapMouse.OnInputServiceOnMouseDown;
+			_inputService.MouseUp -= _overlapMouse.OnInputServiceOnMouseUp;
+			
+			_overlapMouse.TokenTouched -= _lineDrawer.AddTokenPosition;
+			_inputService.MouseUp -= _lineDrawer.ClearTokens;
 		}
 	}
 }
