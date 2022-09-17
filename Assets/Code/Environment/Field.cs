@@ -41,7 +41,10 @@ namespace Code.Environment
 			   .Do(_addedTokens.Add);
 
 		private bool TokenCanBeAdded(Vector2 position)
-			=> _chainStarted && TokenIsFittingType(position);
+			=> _chainStarted && TokenNotYetAdded(position) && TokenIsFittingType(position);
+
+		private bool TokenNotYetAdded(Vector2 position)
+			=> _addedTokens.Contains(GetTokenByPosition(position)) == false;
 
 		private bool TokenIsFittingType(Vector2 position)
 			=> GetTokenByPosition(position).TokenType == _addedTokens.First().TokenType;
