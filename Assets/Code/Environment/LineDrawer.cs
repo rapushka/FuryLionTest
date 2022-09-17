@@ -15,7 +15,7 @@ namespace Code.Environment
 			_cashedPositions = new List<Vector2>();
 		}
 
-		public void OnTokenTouched(Vector2 position)
+		public void AddTokenPosition(Vector2 position)
 		{
 			if (_cashedPositions.Contains(position))
 			{
@@ -24,6 +24,12 @@ namespace Code.Environment
 			
 			_cashedPositions.Add(position);
 			_lineRenderer.Add(position);
+		}
+
+		public void ClearTokens()
+		{
+			_cashedPositions.Clear();
+			_lineRenderer.positionCount = 0;
 		}
 	}
 }
