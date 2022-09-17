@@ -4,11 +4,13 @@ namespace Code.Workflow.Extensions
 {
 	public static class LineRendererExtensions
 	{
-		public static void Add(this LineRenderer @this, Vector3 position)
+		public static void AddPosition(this LineRenderer @this, Vector2 position)
 		{
 			@this.positionCount++;
 			var index = @this.positionCount - 1;
-			@this.SetPosition(index, position);			
+			@this.SetPosition(index, position);		
 		}
+
+		public static void ClearPositions(this LineRenderer @this) => @this.positionCount = 0;
 	}
 }

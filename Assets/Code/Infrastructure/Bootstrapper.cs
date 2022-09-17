@@ -10,19 +10,18 @@ namespace Code.Infrastructure
 		[SerializeField] private OverlapMouse _overlapMouse;
 		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
-
-		private LineDrawer _lineDrawer;
+		[SerializeField] private Token.Token[] _tokens;
 
 		private void Awake()
 		{
-			_lineDrawer = new LineDrawer(_lineRenderer);
-			_field.Construct(_lineDrawer);
+			var chain = new Chain(_tokens);
+			_field.Construct(_lineRenderer, chain);
 		}
 
 		private void OnEnable()
 		{
-			_inputService.MouseDown += _overlapMouse.OnInputServiceOnMouseDown;
-			_inputService.MouseUp += _overlapMouse.OnInputServiceOnMouseUp;
+			_inputService.MouseDown += _overlapMouse.EnableOverlapping;
+			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
 			_inputService.MouseUp += _field.EndChain;
 			
 			_overlapMouse.TokenHit += _field.AddTokenToChain;
@@ -31,8 +30,8 @@ namespace Code.Infrastructure
 
 		private void OnDisable()
 		{
-			_inputService.MouseDown -= _overlapMouse.OnInputServiceOnMouseDown;
-			_inputService.MouseUp -= _overlapMouse.OnInputServiceOnMouseUp;
+			_inputService.MouseDown -= _overlapMouse.EnableOverlapping;
+			_inputService.MouseUp -= _overlapMouse.DisableOverlapping;
 			_inputService.MouseUp -= _field.EndChain;
 			
 			_overlapMouse.TokenHit -= _field.AddTokenToChain;
