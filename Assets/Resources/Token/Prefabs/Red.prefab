@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2278442097838522370}
   - component: {fileID: 3340949127831052693}
+  - component: {fileID: -1589647713080509221}
+  - component: {fileID: 5844483592098527437}
   m_Layer: 0
   m_Name: Red
   m_TagString: Untagged
@@ -84,3 +86,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1589647713080509221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253346015291329422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21213f740e7fe20459eae73165aa527e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &5844483592098527437
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253346015291329422}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
