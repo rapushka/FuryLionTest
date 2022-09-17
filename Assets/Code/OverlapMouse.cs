@@ -1,5 +1,7 @@
 using System;
 using Code.Services;
+using Code.Workflow.Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Code
@@ -31,26 +33,20 @@ namespace Code
 			_camera = Camera.main;
 		}
 
-		private void Update() => Overlap();
+		private void Update() => OverlapMousePosition();
 
-		private void Overlap()
+		private void OverlapMousePosition()
 		{
-			if (_isPressed == false)
+			if (_isPressed
+			    && AnyHit())
 			{
-				return;
-			}
-
-			var hitsCount = Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _results);
-			if (hitsCount == 0)
-			{
-				return;
-			}
-
-			foreach (Collider2D result in _results)
-			{
-				TokenTouched?.Invoke(result.transform.position);
+				_results.ForEach((r) => TokenTouched?.Invoke(r.transform.position));
 			}
 		}
+
+		private bool AnyHit() => Overlap() != 0;
+
+		private int Overlap() => Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _results);
 
 		private Vector2 MouseWorldPosition() => _camera.ScreenToWorldPoint(Input.mousePosition);
 
