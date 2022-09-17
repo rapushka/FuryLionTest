@@ -11,12 +11,9 @@ namespace Code.Infrastructure
 		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
 
-		private LineDrawer _lineDrawer;
-
 		private void Awake()
 		{
-			_lineDrawer = new LineDrawer(_lineRenderer);
-			_field.Construct(_lineDrawer);
+			_field.Construct(_lineRenderer);
 		}
 
 		private void OnEnable()

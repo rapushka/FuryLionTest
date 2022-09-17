@@ -10,12 +10,12 @@ namespace Code.Environment
 		[SerializeField] private Token.Token[] _tokens;
 
 		private List<Token.Token> _addedTokens;
-		private LineDrawer _lineDrawer;
+		private LineRenderer _lineRenderer;
 		private bool _chainStarted;
 
-		public void Construct(LineDrawer lineDrawer)
+		public void Construct(LineRenderer lineRenderer)
 		{
-			_lineDrawer = lineDrawer;
+			_lineRenderer = lineRenderer;
 			_addedTokens = new List<Token.Token>();
 		}
 
@@ -29,14 +29,14 @@ namespace Code.Environment
 
 		public void EndChain()
 		{
-			_lineDrawer.ClearTokens();
+			_lineRenderer.ClearPositions();
 			_addedTokens.Clear();
 			_chainStarted = false;
 		}
 
 		private void AddTokenAt(Vector2 position)
 			=> position
-			   .Do(_lineDrawer.AddTokenPosition)
+			   .Do(_lineRenderer.AddPosition)
 			   .Select(GetTokenByPosition)
 			   .Do(_addedTokens.Add);
 
