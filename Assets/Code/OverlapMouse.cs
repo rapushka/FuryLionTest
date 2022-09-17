@@ -1,3 +1,5 @@
+using System;
+using Code.Services;
 using UnityEngine;
 
 namespace Code
@@ -5,10 +7,23 @@ namespace Code
 	public class OverlapMouse : MonoBehaviour
 	{
 		[SerializeField] private float _overlapRadius = 0.01f;
+		[SerializeField] private InputService _inputService;
 
 		private Camera _camera;
 		private bool _isPressed;
 		private Collider2D[] _results;
+
+		public event Action<Vector2> TokenTouched;
+
+		private void OnEnable()
+		{
+			_inputService.MouseDown += OnInputServiceOnMouseDown;
+			_inputService.MouseUp += OnInputServiceOnMouseUp;
+		}
+
+		private void OnInputServiceOnMouseDown() => _isPressed = true;
+
+		private void OnInputServiceOnMouseUp() => _isPressed = false;
 
 		private void Start()
 		{
@@ -16,33 +31,16 @@ namespace Code
 			_camera = Camera.main;
 		}
 
-		private void Update()
-		{
-			UpdateMouseState();
-			OverlapMousePosition();
-		}
+		private void Update() => Overlap();
 
-		private void UpdateMouseState()
-		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				_isPressed = true;
-			}
-
-			if (Input.GetMouseButtonUp(0))
-			{
-				_isPressed = false;
-			}
-		}
-
-		private void OverlapMousePosition()
+		private void Overlap()
 		{
 			if (_isPressed == false)
 			{
 				return;
 			}
 
-			int hitsCount = Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _results);
+			var hitsCount = Physics2D.OverlapCircleNonAlloc(MouseWorldPosition(), _overlapRadius, _results);
 			if (hitsCount == 0)
 			{
 				return;
@@ -50,10 +48,16 @@ namespace Code
 
 			foreach (Collider2D result in _results)
 			{
-				Debug.Log(result.transform.position);
+				TokenTouched?.Invoke(result.transform.position);
 			}
 		}
 
 		private Vector2 MouseWorldPosition() => _camera.ScreenToWorldPoint(Input.mousePosition);
+
+		private void OnDisable()
+		{
+			_inputService.MouseDown -= OnInputServiceOnMouseDown;
+			_inputService.MouseUp -= OnInputServiceOnMouseUp;
+		}
 	}
 }
