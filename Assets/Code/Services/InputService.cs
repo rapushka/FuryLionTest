@@ -1,4 +1,5 @@
 using System;
+using Code.Workflow.Extensions;
 using UnityEngine;
 
 namespace Code.Services
@@ -10,15 +11,8 @@ namespace Code.Services
 
 		private void Update()
 		{
-			if (Input.GetMouseButtonDown(0))
-			{
-				MouseDown?.Invoke();
-			}
-
-			if (Input.GetMouseButtonUp(0))
-			{
-				MouseUp?.Invoke();
-			}
+			this.Do((_) => MouseDown?.Invoke(), @if: Input.GetMouseButtonDown(0));
+			this.Do((_) => MouseUp?.Invoke(), @if: Input.GetMouseButtonUp(0));
 		}
 	}
 }
