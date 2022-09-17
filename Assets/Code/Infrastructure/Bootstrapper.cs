@@ -18,8 +18,8 @@ namespace Code.Infrastructure
 
 		private void OnEnable()
 		{
-			_inputService.MouseDown += _overlapMouse.OnInputServiceOnMouseDown;
-			_inputService.MouseUp += _overlapMouse.OnInputServiceOnMouseUp;
+			_inputService.MouseDown += _overlapMouse.EnableOverlapping;
+			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
 			_inputService.MouseUp += _field.EndChain;
 			
 			_overlapMouse.TokenHit += _field.AddTokenToChain;
@@ -28,8 +28,8 @@ namespace Code.Infrastructure
 
 		private void OnDisable()
 		{
-			_inputService.MouseDown -= _overlapMouse.OnInputServiceOnMouseDown;
-			_inputService.MouseUp -= _overlapMouse.OnInputServiceOnMouseUp;
+			_inputService.MouseDown -= _overlapMouse.EnableOverlapping;
+			_inputService.MouseUp -= _overlapMouse.DisableOverlapping;
 			_inputService.MouseUp -= _field.EndChain;
 			
 			_overlapMouse.TokenHit -= _field.AddTokenToChain;
