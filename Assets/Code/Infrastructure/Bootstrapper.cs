@@ -1,5 +1,6 @@
 using Code.Environment;
 using Code.Input;
+using TMPro;
 using UnityEngine;
 
 namespace Code.Infrastructure
@@ -18,18 +19,19 @@ namespace Code.Infrastructure
 		{
 			_inputService.MouseDown += _overlapMouse.OnInputServiceOnMouseDown;
 			_inputService.MouseUp += _overlapMouse.OnInputServiceOnMouseUp;
-			
-			_overlapMouse.TokenTouched += _lineDrawer.AddTokenPosition;
 			_inputService.MouseUp += _lineDrawer.ClearTokens;
+			
+			_overlapMouse.TokenHit += _lineDrawer.AddTokenPosition;
+			_overlapMouse.ClickOnToken += (p) => Debug.Log("Click on " + p);
 		}
 
 		private void OnDisable()
 		{
 			_inputService.MouseDown -= _overlapMouse.OnInputServiceOnMouseDown;
 			_inputService.MouseUp -= _overlapMouse.OnInputServiceOnMouseUp;
-			
-			_overlapMouse.TokenTouched -= _lineDrawer.AddTokenPosition;
 			_inputService.MouseUp -= _lineDrawer.ClearTokens;
+			
+			_overlapMouse.TokenHit -= _lineDrawer.AddTokenPosition;
 		}
 	}
 }
