@@ -50,7 +50,8 @@ namespace Code.Gameplay
 		}
 
 		private bool IsPenultimate(Vector2 nextPosition)
-			=> nextPosition == _chainedTokens.Last.Previous?.Value;
+			=> _chainedTokens.Last is { Previous: { } } 
+			   && nextPosition == _chainedTokens.Last.Previous.Value;
 
 		private void RemoveLastToken(Vector2 nextPosition)
 		{
