@@ -8,7 +8,7 @@ namespace Code.Gameplay
 	public class Chain
 	{
 		private readonly Field _field;
-		private readonly List<Token> _chainedTokens;
+		private readonly LinkedList<Token> _chainedTokens;
 
 		private bool _chainComposingInProcess;
 
@@ -16,7 +16,7 @@ namespace Code.Gameplay
 		{
 			_field = field;
 
-			_chainedTokens = new List<Token>();
+			_chainedTokens = new LinkedList<Token>();
 		}
 
 		public void StartComposing(Vector2 position)
@@ -46,7 +46,7 @@ namespace Code.Gameplay
 			   && TokenIsFittingType(position)
 			   && IsNeighborForLastToken(position);
 
-		private void AddTokenAt(Vector2 position) => _chainedTokens.Add(_field[position]);
+		private void AddTokenAt(Vector2 position) => _chainedTokens.AddLast(_field[position]);
 
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(_field[position]) == false;
