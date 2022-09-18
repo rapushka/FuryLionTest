@@ -2,7 +2,6 @@ namespace Code.Gameplay
 {
 	public enum TokenType
 	{
-		Random,
 		Empty,
 		Red,
 		Green,
@@ -11,6 +10,7 @@ namespace Code.Gameplay
 		Pink,
 		Rock,	
 		DoubledRock,
-		Ice
+		Ice,
+		Random
 	}
 }

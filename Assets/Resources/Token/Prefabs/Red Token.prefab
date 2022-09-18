@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: _tokenType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_RootOrder
