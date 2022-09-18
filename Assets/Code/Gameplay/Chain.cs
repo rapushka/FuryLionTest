@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Workflow.Extensions;
@@ -11,6 +12,10 @@ namespace Code.Gameplay
 		private readonly LinkedList<Token> _chainedTokens;
 
 		private bool _chainComposingInProcess;
+
+		public event Action<Vector2> TokenAdded;
+		public event Action LastTokenRemoved;
+		public event Action ChainEnded;
 
 		public Chain(Field field)
 		{
@@ -26,22 +31,10 @@ namespace Code.Gameplay
 			position.Do(AddTokenAt, @if: isNotStartedYet);
 		}
 
-		public int NextToken(Vector2 position)
-			=> RemoveTokenIfPenultimate(position) ? -1 :
-				AddIfNew(position) ? 1 : 0;
-
-		private bool AddIfNew(Vector2 position)
+		public void NextToken(Vector2 nextPosition)
 		{
-			var tokenCanBeAdded = TokenCanBeAdded(position);
-			position.Do(AddTokenAt, @if: tokenCanBeAdded);
-			return tokenCanBeAdded;
-		}
-
-		private bool RemoveTokenIfPenultimate(Vector2 position)
-		{
-			var isPenultimate = _field[position] == _chainedTokens.Last.Previous?.Value;
-			_chainedTokens.Do((c) => c.RemoveLast(), @if: isPenultimate);
-			return isPenultimate;
+			RemoveLastTokenIfPenultimate(nextPosition);
+			AddIfNew(nextPosition);
 		}
 
 		public void EndComposing()
@@ -49,6 +42,20 @@ namespace Code.Gameplay
 			var isNotEndedYet = _chainComposingInProcess;
 			_chainComposingInProcess = false;
 			_chainedTokens.Do((c) => c.Clear(), @if: isNotEndedYet);
+			ChainEnded?.Invoke();
+		}
+
+		private void AddIfNew(Vector2 position)
+		{
+			var tokenCanBeAdded = TokenCanBeAdded(position);
+			position.Do(AddTokenAt, @if: tokenCanBeAdded);
+		}
+
+		private void RemoveLastTokenIfPenultimate(Vector2 nextPosition)
+		{
+			var isPenultimate = _field[nextPosition] == _chainedTokens.Last.Previous?.Value;
+			_chainedTokens.Do((c) => c.RemoveLast(), @if: isPenultimate);
+			LastTokenRemoved.Do((e) => e?.Invoke(), @if: isPenultimate);
 		}
 
 		private bool TokenCanBeAdded(Vector2 position)
@@ -57,7 +64,11 @@ namespace Code.Gameplay
 			   && TokenIsFittingType(position)
 			   && IsNeighborForLastToken(position);
 
-		private void AddTokenAt(Vector2 position) => _chainedTokens.AddLast(_field[position]);
+		private void AddTokenAt(Vector2 position)
+		{
+			_chainedTokens.AddLast(_field[position]);
+			TokenAdded?.Invoke(position);
+		}
 
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(_field[position]) == false;

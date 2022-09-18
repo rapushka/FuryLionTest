@@ -11,7 +11,13 @@ namespace Code.Workflow.Extensions
 			@this.SetPosition(index, position);		
 		}
 		
-		public static void RemoveLastPosition(this LineRenderer @this) => @this.positionCount--;
+		public static void RemoveLastPosition(this LineRenderer @this)
+		{
+			if (@this.positionCount > 0)
+			{
+				@this.positionCount--;
+			}
+		}
 
 		public static void ClearPositions(this LineRenderer @this) => @this.positionCount = 0;
 	}
