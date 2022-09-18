@@ -1,5 +1,5 @@
 using System;
-using Code.Workflow.Extensions;
+using Code.Extensions;
 using UnityEngine;
 
 namespace Code.Input

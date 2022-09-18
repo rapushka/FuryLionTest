@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.Workflow.Extensions
+namespace Code.Extensions
 {
 	public static class GenericExtensions
 	{

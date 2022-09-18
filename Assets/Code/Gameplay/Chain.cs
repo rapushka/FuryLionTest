@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Workflow.Extensions;
+using Code.Extensions;
 using UnityEngine;
 
 namespace Code.Gameplay

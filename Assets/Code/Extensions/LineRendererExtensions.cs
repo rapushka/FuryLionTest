@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Workflow.Extensions
+namespace Code.Extensions
 {
 	public static class LineRendererExtensions
 	{
