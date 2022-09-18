@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Environment;
 using Code.Extensions;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Code.Gameplay
 	public class Chain
 	{
 		private readonly Field _field;
-		private readonly LinkedList<Token> _chainedTokens;
+		private readonly LinkedList<Vector2> _chainedTokens;
 
 		private bool _chainComposingInProcess;
 
@@ -21,8 +22,10 @@ namespace Code.Gameplay
 		{
 			_field = field;
 
-			_chainedTokens = new LinkedList<Token>();
+			_chainedTokens = new LinkedList<Vector2>();
 		}
+
+		private Vector2 ChainHead => _chainedTokens.First();
 
 		public void StartComposing(Vector2 position)
 		{
@@ -47,7 +50,7 @@ namespace Code.Gameplay
 		}
 
 		private bool IsPenultimate(Vector2 nextPosition)
-			=> _field[nextPosition] == _chainedTokens.Last.Previous?.Value;
+			=> nextPosition == _chainedTokens.Last.Previous?.Value;
 
 		private void RemoveLastToken(Vector2 nextPosition)
 		{
@@ -63,17 +66,17 @@ namespace Code.Gameplay
 
 		private void AddTokenAt(Vector2 position)
 		{
-			_chainedTokens.AddLast(_field[position]);
+			_chainedTokens.AddLast(position);
 			TokenAdded?.Invoke(position);
 		}
 
 		private bool TokenNotYetAdded(Vector2 position)
-			=> _chainedTokens.Contains(_field[position]) == false;
+			=> _chainedTokens.Contains(position) == false;
 
 		private bool TokenIsFittingType(Vector2 position)
-			=> _field[position].TokenType == _chainedTokens.First().TokenType;
+			=> _field[position].TokenType == _field[ChainHead].TokenType;
 
 		private bool IsNeighborForLastToken(Vector2 position)
-			=> _field.IsNeighboring(_chainedTokens.Last(), _field[position]);
+			=> _field.IsNeighboring(_chainedTokens.Last(), position);
 	}
 }

@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
+using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Gameplay
+namespace Code.Environment
 {
 	public class Field : MonoBehaviour
 	{
@@ -12,9 +13,9 @@ namespace Code.Gameplay
 		public Token this[Vector2 position]
 			=> _tokens.First((token) => (Vector2)token.transform.position == position);
 
-		public bool IsNeighboring(Token first, Token second)
+		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 		{
-			var deltaPosition = first.transform.position - second.transform.position;
+			var deltaPosition = firstPosition - secondPosition;
 			
 			return MathF.Abs(deltaPosition.x) <= _step
 			       && MathF.Abs(deltaPosition.y) <= _step;
