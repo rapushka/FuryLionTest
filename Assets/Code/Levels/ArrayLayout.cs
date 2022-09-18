@@ -14,15 +14,21 @@ namespace Code.Levels
 			Rows = new Row[Constants.GameFieldSize.Height];
 		}
 
-		[Serializable]
-		public class Row
+		public TokenType[,] ToRectangularArray()
 		{
-			public TokenType[] Value;
+			var xLength = Rows.Length;
+			var yLength = Rows[0].Value.Length;
+			var result = new TokenType[xLength, yLength];
 
-			public Row()
+			for (var i = 0; i < xLength; i++)
 			{
-				Value = new TokenType[Constants.GameFieldSize.Width];
+				for (var j = 0; j < yLength; j++)
+				{
+					result[i, j] = Rows[i].Value[j];
+				}
 			}
+
+			return result;
 		}
 	}
 }

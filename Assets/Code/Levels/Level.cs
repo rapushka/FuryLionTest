@@ -1,3 +1,4 @@
+using Code.Gameplay;
 using UnityEngine;
 
 namespace Code.Levels
@@ -6,5 +7,7 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private ArrayLayout _tokens;
+
+		public TokenType[,] GetArray() => _tokens.ToRectangularArray();
 	}
 }
