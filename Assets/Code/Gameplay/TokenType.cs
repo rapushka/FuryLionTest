@@ -11,6 +11,7 @@ namespace Code.Gameplay
 		Rock,	
 		DoubledRock,
 		Ice,
+		Border,
 		Random
 	}
 }
