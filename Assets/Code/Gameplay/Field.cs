@@ -14,10 +14,7 @@ namespace Code.Gameplay
 
 		public bool IsNeighboring(Token.Token first, Token.Token second)
 		{
-			var firstPosition = first.transform.position;
-			var secondPosition = second.transform.position;
-
-			var deltaPosition = firstPosition - secondPosition;
+			var deltaPosition = first.transform.position - second.transform.position;
 			
 			return MathF.Abs(deltaPosition.x) <= _step
 			       && MathF.Abs(deltaPosition.y) <= _step;

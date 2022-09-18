@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Code.Environment
 {
-	public class ChainView : MonoBehaviour
+	public class ChainRenderer
 	{
-		private LineRenderer _lineRenderer;
-		private Chain _chain;
+		private readonly LineRenderer _lineRenderer;
+		private readonly Chain _chain;
 
-		public void Construct(Chain chain, LineRenderer lineRenderer)
+		public ChainRenderer(Chain chain, LineRenderer lineRenderer)
 		{
 			_lineRenderer = lineRenderer;
 			_chain = chain;
