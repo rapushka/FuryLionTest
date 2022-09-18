@@ -1,14 +1,15 @@
+using Code.Gameplay;
 using Code.Workflow.Extensions;
 using UnityEngine;
 
 namespace Code.Environment
 {
-	public class Field : MonoBehaviour
+	public class ChainRenderer
 	{
-		private LineRenderer _lineRenderer;
-		private Chain _chain;
+		private readonly LineRenderer _lineRenderer;
+		private readonly Chain _chain;
 
-		public void Construct(LineRenderer lineRenderer, Chain chain)
+		public ChainRenderer(Chain chain, LineRenderer lineRenderer)
 		{
 			_lineRenderer = lineRenderer;
 			_chain = chain;
