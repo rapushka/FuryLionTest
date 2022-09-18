@@ -6,6 +6,5 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private ArrayLayout _tokens;
-		
 	}
 }
