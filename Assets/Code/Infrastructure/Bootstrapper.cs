@@ -13,31 +13,40 @@ namespace Code.Infrastructure
 		[SerializeField] private Field _field;
 
 		private ChainRenderer _chainRenderer;
-		
+		private Chain _chain;
+
 		private void Awake()
 		{
-			var chain = new Chain(_field);
-			_chainRenderer = new ChainRenderer(chain, _lineRenderer);
+			_chain = new Chain(_field);
+			_chainRenderer = new ChainRenderer(_lineRenderer);
 		}
 
 		private void OnEnable()
 		{
 			_inputService.MouseDown += _overlapMouse.EnableOverlapping;
 			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
-			_inputService.MouseUp += _chainRenderer.EndChain;
 			
-			_overlapMouse.TokenHit += _chainRenderer.AddTokenToChain;
-			_overlapMouse.ClickOnToken += _chainRenderer.StartChain;
+			_overlapMouse.ClickOnToken += _chain.StartComposing;
+			_overlapMouse.TokenHit += _chain.NextToken;
+			_inputService.MouseUp += _chain.EndComposing;
+
+			_chain.TokenAdded += _chainRenderer.OnTokenAdded;
+			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
+			_chain.ChainEnded += _chainRenderer.OnChainEnded;
 		}
 
 		private void OnDisable()
 		{
 			_inputService.MouseDown -= _overlapMouse.EnableOverlapping;
 			_inputService.MouseUp -= _overlapMouse.DisableOverlapping;
-			_inputService.MouseUp -= _chainRenderer.EndChain;
 			
-			_overlapMouse.TokenHit -= _chainRenderer.AddTokenToChain;
-			_overlapMouse.ClickOnToken -= _chainRenderer.StartChain;
+			_overlapMouse.ClickOnToken -= _chain.StartComposing;
+			_overlapMouse.TokenHit -= _chain.NextToken;
+			_inputService.MouseUp -= _chain.EndComposing;
+			
+			_chain.TokenAdded -= _chainRenderer.OnTokenAdded;
+			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
+			_chain.ChainEnded -= _chainRenderer.OnChainEnded;
 		}
 	}
 }
