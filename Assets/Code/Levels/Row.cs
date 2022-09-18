@@ -5,13 +5,13 @@ using Code.Gameplay;
 namespace Code.Levels
 {
 	[Serializable]
-	public class Row
+	public class Row<T>
 	{
-		public TokenType[] Value;
+		public T[] Value;
 
 		public Row()
 		{
-			Value = new TokenType[Constants.GameFieldSize.Width];
+			Value = new T[Constants.GameFieldSize.Width];
 		}
 	}
 }

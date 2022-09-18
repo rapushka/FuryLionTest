@@ -1,24 +1,23 @@
 using System;
 using Code.Common;
-using Code.Gameplay;
 
 namespace Code.Levels
 {
 	[Serializable]
-	public class ArrayLayout
+	public class ArrayLayout<T>
 	{
-		public Row[] Rows;
+		public Row<T>[] Rows;
 
 		public ArrayLayout()
 		{
-			Rows = new Row[Constants.GameFieldSize.Height];
+			Rows = new Row<T>[Constants.GameFieldSize.Height];
 		}
 
-		public TokenType[,] ToRectangularArray()
+		public T[,] ToRectangularArray()
 		{
 			var xLength = Rows.Length;
 			var yLength = Rows[0].Value.Length;
-			var result = new TokenType[xLength, yLength];
+			var result = new T[xLength, yLength];
 
 			for (var i = 0; i < xLength; i++)
 			{
