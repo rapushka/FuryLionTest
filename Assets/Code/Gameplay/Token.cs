@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Token
+namespace Code.Gameplay
 {
 	public class Token : MonoBehaviour
 	{
