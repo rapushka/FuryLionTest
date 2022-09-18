@@ -26,11 +26,22 @@ namespace Code.Gameplay
 			position.Do(AddTokenAt, @if: isNotStartedYet);
 		}
 
-		public bool TryAddToken(Vector2 position)
+		public int NextToken(Vector2 position)
+			=> RemoveTokenIfPenultimate(position) ? -1 :
+				AddIfNew(position) ? 1 : 0;
+
+		private bool AddIfNew(Vector2 position)
 		{
 			var tokenCanBeAdded = TokenCanBeAdded(position);
 			position.Do(AddTokenAt, @if: tokenCanBeAdded);
 			return tokenCanBeAdded;
+		}
+
+		private bool RemoveTokenIfPenultimate(Vector2 position)
+		{
+			var isPenultimate = _field[position] == _chainedTokens.Last.Previous?.Value;
+			_chainedTokens.Do((c) => c.RemoveLast(), @if: isPenultimate);
+			return isPenultimate;
 		}
 
 		public void EndComposing()

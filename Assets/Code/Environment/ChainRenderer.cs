@@ -21,8 +21,12 @@ namespace Code.Environment
 			_lineRenderer.AddPosition(position);
 		}
 
-		public void AddTokenToChain(Vector2 position) 
-			=> position.Do(_lineRenderer.AddPosition, @if: _chain.TryAddToken);
+		public void AddTokenToChain(Vector2 position)
+		{
+			var tokenAdded = _chain.NextToken(position);
+			position.Do(_lineRenderer.AddPosition, @if: tokenAdded == 1);
+			position.Do((_) => _lineRenderer.RemoveLastPosition(), @if: tokenAdded == -1);
+		}
 
 		public void EndChain()
 		{
