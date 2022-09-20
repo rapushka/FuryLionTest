@@ -18,7 +18,7 @@ namespace Code.Gameplay
 		private TokenType[,] _tokenTypes;
 
 		private static Vector2 FieldSize => new(GameFieldSize.Height, 0);
-		
+
 		public Token[,] Generate()
 		{
 			_tokenGameObjects = new Token[GameFieldSize.Height, GameFieldSize.Width];
@@ -40,7 +40,8 @@ namespace Code.Gameplay
 
 		private Token TokenOfCurrentType(TokenType currentType) => _tokens.First((t) => t.TokenType == currentType);
 
-		private Vector3 ScaledPosition(int x, int y) => (new Vector2(y, x) - FieldSize) * _step + _offset;
+		private Vector3 ScaledPosition(int x, int y) 
+			=> new Vector2(y, Mathf.Abs(x - (GameFieldSize.Height - 1))) * _step + _offset;
 
 		private static bool IsForCreation(TokenType tokenType) => tokenType != TokenType.Empty;
 	}
