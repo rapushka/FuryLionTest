@@ -1,8 +1,8 @@
-using System.Linq;
 using Code.Extensions;
 using Code.Levels;
 using UnityEngine;
 using static Code.Common.Constants;
+using Object = UnityEngine.Object;
 
 namespace Code.Gameplay
 {
@@ -11,8 +11,8 @@ namespace Code.Gameplay
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private float _step;
 		[SerializeField] private Vector2 _offset;
-		[SerializeField] private Token[] _tokens;
 		[SerializeField] private Transform _levelRoot;
+		[SerializeField] private TokenToTypeCollection _tokens;
 
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
@@ -39,7 +39,7 @@ namespace Code.Gameplay
 			where T : Object
 			=> Instantiate(original, position, Quaternion.identity, _levelRoot);
 
-		private Token TokenByType(TokenType currentType) => _tokens.First((t) => t.TokenType == currentType);
+		private Token TokenByType(TokenType currentType) => _tokens[currentType];
 
 		private Vector3 ScaledPosition(int x, int y)
 			=> new Vector2(y, Mathf.Abs(x - (GameFieldSize.Height - 1))) * _step + _offset;
