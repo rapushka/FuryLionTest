@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Code.Environment;
 using Code.Gameplay;
 using Code.Input;

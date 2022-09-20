@@ -16,13 +16,16 @@ namespace Code.Environment
 
 		private void Start() => _tokens = _levelGenerator.Generate();
 
-		public Token this[Vector2 position]
-			=> _tokens.First((token) => (Vector2)token.transform.position == position);
+		public Token this[Vector2 position] => _tokens.First((token) => IsMatching(token, position));
+
+		private static bool IsMatching(Component token, Vector2 position)
+			=> token
+			   && (Vector2)token.transform.position == position;
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 		{
 			var deltaPosition = firstPosition - secondPosition;
-			
+
 			return MathF.Abs(deltaPosition.x) <= _step
 			       && MathF.Abs(deltaPosition.y) <= _step;
 		}

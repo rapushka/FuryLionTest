@@ -1,5 +1,6 @@
 using System;
 using Code.Common;
+using Code.Extensions;
 
 namespace Code.Levels
 {
@@ -16,13 +17,7 @@ namespace Code.Levels
 			var yLength = Rows[0].Value.Length;
 			var result = new T[xLength, yLength];
 
-			for (var i = 0; i < xLength; i++)
-			{
-				for (var j = 0; j < yLength; j++)
-				{
-					result[i, j] = Rows[i].Value[j];
-				}
-			}
+			result.DoubleFor((_, i, j) => result[i, j] = Rows[i].Value[j]);
 
 			return result;
 		}

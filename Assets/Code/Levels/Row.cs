@@ -1,6 +1,5 @@
 using System;
 using Code.Common;
-using Code.Gameplay;
 
 namespace Code.Levels
 {
