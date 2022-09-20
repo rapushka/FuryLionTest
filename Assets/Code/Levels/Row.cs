@@ -9,9 +9,6 @@ namespace Code.Levels
 	{
 		public T[] Value;
 
-		public Row()
-		{
-			Value = new T[Constants.GameFieldSize.Width];
-		}
+		public Row() => Value = new T[Constants.GameFieldSize.Width];
 	}
 }

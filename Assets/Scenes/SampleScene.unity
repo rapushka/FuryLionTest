@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 476935152}
+  - component: {fileID: 476935153}
   m_Layer: 0
   m_Name: Level Generator
   m_TagString: Untagged
@@ -154,6 +155,23 @@ Transform:
   m_Father: {fileID: 786648458}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &476935153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476935151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070dbaa02af34a59ab3b60a1741e2a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugLevel: {fileID: 11400000, guid: 803ace59c213bee4b82fc239682e1336, type: 2}
+  _step: 1
+  _tokens:
+  - {fileID: 4161296535719208669, guid: 5cee4e7ff233d4944af50fd42b183c13, type: 3}
+  - {fileID: 4161296535719208669, guid: 9126a807cd5a6524b8fd5f56e7d94aeb, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +628,7 @@ MonoBehaviour:
   _overlapMouse: {fileID: 1854372946}
   _inputService: {fileID: 982562149}
   _field: {fileID: 1506309761}
+  _levelGenerator: {fileID: 476935153}
 --- !u!1 &1506309760
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +659,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _step: 0.75
-  _tokens: []
 --- !u!4 &1506309762
 Transform:
   m_ObjectHideFlags: 0

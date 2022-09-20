@@ -8,10 +8,7 @@ namespace Code.Levels
 	{
 		public Row<T>[] Rows;
 
-		public ArrayLayout()
-		{
-			Rows = new Row<T>[Constants.GameFieldSize.Height];
-		}
+		public ArrayLayout() => Rows = new Row<T>[Constants.GameFieldSize.Height];
 
 		public T[,] ToRectangularArray()
 		{
