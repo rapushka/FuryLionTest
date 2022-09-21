@@ -16,19 +16,10 @@ namespace Code.Environment
 
 		private void Start() => _tokens = _levelGenerator.Generate();
 
-		public Token this[Vector2 position]
-		{
-			get
-			{
-				var indexes = ToIndexes(position);
-				return _tokens[indexes.x, indexes.y];
-			}
-		}
+		public Token this[Vector2 position] => _tokens.GetByVector(ToIndexes(position));
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 		{
-			// TODO: ToIndexes(position)
-
 			var deltaPosition = firstPosition - secondPosition;
 
 			return MathF.Abs(deltaPosition.x) <= _step
@@ -36,13 +27,11 @@ namespace Code.Environment
 		}
 
 		private Vector2Int ToIndexes(Vector2 position)
-		{
-			position -= _levelGenerator.Offset;
-			position /= _levelGenerator.Step;
-			position.y = Mathf.Abs(position.y - (_tokens.GetLength(0) - 1));
-			(position.x, position.y) = (position.y, position.x);
-
-			return position.ToIntVector();
-		}
+			=> position
+			   .Set((p) => p - _levelGenerator.Offset)
+			   .Set((p) => p / _levelGenerator.Step)
+			   .SetY((p) => Mathf.Abs(p.y - (_tokens.GetLength(0) - 1)))
+			   .SwapXY()
+			   .ToIntVector();
 	}
 }

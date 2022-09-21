@@ -38,5 +38,11 @@ namespace Code.Extensions
 		
 		public static T Do<T>(this T @this, Action<T> action, Func<T, bool> @if) 
 			=> @this.Do(action, @if.Invoke(@this));
+
+		public static T Set<T>(this T @this, Func<T, T> action)
+		{
+			@this = action.Invoke(@this);
+			return @this;
+		}
 	}
 }
