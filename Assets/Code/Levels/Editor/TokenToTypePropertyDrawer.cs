@@ -1,5 +1,5 @@
 using System;
-using Code.Common;
+using Code.Extensions;
 using Code.Gameplay;
 using Code.Levels.LevelGeneration;
 using UnityEditor;
@@ -12,53 +12,57 @@ namespace Code.Levels.Editor
 	{
 		private const float ElementHeight = 25f;
 		private const int ElementsInRow = 2;
+		private const float CoefficientWidthType = 0.75f;
+		private const float CoefficientWidthPrefab = 1.25f;
+
+		private int _tokenTypesCount;
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(position, label, property);
 			EditorGUI.PrefixLabel(position, label);
 
-			var newPosition = position;
-			newPosition.y += ElementHeight;
+			var currentPosition = position.AddY(ElementHeight);
 			var entries = property.FindPropertyRelative("_entries");
-			var tokenTypesCount = Enum.GetValues(typeof(TokenType)).Length;
 
-			entries.arraySize = tokenTypesCount;
-			// for (var i = 0; i < tokenTypesCount; i++)
-			// {
-				// entries.InsertArrayElementAtIndex(0);
-			// }
-			
+			_tokenTypesCount = Enum.GetValues(typeof(TokenType)).Length;
+			entries.arraySize = _tokenTypesCount;
+
 			for (var i = 0; i < entries.arraySize; i++)
 			{
-				var type = entries.GetArrayElementAtIndex(i).FindPropertyRelative("_tokenType");
-				var prefab = entries.GetArrayElementAtIndex(i).FindPropertyRelative("_tokenPrefab");
+				var entry = entries.GetArrayElementAtIndex(i);
+				var type = entry.FindPropertyRelative("_type");
+				var prefab = entry.FindPropertyRelative("_prefab");
 
-				newPosition.height = ElementHeight;
-				newPosition.width = position.width / ElementsInRow;
+				currentPosition = currentPosition.SetHeight(ElementHeight)
+				                                 .SetWidth(position.width / ElementsInRow);
 
 				type.enumValueIndex = i;
-				DrawRow(type, prefab, newPosition);
+				DrawRow(type, prefab, currentPosition);
 
-				newPosition.x = position.x;
-				newPosition.y += ElementHeight;
+				currentPosition = currentPosition.SetX(position.x)
+				                                 .AddY(ElementHeight);
 			}
 
 			EditorGUI.EndProperty();
 		}
 
-		private void DrawRow(SerializedProperty type, SerializedProperty prefab, Rect newPosition)
+		private void DrawRow(SerializedProperty type, SerializedProperty prefab, Rect currentPosition)
 		{
-			newPosition.width *= 0.75f;
-			EditorGUI.PropertyField(newPosition, type, GUIContent.none);
-			newPosition.x += newPosition.width;
-			newPosition.width *= 1.7f;
-			EditorGUI.PropertyField(newPosition, prefab, GUIContent.none);
+			var typeName = Enum.GetName(typeof(TokenType), type.enumValueIndex);
+			var guiContent = new GUIContent(typeName);
+
+			EditorGUI.PropertyField(currentPosition, type, guiContent);
+
+			currentPosition = currentPosition.AddX(currentPosition.width * CoefficientWidthType)
+			                                 .MultipleWidth(CoefficientWidthPrefab);
+
+			EditorGUI.PropertyField(currentPosition, prefab, GUIContent.none);
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return ElementHeight * (Constants.GameFieldSize.Height + 1);
+			return ElementHeight * (_tokenTypesCount + 1);
 		}
 	}
 }

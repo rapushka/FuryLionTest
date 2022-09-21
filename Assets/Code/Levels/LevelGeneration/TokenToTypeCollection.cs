@@ -18,6 +18,6 @@ namespace Code.Levels.LevelGeneration
 		public Token this[TokenType tokenType] => Dictionary[tokenType];
 
 		private Dictionary<TokenType, Token> SerializedArrayToDictionary()
-			=> _entries.ToDictionary((e) => e.TokenType, (e) => e.TokenPrefab);
+			=> _entries.ToDictionary((e) => e.Type, (e) => e.Prefab);
 	}
 }

@@ -7,11 +7,11 @@ namespace Code.Levels.LevelGeneration
 	[Serializable]
 	public class TokenToTypeEntry
 	{
-		[SerializeField] private TokenType _tokenType;
-		[SerializeField] private Token _tokenPrefab;
+		[SerializeField] private TokenType _type;
+		[SerializeField] private Token _prefab;
 
-		public TokenType TokenType => _tokenType;
+		public TokenType Type => _type;
 
-		public Token TokenPrefab => _tokenPrefab;
+		public Token Prefab => _prefab;
 	}
 }

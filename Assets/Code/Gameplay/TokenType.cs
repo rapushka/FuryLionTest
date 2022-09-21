@@ -8,10 +8,10 @@ namespace Code.Gameplay
 		Blue,
 		Yellow,
 		Pink,
-		Rock,	
-		DoubledRock,
+		RockLevel1,
+		RockLevel2,
 		Ice,
 		Border,
-		Random
+		RandomColor
 	}
 }

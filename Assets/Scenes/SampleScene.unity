@@ -170,10 +170,31 @@ MonoBehaviour:
   _debugLevel: {fileID: 11400000, guid: 803ace59c213bee4b82fc239682e1336, type: 2}
   _step: 1
   _offset: {x: 0.5, y: 0.5}
-  _tokens:
-  - {fileID: 4161296535719208669, guid: 5cee4e7ff233d4944af50fd42b183c13, type: 3}
-  - {fileID: 4161296535719208669, guid: 9126a807cd5a6524b8fd5f56e7d94aeb, type: 3}
   _levelRoot: {fileID: 1160769000}
+  _tokens:
+    _entries:
+    - _type: 0
+      _prefab: {fileID: 0}
+    - _type: 1
+      _prefab: {fileID: 4161296535719208669, guid: 9126a807cd5a6524b8fd5f56e7d94aeb, type: 3}
+    - _type: 2
+      _prefab: {fileID: 0}
+    - _type: 3
+      _prefab: {fileID: 4161296535719208669, guid: 5cee4e7ff233d4944af50fd42b183c13, type: 3}
+    - _type: 4
+      _prefab: {fileID: 0}
+    - _type: 5
+      _prefab: {fileID: 0}
+    - _type: 6
+      _prefab: {fileID: 0}
+    - _type: 7
+      _prefab: {fileID: 0}
+    - _type: 8
+      _prefab: {fileID: 0}
+    - _type: 9
+      _prefab: {fileID: 0}
+    - _type: 10
+      _prefab: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
