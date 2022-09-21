@@ -78,8 +78,8 @@ namespace Code.Gameplay
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(position) == false;
 
-		private bool TokenIsFittingType(Vector2 position)
-			=> _field[position].TokenType == _field[ChainHead].TokenType;
+		private bool TokenIsFittingType(Vector2 position) 
+			=> _field[ChainHead].TokenType == _field[position].TokenType;
 
 		private bool IsNeighborForLastToken(Vector2 position)
 			=> _field.IsNeighboring(_chainedTokens.Last(), position);

@@ -20,8 +20,6 @@ namespace Code.Environment
 		{
 			get
 			{
-				return _tokens.First((token) => IsMatching(token, position));
-
 				var indexes = ToIndexes(position);
 				return _tokens[indexes.x, indexes.y];
 			}
@@ -29,26 +27,20 @@ namespace Code.Environment
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 		{
-			// ToIndexes(position)
+			// TODO: ToIndexes(position)
 
 			var deltaPosition = firstPosition - secondPosition;
 
-			Debug.Log($"Neighboring = {MathF.Abs(deltaPosition.x) <= _step && MathF.Abs(deltaPosition.y) <= _step}");
-
 			return MathF.Abs(deltaPosition.x) <= _step
 			       && MathF.Abs(deltaPosition.y) <= _step;
-		}
-
-		private static bool IsMatching(Component token, Vector2 position)
-		{
-			return token
-			       && (Vector2)token.transform.position == position;
 		}
 
 		private Vector2Int ToIndexes(Vector2 position)
 		{
 			position -= _levelGenerator.Offset;
 			position /= _levelGenerator.Step;
+			position.y = Mathf.Abs(position.y - (_tokens.GetLength(0) - 1));
+			(position.x, position.y) = (position.y, position.x);
 
 			return position.ToIntVector();
 		}

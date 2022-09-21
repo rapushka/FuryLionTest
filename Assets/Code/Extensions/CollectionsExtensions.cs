@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Concurrent;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Code.Extensions
 {
@@ -17,9 +20,9 @@ namespace Code.Extensions
 			}
 		}
 
-		public static T First<T>(this T[,] array, Func<T, bool> predicate)
+		public static T First<T>(this T[,] @this, Func<T, bool> predicate)
 		{
-			foreach (var item in array)
+			foreach (var item in @this)
 			{
 				if (predicate.Invoke(item))
 				{
