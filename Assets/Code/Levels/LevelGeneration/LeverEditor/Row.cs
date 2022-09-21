@@ -1,7 +1,7 @@
 using System;
 using Code.Common;
 
-namespace Code.Levels
+namespace Code.Levels.LevelGeneration.LeverEditor
 {
 	[Serializable]
 	public class Row<T>

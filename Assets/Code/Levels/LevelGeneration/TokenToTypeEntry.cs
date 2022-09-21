@@ -1,7 +1,8 @@
 using System;
+using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Gameplay
+namespace Code.Levels.LevelGeneration
 {
 	[Serializable]
 	public class TokenToTypeEntry

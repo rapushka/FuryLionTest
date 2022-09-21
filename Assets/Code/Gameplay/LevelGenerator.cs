@@ -1,5 +1,6 @@
 using Code.Extensions;
 using Code.Levels;
+using Code.Levels.LevelGeneration;
 using UnityEngine;
 using static Code.Common.Constants;
 using Object = UnityEngine.Object;

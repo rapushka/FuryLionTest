@@ -2,7 +2,7 @@ using System;
 using Code.Common;
 using Code.Extensions;
 
-namespace Code.Levels
+namespace Code.Levels.LevelGeneration.LeverEditor
 {
 	[Serializable]
 	public class ArrayLayout<T>
