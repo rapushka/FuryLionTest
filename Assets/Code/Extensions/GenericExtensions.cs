@@ -21,6 +21,20 @@ namespace Code.Extensions
 
 			return @this;
 		}
+
+		public static T Do<T>(this T @this, Func<T, bool> @if, Action<T> @true, Action<T> @false)
+		{
+			if (@if.Invoke(@this))
+			{
+				@true.Invoke(@this);
+			}
+			else
+			{
+				@false.Invoke(@this);
+			}
+
+			return @this;
+		}
 		
 		public static T Do<T>(this T @this, Action<T> action, Func<T, bool> @if) 
 			=> @this.Do(action, @if.Invoke(@this));

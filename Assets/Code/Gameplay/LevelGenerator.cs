@@ -18,6 +18,9 @@ namespace Code.Gameplay
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
 
+		public float Step => _step;
+		public Vector2 Offset => _offset;
+
 		public Token[,] Generate()
 		{
 			_tokenTypes = GetTokenTypes();
