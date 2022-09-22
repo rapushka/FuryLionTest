@@ -31,6 +31,9 @@ namespace Code.Extensions
 			throw new ArgumentException("array don't contain needed element");
 		}
 		
-		public static T GetByVector<T>(this T[,] @this, Vector2Int position) => @this[position.x, position.y];
+		public static T GetAtVector<T>(this T[,] @this, Vector2Int position) => @this[position.x, position.y];
+
+		public static T SetAtVector<T>(this T[,] @this, Vector2Int position, T value)
+			=> @this[position.x, position.y] = value;
 	}
 }

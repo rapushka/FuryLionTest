@@ -37,7 +37,7 @@ namespace Code.Extensions
 			return @this;
 		}
 
-		private static float ReverseY(this Vector2 @this, float lengthY) => Mathf.Abs(@this.y - (lengthY - 1));
+		public static float ReverseY(this Vector2 @this, float lengthY) => Mathf.Abs(@this.y - (lengthY - 1));
 
 		public static Vector2Int ToVectorInt(this Vector2 @this) => new((int)@this.x, (int)@this.y);
 		
