@@ -35,11 +35,14 @@ namespace Code.Gameplay
 		}
 
 		public void NextToken(Vector2 nextPosition)
-		{
-			var isPenultimate = IsPenultimate(nextPosition);
-			nextPosition.Do(RemoveLastToken, @if: isPenultimate);
-			nextPosition.Do(AddTokenAt, @if: isPenultimate == false && TokenShouldBeAdded(nextPosition));
-		}
+			=> nextPosition.Do
+			(
+				@if: IsPenultimateToken,
+				@true: RemoveLastToken,
+				@false: TryAddTokenAt
+			);
+
+		private void TryAddTokenAt(Vector2 position) => position.Do(AddTokenAt, @if: TokenShouldBeAdded);
 
 		public void EndComposing()
 		{
@@ -49,7 +52,7 @@ namespace Code.Gameplay
 			ChainEnded?.Invoke();
 		}
 
-		private bool IsPenultimate(Vector2 nextPosition)
+		private bool IsPenultimateToken(Vector2 nextPosition)
 			=> nextPosition == _chainedTokens.Last?.Previous?.Value;
 
 		private void RemoveLastToken(Vector2 nextPosition)
@@ -65,16 +68,18 @@ namespace Code.Gameplay
 			   && IsNeighborForLastToken(position);
 
 		private void AddTokenAt(Vector2 position)
-		{
-			_chainedTokens.AddLast(position);
-			TokenAdded?.Invoke(position);
-		}
+			=> position.Do(AddTokenToChain)
+			           .Do(TokenAddedInvoke);
+
+		private void AddTokenToChain(Vector2 position) => _chainedTokens.AddLast(position);
+
+		private void TokenAddedInvoke(Vector2 position) => TokenAdded?.Invoke(position);
 
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(position) == false;
 
-		private bool TokenIsFittingType(Vector2 position)
-			=> _field[position].TokenType == _field[ChainHead].TokenType;
+		private bool TokenIsFittingType(Vector2 position) 
+			=> _field[ChainHead].TokenType == _field[position].TokenType;
 
 		private bool IsNeighborForLastToken(Vector2 position)
 			=> _field.IsNeighboring(_chainedTokens.Last(), position);

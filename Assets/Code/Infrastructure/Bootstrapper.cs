@@ -11,6 +11,7 @@ namespace Code.Infrastructure
 		[SerializeField] private OverlapMouse _overlapMouse;
 		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
+		[SerializeField] private LevelGenerator _levelGenerator;
 
 		private ChainRenderer _chainRenderer;
 		private Chain _chain;
@@ -19,6 +20,7 @@ namespace Code.Infrastructure
 		{
 			_chain = new Chain(_field);
 			_chainRenderer = new ChainRenderer(_lineRenderer);
+			_field.Construct(_levelGenerator);
 		}
 
 		private void OnEnable()

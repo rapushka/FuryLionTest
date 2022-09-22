@@ -1,12 +1,13 @@
 using Code.Extensions;
 using Code.Gameplay;
+using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEditor;
 using UnityEngine;
 using static Code.Common.Constants;
 
 namespace Code.Levels.Editor
 {
-	[CustomPropertyDrawer(typeof(ArrayLayout))]
+	[CustomPropertyDrawer(typeof(ArrayLayout<TokenType>))]
 	public class LevelPropertyDrawer : PropertyDrawer
 	{
 		private const float ElementHeight = 36f;

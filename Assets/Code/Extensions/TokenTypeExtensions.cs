@@ -15,11 +15,11 @@ namespace Code.Extensions
 				TokenType.Blue        => Color.blue,
 				TokenType.Yellow      => Color.yellow,
 				TokenType.Pink        => Color.magenta,
-				TokenType.Rock        => Color.gray,
-				TokenType.DoubledRock => Color.HSVToRGB(0.3f, 0.3f, 0.3f),
+				TokenType.RockLevel1        => Color.gray,
+				TokenType.RockLevel2 => Color.HSVToRGB(0.3f, 0.3f, 0.3f),
 				TokenType.Ice         => Color.cyan,
 				TokenType.Border      => Color.black,
-				TokenType.Random      => Color.white,
+				TokenType.RandomColor      => Color.white,
 				_                     => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
 	}

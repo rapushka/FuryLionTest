@@ -1,24 +1,29 @@
-using System;
-using System.Linq;
 using Code.Gameplay;
+using Code.Extensions;
 using UnityEngine;
 
 namespace Code.Environment
 {
 	public class Field : MonoBehaviour
 	{
-		[SerializeField] private float _step;
-		[SerializeField] private Token[] _tokens;
+		private LevelGenerator _levelGenerator;
+		private float _step;
+		private Vector2 _offset;
+		private Token[,] _tokens;
 
-		public Token this[Vector2 position]
-			=> _tokens.First((token) => (Vector2)token.transform.position == position);
+		public void Construct(LevelGenerator levelGenerator) => _levelGenerator = levelGenerator;
 
-		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
+		private void Start()
 		{
-			var deltaPosition = firstPosition - secondPosition;
-			
-			return MathF.Abs(deltaPosition.x) <= _step
-			       && MathF.Abs(deltaPosition.y) <= _step;
+			_tokens = _levelGenerator.Generate();
+			_step = _levelGenerator.Step;
+			_offset = _levelGenerator.Offset;
 		}
+
+		public Token this[Vector2 position] 
+			=> _tokens.GetByVector(position.AsIndexes(_offset, _step, _tokens.GetLength(0)));
+
+		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition) 
+			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
 	}
 }
