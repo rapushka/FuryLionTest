@@ -7,7 +7,7 @@ namespace Code.Environment
 	public class Gravity
 	{
 		private readonly List<Vector2Int> _willFall;
-		
+
 		private Token[,] _tokens;
 
 		public Gravity() => _willFall = new List<Vector2Int>();
@@ -26,14 +26,20 @@ namespace Code.Environment
 		{
 			foreach (var indexes in _willFall)
 			{
-				_tokens[indexes.x, indexes.y]
-					.transform.Translate(Vector3.down);
+				var currentY = indexes.y;
+				while (_tokens[indexes.x, currentY - 1] == false)
+				{
+					_tokens[indexes.x, currentY].transform.Translate(Vector3.down);
 
-				(_tokens[indexes.x, indexes.y], _tokens[indexes.x, indexes.y - 1])
-					= (GetTokenBellow(indexes.x, indexes.y), _tokens[indexes.x, indexes.y]);
+					Swap(ref _tokens[indexes.x, currentY], ref _tokens[indexes.x, currentY - 1]);
+					currentY--;
+				}
 			}
+
 			_willFall.Clear();
 		}
+
+		private void Swap(ref Token left, ref Token right) => (left, right) = (right, left);
 
 		private void MarkToFalling()
 		{
