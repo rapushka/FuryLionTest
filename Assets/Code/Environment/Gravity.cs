@@ -28,7 +28,11 @@ namespace Code.Environment
 			{
 				_tokens[indexes.x, indexes.y]
 					.transform.Translate(Vector3.down);
+
+				(_tokens[indexes.x, indexes.y], _tokens[indexes.x, indexes.y - 1])
+					= (GetTokenBellow(indexes.x, indexes.y), _tokens[indexes.x, indexes.y]);
 			}
+			_willFall.Clear();
 		}
 
 		private void MarkToFalling()
