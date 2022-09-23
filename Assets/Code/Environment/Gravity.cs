@@ -27,7 +27,7 @@ namespace Code.Environment
 			foreach (var indexes in _willFall)
 			{
 				_tokens[indexes.x, indexes.y]
-					.transform.Translate(GetTokenBellow(indexes.x, indexes.y).transform.position);
+					.transform.Translate(Vector3.down);
 			}
 		}
 
@@ -52,14 +52,13 @@ namespace Code.Environment
 			}
 		}
 
-		private Token GetTokenBellow(int x, int y) => _tokens[x + 1, y];
+		private Token GetTokenBellow(int x, int y) => _tokens[x, y - 1];
 
 		private void MarkWithAboveTokens(int startX, int startY)
 		{
-			for (var x = startX; Continue(x, startY); x--)
+			for (var y = startY; Continue(startX, y); y++)
 			{
-				_willFall.Add(new Vector2Int(x, startY));
-				Debug.Log($"{_willFall.Last()} — {_tokens[x, startY].transform.position}");
+				_willFall.Add(new Vector2Int(startX, y));
 			}
 		}
 
