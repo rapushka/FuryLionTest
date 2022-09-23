@@ -27,7 +27,8 @@ namespace Code.Environment
 			foreach (var indexes in _willFall)
 			{
 				var currentY = indexes.y;
-				while (_tokens[indexes.x, currentY - 1] == false)
+				while (currentY > 0
+				       && _tokens[indexes.x, currentY - 1] == false)
 				{
 					_tokens[indexes.x, currentY].transform.Translate(Vector3.down);
 
@@ -51,7 +52,7 @@ namespace Code.Environment
 
 					if (token == false
 					    || token.ApplyGravity == false
-					    || GetTokenBellow(x, y)
+					    || TokenBellowIsNotEmpty(x, y)
 					    || _willFall.Contains(new Vector2Int(x, y)))
 					{
 						continue;
@@ -62,7 +63,7 @@ namespace Code.Environment
 			}
 		}
 
-		private Token GetTokenBellow(int x, int y) => _tokens[x, y - 1];
+		private bool TokenBellowIsNotEmpty(int x, int y) => y == 0 || _tokens[x, y - 1] == true;
 
 		private void MarkWithAboveTokens(int startX, int startY)
 		{
