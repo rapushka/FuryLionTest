@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.Gameplay;
 using UnityEngine;
 
@@ -7,8 +6,9 @@ namespace Code.Environment
 {
 	public class Gravity
 	{
+		private readonly List<Vector2Int> _willFall;
+		
 		private Token[,] _tokens;
-		private List<Vector2Int> _willFall;
 
 		public Gravity() => _willFall = new List<Vector2Int>();
 

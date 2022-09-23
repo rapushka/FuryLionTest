@@ -8,7 +8,6 @@ namespace Code.Environment
 	{
 		private LevelGenerator _levelGenerator;
 		private float _step;
-		private Vector2 _offset;
 		private Token[,] _tokens;
 		private Gravity _gravity;
 
@@ -19,8 +18,7 @@ namespace Code.Environment
 		{
 			_tokens = _levelGenerator.Generate();
 			_step = _levelGenerator.Step;
-			_offset = _levelGenerator.Offset;
-			
+
 			ApplyGravity();
 		}
 
