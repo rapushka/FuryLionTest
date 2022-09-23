@@ -25,7 +25,7 @@ namespace Code.Environment
 		}
 
 		public Token this[Vector2 position] 
-			=> _tokens.GetAtVector(position.AsIndexes(_offset, _step, _tokens.GetLength(0)));
+			=> _tokens.GetAtVector(position.ToVectorInt());
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition) 
 			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
