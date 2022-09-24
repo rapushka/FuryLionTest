@@ -10,6 +10,7 @@ namespace Code.Environment
 		private readonly DiagonallyMover _diagonallyMover;
 
 		private Token[,] _tokens;
+		private bool _mayBePrecedents;
 
 		public Gravity()
 		{
@@ -21,24 +22,44 @@ namespace Code.Environment
 
 		public Token[,] Apply(Token[,] tokens)
 		{
-			while (true)
-			{
-				if (_verticallyChecker.HasTokensToMoveVertically(tokens, out var verticallyIndexes))
-				{
-					tokens = _verticallyMover.Move(tokens, verticallyIndexes);
-					continue;
-				}
+			_mayBePrecedents = true;
 
-				if (_diagonallyChecker.HasTokenToMoveDiagonally(tokens, out var diagonallyIndex, out var direction)
-				    && diagonallyIndex is not null)
-				{
-					tokens = _diagonallyMover.Move(tokens, diagonallyIndex.Value, direction);
-					continue;
-				}
-				
-				break;
+			while (_mayBePrecedents)
+			{
+				tokens = VerticallyCheck(tokens);
+				tokens = DiagonallyCheck(tokens);
 			}
 
+			return tokens;
+		}
+
+		private Token[,] VerticallyCheck(Token[,] tokens)
+		{
+			if (_verticallyChecker.HasPrecedentTokens(tokens, out var positions) == false)
+			{
+				_mayBePrecedents = false;
+				return tokens;
+			}
+
+			tokens = _verticallyMover.Move(tokens, positions);
+			return tokens;
+		}
+
+		private Token[,] DiagonallyCheck(Token[,] tokens)
+		{
+			if (_mayBePrecedents)
+			{
+				return tokens;
+			}
+			
+			if (_diagonallyChecker.HasPrecedentToken(tokens, out var position, out var direction) == false
+			    || position is null)
+			{
+				return tokens;
+			}
+
+			tokens = _diagonallyMover.Move(tokens, position.Value, direction);
+			_mayBePrecedents = true;
 			return tokens;
 		}
 	}

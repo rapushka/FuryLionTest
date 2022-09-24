@@ -9,7 +9,7 @@ namespace Code.Environment
 		private Token[,] _tokens;
 		private Vector3 _direction;
 
-		public bool HasTokenToMoveDiagonally(Token[,] tokens, out Vector2Int? result, out Vector3 direction)
+		public bool HasPrecedentToken(Token[,] tokens, out Vector2Int? result, out Vector3 direction)
 		{
 			_tokens = tokens;
 

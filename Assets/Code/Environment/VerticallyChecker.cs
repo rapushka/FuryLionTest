@@ -17,7 +17,7 @@ namespace Code.Environment
 			_result = new List<Vector2Int>();
 		}
 
-		public bool HasTokensToMoveVertically(Token[,] tokens, out IEnumerable<Vector2Int> result)
+		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result)
 		{
 			_result.Clear();
 			_tokens = tokens;

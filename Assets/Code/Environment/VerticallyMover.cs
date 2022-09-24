@@ -6,9 +6,9 @@ namespace Code.Environment
 {
 	public class VerticallyMover
 	{
-		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> indexes)
+		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions)
 		{
-			foreach (var entry in indexes)
+			foreach (var entry in positions)
 			{
 				FallTokenVertically(tokens, entry);
 			}
@@ -16,13 +16,13 @@ namespace Code.Environment
 			return tokens;
 		}
 
-		private void FallTokenVertically(Token[,] tokens, Vector2Int indexes)
+		private void FallTokenVertically(Token[,] tokens, Vector2Int position)
 		{
-			for (var y = indexes.y; y > 0 && BellowIsEmpty(tokens, indexes.x, y); y--)
+			for (var y = position.y; y > 0 && BellowIsEmpty(tokens, position.x, y); y--)
 			{
-				tokens[indexes.x, y].transform.Translate(Vector3.down);
+				tokens[position.x, y].transform.Translate(Vector3.down);
 
-				Swap(ref tokens[indexes.x, y], ref tokens[indexes.x, y - 1]);
+				Swap(ref tokens[position.x, y], ref tokens[position.x, y - 1]);
 			}
 		}
 
