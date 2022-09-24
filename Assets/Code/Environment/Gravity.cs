@@ -1,4 +1,5 @@
 using Code.Gameplay;
+using UnityEngine;
 
 namespace Code.Environment
 {
@@ -36,29 +37,29 @@ namespace Code.Environment
 
 		private void VerticallyCheck()
 		{
-			if (_verticallyChecker.HasPrecedentTokens(_tokens, out var positions) == false)
+			if (_verticallyChecker.HasPrecedentTokens(_tokens, out var positions))
+			{
+				_tokens = _verticallyMover.Move(_tokens, positions);
+			}
+			else
 			{
 				_mayBePrecedents = false;
-				return;
 			}
-
-			_tokens = _verticallyMover.Move(_tokens, positions);
 		}
 
 		private void DiagonallyCheck()
 		{
-			if (_mayBePrecedents)
+			if (_mayBePrecedents == false
+			    && _diagonallyChecker.HasPrecedentToken(_tokens, out var position, out var direction)
+			    && position is not null)
 			{
-				return;
+				MoveDiagonally(position.Value, direction);
 			}
-			
-			if (_diagonallyChecker.HasPrecedentToken(_tokens, out var position, out var direction) == false
-			    || position is null)
-			{
-				return;
-			}
+		}
 
-			_tokens = _diagonallyMover.Move(_tokens, position.Value, direction);
+		private void MoveDiagonally(Vector2Int position, Vector3 direction)
+		{
+			_tokens = _diagonallyMover.Move(_tokens, position, direction);
 			_mayBePrecedents = true;
 		}
 	}
