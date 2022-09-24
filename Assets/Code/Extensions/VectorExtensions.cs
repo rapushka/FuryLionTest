@@ -47,5 +47,7 @@ namespace Code.Extensions
 		public static Vector2 AsAbs(this Vector2 @this) => @this.SetX(Mathf.Abs(@this.x)).SetY(Mathf.Abs(@this.y));
 
 		public static bool LessThanOrEqualTo(this Vector2 @this, float value) => @this.x <= value && @this.y <= value;
+
+		public static Vector3 AsVector3(this Vector2Int @this) => new(@this.x, @this.y);
 	}
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
@@ -18,32 +19,78 @@ namespace Code.Environment
 
 		public Token[,] Apply(Token[,] tokens)
 		{
-			_tokens = (Token[,])tokens.Clone();
+			while (true)
+			{
+				_tokens = (Token[,])tokens.Clone();
 
-			MarkToFallingVertically();
-			FallVertically();
-			MarkToFallDiagonally();
-			_willFallDiagonally.ForEach((p) => Debug.Log($"{p.Key} → {p.Value}"));
+				MarkToFallingVertically();
+				FallVertically();
+				MarkToFallDiagonally();
+				_willFallDiagonally.ForEach((p) => Debug.Log($"{p.Key} → {p.Value}"));
+				FallDiagonally();
+				
+				MarkToFallingVertically();
+				MarkToFallDiagonally();
 
-			return _tokens;
+				// if (_willFallVertically.Any() == false
+				//     && _willFallDiagonally.Any() == false)
+				{
+					return _tokens;
+				}
+
+				tokens = _tokens;
+			}
+		}
+
+		private void FallDiagonally()
+		{
+			foreach (var (indexes, direction) in _willFallDiagonally)
+			{
+				FallDiagonallyToken(indexes, direction);
+			}
+			
+			_willFallDiagonally.Clear();
 		}
 
 		private void FallVertically()
 		{
 			foreach (var indexes in _willFallVertically)
 			{
-				var currentY = indexes.y;
-				while (currentY > 0
-				       && _tokens[indexes.x, currentY - 1] == false)
-				{
-					_tokens[indexes.x, currentY].transform.Translate(Vector3.down);
-
-					Swap(ref _tokens[indexes.x, currentY], ref _tokens[indexes.x, currentY - 1]);
-					currentY--;
-				}
+				FallVerticallyToken(indexes);
 			}
 
 			_willFallVertically.Clear();
+		}
+
+		private void FallVerticallyToken(Vector2Int indexes)
+		{
+			var currentY = indexes.y;
+			while (currentY > 0
+			       && _tokens[indexes.x, currentY - 1] == false)
+			{
+				_tokens[indexes.x, currentY].transform.Translate(Vector3.down);
+
+				Swap(ref _tokens[indexes.x, currentY], ref _tokens[indexes.x, currentY - 1]);
+				currentY--;
+			}
+		}
+
+		private void FallDiagonallyToken(Vector2Int indexes, Direction direction)
+		{
+			if (direction == Direction.None)
+			{
+				return;
+			}
+
+			var xDirection = direction == Direction.Left
+				? Vector3.left
+				: Vector3.right;
+
+			var translated = Vector3.down + xDirection;
+			_tokens[indexes.x, indexes.y].transform.Translate(translated);
+			translated += indexes.AsVector3();
+
+			Swap(ref _tokens[indexes.x, indexes.y], ref _tokens[(int)translated.x, (int)translated.y]);
 		}
 
 		private void Swap(ref Token left, ref Token right) => (left, right) = (right, left);
@@ -83,7 +130,9 @@ namespace Code.Environment
 			var direction = TokenOnDiagonalIsEmpty(x, y);
 			if (direction != Direction.None)
 			{
-				_willFallDiagonally.Add(tokenPosition, direction);
+				FallDiagonallyToken(new Vector2Int(x, y), direction);
+
+				// _willFallDiagonally.Add(tokenPosition, direction);
 			}
 		}
 
@@ -105,7 +154,7 @@ namespace Code.Environment
 			=> x < _tokens.GetLength(0) - 1
 			   && _tokens[x + 1, y - 1] == false;
 
-		private bool TokenBellowIsEmpty(int x, int y) => y != 0 || _tokens[x, y - 1] == false;
+		private bool TokenBellowIsEmpty(int x, int y) => y <= 0 || _tokens[x, y - 1] == false;
 
 		private void MarkWithAboveTokens(int startX, int startY)
 		{
