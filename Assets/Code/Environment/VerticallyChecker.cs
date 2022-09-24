@@ -50,7 +50,7 @@ namespace Code.Environment
 		}
 
 		private bool VerticalLineNotEnded(int x, int y)
-			=> x < _tokens.GetLength(0)
+			=> y < _tokens.GetLength(1)
 			   && (_tokens[x, y] && _tokens[x, y].ApplyGravity);
 	}
 }
