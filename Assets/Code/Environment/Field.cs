@@ -9,9 +9,9 @@ namespace Code.Environment
 		private LevelGenerator _levelGenerator;
 		private float _step;
 		private Token[,] _tokens;
-		private Gravity _gravity;
+		private Gravity.Gravity _gravity;
 
-		public void Construct(LevelGenerator levelGenerator, Gravity gravity) 
+		public void Construct(LevelGenerator levelGenerator, Gravity.Gravity gravity) 
 			=> (_levelGenerator, _gravity) = (levelGenerator, gravity);
 
 		private void Start()

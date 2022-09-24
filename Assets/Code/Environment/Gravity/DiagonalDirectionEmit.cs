@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment
+namespace Code.Environment.Gravity
 {
 	public class DiagonalDirectionEmit
 	{
