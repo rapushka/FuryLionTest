@@ -7,7 +7,7 @@ namespace Code.Extensions
 	public static class CollectionsExtensions
 	{
 		public static void ForEach<T>(this T[] @this, Action<T> action) => Array.ForEach(@this, action);
-		
+
 		public static void DoubleFor<T>(this T[,] array, Action<T, int, int> @this)
 		{
 			for (var i = 0; i < array.GetLength(0); i++)
@@ -18,7 +18,7 @@ namespace Code.Extensions
 				}
 			}
 		}
-		
+
 		public static void DoubleForReversed<T>(this T[,] @this, Action<T, int, int> action)
 		{
 			for (var i = @this.GetLength(0) - 1; i >= 0; i--)

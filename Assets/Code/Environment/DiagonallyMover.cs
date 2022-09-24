@@ -10,7 +10,7 @@ namespace Code.Environment
 			FallTokenDiagonally(tokens, indexes, direction);
 			return tokens;
 		}
-		
+
 		private void FallTokenDiagonally(Token[,] tokens, Vector2Int indexes, Vector3 direction)
 		{
 			tokens[indexes.x, indexes.y].transform.Translate(Vector3.down + direction);

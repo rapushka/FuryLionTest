@@ -25,9 +25,9 @@ namespace Code.Environment
 			   && token.ApplyGravity
 			   && TokenDiagonallyBellowIsEmpty(x, y);
 
-		private bool TokenDiagonallyBellowIsEmpty(int x, int y) 
+		private bool TokenDiagonallyBellowIsEmpty(int x, int y)
 			=> (_direction = GetDirection(x, y)) != Vector3.zero;
-		
+
 		private Vector3 GetDirection(int x, int y)
 			=> IsAtBottomBorder(y) ? Vector3.zero
 				: CanMoveBottomLeft(x, y) ? Vector3.left

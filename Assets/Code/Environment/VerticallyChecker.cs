@@ -9,7 +9,7 @@ namespace Code.Environment
 	public class VerticallyChecker
 	{
 		private readonly List<Vector2Int> _result;
-		
+
 		private Token[,] _tokens;
 
 		public VerticallyChecker()
@@ -21,13 +21,13 @@ namespace Code.Environment
 		{
 			_result.Clear();
 			_tokens = tokens;
-			
+
 			_tokens.DoubleForReversed(MarkVerticallyToken);
 
 			result = _result;
 			return result.Any();
 		}
-		
+
 		private void MarkVerticallyToken(Token token, int x, int y)
 		{
 			if (token == true
@@ -38,7 +38,7 @@ namespace Code.Environment
 				_result.Add(new Vector2Int(x, y));
 			}
 		}
-		
+
 		private bool TokenBellowIsEmpty(int x, int y) => y > 0 && _tokens[x, y - 1] == false;
 	}
 }
