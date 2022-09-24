@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -8,6 +9,14 @@ namespace Code.Extensions
 	{
 		public static void ForEach<T>(this T[] @this, Action<T> action) => Array.ForEach(@this, action);
 
+		public static void ForEach<T>(this IEnumerable<T> @this, Action<T> action)
+		{
+			foreach (var entry in @this)
+			{
+				action.Invoke(entry);
+			}
+		} 
+		
 		public static void DoubleFor<T>(this T[,] array, Action<T, int, int> @this)
 		{
 			for (var i = 0; i < array.GetLength(0); i++)

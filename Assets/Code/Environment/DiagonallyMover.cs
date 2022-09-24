@@ -5,9 +5,9 @@ namespace Code.Environment
 {
 	public class DiagonallyMover
 	{
-		public Token[,] Move(Token[,] tokens, Vector2Int indexes, Vector3 direction)
+		public Token[,] Move(Token[,] tokens, Vector2Int position, Vector3 direction)
 		{
-			FallTokenDiagonally(tokens, indexes, direction);
+			FallTokenDiagonally(tokens, position, direction);
 			return tokens;
 		}
 
