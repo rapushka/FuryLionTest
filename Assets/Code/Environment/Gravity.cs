@@ -22,45 +22,44 @@ namespace Code.Environment
 
 		public Token[,] Apply(Token[,] tokens)
 		{
+			_tokens = tokens;
 			_mayBePrecedents = true;
 
 			while (_mayBePrecedents)
 			{
-				tokens = VerticallyCheck(tokens);
-				tokens = DiagonallyCheck(tokens);
+				VerticallyCheck();
+				DiagonallyCheck();
 			}
 
-			return tokens;
+			return _tokens;
 		}
 
-		private Token[,] VerticallyCheck(Token[,] tokens)
+		private void VerticallyCheck()
 		{
-			if (_verticallyChecker.HasPrecedentTokens(tokens, out var positions) == false)
+			if (_verticallyChecker.HasPrecedentTokens(_tokens, out var positions) == false)
 			{
 				_mayBePrecedents = false;
-				return tokens;
+				return;
 			}
 
-			tokens = _verticallyMover.Move(tokens, positions);
-			return tokens;
+			_tokens = _verticallyMover.Move(_tokens, positions);
 		}
 
-		private Token[,] DiagonallyCheck(Token[,] tokens)
+		private void DiagonallyCheck()
 		{
 			if (_mayBePrecedents)
 			{
-				return tokens;
+				return;
 			}
 			
-			if (_diagonallyChecker.HasPrecedentToken(tokens, out var position, out var direction) == false
+			if (_diagonallyChecker.HasPrecedentToken(_tokens, out var position, out var direction) == false
 			    || position is null)
 			{
-				return tokens;
+				return;
 			}
 
-			tokens = _diagonallyMover.Move(tokens, position.Value, direction);
+			_tokens = _diagonallyMover.Move(_tokens, position.Value, direction);
 			_mayBePrecedents = true;
-			return tokens;
 		}
 	}
 }
