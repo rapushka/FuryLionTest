@@ -35,10 +35,22 @@ namespace Code.Environment
 			    && TokenBellowIsEmpty(x, y)
 			    && _result.Contains(new Vector2Int(x, y)) == false)
 			{
-				_result.Add(new Vector2Int(x, y));
+				MarkWithAboveTokens(x, y);
 			}
 		}
 
 		private bool TokenBellowIsEmpty(int x, int y) => y > 0 && _tokens[x, y - 1] == false;
+		
+		private void MarkWithAboveTokens(int startX, int startY)
+		{
+			for (var y = startY; VerticalLineNotEnded(startX, y); y++)
+			{
+				_result.Add(new Vector2Int(startX, y));
+			}
+		}
+
+		private bool VerticalLineNotEnded(int x, int y)
+			=> x < _tokens.GetLength(0)
+			   && (_tokens[x, y] && _tokens[x, y].ApplyGravity);
 	}
 }
