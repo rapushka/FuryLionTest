@@ -1,21 +1,31 @@
+using System.Collections.Generic;
+using Code.Environment.Gravity.Interfaces;
+using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
 namespace Code.Environment.Gravity
 {
-	public class DiagonallyMover
+	public class DiagonallyMover : IDirectionMover
 	{
-		public Token[,] Move(Token[,] tokens, Vector2Int position, Vector3 direction)
+		private Token[,] _tokens;
+		private Vector3 _direction;
+
+		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions, Vector3 direction)
 		{
-			FallTokenDiagonally(tokens, position, direction);
-			return tokens;
+			_tokens = tokens;
+			_direction = direction;
+			
+			positions.ForEach(FallTokenDiagonally);
+			
+			return _tokens;
 		}
-
-		private void FallTokenDiagonally(Token[,] tokens, Vector2Int indexes, Vector3 direction)
+		
+		private void FallTokenDiagonally(Vector2Int position)
 		{
-			tokens[indexes.x, indexes.y].transform.Translate(Vector3.down + direction);
+			_tokens[position.x, position.y].transform.Translate(Vector3.down + _direction);
 
-			Swap(ref tokens[indexes.x, indexes.y], ref tokens[indexes.x + (int)direction.x, indexes.y - 1]);
+			Swap(ref _tokens[position.x, position.y], ref _tokens[position.x + (int)_direction.x, position.y - 1]);
 		}
 
 		private void Swap(ref Token left, ref Token right) => (left, right) = (right, left);

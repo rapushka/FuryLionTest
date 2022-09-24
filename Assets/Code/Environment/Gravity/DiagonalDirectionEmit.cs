@@ -8,7 +8,7 @@ namespace Code.Environment.Gravity
 	public class DiagonalDirectionEmit
 	{
 		private readonly IDirectionChecker _checker;
-		private readonly DiagonallyMover _mover;
+		private readonly IDirectionMover _mover;
 
 		public DiagonalDirectionEmit()
 		{
@@ -19,7 +19,7 @@ namespace Code.Environment.Gravity
 		public bool HasPrecedent(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction) 
 			=> _checker.HasPrecedentTokens(tokens, out result, out direction);
 
-		public Token[,] Move(Token[,] tokens, Vector2Int position, Vector3 direction) 
-			=> _mover.Move(tokens, position, direction);
+		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions, Vector3 direction) 
+			=> _mover.Move(tokens, positions, direction);
 	}
 }

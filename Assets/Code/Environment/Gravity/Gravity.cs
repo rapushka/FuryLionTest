@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using Code.Gameplay;
 using UnityEngine;
 
@@ -47,14 +47,14 @@ namespace Code.Environment.Gravity
 		private void DiagonallyCheck()
 		{
 			if (_mayBePrecedents == false
-			    && _diagonal.HasPrecedent(_tokens, out var position, out var direction)
-			    && position is not null)
+			    && _diagonal.HasPrecedent(_tokens, out var positions, out var direction)
+			    && positions is not null)
 			{
-				MoveDiagonally(position.First(), direction);
+				MoveDiagonally(positions, direction);
 			}
 		}
 
-		private void MoveDiagonally(Vector2Int position, Vector3 direction)
+		private void MoveDiagonally(IEnumerable<Vector2Int> position, Vector3 direction)
 		{
 			_tokens = _diagonal.Move(_tokens, position, direction);
 			_mayBePrecedents = true;
