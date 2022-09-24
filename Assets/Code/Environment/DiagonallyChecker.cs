@@ -13,7 +13,7 @@ namespace Code.Environment
 		{
 			_tokens = tokens;
 
-			result = _tokens.FirstOrDefaultFromEnd(MarkDiagonallyToken)
+			result = _tokens.FirstOrDefault(MarkDiagonallyToken)
 			                ?.transform.position.ToVectorInt();
 
 			direction = _direction;

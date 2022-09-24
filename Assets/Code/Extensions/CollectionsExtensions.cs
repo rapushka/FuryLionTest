@@ -31,11 +31,11 @@ namespace Code.Extensions
 		}
 
 		[CanBeNull]
-		public static T FirstOrDefaultFromEnd<T>(this T[,] @this, Func<T, int, int, bool> predicate)
+		public static T FirstOrDefault<T>(this T[,] @this, Func<T, int, int, bool> predicate)
 		{
-			for (var i = @this.GetLength(0) - 1; i >= 0; i--)
+			for (var i = 0; i < @this.GetLength(0); i++)
 			{
-				for (var j = @this.GetLength(1) - 1; j >= 0; j--)
+				for (var j = 0; j < @this.GetLength(1); j++)
 				{
 					if (predicate.Invoke(@this[i, j], i, j))
 					{
