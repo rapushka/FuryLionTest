@@ -13,7 +13,7 @@ namespace Code.Extensions
 			{
 				for (var j = 0; j < array.GetLength(1); j++)
 				{
-					action(array[i, j], i, j);
+					action.Invoke(array[i, j], i, j);
 				}
 			}
 		}

@@ -40,6 +40,7 @@ namespace Code.Extensions
 		public static float ReverseY(this Vector2 @this, float lengthY) => Mathf.Abs(@this.y - (lengthY - 1));
 
 		public static Vector2Int ToVectorInt(this Vector2 @this) => new((int)@this.x, (int)@this.y);
+		public static Vector2Int ToVectorInt(this Vector3 @this) => new((int)@this.x, (int)@this.y);
 		
 		public static Vector2 DistanceTo(this Vector2 @this, Vector2 other) => @this - other;
 
