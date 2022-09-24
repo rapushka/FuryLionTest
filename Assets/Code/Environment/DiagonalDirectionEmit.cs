@@ -18,7 +18,7 @@ namespace Code.Environment
 		public bool HasPrecedent(Token[,] tokens, out Vector2Int? result, out Vector3 direction) 
 			=> _checker.HasPrecedentToken(tokens, out result, out direction);
 
-		public Token[,] Move(Token[,] tokens, Vector2Int result, Vector3 direction) 
-			=> _mover.Move(tokens, result, direction);
+		public Token[,] Move(Token[,] tokens, Vector2Int position, Vector3 direction) 
+			=> _mover.Move(tokens, position, direction);
 	}
 }
