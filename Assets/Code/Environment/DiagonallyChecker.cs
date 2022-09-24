@@ -7,13 +7,12 @@ namespace Code.Environment
 	public class DiagonallyChecker
 	{
 		private Token[,] _tokens;
-		private Direction _direction;
+		private Vector3 _direction;
 
-		public bool HasTokenToMoveDiagonally(Token[,] tokens, out Vector2Int? result, out Direction direction)
+		public bool HasTokenToMoveDiagonally(Token[,] tokens, out Vector2Int? result, out Vector3 direction)
 		{
 			_tokens = tokens;
 
-			_direction = Direction.None;
 			result = _tokens.FirstOrDefault(MarkDiagonallyToken)
 			                ?.transform.position.ToVectorInt();
 
@@ -27,13 +26,13 @@ namespace Code.Environment
 			   && TokenDiagonallyBellowIsEmpty(x, y);
 
 		private bool TokenDiagonallyBellowIsEmpty(int x, int y) 
-			=> (_direction = GetDirection(x, y)) != Direction.None;
-
-		private Direction GetDirection(int x, int y)
-			=> IsAtBottomBorder(y) ? Direction.None
-				: CanMoveBottomLeft(x, y) ? Direction.Left
-				: CanMoveBottomRight(x, y) ? Direction.Right
-				: Direction.None;
+			=> (_direction = GetDirection(x, y)) != Vector3.zero;
+		
+		private Vector3 GetDirection(int x, int y)
+			=> IsAtBottomBorder(y) ? Vector3.zero
+				: CanMoveBottomLeft(x, y) ? Vector3.left
+				: CanMoveBottomRight(x, y) ? Vector3.right
+				: Vector3.zero;
 
 		private static bool IsAtBottomBorder(int y) => y <= 0;
 

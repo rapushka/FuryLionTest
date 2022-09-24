@@ -32,7 +32,7 @@ namespace Code.Environment
 				if (_diagonallyChecker.HasTokenToMoveDiagonally(tokens, out var diagonallyIndex, out var direction)
 				    && diagonallyIndex is not null)
 				{
-					tokens = _diagonallyMover.Move(tokens, diagonallyIndex, direction);
+					tokens = _diagonallyMover.Move(tokens, diagonallyIndex.Value, direction);
 					continue;
 				}
 				

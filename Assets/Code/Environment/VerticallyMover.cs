@@ -10,12 +10,12 @@ namespace Code.Environment
 		{
 			foreach (var entry in indexes)
 			{
-				FallVerticallyToken(tokens, entry);
+				FallTokenVertically(tokens, entry);
 			}
 			return tokens;
 		}
 		
-		private void FallVerticallyToken(Token[,] tokens, Vector2Int indexes)
+		private void FallTokenVertically(Token[,] tokens, Vector2Int indexes)
 		{
 			for (var y = indexes.y; y > 0 && BellowIsEmpty(tokens, indexes.x, y); y--)
 			{
