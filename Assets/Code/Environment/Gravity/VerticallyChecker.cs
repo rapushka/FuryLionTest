@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Environment.Gravity.Interfaces;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
 namespace Code.Environment.Gravity
 {
-	public class VerticallyChecker
+	public class VerticallyChecker : IDirectionChecker
 	{
 		private readonly List<Vector2Int> _result;
 
@@ -17,7 +18,7 @@ namespace Code.Environment.Gravity
 			_result = new List<Vector2Int>();
 		}
 
-		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result)
+		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction)
 		{
 			_result.Clear();
 			_tokens = tokens;
@@ -25,9 +26,10 @@ namespace Code.Environment.Gravity
 			_tokens.DoubleForReversed(MarkVerticallyToken);
 
 			result = _result;
+			direction = Vector3.down;
 			return result.Any();
 		}
-
+		
 		private void MarkVerticallyToken(Token token, int x, int y)
 		{
 			if (token == true
@@ -40,7 +42,7 @@ namespace Code.Environment.Gravity
 		}
 
 		private bool TokenBellowIsEmpty(int x, int y) => y > 0 && _tokens[x, y - 1] == false;
-		
+
 		private void MarkWithAboveTokens(int startX, int startY)
 		{
 			for (var y = startY; VerticalLineNotEnded(startX, y); y++)

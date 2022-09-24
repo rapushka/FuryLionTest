@@ -34,7 +34,7 @@ namespace Code.Environment.Gravity
 
 		private void VerticallyCheck()
 		{
-			if (_vertical.HasPrecedent(_tokens, out var positions))
+			if (_vertical.HasPrecedent(_tokens, out var positions, out var direction))
 			{
 				_tokens = _vertical.Move(_tokens, positions);
 			}
