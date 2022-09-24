@@ -31,7 +31,7 @@ namespace Code.Extensions
 		}
 
 		[CanBeNull]
-		public static T FirstOrDefault<T>(this T[,] @this, Func<T, int, int, bool> predicate)
+		public static T FirstOrDefaultFromEnd<T>(this T[,] @this, Func<T, int, int, bool> predicate)
 		{
 			for (var i = @this.GetLength(0) - 1; i >= 0; i--)
 			{
