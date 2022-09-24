@@ -1,23 +1,39 @@
+using System.Collections.Generic;
+using System.Linq;
+using Code.Environment.Gravity.Interfaces;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
 namespace Code.Environment.Gravity
 {
-	public class DiagonallyChecker
+	public class DiagonallyChecker : IDirectionChecker
 	{
+		private readonly List<Vector2Int> _result;
+
 		private Token[,] _tokens;
 		private Vector3 _direction;
 
-		public bool HasPrecedentToken(Token[,] tokens, out Vector2Int? result, out Vector3 direction)
+		public DiagonallyChecker()
 		{
+			_result = new List<Vector2Int>();
+		}
+
+		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction)
+		{
+			_result.Clear();
 			_tokens = tokens;
 
-			result = _tokens.FirstOrDefault(MarkDiagonallyToken)
-			                ?.transform.position.ToVectorInt();
+			var v = _tokens.FirstOrDefault(MarkDiagonallyToken)
+			               ?.transform.position.ToVectorInt();
+			if (v != null)
+			{
+				_result.Add(v.Value);
+			}
 
 			direction = _direction;
-			return result is not null;
+			result = _result;
+			return _result.Any();
 		}
 
 		private bool MarkDiagonallyToken(Token token, int x, int y)
