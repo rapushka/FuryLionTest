@@ -3,7 +3,7 @@ using Code.Environment.Gravity.Interfaces;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity
+namespace Code.Environment.Gravity.Emits
 {
 	public class DiagonalDirectionEmit
 	{
