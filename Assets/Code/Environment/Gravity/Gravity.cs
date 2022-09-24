@@ -36,7 +36,7 @@ namespace Code.Environment.Gravity
 		{
 			if (_vertical.HasPrecedent(_tokens, out var positions, out var direction))
 			{
-				_tokens = _vertical.Move(_tokens, positions);
+				_tokens = _vertical.Move(_tokens, positions, direction);
 			}
 			else
 			{
