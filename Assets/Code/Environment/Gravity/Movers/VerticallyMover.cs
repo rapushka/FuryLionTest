@@ -10,10 +10,10 @@ namespace Code.Environment.Gravity.Movers
 		{
 			var position = pair.Key;
 			var direction = pair.Value;
+			
 			for (var y = position.y; y > 0 && BellowIsEmpty(Tokens, position.x, y); y--)
 			{
-				Tokens[position.x, y].transform.Translate(direction);
-				Swap(ref Tokens[position.x, y], ref Tokens[position.x, y - 1]);
+				MoveToken(position.x, y, direction);
 			}
 		}
 

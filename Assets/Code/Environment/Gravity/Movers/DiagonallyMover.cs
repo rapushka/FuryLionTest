@@ -10,8 +10,7 @@ namespace Code.Environment.Gravity.Movers
 			var position = pair.Key;
 			var direction = pair.Value;
 
-			Tokens[position.x, position.y].transform.Translate(Vector3.down + direction);
-			Swap(ref Tokens[position.x, position.y], ref Tokens[position.x + (int)direction.x, position.y - 1]);
+			MoveToken(position.x, position.y, to: direction + Vector3.down);
 		}
 	}
 }

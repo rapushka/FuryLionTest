@@ -12,14 +12,18 @@ namespace Code.Environment.Gravity.Movers
 		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions)
 		{
 			Tokens = tokens;
-			
 			positions.ForEach(FallTokenAtDirection);
-			
 			return Tokens;
 		}
 
-		protected static void Swap(ref Token left, ref Token right) => (left, right) = (right, left);
-
 		protected abstract void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> obj);
+
+		protected void MoveToken(int x, int y, Vector3 to)
+		{
+			Tokens[x, y].transform.Translate(to);
+			Swap(ref Tokens[x, y], ref Tokens[x + (int)to.x, y + (int)to.y]);
+		}
+
+		private static void Swap(ref Token left, ref Token right) => (left, right) = (right, left);
 	}
 }
