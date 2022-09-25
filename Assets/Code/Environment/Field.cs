@@ -19,7 +19,7 @@ namespace Code.Environment
 			_tokens = _levelGenerator.Generate();
 			_step = _levelGenerator.Step;
 
-			// ApplyGravity();
+			ApplyGravity();
 		}
 
 		public Token this[Vector2 position] 
