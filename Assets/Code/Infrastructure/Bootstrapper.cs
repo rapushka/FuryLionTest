@@ -39,7 +39,7 @@ namespace Code.Infrastructure
 			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
 			_chain.ChainEnded += _chainRenderer.OnChainEnded;
 			
-			_chain.ChainEnded += _field.ApplyGravity;
+			_chain.ChainEnded += _field.OnChainEnded;
 		}
 
 		private void OnDisable()
@@ -55,7 +55,7 @@ namespace Code.Infrastructure
 			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
 			_chain.ChainEnded -= _chainRenderer.OnChainEnded;
 			
-			_chain.ChainEnded -= _field.ApplyGravity;
+			_chain.ChainEnded -= _field.OnChainEnded;
 		}
 	}
 }

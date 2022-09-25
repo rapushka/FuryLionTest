@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Code.Extensions;
 using UnityEngine;
 
@@ -13,6 +14,6 @@ namespace Code.Environment
 
 		public void OnLastTokenRemoved() => _lineRenderer.RemoveLastPosition();
 
-		public void OnChainEnded() => _lineRenderer.ClearPositions();
+		public void OnChainEnded(LinkedList<Vector2> linkedList) => _lineRenderer.ClearPositions();
 	}
 }

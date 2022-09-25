@@ -39,10 +39,8 @@ namespace Code.Gameplay
 		private void CreateToArray(TokenType tokenType, int i, int j) 
 			=> _tokenGameObjects.SetAtVector(ToUnityWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
 
-		private Token Value(TokenType tokenType, int i, int j)
-		{
-			return InstantiateInRoot(TokenByType(tokenType), ScalePosition(i, j));
-		}
+		private Token Value(TokenType tokenType, int i, int j) 
+			=> InstantiateInRoot(TokenByType(tokenType), ScalePosition(i, j));
 
 		private T InstantiateInRoot<T>(T original, Vector3 position)
 			where T : Object

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Code.Gameplay;
 using Code.Extensions;
 using UnityEngine;
@@ -22,12 +24,28 @@ namespace Code.Environment
 			ApplyGravity();
 		}
 
-		public Token this[Vector2 position] 
-			=> _tokens.GetAtVector(position.ToVectorInt());
+		public Token this[Vector2 position]
+		{
+			get => _tokens.GetAtVector(position.ToVectorInt());
+			set => _tokens.SetAtVector(position.ToVectorInt(), value);
+		}
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition) 
 			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
 
-		public void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
+		public void OnChainEnded(LinkedList<Vector2> chain)
+		{
+			foreach (var position in chain)
+			{
+				var token = this[position];
+				
+				Destroy(token.gameObject);
+				this[position] = null;
+			}
+
+			ApplyGravity();
+		}
+
+		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
 	}
 }

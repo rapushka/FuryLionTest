@@ -70,7 +70,8 @@ namespace Code.Extensions
 			}
 		}
 
-		public static T GetAtVector<T>(this T[,] @this, Vector2Int position) => @this[position.x, position.y];
+		public static T GetAtVector<T>(this T[,] @this, Vector2Int position) 
+			=> @this[position.x, position.y];
 
 		public static T SetAtVector<T>(this T[,] @this, Vector2Int position, T value)
 			=> @this[position.x, position.y] = value;

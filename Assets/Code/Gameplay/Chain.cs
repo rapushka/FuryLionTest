@@ -16,7 +16,7 @@ namespace Code.Gameplay
 
 		public event Action<Vector2> TokenAdded;
 		public event Action LastTokenRemoved;
-		public event Action ChainEnded;
+		public event Action<LinkedList<Vector2>> ChainEnded;
 
 		public Chain(Field field)
 		{
@@ -48,8 +48,10 @@ namespace Code.Gameplay
 		{
 			var isNotEndedYet = _chainComposingInProcess;
 			_chainComposingInProcess = false;
+			
+			ChainEnded?.Invoke(_chainedTokens);
+			
 			_chainedTokens.Do((c) => c.Clear(), @if: isNotEndedYet);
-			ChainEnded?.Invoke();
 		}
 
 		private bool IsPenultimateToken(Vector2 nextPosition)
