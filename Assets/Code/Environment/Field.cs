@@ -56,10 +56,12 @@ namespace Code.Environment
 
 		private void UpdateField()
 		{
-			// var tokensWasSpawned = true;
-			// while (tokensWasSpawned)
-			ApplyGravity();
-			TrySpawnTokens();
+			var tokensWasSpawned = true;
+			while (tokensWasSpawned)
+			{
+				ApplyGravity();
+				tokensWasSpawned = TrySpawnTokens();
+			}
 		}
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
