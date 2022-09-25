@@ -6,32 +6,20 @@ using UnityEngine;
 
 namespace Code.Environment.Gravity.Checkers
 {
-	public class VerticallyChecker : IDirectionChecker
+	public class VerticallyChecker : BaseDirectionChecker
 	{
-		private Token[,] _tokens;
-
-		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
-		{
-			_tokens = tokens;
-
-			result = FillResults(_tokens);
-			return result.Any();
-		}
-
-		private Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
-			=> tokens.Where(MarkVerticallyToken)
+		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
+			=> tokens.Where(TokenIsPrecedent)
 			         .Select((t) => t.transform.position.ToVectorInt())
 			         .ToDictionary((p) => p, GetDirection);
 
-		private Vector3 GetDirection(Vector2Int position) => GetDirection(position.x, position.y);
+		protected override Vector3 GetDirection(int x, int y) => Vector3.down;
 
-		private bool MarkVerticallyToken(Token token, int x, int y)
-			=> token == true
-			   && token.ApplyGravity
-			   && TokenBellowIsEmpty(x, y);
+		protected override bool TokenOnDirectionIsEmpty(int x, int y) 
+			=> IsNotOnBottomBorder(y) && BellowTokenIsEmpty(x, y);
 
-		private bool TokenBellowIsEmpty(int x, int y) => y > 0 && _tokens[x, y - 1] == false;
-
-		private Vector3 GetDirection(int x, int y) => Vector3.down;
+		private static bool IsNotOnBottomBorder(int y) => y > 0;
+		
+		private bool BellowTokenIsEmpty(int x, int y) => Tokens[x, y - 1] == false;
 	}
 }

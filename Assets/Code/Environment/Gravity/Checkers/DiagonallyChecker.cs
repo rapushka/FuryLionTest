@@ -1,61 +1,43 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
 namespace Code.Environment.Gravity.Checkers
 {
-	public class DiagonallyChecker : IDirectionChecker
+	public class DiagonallyChecker : BaseDirectionChecker
 	{
-		private Token[,] _tokens;
-
-		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
-		{
-			_tokens = tokens;
-
-			result = FillResults(_tokens);
-			return result.Any();
-		}
-
-		private Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
-			=> tokens.FirstOrDefault(MarkDiagonallyToken)
+		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
+			=> tokens.FirstOrDefault(TokenIsPrecedent)
 			         ?.transform.position.ToVectorInt()
 			         .ToDictionary((p) => p, GetDirection)
 			         ?? new Dictionary<Vector2Int, Vector3>();
 
-		private Vector3 GetDirection(Vector2Int position) => GetDirection(position.x, position.y);
-
-		private bool MarkDiagonallyToken(Token token, int x, int y)
-			=> token == true
-			   && token.ApplyGravity
-			   && TokenDiagonallyBellowIsEmpty(x, y);
-
-		private bool TokenDiagonallyBellowIsEmpty(int x, int y)
-			=> GetDirection(x, y) != Vector3.zero;
-
-		private Vector3 GetDirection(int x, int y)
-			=> IsAtBottomBorder(y) ? Vector3.zero
+		protected override Vector3 GetDirection(int x, int y)
+			=> IsOnBottomBorder(y) ? Vector3.zero
 				: CanMoveBottomLeft(x, y) ? Vector3.left
 				: CanMoveBottomRight(x, y) ? Vector3.right
 				: Vector3.zero;
 
-		private static bool IsAtBottomBorder(int y) => y <= 0;
+		protected override bool TokenOnDirectionIsEmpty(int x, int y)
+			=> GetDirection(x, y) != Vector3.zero;
+
+		private static bool IsOnBottomBorder(int y) => y <= 0;
 
 		private bool CanMoveBottomLeft(int x, int y)
-			=> IsNotAtLeftBorder(x)
-			   && IsEmptyAtBottomLeft(x, y);
+			=> IsNotOnLeftBorder(x)
+			   && IsEmptyOnBottomLeft(x, y);
 
 		private bool CanMoveBottomRight(int x, int y)
 			=> IsNotOnRightBorder(x)
-			   && IsEmptyAtBottomRight(x, y);
+			   && IsEmptyOnBottomRight(x, y);
 
-		private static bool IsNotAtLeftBorder(int x) => x > 0;
+		private static bool IsNotOnLeftBorder(int x) => x > 0;
 
-		private bool IsEmptyAtBottomLeft(int x, int y) => _tokens[x - 1, y - 1] == false;
+		private bool IsEmptyOnBottomLeft(int x, int y) => Tokens[x - 1, y - 1] == false;
 
-		private bool IsNotOnRightBorder(int x) => x < _tokens.GetLength(0) - 1;
+		private bool IsNotOnRightBorder(int x) => x < Tokens.GetLength(0) - 1;
 
-		private bool IsEmptyAtBottomRight(int x, int y) => _tokens[x + 1, y - 1] == false;
+		private bool IsEmptyOnBottomRight(int x, int y) => Tokens[x + 1, y - 1] == false;
 	}
 }
