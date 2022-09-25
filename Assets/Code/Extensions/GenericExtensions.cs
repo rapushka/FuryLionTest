@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Code.Extensions
 {
@@ -43,6 +44,15 @@ namespace Code.Extensions
 		{
 			@this = action.Invoke(@this);
 			return @this;
+		}
+
+		public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>
+			(this TKey @this, Func<TKey, TKey> getKey, Func<TKey, TValue> getValue)
+		{
+			return new Dictionary<TKey, TValue>
+			{
+				[getKey(@this)] = getValue(@this)
+			};
 		}
 	}
 }

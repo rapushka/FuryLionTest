@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using Code.Environment.Gravity.Checkers;
+using Code.Environment.Gravity.Emits;
+using Code.Environment.Gravity.Movers;
 using Code.Gameplay;
 using UnityEngine;
 
@@ -5,16 +9,16 @@ namespace Code.Environment.Gravity
 {
 	public class Gravity
 	{
-		private readonly VerticalDirectionEmit _vertical;
-		private readonly DiagonalDirectionEmit _diagonal;
+		private readonly BaseDirectionEmit _vertical;
+		private readonly BaseDirectionEmit _diagonal;
 
 		private Token[,] _tokens;
 		private bool _mayBePrecedents;
 
 		public Gravity()
 		{
-			_vertical = new VerticalDirectionEmit();
-			_diagonal = new DiagonalDirectionEmit();
+			_vertical = new BaseDirectionEmit(new VerticallyChecker(), new VerticallyMover());
+			_diagonal = new BaseDirectionEmit(new DiagonallyChecker(), new DiagonallyMover());
 		}
 
 		public Token[,] Apply(Token[,] tokens)
@@ -46,16 +50,16 @@ namespace Code.Environment.Gravity
 		private void DiagonallyCheck()
 		{
 			if (_mayBePrecedents == false
-			    && _diagonal.HasPrecedent(_tokens, out var position, out var direction)
-			    && position is not null)
+			    && _diagonal.HasPrecedent(_tokens, out var positions)
+			    && positions is not null)
 			{
-				MoveDiagonally(position.Value, direction);
+				MoveDiagonally(positions);
 			}
 		}
 
-		private void MoveDiagonally(Vector2Int position, Vector3 direction)
+		private void MoveDiagonally(Dictionary<Vector2Int, Vector3> positions)
 		{
-			_tokens = _diagonal.Move(_tokens, position, direction);
+			_tokens = _diagonal.Move(_tokens, positions);
 			_mayBePrecedents = true;
 		}
 	}
