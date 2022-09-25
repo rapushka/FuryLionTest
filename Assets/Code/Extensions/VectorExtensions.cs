@@ -37,14 +37,17 @@ namespace Code.Extensions
 			return @this;
 		}
 
-		private static float ReverseY(this Vector2 @this, float lengthY) => Mathf.Abs(@this.y - (lengthY - 1));
+		public static float ReverseY(this Vector2 @this, float lengthY) => Mathf.Abs(@this.y - (lengthY - 1));
 
 		public static Vector2Int ToVectorInt(this Vector2 @this) => new((int)@this.x, (int)@this.y);
+		public static Vector2Int ToVectorInt(this Vector3 @this) => new((int)@this.x, (int)@this.y);
 		
 		public static Vector2 DistanceTo(this Vector2 @this, Vector2 other) => @this - other;
 
 		public static Vector2 AsAbs(this Vector2 @this) => @this.SetX(Mathf.Abs(@this.x)).SetY(Mathf.Abs(@this.y));
 
 		public static bool LessThanOrEqualTo(this Vector2 @this, float value) => @this.x <= value && @this.y <= value;
+
+		public static Vector3 AsVector3(this Vector2Int @this) => new(@this.x, @this.y);
 	}
 }

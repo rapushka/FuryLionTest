@@ -1,4 +1,5 @@
 using Code.Environment;
+using Code.Environment.Gravity;
 using Code.Gameplay;
 using Code.Input;
 using UnityEngine;
@@ -18,16 +19,18 @@ namespace Code.Infrastructure
 
 		private void Awake()
 		{
+			var gravity = new Gravity();
+			
 			_chain = new Chain(_field);
 			_chainRenderer = new ChainRenderer(_lineRenderer);
-			_field.Construct(_levelGenerator);
+			_field.Construct(_levelGenerator, gravity);
 		}
 
 		private void OnEnable()
 		{
 			_inputService.MouseDown += _overlapMouse.EnableOverlapping;
 			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
-			
+
 			_overlapMouse.ClickOnToken += _chain.StartComposing;
 			_overlapMouse.TokenHit += _chain.NextToken;
 			_inputService.MouseUp += _chain.EndComposing;
@@ -35,6 +38,8 @@ namespace Code.Infrastructure
 			_chain.TokenAdded += _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
 			_chain.ChainEnded += _chainRenderer.OnChainEnded;
+			
+			_chain.ChainEnded += _field.ApplyGravity;
 		}
 
 		private void OnDisable()
@@ -49,6 +54,8 @@ namespace Code.Infrastructure
 			_chain.TokenAdded -= _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
 			_chain.ChainEnded -= _chainRenderer.OnChainEnded;
+			
+			_chain.ChainEnded -= _field.ApplyGravity;
 		}
 	}
 }
