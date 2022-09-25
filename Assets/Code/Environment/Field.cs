@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.Gameplay;
 using Code.Extensions;
 using UnityEngine;
@@ -8,12 +7,14 @@ namespace Code.Environment
 {
 	public class Field : MonoBehaviour
 	{
+		[SerializeField] private int _minTokensCountForChain = 3;
+
 		private LevelGenerator _levelGenerator;
 		private float _step;
 		private Token[,] _tokens;
 		private Gravity.Gravity _gravity;
 
-		public void Construct(LevelGenerator levelGenerator, Gravity.Gravity gravity) 
+		public void Construct(LevelGenerator levelGenerator, Gravity.Gravity gravity)
 			=> (_levelGenerator, _gravity) = (levelGenerator, gravity);
 
 		private void Start()
@@ -30,15 +31,20 @@ namespace Code.Environment
 			set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition) 
+		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
 
 		public void OnChainEnded(LinkedList<Vector2> chain)
 		{
+			if (chain.Count < _minTokensCountForChain)
+			{
+				return;
+			}
+
 			foreach (var position in chain)
 			{
 				var token = this[position];
-				
+
 				Destroy(token.gameObject);
 				this[position] = null;
 			}
