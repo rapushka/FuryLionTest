@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Code.Environment.Gravity.Emits
 {
-	public abstract class BaseDirectionEmit
+	public class BaseDirectionEmit
 	{
 		private readonly IDirectionChecker _checker;
 		private readonly IDirectionMover _mover;
 
-		protected BaseDirectionEmit(IDirectionChecker checker, IDirectionMover mover)
+		public BaseDirectionEmit(IDirectionChecker checker, IDirectionMover mover)
 			=> (_checker, _mover) = (checker, mover);
 
 		public bool HasPrecedent(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
