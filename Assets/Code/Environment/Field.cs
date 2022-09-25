@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
 using UnityEngine;
@@ -12,11 +13,11 @@ namespace Code.Environment
 		private LevelGenerator _levelGenerator;
 		private float _step;
 		private Token[,] _tokens;
-		private Gravity.Gravity _gravity;
+		private Gravity _gravity;
 		private TokensSpawner _spawner;
 
-		public void Construct(LevelGenerator levelGenerator, Gravity.Gravity gravity)
-			=> (_levelGenerator, _gravity) = (levelGenerator, gravity);
+		public void Construct(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner)
+			=> (_levelGenerator, _gravity, _spawner) = (levelGenerator, gravity, spawner);
 
 		private void Start()
 		{
@@ -56,18 +57,16 @@ namespace Code.Environment
 		private void UpdateField()
 		{
 			var tokensWasSpawned = true;
-			// while (tokensWasSpawned)
+			while (tokensWasSpawned)
 			{
 				ApplyGravity();
-				// tokensWasSpawned = TrySpawnTokens();
+				tokensWasSpawned = TrySpawnTokens();
+				tokensWasSpawned = false;
 			}
 		}
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
 
-		private bool TrySpawnTokens()
-		{
-			return _spawner.Spawn(_tokens);
-		}
+		private bool TrySpawnTokens() => _spawner.Spawn(_tokens);
 	}
 }

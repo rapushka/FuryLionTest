@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Code.Environment.Gravity.Checkers;
-using Code.Environment.Gravity.Emits;
-using Code.Environment.Gravity.Movers;
+using Code.Environment.GravityBehaviour.Checkers;
+using Code.Environment.GravityBehaviour.Emits;
+using Code.Environment.GravityBehaviour.Movers;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity
+namespace Code.Environment.GravityBehaviour
 {
 	public class Gravity
 	{

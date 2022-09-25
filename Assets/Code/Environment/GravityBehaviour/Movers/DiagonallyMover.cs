@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Movers
+namespace Code.Environment.GravityBehaviour.Movers
 {
 	public class DiagonallyMover : BaseDirectionMover
 	{

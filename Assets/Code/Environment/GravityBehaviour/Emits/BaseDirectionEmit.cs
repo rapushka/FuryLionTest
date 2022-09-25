@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Code.Environment.Gravity.Checkers;
-using Code.Environment.Gravity.Movers;
+using Code.Environment.GravityBehaviour.Checkers;
+using Code.Environment.GravityBehaviour.Movers;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Emits
+namespace Code.Environment.GravityBehaviour.Emits
 {
 	public class BaseDirectionEmit
 	{

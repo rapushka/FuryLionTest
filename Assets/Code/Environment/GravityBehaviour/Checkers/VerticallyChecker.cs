@@ -4,13 +4,14 @@ using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Checkers
+namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public class VerticallyChecker : BaseDirectionChecker
 	{
 		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
 			=> tokens.Where(TokenIsPrecedent)
 			         .Select((t) => t.transform.position.ToVectorInt())
+			         .Distinct()
 			         .ToDictionary((p) => p, GetDirection);
 
 		protected override Vector3 GetDirection(int x, int y) => Vector3.down;

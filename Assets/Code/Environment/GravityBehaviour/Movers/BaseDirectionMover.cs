@@ -3,7 +3,7 @@ using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Movers
+namespace Code.Environment.GravityBehaviour.Movers
 {
 	public abstract class BaseDirectionMover : IDirectionMover
 	{

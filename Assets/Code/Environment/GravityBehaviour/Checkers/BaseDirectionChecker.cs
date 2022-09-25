@@ -3,7 +3,7 @@ using System.Linq;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Checkers
+namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public abstract class BaseDirectionChecker : IDirectionChecker
 	{

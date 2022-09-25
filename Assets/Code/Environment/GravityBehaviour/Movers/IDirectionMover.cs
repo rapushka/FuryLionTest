@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Movers
+namespace Code.Environment.GravityBehaviour.Movers
 {
 	public interface IDirectionMover
 	{
