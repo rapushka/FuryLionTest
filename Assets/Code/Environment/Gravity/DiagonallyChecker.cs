@@ -9,17 +9,17 @@ namespace Code.Environment.Gravity
 {
 	public class DiagonallyChecker : IDirectionChecker
 	{
-		private readonly List<Vector2Int> _result;
+		private readonly Dictionary<Vector2Int, Vector3> _result;
 
 		private Token[,] _tokens;
 		private Vector3 _direction;
 
 		public DiagonallyChecker()
 		{
-			_result = new List<Vector2Int>();
+			_result = new Dictionary<Vector2Int, Vector3>();
 		}
 
-		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction)
+		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
 		{
 			_result.Clear();
 			_tokens = tokens;
@@ -28,10 +28,9 @@ namespace Code.Environment.Gravity
 			               ?.transform.position.ToVectorInt();
 			if (v != null)
 			{
-				_result.Add(v.Value);
+				_result.Add(v.Value, _direction);
 			}
 
-			direction = _direction;
 			result = _result;
 			return _result.Any();
 		}

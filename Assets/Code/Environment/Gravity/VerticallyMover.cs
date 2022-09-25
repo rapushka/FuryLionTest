@@ -9,11 +9,9 @@ namespace Code.Environment.Gravity
 	public class VerticallyMover : IDirectionMover
 	{
 		private Token[,] _tokens;
-		private Vector3 _direction;
 
-		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions, Vector3 direction)
+		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions)
 		{
-			_direction = direction;
 			_tokens = tokens;
 			
 			positions.ForEach(FallTokenVertically);
@@ -21,11 +19,13 @@ namespace Code.Environment.Gravity
 			return _tokens;
 		}
 		
-		private void FallTokenVertically(Vector2Int position)
+		private void FallTokenVertically(KeyValuePair<Vector2Int, Vector3> pair)
 		{
+			var position = pair.Key;
+			var direction = pair.Value;
 			for (var y = position.y; y > 0 && BellowIsEmpty(_tokens, position.x, y); y--)
 			{
-				_tokens[position.x, y].transform.Translate(_direction);
+				_tokens[position.x, y].transform.Translate(direction);
 
 				Swap(ref _tokens[position.x, y], ref _tokens[position.x, y - 1]);
 			}

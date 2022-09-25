@@ -35,9 +35,9 @@ namespace Code.Environment.Gravity
 
 		private void VerticallyCheck()
 		{
-			if (_vertical.HasPrecedent(_tokens, out var positions, out var direction))
+			if (_vertical.HasPrecedent(_tokens, out var positions))
 			{
-				_tokens = _vertical.Move(_tokens, positions, direction);
+				_tokens = _vertical.Move(_tokens, positions);
 			}
 			else
 			{
@@ -48,16 +48,16 @@ namespace Code.Environment.Gravity
 		private void DiagonallyCheck()
 		{
 			if (_mayBePrecedents == false
-			    && _diagonal.HasPrecedent(_tokens, out var positions, out var direction)
+			    && _diagonal.HasPrecedent(_tokens, out var positions)
 			    && positions is not null)
 			{
-				MoveDiagonally(positions, direction);
+				MoveDiagonally(positions);
 			}
 		}
 
-		private void MoveDiagonally(IEnumerable<Vector2Int> position, Vector3 direction)
+		private void MoveDiagonally(Dictionary<Vector2Int, Vector3> positions)
 		{
-			_tokens = _diagonal.Move(_tokens, position, direction);
+			_tokens = _diagonal.Move(_tokens, positions);
 			_mayBePrecedents = true;
 		}
 	}

@@ -9,16 +9,16 @@ namespace Code.Environment.Gravity
 {
 	public class VerticallyChecker : IDirectionChecker
 	{
-		private readonly List<Vector2Int> _result;
+		private readonly Dictionary<Vector2Int, Vector3> _result;
 
 		private Token[,] _tokens;
 
 		public VerticallyChecker()
 		{
-			_result = new List<Vector2Int>();
+			_result = new Dictionary<Vector2Int, Vector3>();
 		}
 
-		public bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction)
+		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
 		{
 			_result.Clear();
 			_tokens = tokens;
@@ -26,7 +26,6 @@ namespace Code.Environment.Gravity
 			_tokens.DoubleForReversed(MarkVerticallyToken);
 
 			result = _result;
-			direction = Vector3.down;
 			return result.Any();
 		}
 		
@@ -35,7 +34,7 @@ namespace Code.Environment.Gravity
 			if (token == true
 			    && token.ApplyGravity
 			    && TokenBellowIsEmpty(x, y)
-			    && _result.Contains(new Vector2Int(x, y)) == false)
+			    && _result.ContainsKey(new Vector2Int(x, y)) == false)
 			{
 				MarkWithAboveTokens(x, y);
 			}
@@ -47,7 +46,7 @@ namespace Code.Environment.Gravity
 		{
 			for (var y = startY; VerticalLineNotEnded(startX, y); y++)
 			{
-				_result.Add(new Vector2Int(startX, y));
+				_result.Add(new Vector2Int(startX, y), Vector3.down);
 			}
 		}
 

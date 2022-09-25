@@ -6,6 +6,6 @@ namespace Code.Environment.Gravity.Interfaces
 {
 	public interface IDirectionChecker
 	{
-		bool HasPrecedentTokens(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction);
+		bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result);
 	}
 }

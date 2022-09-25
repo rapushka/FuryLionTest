@@ -13,10 +13,10 @@ namespace Code.Environment.Gravity.Emits
 		protected BaseDirectionEmit(IDirectionChecker checker, IDirectionMover mover)
 			=> (_checker, _mover) = (checker, mover);
 
-		public bool HasPrecedent(Token[,] tokens, out IEnumerable<Vector2Int> result, out Vector3 direction)
-			=> _checker.HasPrecedentTokens(tokens, out result, out direction);
+		public bool HasPrecedent(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
+			=> _checker.HasPrecedentTokens(tokens, out result);
 
-		public Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions, Vector3 direction)
-			=> _mover.Move(tokens, positions, direction);
+		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions)
+			=> _mover.Move(tokens, positions);
 	}
 }

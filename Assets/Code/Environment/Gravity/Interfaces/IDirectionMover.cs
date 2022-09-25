@@ -6,6 +6,6 @@ namespace Code.Environment.Gravity.Interfaces
 {
 	public interface IDirectionMover
 	{
-		Token[,] Move(Token[,] tokens, IEnumerable<Vector2Int> positions, Vector3 direction);
+		Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions);
 	}
 }
