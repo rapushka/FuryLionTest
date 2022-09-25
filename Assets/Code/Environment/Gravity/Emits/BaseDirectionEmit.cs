@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Code.Environment.Gravity.Interfaces;
+using Code.Environment.Gravity.Checkers;
+using Code.Environment.Gravity.Movers;
 using Code.Gameplay;
 using UnityEngine;
 

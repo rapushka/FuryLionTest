@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Code.Environment.Gravity.Interfaces;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity
+namespace Code.Environment.Gravity.Movers
 {
 	public class VerticallyMover : IDirectionMover
 	{

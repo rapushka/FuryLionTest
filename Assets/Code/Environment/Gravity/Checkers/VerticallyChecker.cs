@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Environment.Gravity.Interfaces;
 using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity
+namespace Code.Environment.Gravity.Checkers
 {
 	public class VerticallyChecker : IDirectionChecker
 	{

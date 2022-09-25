@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.Gravity.Interfaces
+namespace Code.Environment.Gravity.Checkers
 {
 	public interface IDirectionChecker
 	{
