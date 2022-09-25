@@ -11,6 +11,8 @@ namespace Code.Levels.LevelGeneration
 	{
 		[SerializeField] private List<TokenToTypeEntry> _entries;
 
+		public List<TokenToTypeEntry> Entries => _entries;
+
 		private Dictionary<TokenType, Token> _cashedDictionary;
 
 		private Dictionary<TokenType, Token> Dictionary => _cashedDictionary ??= SerializedArrayToDictionary();

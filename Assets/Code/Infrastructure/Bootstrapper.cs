@@ -13,6 +13,7 @@ namespace Code.Infrastructure
 		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
 		[SerializeField] private LevelGenerator _levelGenerator;
+		[SerializeField] private TokensCollection _tokens;
 
 		private ChainRenderer _chainRenderer;
 		private Chain _chain;
@@ -23,6 +24,8 @@ namespace Code.Infrastructure
 			
 			_chain = new Chain(_field);
 			_chainRenderer = new ChainRenderer(_lineRenderer);
+			
+			_levelGenerator.Construct(_tokens.InitializedDictionary());
 			_field.Construct(_levelGenerator, gravity);
 		}
 

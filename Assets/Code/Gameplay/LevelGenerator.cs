@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Code.Extensions;
 using Code.Levels;
-using Code.Levels.LevelGeneration;
 using UnityEngine;
 using static Code.Common.Constants;
 using Object = UnityEngine.Object;
@@ -13,14 +13,19 @@ namespace Code.Gameplay
 		[SerializeField] private float _step;
 		[SerializeField] private Vector2 _offset;
 		[SerializeField] private Transform _levelRoot;
-		[SerializeField] private TokenToTypeCollection _tokens;
 
+		private Dictionary<TokenType, Token> _tokens;
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
 
 		public float Step => _step;
 		public Vector2 Offset => _offset;
 
+		public void Construct(Dictionary<TokenType, Token> tokens)
+		{
+			_tokens = tokens;
+		}
+		
 		public Token[,] Generate()
 		{
 			_tokenTypes = GetTokenTypes();

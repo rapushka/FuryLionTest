@@ -13,6 +13,7 @@ namespace Code.Environment
 		private float _step;
 		private Token[,] _tokens;
 		private Gravity.Gravity _gravity;
+		private TokensSpawner _spawner;
 
 		public void Construct(LevelGenerator levelGenerator, Gravity.Gravity gravity)
 			=> (_levelGenerator, _gravity) = (levelGenerator, gravity);
@@ -22,7 +23,7 @@ namespace Code.Environment
 			_tokens = _levelGenerator.Generate();
 			_step = _levelGenerator.Step;
 
-			ApplyGravity();
+			UpdateField();
 		}
 
 		public Token this[Vector2 position]
@@ -49,9 +50,24 @@ namespace Code.Environment
 				this[position] = null;
 			}
 
-			ApplyGravity();
+			UpdateField();
+		}
+
+		private void UpdateField()
+		{
+			var tokensWasSpawned = true;
+			// while (tokensWasSpawned)
+			{
+				ApplyGravity();
+				// tokensWasSpawned = TrySpawnTokens();
+			}
 		}
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
+
+		private bool TrySpawnTokens()
+		{
+			return _spawner.Spawn(_tokens);
+		}
 	}
 }
