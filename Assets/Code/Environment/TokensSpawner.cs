@@ -16,16 +16,15 @@ namespace Code.Environment
 		public bool Spawn(Token[,] tokens)
 		{
 			var created = false;
-
 			var y = tokens.GetLength(1) - 1;
-
+			
 			for (var x = 0; x < tokens.GetLength(0); x++)
 			{
 				if (tokens[x, y] == true)
 				{
 					continue;
 				}
-
+			
 				CreateToken(tokens, x, y);
 				created = true;
 			}
@@ -39,8 +38,8 @@ namespace Code.Environment
 				? _tokensDictionary[TokenType.Blue]
 				: _tokensDictionary[TokenType.Red];
 
-			Instantiate(token, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity);
-			tokens[x, y] = token;
+			var tokenInstance = Instantiate(token, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity);
+			tokens[x, y] = tokenInstance;
 		}
 	}
 }
