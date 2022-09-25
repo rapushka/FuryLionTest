@@ -12,7 +12,6 @@ namespace Code.Environment.Gravity
 		private readonly Dictionary<Vector2Int, Vector3> _result;
 
 		private Token[,] _tokens;
-		private Vector3 _direction;
 
 		public DiagonallyChecker()
 		{
@@ -24,16 +23,26 @@ namespace Code.Environment.Gravity
 			_result.Clear();
 			_tokens = tokens;
 
-			var v = _tokens.FirstOrDefault(MarkDiagonallyToken)
-			               ?.transform.position.ToVectorInt();
-			if (v != null)
-			{
-				_result.Add(v.Value, _direction);
-			}
-
-			result = _result;
+			result = FillResult(_tokens);
 			return _result.Any();
 		}
+
+		private Dictionary<Vector2Int, Vector3> FillResult(Token[,] tokens)
+		{
+			var marked = tokens.FirstOrDefault(MarkDiagonallyToken)
+			                   ?.transform.position.ToVectorInt();
+
+			if (marked != null)
+			{
+				AddToResult(marked.Value);
+			}
+
+			return _result;
+		}
+
+		private void AddToResult(Vector2Int entry) => _result.Add(entry, GetDirection(entry));
+
+		private Vector3 GetDirection(Vector2Int position) => GetDirection(position.x, position.y);
 
 		private bool MarkDiagonallyToken(Token token, int x, int y)
 			=> token == true
@@ -41,7 +50,7 @@ namespace Code.Environment.Gravity
 			   && TokenDiagonallyBellowIsEmpty(x, y);
 
 		private bool TokenDiagonallyBellowIsEmpty(int x, int y)
-			=> (_direction = GetDirection(x, y)) != Vector3.zero;
+			=> GetDirection(x, y) != Vector3.zero;
 
 		private Vector3 GetDirection(int x, int y)
 			=> IsAtBottomBorder(y) ? Vector3.zero

@@ -56,6 +56,20 @@ namespace Code.Extensions
 			return default;
 		}
 
+		public static IEnumerable<T> Where<T>(this T[,] @this, Func<T, int, int, bool> predicate)
+		{
+			for (var i = 0; i < @this.GetLength(0); i++)
+			{
+				for (var j = 0; j < @this.GetLength(1); j++)
+				{
+					if (predicate.Invoke(@this[i, j], i, j))
+					{
+						yield return @this[i, j];
+					}
+				}
+			}
+		}
+
 		public static T GetAtVector<T>(this T[,] @this, Vector2Int position) => @this[position.x, position.y];
 
 		public static T SetAtVector<T>(this T[,] @this, Vector2Int position, T value)
