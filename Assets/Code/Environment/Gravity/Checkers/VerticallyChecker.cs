@@ -9,7 +9,7 @@ namespace Code.Environment.Gravity.Checkers
 	public class VerticallyChecker : IDirectionChecker
 	{
 		private Token[,] _tokens;
-		
+
 		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
 		{
 			_tokens = tokens;
@@ -19,10 +19,9 @@ namespace Code.Environment.Gravity.Checkers
 		}
 
 		private Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
-			=> tokens
-			   .Where(MarkVerticallyToken)
-			   .Select((t) => t.transform.position.ToVectorInt())
-			   .ToDictionary((p) => p, GetDirection);
+			=> tokens.Where(MarkVerticallyToken)
+			         .Select((t) => t.transform.position.ToVectorInt())
+			         .ToDictionary((p) => p, GetDirection);
 
 		private Vector3 GetDirection(Vector2Int position) => GetDirection(position.x, position.y);
 
@@ -33,6 +32,6 @@ namespace Code.Environment.Gravity.Checkers
 
 		private bool TokenBellowIsEmpty(int x, int y) => y > 0 && _tokens[x, y - 1] == false;
 
-		private static Vector3 GetDirection(int x, int y) => Vector3.down;
+		private Vector3 GetDirection(int x, int y) => Vector3.down;
 	}
 }

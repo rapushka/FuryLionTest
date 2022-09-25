@@ -8,38 +8,21 @@ namespace Code.Environment.Gravity.Checkers
 {
 	public class DiagonallyChecker : IDirectionChecker
 	{
-		private readonly Dictionary<Vector2Int, Vector3> _result;
-
 		private Token[,] _tokens;
-
-		public DiagonallyChecker()
-		{
-			_result = new Dictionary<Vector2Int, Vector3>();
-		}
 
 		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
 		{
-			_result.Clear();
 			_tokens = tokens;
 
-			result = FillResult(_tokens);
-			return _result.Any();
+			result = FillResults(_tokens);
+			return result.Any();
 		}
 
-		private Dictionary<Vector2Int, Vector3> FillResult(Token[,] tokens)
-		{
-			var marked = tokens.FirstOrDefault(MarkDiagonallyToken)
-			                   ?.transform.position.ToVectorInt();
-
-			if (marked != null)
-			{
-				AddToResult(marked.Value);
-			}
-
-			return _result;
-		}
-
-		private void AddToResult(Vector2Int entry) => _result.Add(entry, GetDirection(entry));
+		private Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
+			=> tokens.FirstOrDefault(MarkDiagonallyToken)
+			         ?.transform.position.ToVectorInt()
+			         .ToDictionary((p) => p, GetDirection)
+			         ?? new Dictionary<Vector2Int, Vector3>();
 
 		private Vector3 GetDirection(Vector2Int position) => GetDirection(position.x, position.y);
 
