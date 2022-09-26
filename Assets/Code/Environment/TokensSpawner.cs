@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Extensions;
 using Code.Gameplay;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Code.Environment
 {
 	public class TokensSpawner : MonoBehaviour
 	{
+		private const float Step = 0.5f;
 		private Dictionary<TokenType, Token> _tokensDictionary;
 
 		public void Construct(Dictionary<TokenType, Token> tokensDictionary)
@@ -34,11 +36,9 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var token = Random.Range(0, 10) % 2 == 0
-				? _tokensDictionary[TokenType.Blue]
-				: _tokensDictionary[TokenType.Red];
+			var token = _tokensDictionary.PickRandomColor();
 
-			var tokenInstance = Instantiate(token, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity);
+			var tokenInstance = Instantiate(token, new Vector3(x + Step, y + Step), Quaternion.identity);
 			tokens[x, y] = tokenInstance;
 		}
 	}
