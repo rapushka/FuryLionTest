@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
+using Code.Infrastructure;
 using UnityEngine;
 
 namespace Code.Environment
@@ -16,13 +17,16 @@ namespace Code.Environment
 		private Gravity _gravity;
 		private TokensSpawner _spawner;
 
-		public void Construct(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner)
-			=> (_levelGenerator, _gravity, _spawner) = (levelGenerator, gravity, spawner);
+		public void Construct(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
+		{
+			(_levelGenerator, _gravity, _spawner) = (generator, gravity, spawner);
+
+			_step = balance.Field.Step;
+		}
 
 		private void Start()
 		{
 			_tokens = _levelGenerator.Generate();
-			_step = _levelGenerator.Step;
 
 			UpdateField();
 		}

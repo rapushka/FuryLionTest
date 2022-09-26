@@ -15,6 +15,7 @@ namespace Code.Infrastructure
 		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
 		[SerializeField] private TokensSpawner _spawner;
+		[SerializeField] private GameBalance _balance;
 
 		private ChainRenderer _chainRenderer;
 		private Chain _chain;
@@ -28,8 +29,8 @@ namespace Code.Infrastructure
 			_chainRenderer = new ChainRenderer(_lineRenderer);
 
 			_spawner.Construct(tokensToTypes);
-			_levelGenerator.Construct(tokensToTypes);
-			_field.Construct(_levelGenerator, gravity, _spawner);
+			_levelGenerator.Construct(tokensToTypes, _balance);
+			_field.Construct(_levelGenerator, gravity, _spawner, _balance);
 		}
 
 		private void OnEnable()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Extensions;
+using Code.Infrastructure;
 using Code.Levels;
 using UnityEngine;
 using static Code.Common.Constants;
@@ -10,10 +11,10 @@ namespace Code.Gameplay
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField] private Level _debugLevel;
-		[SerializeField] private float _step;
-		[SerializeField] private Vector2 _offset;
 		[SerializeField] private Transform _levelRoot;
 
+		private Vector2 _offset;
+		private float _step;
 		private Dictionary<TokenType, Token> _tokens;
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
@@ -21,9 +22,12 @@ namespace Code.Gameplay
 		public float Step => _step;
 		public Vector2 Offset => _offset;
 
-		public void Construct(Dictionary<TokenType, Token> tokens)
+		public void Construct(Dictionary<TokenType, Token> tokens, GameBalance gameBalance)
 		{
 			_tokens = tokens;
+			
+			_step = gameBalance.Field.Step;
+			_offset = gameBalance.Field.Offset;
 		}
 		
 		public Token[,] Generate()
