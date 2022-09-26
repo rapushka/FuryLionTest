@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using Code.Extensions;
 using Code.Gameplay;
+using Code.Infrastructure;
 using UnityEngine;
 
 namespace Code.Environment
 {
 	public class TokensSpawner : MonoBehaviour
 	{
-		private const float Step = 0.5f;
 		private Dictionary<TokenType, Token> _tokensDictionary;
+		private float _step;
+		private Vector2 _offset;
 
-		public void Construct(Dictionary<TokenType, Token> tokensDictionary)
+		public void Construct(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance)
 		{
 			_tokensDictionary = tokensDictionary;
+			_step = balance.Field.Step;
+			_offset = balance.Field.Offset;
 		}
 
 		public bool Spawn(Token[,] tokens)
@@ -36,10 +40,12 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var token = _tokensDictionary.PickRandomColor();
+			var tokenPrefab = _tokensDictionary.PickRandomColor();
 
-			var tokenInstance = Instantiate(token, new Vector3(x + Step, y + Step), Quaternion.identity);
-			tokens[x, y] = tokenInstance;
+			var token = Instantiate(tokenPrefab, ScalePosition(x, y), Quaternion.identity);
+			tokens[x, y] = token;
 		}
+
+		private Vector3 ScalePosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
 	}
 }

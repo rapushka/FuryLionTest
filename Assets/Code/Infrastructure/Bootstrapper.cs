@@ -28,7 +28,7 @@ namespace Code.Infrastructure
 			_chain = new Chain(_field);
 			_chainRenderer = new ChainRenderer(_lineRenderer);
 
-			_spawner.Construct(tokensToTypes);
+			_spawner.Construct(tokensToTypes, _balance);
 			_levelGenerator.Construct(tokensToTypes, _balance);
 			_field.Construct(_levelGenerator, gravity, _spawner, _balance);
 		}
