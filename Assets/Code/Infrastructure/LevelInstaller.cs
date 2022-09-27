@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using Code.Common;
 using Code.Environment;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
@@ -26,13 +26,14 @@ namespace Code.Infrastructure
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesTo<LevelInstaller>().FromInstance(this);
-			
+			InitializeSignals();
+
 			var tokens = _tokens.InitializedDictionary();
-			
+
 			Container.Bind<GameBalance>().FromInstance(_balance).AsSingle().NonLazy();
 			Container.Bind<Dictionary<TokenType, Token>>().FromInstance(tokens).AsSingle().NonLazy();
 			Container.Bind<LineRenderer>().FromInstance(_lineRenderer).AsSingle().NonLazy();
-			
+
 			Container.Bind<Gravity>().AsSingle().NonLazy();
 			Container.Bind<Chain>().AsSingle().NonLazy();
 			Container.Bind<ChainRenderer>().AsSingle().NonLazy();
@@ -40,7 +41,20 @@ namespace Code.Infrastructure
 			Container.Bind<Field>().FromInstance(_field).AsSingle().NonLazy();
 			Container.Bind<LevelGenerator>().FromInstance(_levelGenerator).AsSingle().NonLazy();
 			Container.Bind<TokensSpawner>().FromInstance(_spawner).AsSingle().NonLazy();
+			
+			Container.Bind<OverlapMouse>().FromInstance(_overlapMouse).AsSingle().NonLazy();
 		}
+
+		private void InitializeSignals()
+		{
+			SignalBusInstaller.Install(Container);
+
+			Container.DeclareSignal<MouseDownSignal>();
+			BindSignalWithoutParams<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping); 
+		}
+
+		private void BindSignalWithoutParams<TSignal, TObject>(Func<TObject, Action> handlerGetter) 
+			=> Container.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
 
 		public void Initialize()
 		{
@@ -51,7 +65,6 @@ namespace Code.Infrastructure
 
 		private void SubscribeEvents()
 		{
-			_inputService.MouseDown += _overlapMouse.EnableOverlapping;
 			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
 
 			_overlapMouse.ClickOnToken += _chain.StartComposing;
@@ -67,7 +80,6 @@ namespace Code.Infrastructure
 
 		private void OnDisable()
 		{
-			_inputService.MouseDown -= _overlapMouse.EnableOverlapping;
 			_inputService.MouseUp -= _overlapMouse.DisableOverlapping;
 
 			_overlapMouse.ClickOnToken -= _chain.StartComposing;
