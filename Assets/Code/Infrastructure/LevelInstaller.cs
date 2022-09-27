@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Environment;
 using Code.Environment.GravityBehaviour;
@@ -50,20 +49,11 @@ namespace Code.Infrastructure
 		{
 			SignalBusInstaller.Install(Container);
 
-			Container.DeclareSignal<MouseDownSignal>();
-			BindSignalWithoutParams<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping);
-
-			Container.DeclareSignal<MouseUpSignal>();
-			BindSignalWithoutParams<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
-				.BindSignal<MouseUpSignal>().ToMethod<Chain>((x) => x.EndComposing).FromResolve();
-			BindSignalWithoutParams<MouseUpSignal, Chain>((x) => x.EndComposing);
-		}
-
-		private DiContainer BindSignalWithoutParams<TSignal, TObject>
-			(Func<TObject, Action> handlerGetter)
-		{
-			Container.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
-			return Container;
+			Container
+				.BindSignalTo<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping)
+				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
+				.BindSignalTo<MouseUpSignal, Chain>((x) => x.EndComposing)
+				;
 		}
 
 		public void Initialize()
