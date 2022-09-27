@@ -4,6 +4,7 @@ using Code.Gameplay;
 using Code.Extensions;
 using Code.Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment
 {
@@ -17,6 +18,7 @@ namespace Code.Environment
 		private Gravity _gravity;
 		private TokensSpawner _spawner;
 
+		[Inject]
 		public void Construct(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
 		{
 			(_levelGenerator, _gravity, _spawner) = (generator, gravity, spawner);

@@ -3,6 +3,7 @@ using Code.Extensions;
 using Code.Infrastructure;
 using Code.Levels;
 using UnityEngine;
+using Zenject;
 using static Code.Common.Constants;
 using Object = UnityEngine.Object;
 
@@ -19,6 +20,7 @@ namespace Code.Gameplay
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
 
+		[Inject]
 		public void Construct(Dictionary<TokenType, Token> tokens, GameBalance gameBalance)
 		{
 			_tokens = tokens;

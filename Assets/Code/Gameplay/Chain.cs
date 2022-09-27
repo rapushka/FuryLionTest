@@ -4,6 +4,7 @@ using System.Linq;
 using Code.Environment;
 using Code.Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Gameplay
 {
@@ -18,6 +19,7 @@ namespace Code.Gameplay
 		public event Action LastTokenRemoved;
 		public event Action<LinkedList<Vector2>> ChainEnded;
 
+		[Inject]
 		public Chain(Field field)
 		{
 			_field = field;

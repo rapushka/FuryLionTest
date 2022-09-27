@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment
 {
@@ -8,7 +9,7 @@ namespace Code.Environment
 	{
 		private readonly LineRenderer _lineRenderer;
 
-		public ChainRenderer(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
+		[Inject] public ChainRenderer(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
 
 		public void OnTokenAdded(Vector2 newPosition) => _lineRenderer.AddPosition(newPosition);
 

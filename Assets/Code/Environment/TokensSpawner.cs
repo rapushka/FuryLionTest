@@ -3,6 +3,7 @@ using Code.Extensions;
 using Code.Gameplay;
 using Code.Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment
 {
@@ -12,6 +13,7 @@ namespace Code.Environment
 		private float _step;
 		private Vector2 _offset;
 
+		[Inject]
 		public void Construct(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance)
 		{
 			_tokensDictionary = tokensDictionary;

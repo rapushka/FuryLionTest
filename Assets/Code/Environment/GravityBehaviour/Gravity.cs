@@ -4,6 +4,7 @@ using Code.Environment.GravityBehaviour.Emits;
 using Code.Environment.GravityBehaviour.Movers;
 using Code.Gameplay;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment.GravityBehaviour
 {
@@ -15,6 +16,7 @@ namespace Code.Environment.GravityBehaviour
 		private Token[,] _tokens;
 		private bool _mayBePrecedents;
 
+		[Inject]
 		public Gravity()
 		{
 			_vertical = new BaseDirectionEmit(new VerticallyChecker(), new VerticallyMover());
