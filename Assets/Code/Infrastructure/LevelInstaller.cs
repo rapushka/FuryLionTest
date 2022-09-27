@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Environment;
 using Code.Environment.GravityBehaviour;
+using Code.Extensions;
 using Code.Gameplay;
 using Code.Input;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace Code.Infrastructure
 			Container.Bind<Field>().FromInstance(_field).AsSingle().NonLazy();
 			Container.Bind<LevelGenerator>().FromInstance(_levelGenerator).AsSingle().NonLazy();
 			Container.Bind<TokensSpawner>().FromInstance(_spawner).AsSingle().NonLazy();
-			
+
 			Container.Bind<OverlapMouse>().FromInstance(_overlapMouse).AsSingle().NonLazy();
 		}
 
@@ -50,11 +51,20 @@ namespace Code.Infrastructure
 			SignalBusInstaller.Install(Container);
 
 			Container.DeclareSignal<MouseDownSignal>();
-			BindSignalWithoutParams<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping); 
+			BindSignalWithoutParams<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping);
+
+			Container.DeclareSignal<MouseUpSignal>();
+			BindSignalWithoutParams<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
+				.BindSignal<MouseUpSignal>().ToMethod<Chain>((x) => x.EndComposing).FromResolve();
+			BindSignalWithoutParams<MouseUpSignal, Chain>((x) => x.EndComposing);
 		}
 
-		private void BindSignalWithoutParams<TSignal, TObject>(Func<TObject, Action> handlerGetter) 
-			=> Container.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
+		private DiContainer BindSignalWithoutParams<TSignal, TObject>
+			(Func<TObject, Action> handlerGetter)
+		{
+			Container.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
+			return Container;
+		}
 
 		public void Initialize()
 		{
@@ -65,11 +75,8 @@ namespace Code.Infrastructure
 
 		private void SubscribeEvents()
 		{
-			_inputService.MouseUp += _overlapMouse.DisableOverlapping;
-
 			_overlapMouse.ClickOnToken += _chain.StartComposing;
 			_overlapMouse.TokenHit += _chain.NextToken;
-			_inputService.MouseUp += _chain.EndComposing;
 
 			_chain.TokenAdded += _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
@@ -80,11 +87,8 @@ namespace Code.Infrastructure
 
 		private void OnDisable()
 		{
-			_inputService.MouseUp -= _overlapMouse.DisableOverlapping;
-
 			_overlapMouse.ClickOnToken -= _chain.StartComposing;
 			_overlapMouse.TokenHit -= _chain.NextToken;
-			_inputService.MouseUp -= _chain.EndComposing;
 
 			_chain.TokenAdded -= _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
