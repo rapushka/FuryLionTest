@@ -1,4 +1,3 @@
-using System;
 using Code.Extensions;
 using Code.Infrastructure;
 using UnityEngine;

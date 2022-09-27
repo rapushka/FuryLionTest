@@ -13,7 +13,6 @@ namespace Code.Infrastructure
 	{
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private OverlapMouse _overlapMouse;
-		[SerializeField] private InputService _inputService;
 		[SerializeField] private Field _field;
 		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
