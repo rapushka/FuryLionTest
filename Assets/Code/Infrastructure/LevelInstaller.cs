@@ -29,19 +29,19 @@ namespace Code.Infrastructure
 
 			var tokens = _tokens.InitializedDictionary();
 
-			Container.Bind<GameBalance>().FromInstance(_balance).AsSingle().NonLazy();
-			Container.Bind<Dictionary<TokenType, Token>>().FromInstance(tokens).AsSingle().NonLazy();
-			Container.Bind<LineRenderer>().FromInstance(_lineRenderer).AsSingle().NonLazy();
+			Container.Bind<GameBalance>().FromInstance(_balance).AsSingle();
+			Container.Bind<Dictionary<TokenType, Token>>().FromInstance(tokens).AsSingle();
+			Container.Bind<LineRenderer>().FromInstance(_lineRenderer).AsSingle();
 
-			Container.Bind<Gravity>().AsSingle().NonLazy();
-			Container.Bind<Chain>().AsSingle().NonLazy();
-			Container.Bind<ChainRenderer>().AsSingle().NonLazy();
+			Container.Bind<Gravity>().AsSingle();
+			Container.Bind<Chain>().AsSingle();
+			Container.Bind<ChainRenderer>().AsSingle();
 
-			Container.Bind<Field>().FromInstance(_field).AsSingle().NonLazy();
-			Container.Bind<LevelGenerator>().FromInstance(_levelGenerator).AsSingle().NonLazy();
-			Container.Bind<TokensSpawner>().FromInstance(_spawner).AsSingle().NonLazy();
+			Container.Bind<Field>().FromInstance(_field).AsSingle();
+			Container.Bind<LevelGenerator>().FromInstance(_levelGenerator).AsSingle();
+			Container.Bind<TokensSpawner>().FromInstance(_spawner).AsSingle();
 
-			Container.Bind<OverlapMouse>().FromInstance(_overlapMouse).AsSingle().NonLazy();
+			Container.Bind<OverlapMouse>().FromInstance(_overlapMouse).AsSingle();
 		}
 
 		private void InitializeSignals()
