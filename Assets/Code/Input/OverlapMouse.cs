@@ -1,6 +1,9 @@
 using System;
 using Code.Extensions;
+using Code.Infrastructure;
+using Code.Infrastructure.BaseSignals;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Input
 {
@@ -8,12 +11,14 @@ namespace Code.Input
 	{
 		[SerializeField] private float _overlapRadius = 0.01f;
 
+		private SignalBus _signalBus;
 		private Camera _camera;
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
 		public event Action<Vector2> ClickOnToken;
-		public event Action<Vector2> TokenHit;
+		
+		[Inject] public void Construct(SignalBus signalBus) => _signalBus = signalBus;
 
 		public void EnableOverlapping()
 		{
@@ -29,7 +34,19 @@ namespace Code.Input
 			_camera = Camera.main;
 		}
 
-		private void FixedUpdate() => TokenHit.Do(InvokeHitEvent, @if: _isPressed && AnyColliderHit());
+		private void FixedUpdate()
+		{
+			if (_isPressed == false
+			    || AnyColliderHit() == false)
+			{
+				return;
+			}
+
+			foreach (var result in _overlapResults)
+			{
+				_signalBus.Fire(new TokenHitSignal(result.transform.position));
+			}
+		}
 
 		private void InvokeHitEvent(Action<Vector2> @event)
 			=> _overlapResults.ForEach((r) => @event?.Invoke(r.transform.position));

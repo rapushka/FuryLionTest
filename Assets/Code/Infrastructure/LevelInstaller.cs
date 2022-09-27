@@ -53,6 +53,9 @@ namespace Code.Infrastructure
 				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
 				.BindSignalTo<MouseUpSignal, Chain>((x) => x.EndComposing)
 				;
+
+			Container.DeclareSignal<TokenHitSignal>();
+			Container.BindSignal<TokenHitSignal>().ToMethod<Chain>((x, v) => x.NextToken(v.Value)).FromResolve();
 		}
 
 		public void Initialize()
@@ -65,7 +68,6 @@ namespace Code.Infrastructure
 		private void SubscribeEvents()
 		{
 			_overlapMouse.ClickOnToken += _chain.StartComposing;
-			_overlapMouse.TokenHit += _chain.NextToken;
 
 			_chain.TokenAdded += _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
@@ -77,7 +79,6 @@ namespace Code.Infrastructure
 		private void OnDisable()
 		{
 			_overlapMouse.ClickOnToken -= _chain.StartComposing;
-			_overlapMouse.TokenHit -= _chain.NextToken;
 
 			_chain.TokenAdded -= _chainRenderer.OnTokenAdded;
 			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
