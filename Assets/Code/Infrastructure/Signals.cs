@@ -13,9 +13,16 @@ namespace Code.Infrastructure
 		public TokenHitSignal(Vector2 value)
 			: base(value) { }
 	}
+
 	public class TokenClickSignal : ImmutableSignal<Vector2>
 	{
 		public TokenClickSignal(Vector2 value)
+			: base(value) { }
+	}
+
+	public class ChainTokenAddedSignal : ImmutableSignal<Vector2>
+	{
+		public ChainTokenAddedSignal(Vector2 value)
 			: base(value) { }
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Environment;
 using Code.Extensions;
+using Code.Infrastructure;
 using UnityEngine;
 using Zenject;
 
@@ -11,18 +12,19 @@ namespace Code.Gameplay
 	public class Chain
 	{
 		private readonly Field _field;
+		private readonly SignalBus _signalBus;
 		private readonly LinkedList<Vector2> _chainedTokens;
 
 		private bool _chainComposingInProcess;
 
-		public event Action<Vector2> TokenAdded;
 		public event Action LastTokenRemoved;
 		public event Action<LinkedList<Vector2>> ChainEnded;
 
 		[Inject]
-		public Chain(Field field)
+		public Chain(Field field, SignalBus signalBus)
 		{
 			_field = field;
+			_signalBus = signalBus;
 
 			_chainedTokens = new LinkedList<Vector2>();
 		}
@@ -77,7 +79,7 @@ namespace Code.Gameplay
 
 		private void AddTokenToChain(Vector2 position) => _chainedTokens.AddLast(position);
 
-		private void TokenAddedInvoke(Vector2 position) => TokenAdded?.Invoke(position);
+		private void TokenAddedInvoke(Vector2 position) => _signalBus.Fire(new ChainTokenAddedSignal(position));
 
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(position) == false;
