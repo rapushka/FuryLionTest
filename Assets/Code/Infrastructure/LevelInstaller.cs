@@ -33,6 +33,7 @@ namespace Code.Infrastructure
 				.BindSingle<TokensSpawner>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
+				.BindSingleWithInterfaces<InputService>()
 				.BindSingleFromInstance(_levelGenerator)
 				;
 
