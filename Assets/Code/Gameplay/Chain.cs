@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Environment;
@@ -16,10 +15,7 @@ namespace Code.Gameplay
 		private readonly LinkedList<Vector2> _chainedTokens;
 
 		private bool _chainComposingInProcess;
-
-		public event Action LastTokenRemoved;
-		public event Action<LinkedList<Vector2>> ChainEnded;
-
+		
 		[Inject]
 		public Chain(Field field, SignalBus signalBus)
 		{
@@ -53,7 +49,7 @@ namespace Code.Gameplay
 			var isNotEndedYet = _chainComposingInProcess;
 			_chainComposingInProcess = false;
 			
-			ChainEnded?.Invoke(_chainedTokens);
+			_signalBus.Fire(new ChainEndedSignal(_chainedTokens));
 			
 			_chainedTokens.Do((c) => c.Clear(), @if: isNotEndedYet);
 		}
@@ -64,7 +60,7 @@ namespace Code.Gameplay
 		private void RemoveLastToken(Vector2 nextPosition)
 		{
 			_chainedTokens.RemoveLast();
-			LastTokenRemoved?.Invoke();
+			_signalBus.Fire<ChainLastTokenRemovedSignal>();
 		}
 
 		private bool TokenShouldBeAdded(Vector2 position)

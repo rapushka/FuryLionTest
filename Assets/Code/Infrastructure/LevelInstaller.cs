@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Code.Infrastructure
 {
-	public class LevelInstaller : MonoInstaller, IInitializable
+	public class LevelInstaller : MonoInstaller
 	{
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private Field _field;
@@ -17,14 +17,10 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensSpawner _spawner;
 		[SerializeField] private GameBalance _balance;
 
-		private ChainRenderer _chainRenderer;
-		private Chain _chain;
-
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesTo<LevelInstaller>().FromInstance(this);
-			InitializeSignals();
+			SubscribeSignals();
 
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
@@ -42,7 +38,7 @@ namespace Code.Infrastructure
 				;
 		}
 
-		private void InitializeSignals()
+		private void SubscribeSignals()
 		{
 			SignalBusInstaller.Install(Container);
 
@@ -53,30 +49,10 @@ namespace Code.Infrastructure
 				.BindSignalTo<TokenHitSignal, Chain>((x, v) => x.NextToken(v.Value))
 				.BindSignalTo<TokenClickSignal, Chain>((x, v) => x.StartComposing(v.Value))
 				.BindSignalTo<ChainTokenAddedSignal, ChainRenderer>((x, v) => x.OnTokenAdded(v.Value))
+				.BindSignalTo<ChainLastTokenRemovedSignal, ChainRenderer>((x) => x.OnLastTokenRemoved)
+				.BindSignalTo<ChainEndedSignal, ChainRenderer>((x, v) => x.OnChainEnded(v.Value))
+				.BindSignalTo<ChainEndedSignal, Field>((x, v) => x.OnChainEnded(v.Value))
 				;
-		}
-
-		public void Initialize()
-		{
-			_chainRenderer = Container.Resolve<ChainRenderer>();
-			_chain = Container.Resolve<Chain>();
-			SubscribeEvents();
-		}
-
-		private void SubscribeEvents()
-		{
-			_chain.LastTokenRemoved += _chainRenderer.OnLastTokenRemoved;
-			_chain.ChainEnded += _chainRenderer.OnChainEnded;
-
-			_chain.ChainEnded += _field.OnChainEnded;
-		}
-
-		private void OnDisable()
-		{
-			_chain.LastTokenRemoved -= _chainRenderer.OnLastTokenRemoved;
-			_chain.ChainEnded -= _chainRenderer.OnChainEnded;
-
-			_chain.ChainEnded -= _field.OnChainEnded;
 		}
 	}
 }
