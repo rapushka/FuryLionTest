@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Code.Input
 {
-	public class OverlapMouse : IInitializable, IFixedTickable 
+	public class OverlapMouse : IInitializable, IFixedTickable
 	{
 		private readonly SignalBus _signalBus;
 		private readonly float _overlapRadius;
@@ -14,7 +14,8 @@ namespace Code.Input
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
-		[Inject] public OverlapMouse(SignalBus signalBus, GameBalance gameBalance)
+		[Inject]
+		public OverlapMouse(SignalBus signalBus, GameBalance gameBalance)
 		{
 			_signalBus = signalBus;
 			_overlapRadius = gameBalance.MouseOverlapRadius;
@@ -38,7 +39,7 @@ namespace Code.Input
 
 		private void FireHitSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));
-		
+
 		private void FireClickSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.transform.position)));
 

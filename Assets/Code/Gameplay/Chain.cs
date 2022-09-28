@@ -15,7 +15,7 @@ namespace Code.Gameplay
 		private readonly LinkedList<Vector2> _chainedTokens;
 
 		private bool _chainComposingInProcess;
-		
+
 		[Inject]
 		public Chain(Field field, SignalBus signalBus)
 		{
@@ -48,9 +48,9 @@ namespace Code.Gameplay
 		{
 			var isNotEndedYet = _chainComposingInProcess;
 			_chainComposingInProcess = false;
-			
+
 			_signalBus.Fire(new ChainEndedSignal(_chainedTokens));
-			
+
 			_chainedTokens.Do((c) => c.Clear(), @if: isNotEndedYet);
 		}
 
@@ -80,7 +80,7 @@ namespace Code.Gameplay
 		private bool TokenNotYetAdded(Vector2 position)
 			=> _chainedTokens.Contains(position) == false;
 
-		private bool TokenIsFittingType(Vector2 position) 
+		private bool TokenIsFittingType(Vector2 position)
 			=> _field[ChainHead].TokenType == _field[position].TokenType;
 
 		private bool IsNeighborForLastToken(Vector2 position)

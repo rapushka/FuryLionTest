@@ -20,8 +20,6 @@ namespace Code.Infrastructure
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			SubscribeSignals();
-
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
@@ -36,6 +34,8 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_levelGenerator)
 				.BindSingleFromInstance(_spawner)
 				;
+
+			SubscribeSignals();
 		}
 
 		private void SubscribeSignals()
