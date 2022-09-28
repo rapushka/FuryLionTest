@@ -1,17 +1,16 @@
 using System.Collections.Generic;
+using Code.Common;
 using Code.Extensions;
 using Code.Infrastructure;
 using Code.Levels;
 using UnityEngine;
 using Zenject;
-using static Code.Common.Constants;
 using Object = UnityEngine.Object;
 
 namespace Code.Gameplay
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		[SerializeField] private Level _debugLevel;
 		[SerializeField] private Transform _levelRoot;
 
 		private Vector2 _offset;
@@ -19,11 +18,13 @@ namespace Code.Gameplay
 		private Dictionary<TokenType, Token> _tokens;
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
+		private Level _level;
 
 		[Inject]
-		public void Construct(Dictionary<TokenType, Token> tokens, GameBalance gameBalance)
+		public void Construct(Dictionary<TokenType, Token> tokens, Level level, GameBalance gameBalance)
 		{
 			_tokens = tokens;
+			_level = level;
 			
 			_step = gameBalance.Field.Step;
 			_offset = gameBalance.Field.Offset;
@@ -31,21 +32,21 @@ namespace Code.Gameplay
 		
 		public Token[,] Generate()
 		{
-			_tokenTypes = GetTokenTypes();
+			_tokenTypes = _level.GetArray();
 			
-			_tokenGameObjects = new Token[_tokenTypes.GetLength(1), _tokenTypes.GetLength(0)];
+			_tokenGameObjects = CreateAdaptedArray();
 			_tokenTypes.DoubleFor(InstantiateTokenAt);
 
 			return _tokenGameObjects;
 		}
 
-		private TokenType[,] GetTokenTypes() => _debugLevel.GetArray();
+		private Token[,] CreateAdaptedArray() => new Token[_tokenTypes.GetLength(1), _tokenTypes.GetLength(0)];
 
 		private void InstantiateTokenAt(TokenType item, int i, int j)
-			=> item.Do((tt) => CreateToArray(tt, i, j), @if: IsForCreation);
+			=> item.Do((tokenType) => CreateInArray(tokenType, i, j), @if: IsForCreation);
 
-		private void CreateToArray(TokenType tokenType, int i, int j) 
-			=> _tokenGameObjects.SetAtVector(ToUnityWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
+		private void CreateInArray(TokenType tokenType, int i, int j) 
+			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
 
 		private Token Value(TokenType tokenType, int i, int j) 
 			=> InstantiateInRoot(TokenByType(tokenType), ScalePosition(i, j));
@@ -57,10 +58,10 @@ namespace Code.Gameplay
 		private Token TokenByType(TokenType currentType) => _tokens[currentType];
 
 		private Vector3 ScalePosition(int x, int y)
-			=> ToUnityWorldPosition(x, y) * _step + _offset;
+			=> IndexesToWorldPosition(x, y) * _step + _offset;
 
-		private static Vector2 ToUnityWorldPosition(int x, int y) 
-			=> new(y, Mathf.Abs(x - (GameFieldSize.Height - 1)));
+		private static Vector2 IndexesToWorldPosition(int x, int y) 
+			=> new(y, Mathf.Abs(x - (Constants.GameFieldSize.Height - 1)));
 
 		private static bool IsForCreation(TokenType tokenType) => tokenType != TokenType.Empty;
 	}

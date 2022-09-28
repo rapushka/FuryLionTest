@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070dbaa02af34a59ab3b60a1741e2a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
   _levelRoot: {fileID: 1160769000}
 --- !u!1 &519420028
 GameObject:
@@ -572,6 +571,7 @@ MonoBehaviour:
   _levelGenerator: {fileID: 476935153}
   _tokens: {fileID: 7662115227024407912, guid: 106ee065d8d10614c9371a0147b7398e, type: 3}
   _balance: {fileID: 5060126106096961876, guid: 869da90139e21284e98fc72fba7d3405, type: 3}
+  _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
 --- !u!1 &1774494709
 GameObject:
   m_ObjectHideFlags: 0

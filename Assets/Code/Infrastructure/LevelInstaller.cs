@@ -3,6 +3,7 @@ using Code.Environment.GravityBehaviour;
 using Code.Extensions;
 using Code.Gameplay;
 using Code.Input;
+using Code.Levels;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace Code.Infrastructure
 		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
 		[SerializeField] private GameBalance _balance;
+		[SerializeField] private Level _debugLevel;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -21,6 +23,7 @@ namespace Code.Infrastructure
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
+				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(_balance)
 				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_lineRenderer)
