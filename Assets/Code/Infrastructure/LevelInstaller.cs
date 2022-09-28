@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Environment;
 using Code.Environment.GravityBehaviour;
 using Code.Extensions;
@@ -22,26 +21,26 @@ namespace Code.Infrastructure
 		private ChainRenderer _chainRenderer;
 		private Chain _chain;
 
+		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesTo<LevelInstaller>().FromInstance(this);
 			InitializeSignals();
 
-			var tokens = _tokens.InitializedDictionary();
+			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
-			Container.Bind<GameBalance>().FromInstance(_balance).AsSingle();
-			Container.Bind<Dictionary<TokenType, Token>>().FromInstance(tokens).AsSingle();
-			Container.Bind<LineRenderer>().FromInstance(_lineRenderer).AsSingle();
-
-			Container.Bind<Gravity>().AsSingle();
-			Container.Bind<Chain>().AsSingle();
-			Container.Bind<ChainRenderer>().AsSingle();
-
-			Container.Bind<Field>().FromInstance(_field).AsSingle();
-			Container.Bind<LevelGenerator>().FromInstance(_levelGenerator).AsSingle();
-			Container.Bind<TokensSpawner>().FromInstance(_spawner).AsSingle();
-
-			Container.Bind<OverlapMouse>().FromInstance(_overlapMouse).AsSingle();
+			Container
+				.BindSingleFromInstance(_balance)
+				.BindSingleFromInstance(dictionaryTokensToType)
+				.BindSingleFromInstance(_lineRenderer)
+				.BindSingle<Gravity>()
+				.BindSingle<Chain>()
+				.BindSingle<ChainRenderer>()
+				.BindSingleFromInstance(_field)
+				.BindSingleFromInstance(_levelGenerator)
+				.BindSingleFromInstance(_spawner)
+				.BindSingleFromInstance(_overlapMouse)
+				;
 		}
 
 		private void InitializeSignals()

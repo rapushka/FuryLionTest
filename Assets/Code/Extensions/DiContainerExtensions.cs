@@ -22,5 +22,16 @@ namespace Code.Extensions
 			
 			return @this;
 		}
+
+		public static DiContainer BindSingle<TContract>(this DiContainer @this)
+		{
+			@this.Bind<TContract>().AsSingle();
+			return @this;
+		}
+		public static DiContainer BindSingleFromInstance<TContract>(this DiContainer @this, TContract instance)
+		{
+			@this.Bind<TContract>().FromInstance(instance).AsSingle();
+			return @this;
+		}
 	}
 }
