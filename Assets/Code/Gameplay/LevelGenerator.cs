@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Common;
 using Code.Extensions;
 using Code.Infrastructure;
+using Code.Infrastructure.IdComponents;
 using Code.Levels;
 using UnityEngine;
 using Zenject;
@@ -9,31 +10,32 @@ using Object = UnityEngine.Object;
 
 namespace Code.Gameplay
 {
-	public class LevelGenerator : MonoBehaviour
+	public class LevelGenerator
 	{
-		[SerializeField] private Transform _levelRoot;
+		private readonly TokensRoot _tokensRoot;
 
-		private Vector2 _offset;
-		private float _step;
-		private Dictionary<TokenType, Token> _tokens;
+		private readonly Vector2 _offset;
+		private readonly float _step;
+		private readonly Dictionary<TokenType, Token> _tokens;
 		private Token[,] _tokenGameObjects;
 		private TokenType[,] _tokenTypes;
-		private Level _level;
+		private readonly Level _level;
 
 		[Inject]
-		public void Construct(Dictionary<TokenType, Token> tokens, Level level, GameBalance gameBalance)
+		public LevelGenerator
+			(Dictionary<TokenType, Token> tokens, Level level, GameBalance gameBalance, TokensRoot tokensRoot)
 		{
 			_tokens = tokens;
 			_level = level;
-			
 			_step = gameBalance.Field.Step;
 			_offset = gameBalance.Field.Offset;
+			_tokensRoot = tokensRoot;
 		}
-		
+
 		public Token[,] Generate()
 		{
 			_tokenTypes = _level.GetArray();
-			
+
 			_tokenGameObjects = CreateAdaptedArray();
 			_tokenTypes.DoubleFor(InstantiateTokenAt);
 
@@ -45,22 +47,22 @@ namespace Code.Gameplay
 		private void InstantiateTokenAt(TokenType item, int i, int j)
 			=> item.Do((tokenType) => CreateInArray(tokenType, i, j), @if: IsForCreation);
 
-		private void CreateInArray(TokenType tokenType, int i, int j) 
+		private void CreateInArray(TokenType tokenType, int i, int j)
 			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
 
-		private Token Value(TokenType tokenType, int i, int j) 
+		private Token Value(TokenType tokenType, int i, int j)
 			=> InstantiateInRoot(TokenByType(tokenType), ScalePosition(i, j));
 
 		private T InstantiateInRoot<T>(T original, Vector3 position)
 			where T : Object
-			=> Instantiate(original, position, Quaternion.identity, _levelRoot);
+			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.transform);
 
 		private Token TokenByType(TokenType currentType) => _tokens[currentType];
 
 		private Vector3 ScalePosition(int x, int y)
 			=> IndexesToWorldPosition(x, y) * _step + _offset;
 
-		private static Vector2 IndexesToWorldPosition(int x, int y) 
+		private static Vector2 IndexesToWorldPosition(int x, int y)
 			=> new(y, Mathf.Abs(x - (Constants.GameFieldSize.Height - 1)));
 
 		private static bool IsForCreation(TokenType tokenType) => tokenType != TokenType.Empty;

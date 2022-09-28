@@ -2,6 +2,7 @@ using Code.Environment;
 using Code.Environment.GravityBehaviour;
 using Code.Extensions;
 using Code.Gameplay;
+using Code.Infrastructure.IdComponents;
 using Code.Input;
 using Code.Levels;
 using UnityEngine;
@@ -11,8 +12,8 @@ namespace Code.Infrastructure
 {
 	public class LevelInstaller : MonoInstaller
 	{
+		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
-		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
 		[SerializeField] private GameBalance _balance;
 		[SerializeField] private Level _debugLevel;
@@ -23,10 +24,11 @@ namespace Code.Infrastructure
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
+				.BindSingleFromInstance(_tokensRoot)
 				.BindSingleFromInstance(_debugLevel)
-				.BindSingleFromInstance(_balance)
 				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_lineRenderer)
+				.BindSingleFromInstance(_balance)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
@@ -34,7 +36,7 @@ namespace Code.Infrastructure
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()
-				.BindSingleFromInstance(_levelGenerator)
+				.BindSingleWithInterfaces<LevelGenerator>()
 				;
 
 			SubscribeSignals();
