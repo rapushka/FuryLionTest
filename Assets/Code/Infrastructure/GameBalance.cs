@@ -5,9 +5,11 @@ namespace Code.Infrastructure
 {
 	public class GameBalance : MonoBehaviour
 	{
+		[SerializeField] private float _mouseOverlapRadius = 0.01f;
 		[SerializeField] private FieldParameters _fieldParameters;
-
+		
 		public FieldParameters Field => _fieldParameters;
+		public float MouseOverlapRadius => _mouseOverlapRadius;
 		
 		[Serializable]
 		public class FieldParameters

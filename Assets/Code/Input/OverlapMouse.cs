@@ -5,16 +5,20 @@ using Zenject;
 
 namespace Code.Input
 {
-	public class OverlapMouse : MonoBehaviour
+	public class OverlapMouse : IInitializable, IFixedTickable 
 	{
-		[SerializeField] private float _overlapRadius = 0.01f;
+		private readonly SignalBus _signalBus;
+		private readonly float _overlapRadius;
 
-		private SignalBus _signalBus;
 		private Camera _camera;
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
-		[Inject] public void Construct(SignalBus signalBus) => _signalBus = signalBus;
+		[Inject] public OverlapMouse(SignalBus signalBus, GameBalance gameBalance)
+		{
+			_signalBus = signalBus;
+			_overlapRadius = gameBalance.MouseOverlapRadius;
+		}
 
 		public void EnableOverlapping()
 		{
@@ -24,13 +28,13 @@ namespace Code.Input
 
 		public void DisableOverlapping() => _isPressed = false;
 
-		private void Start()
+		public void Initialize()
 		{
 			_overlapResults = new Collider2D[1];
 			_camera = Camera.main;
 		}
 
-		private void FixedUpdate() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
+		public void FixedTick() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
 
 		private void FireHitSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));

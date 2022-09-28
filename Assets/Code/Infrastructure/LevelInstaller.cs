@@ -11,7 +11,6 @@ namespace Code.Infrastructure
 	public class LevelInstaller : MonoInstaller, IInitializable
 	{
 		[SerializeField] private LineRenderer _lineRenderer;
-		[SerializeField] private OverlapMouse _overlapMouse;
 		[SerializeField] private Field _field;
 		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
@@ -36,10 +35,10 @@ namespace Code.Infrastructure
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
+				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleFromInstance(_field)
 				.BindSingleFromInstance(_levelGenerator)
 				.BindSingleFromInstance(_spawner)
-				.BindSingleFromInstance(_overlapMouse)
 				;
 		}
 

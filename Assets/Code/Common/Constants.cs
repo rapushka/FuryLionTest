@@ -2,6 +2,7 @@ namespace Code.Common
 {
 	public static class Constants
 	{
+
 		public static class GameFieldSize
 		{
 			public const int Width = 7;

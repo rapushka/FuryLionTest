@@ -13,13 +13,13 @@ namespace Code.Extensions
 
 			return @this;
 		}
-		
+
 		public static DiContainer BindSignalTo<TSignal, TObject>
 			(this DiContainer @this, Action<TObject, TSignal> handlerGetter)
 		{
 			@this.DeclareSignal<TSignal>();
 			@this.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
-			
+
 			return @this;
 		}
 
@@ -28,6 +28,13 @@ namespace Code.Extensions
 			@this.Bind<TContract>().AsSingle();
 			return @this;
 		}
+		
+		public static DiContainer BindSingleWithInterfaces<TContract>(this DiContainer @this)
+		{
+			@this.BindInterfacesAndSelfTo<TContract>().AsSingle();
+			return @this;
+		}
+
 		public static DiContainer BindSingleFromInstance<TContract>(this DiContainer @this, TContract instance)
 		{
 			@this.Bind<TContract>().FromInstance(instance).AsSingle();
