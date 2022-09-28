@@ -25,14 +25,14 @@ namespace Code.Environment
 		{
 			var created = false;
 			var y = tokens.GetLength(1) - 1;
-			
+
 			for (var x = 0; x < tokens.GetLength(0); x++)
 			{
 				if (tokens[x, y] == true)
 				{
 					continue;
 				}
-			
+
 				CreateToken(tokens, x, y);
 				created = true;
 			}
