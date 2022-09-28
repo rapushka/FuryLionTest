@@ -1,6 +1,6 @@
 namespace Code.Infrastructure.BaseSignals
 {
-	public class ImmutableSignal<T>
+	public abstract class ImmutableSignal<T>
 	{
 		public ImmutableSignal(T value)
 		{

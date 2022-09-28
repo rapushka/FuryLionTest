@@ -1,7 +1,6 @@
 using System;
 using Code.Extensions;
 using Code.Infrastructure;
-using Code.Infrastructure.BaseSignals;
 using UnityEngine;
 using Zenject;
 
@@ -17,7 +16,7 @@ namespace Code.Input
 		private Collider2D[] _overlapResults;
 
 		public event Action<Vector2> ClickOnToken;
-		
+
 		[Inject] public void Construct(SignalBus signalBus) => _signalBus = signalBus;
 
 		public void EnableOverlapping()
@@ -34,20 +33,11 @@ namespace Code.Input
 			_camera = Camera.main;
 		}
 
-		private void FixedUpdate()
-		{
-			if (_isPressed == false
-			    || AnyColliderHit() == false)
-			{
-				return;
-			}
+		private void FixedUpdate() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
 
-			foreach (var result in _overlapResults)
-			{
-				_signalBus.Fire(new TokenHitSignal(result.transform.position));
-			}
-		}
-
+		private void FireHitSignal(SignalBus signalBus)
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));
+		
 		private void InvokeHitEvent(Action<Vector2> @event)
 			=> _overlapResults.ForEach((r) => @event?.Invoke(r.transform.position));
 
