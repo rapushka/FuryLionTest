@@ -7,14 +7,14 @@ using Zenject;
 
 namespace Code.Environment
 {
-	public class TokensSpawner : MonoBehaviour
+	public class TokensSpawner
 	{
-		private Dictionary<TokenType, Token> _tokensDictionary;
-		private float _step;
-		private Vector2 _offset;
+		private readonly Dictionary<TokenType, Token> _tokensDictionary;
+		private readonly float _step;
+		private readonly Vector2 _offset;
 
 		[Inject]
-		public void Construct(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance)
+		public TokensSpawner(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance)
 		{
 			_tokensDictionary = tokensDictionary;
 			_step = balance.Field.Step;
@@ -44,7 +44,7 @@ namespace Code.Environment
 		{
 			var tokenPrefab = _tokensDictionary.PickRandomColor();
 
-			var token = Instantiate(tokenPrefab, ScalePosition(x, y), Quaternion.identity);
+			var token = Object.Instantiate(tokenPrefab, ScalePosition(x, y), Quaternion.identity);
 			tokens[x, y] = token;
 		}
 

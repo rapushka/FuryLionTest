@@ -14,7 +14,6 @@ namespace Code.Infrastructure
 		[SerializeField] private Field _field;
 		[SerializeField] private LevelGenerator _levelGenerator;
 		[SerializeField] private TokensCollection _tokens;
-		[SerializeField] private TokensSpawner _spawner;
 		[SerializeField] private GameBalance _balance;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
@@ -29,10 +28,10 @@ namespace Code.Infrastructure
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
+				.BindSingle<TokensSpawner>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleFromInstance(_field)
 				.BindSingleFromInstance(_levelGenerator)
-				.BindSingleFromInstance(_spawner)
 				;
 
 			SubscribeSignals();
