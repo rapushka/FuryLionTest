@@ -52,10 +52,8 @@ namespace Code.Infrastructure
 				.BindSignalTo<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping)
 				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
 				.BindSignalTo<MouseUpSignal, Chain>((x) => x.EndComposing)
+				.BindSignalTo<TokenHitSignal, Chain>((x, v) => x.NextToken(v.Value))
 				;
-
-			Container.DeclareSignal<TokenHitSignal>();
-			Container.BindSignal<TokenHitSignal>().ToMethod<Chain>((x, v) => x.NextToken(v.Value)).FromResolve();
 		}
 
 		public void Initialize()

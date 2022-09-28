@@ -9,8 +9,17 @@ namespace Code.Extensions
 			(this DiContainer @this, Func<TObject, Action> handlerGetter)
 		{
 			@this.DeclareSignal<TSignal>();
-
 			@this.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
+
+			return @this;
+		}
+		
+		public static DiContainer BindSignalTo<TSignal, TObject>
+			(this DiContainer @this, Action<TObject, TSignal> handlerGetter)
+		{
+			@this.DeclareSignal<TSignal>();
+			@this.BindSignal<TSignal>().ToMethod(handlerGetter).FromResolve();
+			
 			return @this;
 		}
 	}
