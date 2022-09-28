@@ -10,7 +10,7 @@ namespace Code.Environment
 {
 	public class Field : IInitializable
 	{
-		private readonly LevelGenerator _levelGenerator;
+		private readonly LevelGenerator _levelLevelGenerator;
 		private readonly float _step;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
@@ -19,17 +19,26 @@ namespace Code.Environment
 		private Token[,] _tokens;
 
 		[Inject]
-		public Field(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
+		public Field
+		(
+			LevelGenerator levelGenerator,
+			Gravity gravity,
+			TokensSpawner spawner,
+			Configuration.ChainParameters chainParameters,
+			Configuration.FieldParameters fieldParameters
+		)
 		{
-			(_levelGenerator, _gravity, _spawner) = (generator, gravity, spawner);
+			_levelLevelGenerator = levelGenerator;
+			_gravity = gravity;
+			_spawner = spawner;
 
-			_step = balance.Field.Step;
-			_minTokensCountForChain = balance.MinTokensCountForChain;
+			_step = fieldParameters.Step;
+			_minTokensCountForChain = chainParameters.MinTokensCountForChain;
 		}
 
 		public void Initialize()
 		{
-			_tokens = _levelGenerator.Generate();
+			_tokens = _levelLevelGenerator.Generate();
 
 			UpdateField();
 		}
@@ -37,7 +46,7 @@ namespace Code.Environment
 		public Token this[Vector2 position]
 		{
 			get => _tokens.GetAtVector(position.ToVectorInt());
-			set => _tokens.SetAtVector(position.ToVectorInt(), value);
+			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)

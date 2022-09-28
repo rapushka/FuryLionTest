@@ -6,6 +6,7 @@ using Code.Infrastructure.IdComponents;
 using Code.Input;
 using Code.Levels;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Code.Infrastructure
@@ -15,7 +16,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokens;
-		[SerializeField] private GameBalance _balance;
+		[FormerlySerializedAs("_balance")] [SerializeField] private Configuration _configuration;
 		[SerializeField] private Level _debugLevel;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
@@ -28,7 +29,10 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_lineRenderer)
-				.BindSingleFromInstance(_balance)
+				.BindSingleFromInstance(_configuration)
+				.BindSingleFromInstance(_configuration.Field)
+				.BindSingleFromInstance(_configuration.Input)
+				.BindSingleFromInstance(_configuration.Chain)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()

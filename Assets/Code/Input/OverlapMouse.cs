@@ -15,10 +15,10 @@ namespace Code.Input
 		private Collider2D[] _overlapResults;
 
 		[Inject]
-		public OverlapMouse(SignalBus signalBus, GameBalance gameBalance)
+		public OverlapMouse(SignalBus signalBus, Configuration.InputSettings inputSettings)
 		{
 			_signalBus = signalBus;
-			_overlapRadius = gameBalance.MouseOverlapRadius;
+			_overlapRadius = inputSettings.CursorOverlapRadius;
 		}
 
 		public void EnableOverlapping()

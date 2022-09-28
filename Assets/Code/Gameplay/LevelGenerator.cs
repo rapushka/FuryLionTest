@@ -23,12 +23,12 @@ namespace Code.Gameplay
 
 		[Inject]
 		public LevelGenerator
-			(Dictionary<TokenType, Token> tokens, Level level, GameBalance gameBalance, TokensRoot tokensRoot)
+			(Dictionary<TokenType, Token> tokens, Level level, Configuration configuration, TokensRoot tokensRoot)
 		{
 			_tokens = tokens;
 			_level = level;
-			_step = gameBalance.Field.Step;
-			_offset = gameBalance.Field.Offset;
+			_step = configuration.Field.Step;
+			_offset = configuration.Field.Offset;
 			_tokensRoot = tokensRoot;
 		}
 

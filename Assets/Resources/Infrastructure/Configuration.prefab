@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5060126106096961877}
   - component: {fileID: 5060126106096961876}
   m_Layer: 0
-  m_Name: Game Balance
+  m_Name: Configuration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,3 +47,7 @@ MonoBehaviour:
   _fieldParameters:
     _step: 1
     _offset: {x: 0.5, y: 0.5}
+  _chainParameters:
+    _minTokensCountForChain: 3
+  _inputSettings:
+    _cursorOverlapRadius: 0.1

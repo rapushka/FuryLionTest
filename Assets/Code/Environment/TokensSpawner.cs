@@ -16,12 +16,17 @@ namespace Code.Environment
 		private readonly Vector2 _offset;
 
 		[Inject]
-		public TokensSpawner(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance, TokensRoot tokensRoot)
+		public TokensSpawner
+		(
+			Dictionary<TokenType, Token> tokensDictionary,
+			Configuration.FieldParameters fieldParameters,
+			TokensRoot tokensRoot
+		)
 		{
 			_tokensDictionary = tokensDictionary;
 			_tokensRoot = tokensRoot;
-			_step = balance.Field.Step;
-			_offset = balance.Field.Offset;
+			_step = fieldParameters.Step;
+			_offset = fieldParameters.Offset;
 		}
 
 		public bool Spawn(Token[,] tokens)
