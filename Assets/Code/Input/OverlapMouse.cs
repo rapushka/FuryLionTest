@@ -1,4 +1,3 @@
-using System;
 using Code.Extensions;
 using Code.Infrastructure;
 using UnityEngine;
@@ -15,14 +14,12 @@ namespace Code.Input
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
-		public event Action<Vector2> ClickOnToken;
-
 		[Inject] public void Construct(SignalBus signalBus) => _signalBus = signalBus;
 
 		public void EnableOverlapping()
 		{
 			_isPressed = true;
-			ClickOnToken.Do(InvokeHitEvent, @if: AnyColliderHit());
+			_signalBus.Do(FireClickSignal, @if: AnyColliderHit());
 		}
 
 		public void DisableOverlapping() => _isPressed = false;
@@ -38,8 +35,8 @@ namespace Code.Input
 		private void FireHitSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));
 		
-		private void InvokeHitEvent(Action<Vector2> @event)
-			=> _overlapResults.ForEach((r) => @event?.Invoke(r.transform.position));
+		private void FireClickSignal(SignalBus signalBus)
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.transform.position)));
 
 		private bool AnyColliderHit() => Overlap() != 0;
 
