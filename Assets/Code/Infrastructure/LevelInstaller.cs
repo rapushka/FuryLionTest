@@ -33,10 +33,10 @@ namespace Code.Infrastructure
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
 				.BindSingle<TokensSpawner>()
+				.BindSingle<LevelGenerator>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()
-				.BindSingleWithInterfaces<LevelGenerator>()
 				;
 
 			SubscribeSignals();
