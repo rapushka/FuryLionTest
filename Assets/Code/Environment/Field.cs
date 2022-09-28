@@ -8,25 +8,26 @@ using Zenject;
 
 namespace Code.Environment
 {
-	public class Field : MonoBehaviour
+	public class Field : IInitializable
 	{
-		[SerializeField] private int _minTokensCountForChain = 3;
+		private readonly LevelGenerator _levelGenerator;
+		private readonly float _step;
+		private readonly Gravity _gravity;
+		private readonly TokensSpawner _spawner;
+		private readonly int _minTokensCountForChain;
 
-		private LevelGenerator _levelGenerator;
-		private float _step;
 		private Token[,] _tokens;
-		private Gravity _gravity;
-		private TokensSpawner _spawner;
 
 		[Inject]
-		public void Construct(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
+		public Field(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
 		{
 			(_levelGenerator, _gravity, _spawner) = (generator, gravity, spawner);
 
 			_step = balance.Field.Step;
+			_minTokensCountForChain = balance.MinTokensCountForChain;
 		}
 
-		private void Start()
+		public void Initialize()
 		{
 			_tokens = _levelGenerator.Generate();
 
@@ -53,7 +54,7 @@ namespace Code.Environment
 			{
 				var token = this[position];
 
-				Destroy(token.gameObject);
+				Object.Destroy(token.gameObject);
 				this[position] = null;
 			}
 

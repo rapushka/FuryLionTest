@@ -6,10 +6,12 @@ namespace Code.Infrastructure
 	public class GameBalance : MonoBehaviour
 	{
 		[SerializeField] private float _mouseOverlapRadius = 0.01f;
+		[SerializeField] private int _minTokensCountForChain = 3;
 		[SerializeField] private FieldParameters _fieldParameters;
 
 		public FieldParameters Field => _fieldParameters;
 		public float MouseOverlapRadius => _mouseOverlapRadius;
+		public int MinTokensCountForChain => _minTokensCountForChain;
 
 		[Serializable]
 		public class FieldParameters
