@@ -6,7 +6,6 @@ using Code.Infrastructure.IdComponents;
 using Code.Input;
 using Code.Levels;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Code.Infrastructure

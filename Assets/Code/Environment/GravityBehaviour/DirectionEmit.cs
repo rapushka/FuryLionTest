@@ -4,14 +4,14 @@ using Code.Environment.GravityBehaviour.Movers;
 using Code.Gameplay;
 using UnityEngine;
 
-namespace Code.Environment.GravityBehaviour.Emits
+namespace Code.Environment.GravityBehaviour
 {
-	public class BaseDirectionEmit
+	public class DirectionEmit
 	{
 		private readonly IDirectionChecker _checker;
 		private readonly IDirectionMover _mover;
 
-		public BaseDirectionEmit(IDirectionChecker checker, IDirectionMover mover)
+		public DirectionEmit(IDirectionChecker checker, IDirectionMover mover)
 			=> (_checker, _mover) = (checker, mover);
 
 		public bool HasPrecedent(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
