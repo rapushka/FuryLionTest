@@ -42,8 +42,6 @@ namespace Code.Gameplay
 				@false: TryAddTokenAt
 			);
 
-		private void TryAddTokenAt(Vector2 position) => position.Do(AddTokenAt, @if: TokenShouldBeAdded);
-
 		public void EndComposing()
 		{
 			var isNotEndedYet = _chainComposingInProcess;
@@ -51,8 +49,10 @@ namespace Code.Gameplay
 
 			_signalBus.Fire(new ChainEndedSignal(_chainedTokens));
 
-			_chainedTokens.Do((c) => c.Clear(), @if: isNotEndedYet);
+			_chainedTokens.Do((tokens) => tokens.Clear(), @if: isNotEndedYet);
 		}
+
+		private void TryAddTokenAt(Vector2 position) => position.Do(AddTokenAt, @if: TokenShouldBeAdded);
 
 		private bool IsPenultimateToken(Vector2 nextPosition)
 			=> nextPosition == _chainedTokens.Last?.Previous?.Value;

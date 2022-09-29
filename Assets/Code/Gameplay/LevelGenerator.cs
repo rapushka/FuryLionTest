@@ -13,13 +13,13 @@ namespace Code.Gameplay
 	public class LevelGenerator
 	{
 		private readonly TokensRoot _tokensRoot;
-
 		private readonly Vector2 _offset;
 		private readonly float _step;
 		private readonly Dictionary<TokenType, Token> _tokens;
-		private Token[,] _tokenGameObjects;
-		private TokenType[,] _tokenTypes;
 		private readonly Level _level;
+
+		private TokenType[,] _tokenTypes;
+		private Token[,] _tokenGameObjects;
 
 		[Inject]
 		public LevelGenerator

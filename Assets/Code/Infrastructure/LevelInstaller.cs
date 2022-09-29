@@ -16,7 +16,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokens;
-		[FormerlySerializedAs("_balance")] [SerializeField] private Configuration _configuration;
+		[SerializeField] private Configuration _configuration;
 		[SerializeField] private Level _debugLevel;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
