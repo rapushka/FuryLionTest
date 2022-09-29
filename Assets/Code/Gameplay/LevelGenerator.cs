@@ -1,36 +1,30 @@
-using System.Collections.Generic;
 using Code.Common;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
-using Code.Infrastructure.IdComponents;
 using Code.Levels;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace Code.Gameplay
 {
 	public class LevelGenerator
 	{
-		private readonly TokensRoot _tokensRoot;
 		private readonly Vector2 _offset;
 		private readonly float _step;
-		private readonly Dictionary<TokenType, Token> _tokens;
 		private readonly Level _level;
+		private readonly TokensPool _tokensPool;
 
 		private TokenType[,] _tokenTypes;
 		private Token[,] _tokenGameObjects;
 
 		[Inject]
-		public LevelGenerator
-			(Dictionary<TokenType, Token> tokens, Level level, Configuration configuration, TokensRoot tokensRoot)
+		public LevelGenerator(Level level, Configuration configuration, TokensPool tokensPool)
 		{
-			_tokens = tokens;
 			_level = level;
+			_tokensPool = tokensPool;
 			_step = configuration.Field.Step;
 			_offset = configuration.Field.Offset;
-			_tokensRoot = tokensRoot;
 		}
 
 		public Token[,] Generate()
@@ -52,13 +46,7 @@ namespace Code.Gameplay
 			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
 
 		private Token Value(TokenType tokenType, int i, int j)
-			=> InstantiateInRoot(TokenByType(tokenType), ScalePosition(i, j));
-
-		private T InstantiateInRoot<T>(T original, Vector3 position)
-			where T : Object
-			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.transform);
-
-		private Token TokenByType(TokenType currentType) => _tokens[currentType];
+			=> _tokensPool.CreateTokenOfType(tokenType, ScalePosition(i, j));
 
 		private Vector3 ScalePosition(int x, int y)
 			=> IndexesToWorldPosition(x, y) * _step + _offset;

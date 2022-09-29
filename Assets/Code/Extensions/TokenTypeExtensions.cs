@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Code.Gameplay.Tokens;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Code.Extensions
 {
@@ -24,8 +22,5 @@ namespace Code.Extensions
 				TokenType.RandomColor => Color.white,
 				_                     => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
-
-		public static Token PickRandomColor(this Dictionary<TokenType, Token> @this)
-			=> @this[(TokenType)Random.Range(1, 6)];
 	}
 }

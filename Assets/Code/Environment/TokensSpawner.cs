@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
-using Code.Infrastructure.IdComponents;
 using UnityEngine;
 using Zenject;
 
@@ -10,21 +7,18 @@ namespace Code.Environment
 {
 	public class TokensSpawner
 	{
-		private readonly Dictionary<TokenType, Token> _tokensDictionary;
-		private readonly TokensRoot _tokensRoot;
+		private readonly TokensPool _tokensPool;
 		private readonly float _step;
 		private readonly Vector2 _offset;
 
 		[Inject]
 		public TokensSpawner
 		(
-			Dictionary<TokenType, Token> tokensDictionary,
 			Configuration.FieldParameters fieldParameters,
-			TokensRoot tokensRoot
+			TokensPool tokensPool
 		)
 		{
-			_tokensDictionary = tokensDictionary;
-			_tokensRoot = tokensRoot;
+			_tokensPool = tokensPool;
 			_step = fieldParameters.Step;
 			_offset = fieldParameters.Offset;
 		}
@@ -50,15 +44,12 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var tokenPrefab = _tokensDictionary.PickRandomColor();
-
-			var token = ObjectInstantiate(tokenPrefab, _tokensRoot.transform, ScalePosition(x, y));
+			var token = _tokensPool.CreateTokenOfType(PickRandomColor(), ScalePosition(x, y));
 			tokens[x, y] = token;
 		}
 
-		private Vector3 ScalePosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
+		private static TokenType PickRandomColor() => (TokenType)Random.Range(1, 6);
 
-		private static Token ObjectInstantiate(Token tokenPrefab, Transform parentTransform, Vector3 position)
-			=> Object.Instantiate(tokenPrefab, position, Quaternion.identity, parentTransform);
+		private Vector3 ScalePosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
 	}
 }

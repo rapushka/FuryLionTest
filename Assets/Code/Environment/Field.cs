@@ -15,6 +15,7 @@ namespace Code.Environment
 		private readonly float _step;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
+		private readonly TokensPool _tokensPool;
 		private readonly int _minTokensCountForChain;
 
 		private Token[,] _tokens;
@@ -26,12 +27,14 @@ namespace Code.Environment
 			Gravity gravity,
 			TokensSpawner spawner,
 			Configuration.ChainParameters chainParameters,
-			Configuration.FieldParameters fieldParameters
+			Configuration.FieldParameters fieldParameters,
+			TokensPool tokensPool
 		)
 		{
 			_levelLevelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
+			_tokensPool = tokensPool;
 
 			_step = fieldParameters.Step;
 			_minTokensCountForChain = chainParameters.MinTokensCountForChain;
@@ -64,7 +67,7 @@ namespace Code.Environment
 			{
 				var token = this[position];
 
-				Object.Destroy(token.gameObject);
+				_tokensPool.DestroyToken(token);
 				this[position] = null;
 			}
 
