@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Infrastructure.IdComponents;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace Code.Gameplay.Tokens
 {
-	public class TokensPool
+	public class TokensPool : IInitializable
 	{
 		private readonly Dictionary<TokenType, Token> _tokenPrefabForType;
 		private readonly TokensRoot _tokensRoot;
@@ -17,45 +19,48 @@ namespace Code.Gameplay.Tokens
 		{
 			_tokenPrefabForType = tokenPrefabForType;
 			_tokensRoot = tokensRoot;
+
 			_createdTokens = new Dictionary<TokenType, List<Token>>();
 		}
 
-		public Token CreateTokenOfType(TokenType tokenType, Vector3 position)
+		public void Initialize()
 		{
-			CreateListForType(tokenType);
-
-			var token = _createdTokens[tokenType].FirstOrDefault(Disabled);
-
-			if (token == null)
+			for (var i = 0; i < Enum.GetValues(typeof(TokenType)).Length; i++)
 			{
-				token = InstantiateAtRoot(position, _tokenPrefabForType[tokenType]);
-				_createdTokens[tokenType].Add(token);
+				_createdTokens.Add((TokenType)i, new List<Token>());
 			}
-			else
-			{
-				token.gameObject.SetActive(true);
-				token.transform.position = position;
-			}
+		}
 
+		public Token CreateTokenOfType(TokenType tokenType, Vector3 position)
+			=> HasPooledTokenOfRightType(tokenType, out var token)
+				? EnableToken(position, token)
+				: CreateNewToken(tokenType, position);
+
+		public void DestroyToken(Token token) => token.gameObject.SetActive(false);
+
+		private static Token EnableToken(Vector3 position, Token token)
+		{
+			token.gameObject.SetActive(true);
+			token.transform.position = position;
 			return token;
 		}
 
-		private bool Disabled(Token t) => t.gameObject.activeInHierarchy == false;
-
-		private void CreateListForType(TokenType tokenType)
+		private bool HasPooledTokenOfRightType(TokenType tokenType, out Token token)
 		{
-			if (_createdTokens.ContainsKey(tokenType) == false)
-			{
-				_createdTokens.Add(tokenType, new List<Token>());
-			}
+			token = _createdTokens[tokenType].FirstOrDefault(IsDisabled);
+			return token is not null;
 		}
+
+		private Token CreateNewToken(TokenType tokenType, Vector3 position)
+		{
+			var token = InstantiateAtRoot(position, _tokenPrefabForType[tokenType]);
+			_createdTokens[tokenType].Add(token);
+			return token;
+		}
+
+		private static bool IsDisabled(Token token) => token.gameObject.activeInHierarchy == false;
 
 		private Token InstantiateAtRoot(Vector3 position, Token original)
 			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.transform);
-
-		public void DestroyToken(Token token)
-		{
-			token.gameObject.SetActive(false);
-		}
 	}
 }

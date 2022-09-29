@@ -38,7 +38,7 @@ namespace Code.Infrastructure
 				.BindSingle<ChainRenderer>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
-				.BindSingle<TokensPool>()
+				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()
