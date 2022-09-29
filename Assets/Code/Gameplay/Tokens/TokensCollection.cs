@@ -3,7 +3,7 @@ using System.Linq;
 using Code.Levels.LevelGeneration;
 using UnityEngine;
 
-namespace Code.Gameplay
+namespace Code.Gameplay.Tokens
 {
 	public class TokensCollection : MonoBehaviour
 	{

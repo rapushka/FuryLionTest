@@ -1,6 +1,6 @@
 using System;
 using Code.Extensions;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration;
 using UnityEditor;
 using UnityEngine;

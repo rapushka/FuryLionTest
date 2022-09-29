@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Code.Environment.GravityBehaviour.Checkers;
 using Code.Environment.GravityBehaviour.Movers;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 
 namespace Code.Environment.GravityBehaviour

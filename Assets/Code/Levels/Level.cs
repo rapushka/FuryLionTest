@@ -1,4 +1,4 @@
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEngine;
 

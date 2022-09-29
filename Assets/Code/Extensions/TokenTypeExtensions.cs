@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

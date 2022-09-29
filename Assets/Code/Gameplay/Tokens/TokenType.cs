@@ -1,4 +1,4 @@
-namespace Code.Gameplay
+namespace Code.Gameplay.Tokens
 {
 	public enum TokenType
 	{

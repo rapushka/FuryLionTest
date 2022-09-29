@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 
 namespace Code.Levels.LevelGeneration
