@@ -21,7 +21,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensCollection _tokens;
 		[SerializeField] private Configuration _configuration;
 		[SerializeField] private Level _debugLevel;
-		[SerializeField] private TMPro.TextMeshProUGUI _scoreText;
+		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
@@ -39,7 +39,7 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_configuration.Input)
 				.BindSingleFromInstance(_configuration.Chain)
 				.BindSingleFromInstance(_configuration.Score)
-				.BindSingleFromInstance(_scoreText)
+				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
@@ -48,7 +48,6 @@ namespace Code.Infrastructure
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
 				.BindSingleWithInterfaces<Score>()
-				.BindSingle<ScoreView>()
 				.BindSingle<SceneTransfer>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()

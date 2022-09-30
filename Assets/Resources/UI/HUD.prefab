@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1120159369}
   - component: {fileID: 1120159371}
   - component: {fileID: 1120159370}
+  - component: {fileID: 5782259652537071383}
   m_Layer: 5
   m_Name: Actions Left Text
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5782259652537071383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120159368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a558640c25499c872918bb564d255f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _remainingActionsText: {fileID: 1120159370}
 --- !u!1 &8339403698657799798
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +160,7 @@ GameObject:
   - component: {fileID: 8339403698657799799}
   - component: {fileID: 8339403698657798537}
   - component: {fileID: 8339403698657798536}
+  - component: {fileID: 3760976510623282071}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -270,6 +285,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3760976510623282071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339403698657799798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0e98b839a94792812bba6cccfbc3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 8339403698657798536}
 --- !u!1 &8339403698790446270
 GameObject:
   m_ObjectHideFlags: 0
