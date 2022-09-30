@@ -22,6 +22,7 @@ namespace Code.GameCycle
 		public void OnChainComposed()
 		{
 			_actionsRemain--;
+			
 			InvokeValueUpdate();
 			LoseIfActionsOver();
 		}
