@@ -633,21 +633,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1120159370, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 8339403698657798536, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
-      propertyPath: m_text
+    - target: {fileID: 8339403698790446257, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8339403698657798536, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 8339403698657799798, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
-      propertyPath: m_Name
-      value: Score Value Text
       objectReference: {fileID: 0}
     - target: {fileID: 8339403698790446258, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
       propertyPath: m_Pivot.x
