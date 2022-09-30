@@ -7,6 +7,7 @@ using Code.Gameplay.Tokens;
 using Code.Infrastructure.IdComponents;
 using Code.Input;
 using Code.Levels;
+using Code.UI;
 using UnityEngine;
 using Zenject;
 
@@ -43,6 +44,7 @@ namespace Code.Infrastructure
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
 				.BindSingle<Score>()
+				.BindSingle<ScoreView>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
@@ -67,6 +69,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainEndedSignal, ChainRenderer>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainEndedSignal, Field>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainEndedSignal, Score>((x, v) => x.OnChainEnded(v.Value))
+				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
 				;
 		}
 	}

@@ -34,4 +34,10 @@ namespace Code.Infrastructure
 		public ChainEndedSignal(LinkedList<Vector2> value)
 			: base(value) { }
 	}
+
+	public class ScoreUpdateSignal : ImmutableSignal<int>
+	{
+		public ScoreUpdateSignal(int value)
+			: base(value) { }
+	}
 }
