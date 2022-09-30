@@ -2,7 +2,7 @@ using Code.Extensions;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Environment
+namespace Code.View
 {
 	public class ChainView
 	{

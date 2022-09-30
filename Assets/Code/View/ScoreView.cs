@@ -1,7 +1,7 @@
 using TMPro;
 using Zenject;
 
-namespace Code.UI
+namespace Code.View
 {
 	public class ScoreView
 	{

@@ -8,7 +8,7 @@ using Code.Gameplay.Tokens;
 using Code.Infrastructure.IdComponents;
 using Code.Input;
 using Code.Levels;
-using Code.UI;
+using Code.View;
 using UnityEngine;
 using Zenject;
 
