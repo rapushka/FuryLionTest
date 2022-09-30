@@ -13,5 +13,10 @@ namespace Code.Levels
 		public int ActionCount => _actionsCount;
 		
 		public TokenType[,] TokenTypesArray => _tokens.ToRectangularArray();
+
+		private void OnValidate()
+		{
+			_actionsCount = _actionsCount > 0 ? _actionsCount : 1;
+		}
 	}
 }

@@ -1,6 +1,7 @@
 using Code.Environment;
 using Code.Environment.GravityBehaviour;
 using Code.Extensions;
+using Code.GameCycle;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
@@ -46,6 +47,8 @@ namespace Code.Infrastructure
 				.BindSingle<LevelGenerator>()
 				.BindSingle<Score>()
 				.BindSingle<ScoreView>()
+				.BindSingle<LoseCondition>()
+				.BindSingle<SceneTransfer>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
@@ -67,11 +70,13 @@ namespace Code.Infrastructure
 				.BindSignalTo<TokenClickSignal, Chain>((x, v) => x.StartComposing(v.Value))
 				.BindSignalTo<ChainTokenAddedSignal, ChainView>((x, v) => x.OnTokenAdded(v.Value))
 				.BindSignalTo<ChainLastTokenRemovedSignal, ChainView>((x) => x.OnLastTokenRemoved)
-				.BindSignalTo<ChainEndedSignal, ChainView>((x, v) => x.OnChainEnded(v.Value))
+				.BindSignalTo<ChainEndedSignal, ChainView>((x, _) => x.OnChainEnded())
 				.BindSignalTo<ChainEndedSignal, CompletedChain>((x, v) => x.OnChainEnded(v.Value))
-				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.OnChainCompleted(v.Value))
-				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainCompleted(v.Value))
+				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.OnChainComposed(v.Value))
+				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
+				.BindSignalTo<ChainComposedSignal, LoseCondition>((x, _) => x.OnChainComposed())
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
+				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
 				;
 		}
 	}

@@ -46,4 +46,6 @@ namespace Code.Infrastructure
 		public ChainComposedSignal(LinkedList<Vector2> value)
 			: base(value) { }
 	}
+
+	public class LevelLostSignal { }
 }

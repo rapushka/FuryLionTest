@@ -53,7 +53,7 @@ namespace Code.Environment
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
 
-		public void OnChainCompleted(LinkedList<Vector2> chain)
+		public void OnChainComposed(LinkedList<Vector2> chain)
 		{
 			foreach (var position in chain)
 			{

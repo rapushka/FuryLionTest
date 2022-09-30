@@ -21,7 +21,7 @@ namespace Code.Gameplay.ScoreSystem
 			_signalBus = signalBus;
 		}
 
-		public void OnChainCompleted(LinkedList<Vector2> chain)
+		public void OnChainComposed(LinkedList<Vector2> chain)
 		{
 			_currentScore += ScaleScore(chain.Count);
 			_signalBus.Fire(new ScoreUpdateSignal(_currentScore));
