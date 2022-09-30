@@ -5,11 +5,11 @@ using Zenject;
 
 namespace Code.Environment
 {
-	public class ChainRenderer
+	public class ChainView
 	{
 		private readonly LineRenderer _lineRenderer;
 
-		[Inject] public ChainRenderer(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
+		[Inject] public ChainView(LineRenderer lineRenderer) => _lineRenderer = lineRenderer;
 
 		public void OnTokenAdded(Vector2 newPosition) => _lineRenderer.AddPosition(newPosition);
 

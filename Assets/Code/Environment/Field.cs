@@ -16,7 +16,6 @@ namespace Code.Environment
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
 		private readonly TokensPool _tokensPool;
-		private readonly int _minTokensCountForChain;
 
 		private Token[,] _tokens;
 
@@ -26,7 +25,6 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			Configuration.ChainParameters chainParameters,
 			Configuration.FieldParameters fieldParameters,
 			TokensPool tokensPool
 		)
@@ -37,7 +35,6 @@ namespace Code.Environment
 			_tokensPool = tokensPool;
 
 			_step = fieldParameters.Step;
-			_minTokensCountForChain = chainParameters.MinTokensCountForChain;
 		}
 
 		public void Initialize()
@@ -56,13 +53,8 @@ namespace Code.Environment
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
 			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
 
-		public void OnChainEnded(LinkedList<Vector2> chain)
+		public void OnChainCompleted(LinkedList<Vector2> chain)
 		{
-			if (chain.Count < _minTokensCountForChain)
-			{
-				return;
-			}
-
 			foreach (var position in chain)
 			{
 				var token = this[position];

@@ -40,4 +40,10 @@ namespace Code.Infrastructure
 		public ScoreUpdateSignal(int value)
 			: base(value) { }
 	}
+
+	public class ChainComposedSignal : ImmutableSignal<LinkedList<Vector2>>
+	{
+		public ChainComposedSignal(LinkedList<Vector2> value)
+			: base(value) { }
+	}
 }
