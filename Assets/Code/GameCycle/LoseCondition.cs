@@ -7,20 +7,20 @@ namespace Code.GameCycle
 	public class LoseCondition
 	{
 		private readonly SignalBus _signalBus;
-		private int _actionsLeft;
+		private int _actionsRemain;
 
 		[Inject]
 		public LoseCondition(Level level, SignalBus signalBus)
 		{
 			_signalBus = signalBus;
-			_actionsLeft = level.ActionCount;
+			_actionsRemain = level.ActionCount;
 		}
 
 		public void OnChainComposed()
 		{
-			_actionsLeft--;
+			_actionsRemain--;
 
-			if (_actionsLeft <= 0)
+			if (_actionsRemain <= 0)
 			{
 				_signalBus.Fire<LevelLostSignal>();
 			}
