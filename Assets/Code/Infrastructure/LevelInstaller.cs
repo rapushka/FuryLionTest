@@ -19,6 +19,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensCollection _tokens;
 		[SerializeField] private Configuration _configuration;
 		[SerializeField] private Level _debugLevel;
+		[SerializeField] private TMPro.TextMeshProUGUI _scoreText;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -35,6 +36,7 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_configuration.Input)
 				.BindSingleFromInstance(_configuration.Chain)
 				.BindSingleFromInstance(_configuration.Score)
+				.BindSingleFromInstance(_scoreText)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
