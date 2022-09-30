@@ -22,6 +22,7 @@ namespace Code.Infrastructure
 		[SerializeField] private Configuration _configuration;
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private TMPro.TextMeshProUGUI _scoreText;
+		[SerializeField] private RemainingActionsView _remainingActionsView;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -39,6 +40,7 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_configuration.Chain)
 				.BindSingleFromInstance(_configuration.Score)
 				.BindSingleFromInstance(_scoreText)
+				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -47,8 +49,8 @@ namespace Code.Infrastructure
 				.BindSingle<LevelGenerator>()
 				.BindSingle<Score>()
 				.BindSingle<ScoreView>()
-				.BindSingle<LoseCondition>()
 				.BindSingle<SceneTransfer>()
+				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
@@ -74,8 +76,10 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainEndedSignal, CompletedChain>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
-				.BindSignalTo<ChainComposedSignal, LoseCondition>((x, _) => x.OnChainComposed())
+				.BindSignalTo<ChainComposedSignal, ActionsRemaining>((x, _) => x.OnChainComposed())
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
+				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
+					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
 				;
 		}

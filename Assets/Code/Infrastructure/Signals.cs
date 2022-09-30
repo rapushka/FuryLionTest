@@ -48,4 +48,10 @@ namespace Code.Infrastructure
 	}
 
 	public class LevelLostSignal { }
+	
+	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
+	{
+		public RemainingActionsUpdateSignal(int value)
+			: base(value) { }
+	}
 }

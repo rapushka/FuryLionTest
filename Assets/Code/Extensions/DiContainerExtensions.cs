@@ -28,7 +28,7 @@ namespace Code.Extensions
 			@this.Bind<TContract>().AsSingle();
 			return @this;
 		}
-		
+
 		public static DiContainer BindSingleWithInterfaces<TContract>(this DiContainer @this)
 		{
 			@this.BindInterfacesAndSelfTo<TContract>().AsSingle();
