@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Code.Gameplay.ScoreSystem
 {
-	public class Score
+	public class Score : IInitializable
 	{
 		private readonly int _scoreMultiplier;
 		private readonly float _multiplierPerTokenInChain;
@@ -21,14 +21,18 @@ namespace Code.Gameplay.ScoreSystem
 			_signalBus = signalBus;
 		}
 
+		public void Initialize() => InvokeValueUpdate();
+
 		public void OnChainComposed(LinkedList<Vector2> chain)
 		{
 			_currentScore += ScaleScore(chain.Count);
-			_signalBus.Fire(new ScoreUpdateSignal(_currentScore));
+			InvokeValueUpdate();
 		}
 
 		private int ScaleScore(int chainLenght) => IntPow(chainLenght, _multiplierPerTokenInChain) * _scoreMultiplier;
 
 		private static int IntPow(int number, float power) => Mathf.CeilToInt(Mathf.Pow(number, power));
+		
+		private void InvokeValueUpdate() => _signalBus.Fire(new ScoreUpdateSignal(_currentScore));
 	}
 }

@@ -47,7 +47,7 @@ namespace Code.Infrastructure
 				.BindSingle<CompletedChain>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
-				.BindSingle<Score>()
+				.BindSingleWithInterfaces<Score>()
 				.BindSingle<ScoreView>()
 				.BindSingle<SceneTransfer>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
