@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d81f074d0b3426c80dd96fad4fe3288, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
+  _actionsCount: 10
   _tokens:
     Rows:
     - Value: 09000000090000000900000000000000090000000900000009000000
