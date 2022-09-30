@@ -6,6 +6,7 @@ using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.IdComponents;
+using Code.Infrastructure.SceneManagement;
 using Code.Input;
 using Code.Levels;
 using Code.View;
@@ -23,6 +24,7 @@ namespace Code.Infrastructure
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
+		[SerializeField] private SceneField _loseScene;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -41,14 +43,15 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_configuration.Score)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
+				.BindSingleFromInstance(_loseScene)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
 				.BindSingle<CompletedChain>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
-				.BindSingleWithInterfaces<Score>()
 				.BindSingle<SceneTransfer>()
+				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
