@@ -543,6 +543,8 @@ MonoBehaviour:
   _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
   _scoreView: {fileID: 2071517002}
   _remainingActionsView: {fileID: 1120159372}
+  _loseScene:
+    _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
 --- !u!1 &1774494709
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8339403698790446257, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8339403698790446258, guid: d3c53d4f5a3cff346b0e5335d6f89af7, type: 3}
       propertyPath: m_Pivot.x
