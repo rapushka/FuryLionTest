@@ -1,5 +1,6 @@
 using Code.Extensions;
 using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +16,7 @@ namespace Code.Input
 		private Collider2D[] _overlapResults;
 
 		[Inject]
-		public OverlapMouse(SignalBus signalBus, Configuration.InputSettings inputSettings)
+		public OverlapMouse(SignalBus signalBus, IInputConfig inputSettings)
 		{
 			_signalBus = signalBus;
 			_overlapRadius = inputSettings.CursorOverlapRadius;

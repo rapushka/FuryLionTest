@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +15,7 @@ namespace Code.Gameplay.ScoreSystem
 		private int _currentScore;
 
 		[Inject]
-		public Score(Configuration.ScoreSettings scoreSettings, SignalBus signalBus)
+		public Score(IScoreConfig scoreSettings, SignalBus signalBus)
 		{
 			_scoreMultiplier = scoreSettings.ScoreMultiplier;
 			_multiplierPerTokenInChain = scoreSettings.MultiplierPerTokenInChain;

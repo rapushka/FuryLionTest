@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,7 @@ namespace Code.Gameplay
 		private readonly int _minTokensCountForChain;
 
 		[Inject]
-		public CompletedChain(SignalBus signalBus, Configuration.ChainParameters chainParameters)
+		public CompletedChain(SignalBus signalBus, IChainConfig chainParameters)
 		{
 			_signalBus = signalBus;
 			_minTokensCountForChain = chainParameters.MinTokensCountForChain;

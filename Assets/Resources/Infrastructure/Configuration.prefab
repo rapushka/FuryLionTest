@@ -44,13 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7495555ded4a41cda71ddcbaeddec0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fieldParameters:
-    _step: 1
-    _offset: {x: 0.5, y: 0.5}
-  _chainParameters:
-    _minTokensCountForChain: 3
-  _inputSettings:
-    _cursorOverlapRadius: 0.1
-  _scoreSettings:
-    _scoreMultiplier: 10
-    _multiplierPerTokenInChain: 1.1
+  _minTokensCountForChain: 3
+  _cursorOverlapRadius: 0.01
+  _step: 1
+  _offset: {x: 0.5, y: 0.5}
+  _scoreMultiplier: 10
+  _multiplierPerTokenInChain: 2

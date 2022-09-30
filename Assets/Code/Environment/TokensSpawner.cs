@@ -1,5 +1,5 @@
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using UnityEngine;
 using Zenject;
 
@@ -12,11 +12,7 @@ namespace Code.Environment
 		private readonly Vector2 _offset;
 
 		[Inject]
-		public TokensSpawner
-		(
-			Configuration.FieldParameters fieldParameters,
-			TokensPool tokensPool
-		)
+		public TokensSpawner(IFieldConfig fieldParameters, TokensPool tokensPool)
 		{
 			_tokensPool = tokensPool;
 			_step = fieldParameters.Step;

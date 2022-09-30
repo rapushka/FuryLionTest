@@ -1,7 +1,7 @@
 using Code.Common;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using Code.Levels;
 using UnityEngine;
 using Zenject;
@@ -19,12 +19,12 @@ namespace Code.Gameplay
 		private Token[,] _tokenGameObjects;
 
 		[Inject]
-		public LevelGenerator(Level level, Configuration configuration, TokensPool tokensPool)
+		public LevelGenerator(Level level, IFieldConfig fieldConfig, TokensPool tokensPool)
 		{
 			_level = level;
 			_tokensPool = tokensPool;
-			_step = configuration.Field.Step;
-			_offset = configuration.Field.Offset;
+			_step = fieldConfig.Step;
+			_offset = fieldConfig.Offset;
 		}
 
 		public Token[,] Generate()

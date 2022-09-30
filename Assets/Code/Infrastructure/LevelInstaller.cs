@@ -5,6 +5,7 @@ using Code.GameCycle;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
+using Code.Infrastructure.Configurations;
 using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
 using Code.Input;
@@ -32,15 +33,11 @@ namespace Code.Infrastructure
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
+				.BindSingleFromInstanceWithInterfaces(_configuration)
+				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_tokensRoot)
 				.BindSingleFromInstance(_debugLevel)
-				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_lineRenderer)
-				.BindSingleFromInstance(_configuration)
-				.BindSingleFromInstance(_configuration.Field)
-				.BindSingleFromInstance(_configuration.Input)
-				.BindSingleFromInstance(_configuration.Chain)
-				.BindSingleFromInstance(_configuration.Score)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_loseScene)

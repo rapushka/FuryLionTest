@@ -3,7 +3,7 @@ using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Infrastructure.Configurations;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +25,7 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			Configuration.FieldParameters fieldParameters,
+			IFieldConfig fieldParameters,
 			TokensPool tokensPool
 		)
 		{

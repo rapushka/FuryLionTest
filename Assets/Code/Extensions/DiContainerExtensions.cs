@@ -40,5 +40,12 @@ namespace Code.Extensions
 			@this.Bind<TContract>().FromInstance(instance).AsSingle();
 			return @this;
 		}
+
+		public static DiContainer BindSingleFromInstanceWithInterfaces<TContract>
+			(this DiContainer @this, TContract instance)
+		{
+			@this.BindInterfacesAndSelfTo<TContract>().FromInstance(instance).AsSingle();
+			return @this;
+		}
 	}
 }
