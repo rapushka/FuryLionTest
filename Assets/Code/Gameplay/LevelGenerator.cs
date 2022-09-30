@@ -29,7 +29,7 @@ namespace Code.Gameplay
 
 		public Token[,] Generate()
 		{
-			_tokenTypes = _level.GetArray();
+			_tokenTypes = _level.TokenTypesArray;
 
 			_tokenGameObjects = CreateAdaptedArray();
 			_tokenTypes.DoubleFor(InstantiateTokenAt);

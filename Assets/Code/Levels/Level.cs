@@ -7,8 +7,11 @@ namespace Code.Levels
 	[CreateAssetMenu(fileName = "Level ", menuName = "ScriptableObjects/Level", order = 0)]
 	public class Level : ScriptableObject
 	{
+		[SerializeField] private int _actionsCount;
 		[SerializeField] private ArrayLayout<TokenType> _tokens;
 
-		public TokenType[,] GetArray() => _tokens.ToRectangularArray();
+		public int ActionCount => _actionsCount;
+		
+		public TokenType[,] TokenTypesArray => _tokens.ToRectangularArray();
 	}
 }
