@@ -2,6 +2,7 @@ using Code.Environment;
 using Code.Environment.GravityBehaviour;
 using Code.Extensions;
 using Code.Gameplay;
+using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.IdComponents;
 using Code.Input;
@@ -33,11 +34,13 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_configuration.Field)
 				.BindSingleFromInstance(_configuration.Input)
 				.BindSingleFromInstance(_configuration.Chain)
+				.BindSingleFromInstance(_configuration.Score)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainRenderer>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
+				.BindSingle<Score>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
@@ -61,6 +64,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainLastTokenRemovedSignal, ChainRenderer>((x) => x.OnLastTokenRemoved)
 				.BindSignalTo<ChainEndedSignal, ChainRenderer>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainEndedSignal, Field>((x, v) => x.OnChainEnded(v.Value))
+				.BindSignalTo<ChainEndedSignal, Score>((x, v) => x.OnChainEnded(v.Value))
 				;
 		}
 	}
