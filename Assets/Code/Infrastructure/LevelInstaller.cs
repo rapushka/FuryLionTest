@@ -21,7 +21,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokens;
-		[SerializeField] private Configuration _configuration;
+		[SerializeField] private SerializableConfig _serializableConfig;
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
@@ -33,7 +33,7 @@ namespace Code.Infrastructure
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
-				.BindSingleFromInstanceWithInterfaces(_configuration)
+				.BindSingleFromInstanceWithInterfaces(_serializableConfig)
 				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_tokensRoot)
 				.BindSingleFromInstance(_debugLevel)
