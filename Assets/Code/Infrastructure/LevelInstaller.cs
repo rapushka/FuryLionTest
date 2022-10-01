@@ -5,7 +5,6 @@ using Code.GameCycle;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure.Configurations;
 using Code.Infrastructure.Configurations.SerializedImplementation;
 using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
