@@ -18,13 +18,7 @@ namespace Code.Environment
 		private Token[,] _tokens;
 
 		[Inject]
-		public Field
-		(
-			LevelGenerator levelGenerator,
-			Gravity gravity,
-			TokensSpawner spawner,
-			TokensPool tokensPool
-		)
+		public Field(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner, TokensPool tokensPool)
 		{
 			_levelLevelGenerator = levelGenerator;
 			_gravity = gravity;
@@ -44,18 +38,23 @@ namespace Code.Environment
 			get => _tokens.GetAtVector(position.ToVectorInt());
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
-		
+
 		public void OnChainComposed(LinkedList<Vector2> chain)
 		{
 			foreach (var position in chain)
 			{
-				var token = this[position];
-
-				_tokensPool.DestroyToken(token);
-				this[position] = null;
+				DestroyTokenAt(position);
 			}
 
 			UpdateField();
+		}
+
+		public void DestroyTokenAt(Vector2 position)
+		{
+			var token = this[position];
+
+			_tokensPool.DestroyToken(token);
+			this[position] = null;
 		}
 
 		private void UpdateField()

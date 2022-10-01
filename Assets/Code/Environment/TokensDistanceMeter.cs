@@ -16,6 +16,6 @@ namespace Code.Environment
 		}
 
 		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
-			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
+			=> firstPosition.DistanceTo(secondPosition).VectorAbs().LessThanOrEqualTo(_step);
 	}
 }

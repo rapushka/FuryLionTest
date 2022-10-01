@@ -44,7 +44,7 @@ namespace Code.Extensions
 		
 		public static Vector2 DistanceTo(this Vector2 @this, Vector2 other) => @this - other;
 
-		public static Vector2 AsAbs(this Vector2 @this) => @this.SetX(Mathf.Abs(@this.x)).SetY(Mathf.Abs(@this.y));
+		public static Vector2 VectorAbs(this Vector2 @this) => @this.SetX(Mathf.Abs(@this.x)).SetY(Mathf.Abs(@this.y));
 
 		public static bool LessThanOrEqualTo(this Vector2 @this, float value) => @this.x <= value && @this.y <= value;
 
