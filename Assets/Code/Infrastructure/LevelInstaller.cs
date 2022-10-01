@@ -6,6 +6,7 @@ using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations;
+using Code.Infrastructure.Configurations.SerializedImplementation;
 using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
 using Code.Input;
@@ -21,7 +22,7 @@ namespace Code.Infrastructure
 		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokens;
-		[SerializeField] private SerializableConfig _serializableConfig;
+		[SerializeField] private SerializedConfig _serializedConfig;
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
@@ -33,7 +34,7 @@ namespace Code.Infrastructure
 			var dictionaryTokensToType = _tokens.InitializedDictionary();
 
 			Container
-				.BindSingleFromInstanceWithInterfaces(_serializableConfig)
+				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(dictionaryTokensToType)
 				.BindSingleFromInstance(_tokensRoot)
 				.BindSingleFromInstance(_debugLevel)

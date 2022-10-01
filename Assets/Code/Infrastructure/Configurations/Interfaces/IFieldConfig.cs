@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Infrastructure.Configurations
+namespace Code.Infrastructure.Configurations.Interfaces
 {
 	public interface IFieldConfig
 	{
