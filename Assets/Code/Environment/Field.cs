@@ -3,7 +3,6 @@ using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +11,6 @@ namespace Code.Environment
 	public class Field : IInitializable
 	{
 		private readonly LevelGenerator _levelLevelGenerator;
-		private readonly float _step;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
 		private readonly TokensPool _tokensPool;
@@ -25,7 +23,6 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			IFieldConfig fieldParameters,
 			TokensPool tokensPool
 		)
 		{
@@ -33,8 +30,6 @@ namespace Code.Environment
 			_gravity = gravity;
 			_spawner = spawner;
 			_tokensPool = tokensPool;
-
-			_step = fieldParameters.Step;
 		}
 
 		public void Initialize()
@@ -49,10 +44,7 @@ namespace Code.Environment
 			get => _tokens.GetAtVector(position.ToVectorInt());
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
-
-		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
-			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
-
+		
 		public void OnChainComposed(LinkedList<Vector2> chain)
 		{
 			foreach (var position in chain)
@@ -68,11 +60,11 @@ namespace Code.Environment
 
 		private void UpdateField()
 		{
-			var tokensWasSpawned = true;
-			while (tokensWasSpawned)
+			var fieldHandled = false;
+			while (fieldHandled == false)
 			{
 				ApplyGravity();
-				tokensWasSpawned = TrySpawnTokens();
+				fieldHandled = TrySpawnTokens() == false;
 			}
 		}
 

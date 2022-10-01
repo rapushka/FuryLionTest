@@ -12,15 +12,17 @@ namespace Code.Gameplay
 	{
 		private readonly Field _field;
 		private readonly SignalBus _signalBus;
+		private readonly TokensDistanceMeter _distanceMeter;
 		private readonly LinkedList<Vector2> _chainedTokens;
 
 		private bool _chainComposingInProcess;
 
 		[Inject]
-		public Chain(Field field, SignalBus signalBus)
+		public Chain(Field field, SignalBus signalBus, TokensDistanceMeter distanceMeter)
 		{
 			_field = field;
 			_signalBus = signalBus;
+			_distanceMeter = distanceMeter;
 
 			_chainedTokens = new LinkedList<Vector2>();
 		}
@@ -84,6 +86,6 @@ namespace Code.Gameplay
 			=> _field[ChainHead].TokenType == _field[position].TokenType;
 
 		private bool IsNeighborForLastToken(Vector2 position)
-			=> _field.IsNeighboring(_chainedTokens.Last(), position);
+			=> _distanceMeter.IsNeighboring(_chainedTokens.Last(), position);
 	}
 }

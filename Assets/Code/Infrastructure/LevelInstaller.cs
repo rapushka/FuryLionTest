@@ -48,6 +48,7 @@ namespace Code.Infrastructure
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
 				.BindSingle<SceneTransfer>()
+				.BindSingle<TokensDistanceMeter>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
