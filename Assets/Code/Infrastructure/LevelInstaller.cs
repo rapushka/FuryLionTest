@@ -1,5 +1,7 @@
 using Code.Environment;
+using Code.Environment.Bonuses;
 using Code.Environment.GravityBehaviour;
+using Code.Environment.Obstacles;
 using Code.Extensions;
 using Code.GameCycle;
 using Code.Gameplay;
@@ -48,6 +50,7 @@ namespace Code.Infrastructure
 				.BindSingle<SceneTransfer>()
 				.BindSingle<TokensDistanceMeter>()
 				.BindSingle<ObstacleDestroyer>()
+				.BindSingle<BonusesSpawner>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()
@@ -77,6 +80,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, ActionsRemaining>((x, _) => x.OnChainComposed())
+				.BindSignalTo<ChainComposedSignal, BonusesSpawner>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
