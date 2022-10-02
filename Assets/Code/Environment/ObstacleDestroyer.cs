@@ -19,8 +19,7 @@ namespace Code.Environment
 				for (var y = (int)startValue.y; y < endValue.y; y++)
 				{
 					if (IsOutOfBounce(x, 0, tokens.GetLength(0))
-					    || IsOutOfBounce(y, 0, tokens.GetLength(1))
-					    || (IsEqual(x, destroyedTokenPosition.x) && IsEqual(destroyedTokenPosition.y, y)))
+					    || IsOutOfBounce(y, 0, tokens.GetLength(1)))
 					{
 						continue;
 					}
@@ -29,7 +28,7 @@ namespace Code.Environment
 					
 					if (token == null)
 					{
-						return;
+						continue;
 					}
 
 					if (token.TokenUnit is TokenUnit.Ice or TokenUnit.RockLevel1)
