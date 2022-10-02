@@ -12,7 +12,6 @@ using Code.Input;
 using Code.Levels;
 using Code.View;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Code.Infrastructure
@@ -48,6 +47,7 @@ namespace Code.Infrastructure
 				.BindSingle<LevelGenerator>()
 				.BindSingle<SceneTransfer>()
 				.BindSingle<TokensDistanceMeter>()
+				.BindSingle<ObstacleDestroyer>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()

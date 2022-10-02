@@ -10,25 +10,34 @@ namespace Code.Environment
 {
 	public class Field : IInitializable
 	{
-		private readonly LevelGenerator _levelLevelGenerator;
+		private readonly LevelGenerator _levelGenerator;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
 		private readonly TokensFactory _tokensFactory;
+		private readonly ObstacleDestroyer _obstacleDestroyer;
 
 		private Token[,] _tokens;
 
 		[Inject]
-		public Field(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner, TokensFactory tokensFactory)
+		public Field
+		(
+			LevelGenerator levelGenerator,
+			Gravity gravity,
+			TokensSpawner spawner,
+			TokensFactory tokensFactory,
+			ObstacleDestroyer obstacleDestroyer
+		)
 		{
-			_levelLevelGenerator = levelGenerator;
+			_levelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
 			_tokensFactory = tokensFactory;
+			_obstacleDestroyer = obstacleDestroyer;
 		}
 
 		public void Initialize()
 		{
-			_tokens = _levelLevelGenerator.Generate();
+			_tokens = _levelGenerator.Generate();
 
 			UpdateField();
 		}
@@ -44,6 +53,7 @@ namespace Code.Environment
 			foreach (var position in chain)
 			{
 				DestroyTokenAt(position);
+				_obstacleDestroyer.CheckNeighbourTokens(_tokens, position, this);
 			}
 
 			UpdateField();
