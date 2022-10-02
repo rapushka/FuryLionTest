@@ -9,11 +9,7 @@ namespace Code.Gameplay.Tokens
 	{
 		[SerializeField] private SerializableTokensCollection _tokens;
 
-		private Dictionary<TokenUnit, Token> _dictionary;
-
-		private void OnEnable() => InitializedDictionary();
-
 		public Dictionary<TokenUnit, Token> InitializedDictionary()
-			=> _dictionary ??= _tokens.Entries.ToDictionary((e) => e.Unit, (e) => e.Prefab);
+			=> _tokens.Entries.ToDictionary((e) => e.Unit, (e) => e.Prefab);
 	}
 }
