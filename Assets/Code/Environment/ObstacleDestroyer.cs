@@ -9,6 +9,7 @@ namespace Code.Environment
 {
 	public class ObstacleDestroyer
 	{
+		private readonly List<Vector2> _changedTokensOnThisAction;
 		private readonly List<Vector2> _offsets;
 
 		private Field _field;
@@ -16,6 +17,8 @@ namespace Code.Environment
 		[Inject]
 		public ObstacleDestroyer()
 		{
+			_changedTokensOnThisAction = new List<Vector2>();
+
 			_offsets = new List<Vector2>
 			{
 				Vector2.up,
@@ -32,9 +35,14 @@ namespace Code.Environment
 			GetOffsetDirections(position)
 				.Where((d) => IsInBounces(d, tokens))
 				.Select((d) => field[d])
-				.Where(IsNotEmpty)
+				.Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
 				.ForEach(HandleObstacle);
 		}
+
+		public void Clear() => _changedTokensOnThisAction.Clear();
+
+		private bool IsNotChangedOnThisAction(Component token)
+			=> _changedTokensOnThisAction.Contains(token.transform.position) == false;
 
 		private IEnumerable<Vector2> GetOffsetDirections(Vector2 position)
 			=> _offsets.Select((offset) => offset + position);
@@ -48,16 +56,20 @@ namespace Code.Environment
 		private void HandleObstacle(Token token)
 		{
 			var unit = token.TokenUnit;
+			var position = token.transform.position;
+
 			if (unit is TokenUnit.Ice or TokenUnit.RockLevel1)
 			{
-				_field.DestroyTokenAt(token.transform.position);
+				_field.DestroyTokenAt(position);
 			}
 			else if (unit is TokenUnit.RockLevel2)
 			{
-				// переключить на RockLevel1
+				_field.SwitchTokenAt(position, TokenUnit.RockLevel1);
+				_changedTokensOnThisAction.Add(position);
 			}
 		}
 
-		private static bool IsInBounce(float n, int minValue, int maxValue) => n >= minValue && n < maxValue;
+		private static bool IsInBounce(float number, int minValue, int maxValue)
+			=> number >= minValue && number < maxValue;
 	}
 }

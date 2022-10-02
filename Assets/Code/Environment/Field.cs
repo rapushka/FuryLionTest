@@ -56,6 +56,8 @@ namespace Code.Environment
 				_obstacleDestroyer.CheckNeighbourTokens(_tokens, position, this);
 			}
 
+			_obstacleDestroyer.Clear();
+
 			UpdateField();
 		}
 
@@ -65,6 +67,11 @@ namespace Code.Environment
 
 			_tokensFactory.DestroyToken(token);
 			this[position] = null;
+		}
+		public void SwitchTokenAt(Vector2 position, TokenUnit to)
+		{
+			DestroyTokenAt(position);
+			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
 		}
 
 		private void UpdateField()
