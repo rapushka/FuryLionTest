@@ -15,9 +15,9 @@ namespace Code.Gameplay.Tokens
 		private readonly Dictionary<TokenUnit, List<Token>> _createdTokens;
 
 		[Inject]
-		public TokensFactory(Dictionary<TokenUnit, Token> tokenPrefabForType, TokensRoot tokensRoot)
+		public TokensFactory(TokensCollection tokenPrefabForType, TokensRoot tokensRoot)
 		{
-			_tokenPrefabForType = tokenPrefabForType;
+			_tokenPrefabForType = tokenPrefabForType.AsDictionary();
 			_tokensRoot = tokensRoot;
 
 			_createdTokens = new Dictionary<TokenUnit, List<Token>>();

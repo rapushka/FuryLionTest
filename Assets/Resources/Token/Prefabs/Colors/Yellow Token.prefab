@@ -12,6 +12,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: _tokenUnit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: _applyGravity
       value: 1
       objectReference: {fileID: 0}
@@ -61,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3253346015291329422, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Name
-      value: Yellow Token 1
+      value: Yellow Token
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.b

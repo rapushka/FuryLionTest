@@ -12,6 +12,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: _tokenUnit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: _applyGravity
       value: 1
       objectReference: {fileID: 0}

@@ -12,6 +12,7 @@ using Code.Input;
 using Code.Levels;
 using Code.View;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Code.Infrastructure
@@ -20,7 +21,7 @@ namespace Code.Infrastructure
 	{
 		[SerializeField] private TokensRoot _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
-		[SerializeField] private TokensCollection _tokens;
+		[SerializeField] private TokensCollection _tokensCollection;
 		[SerializeField] private SerializedConfig _serializedConfig;
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private ScoreView _scoreView;
@@ -30,11 +31,9 @@ namespace Code.Infrastructure
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			var dictionaryTokensToType = _tokens.InitializedDictionary();
-
 			Container
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
-				.BindSingleFromInstance(dictionaryTokensToType)
+				.BindSingleFromInstance(_tokensCollection)
 				.BindSingleFromInstance(_tokensRoot)
 				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(_lineRenderer)
