@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.Infrastructure;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
@@ -18,11 +19,12 @@ namespace Code.Gameplay
 			_minTokensCountForChain = chainParameters.MinTokensCountForChain;
 		}
 
-		public void OnChainEnded(LinkedList<Vector2> chain)
+		public void OnChainEnded(IEnumerable<Vector2> chain)
 		{
-			if (chain.Count >= _minTokensCountForChain)
+			var array = chain as Vector2[] ?? chain.ToArray();
+			if (array.Length >= _minTokensCountForChain)
 			{
-				_signalBus.Fire(new ChainComposedSignal(chain));
+				_signalBus.Fire(new ChainComposedSignal(array));
 			}
 		}
 	}

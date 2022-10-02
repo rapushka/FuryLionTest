@@ -29,9 +29,9 @@ namespace Code.Infrastructure
 
 	public class ChainLastTokenRemovedSignal { }
 
-	public class ChainEndedSignal : ImmutableSignal<LinkedList<Vector2>>
+	public class ChainEndedSignal : ImmutableSignal<IEnumerable<Vector2>>
 	{
-		public ChainEndedSignal(LinkedList<Vector2> value)
+		public ChainEndedSignal(IEnumerable<Vector2> value)
 			: base(value) { }
 	}
 
@@ -41,14 +41,14 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class ChainComposedSignal : ImmutableSignal<LinkedList<Vector2>>
+	public class ChainComposedSignal : ImmutableSignal<IEnumerable<Vector2>>
 	{
-		public ChainComposedSignal(LinkedList<Vector2> value)
+		public ChainComposedSignal(IEnumerable<Vector2> value)
 			: base(value) { }
 	}
 
 	public class LevelLostSignal { }
-	
+
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
 		public RemainingActionsUpdateSignal(int value)

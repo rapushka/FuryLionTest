@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.Infrastructure;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
@@ -24,16 +25,16 @@ namespace Code.Gameplay.ScoreSystem
 
 		public void Initialize() => InvokeValueUpdate();
 
-		public void OnChainComposed(LinkedList<Vector2> chain)
+		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
-			_currentScore += ScaleScore(chain.Count);
+			_currentScore += ScaleScore(chain.Count());
 			InvokeValueUpdate();
 		}
 
 		private int ScaleScore(int chainLenght) => IntPow(chainLenght, _multiplierPerTokenInChain) * _scoreMultiplier;
 
 		private static int IntPow(int number, float power) => Mathf.CeilToInt(Mathf.Pow(number, power));
-		
+
 		private void InvokeValueUpdate() => _signalBus.Fire(new ScoreUpdateSignal(_currentScore));
 	}
 }
