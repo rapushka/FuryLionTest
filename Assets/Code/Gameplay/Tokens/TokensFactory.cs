@@ -31,8 +31,8 @@ namespace Code.Gameplay.Tokens
 			}
 		}
 
-		public Token CreateTokenOfType(TokenUnit tokenUnit, Vector3 position)
-			=> HasPooledTokenOfRightType(tokenUnit, out var token)
+		public Token CreateTokenForUnit(TokenUnit tokenUnit, Vector3 position)
+			=> HasPooledTokenForThisUnit(tokenUnit, out var token)
 				? EnableToken(position, token)
 				: CreateNewToken(tokenUnit, position);
 
@@ -45,7 +45,7 @@ namespace Code.Gameplay.Tokens
 			return token;
 		}
 
-		private bool HasPooledTokenOfRightType(TokenUnit tokenUnit, out Token token)
+		private bool HasPooledTokenForThisUnit(TokenUnit tokenUnit, out Token token)
 		{
 			token = _createdTokens[tokenUnit].FirstOrDefault(IsDisabled);
 			return token is not null;

@@ -7,11 +7,11 @@ using UnityEngine;
 namespace Code.Levels.LevelGeneration
 {
 	[Serializable]
-	public class TokenToTypeCollection
+	public class SerializableTokensCollection
 	{
-		[SerializeField] private List<TokenToTypeEntry> _entries;
+		[SerializeField] private List<TokenToSpawnUnitEntry> _entries;
 
-		public List<TokenToTypeEntry> Entries => _entries;
+		public List<TokenToSpawnUnitEntry> Entries => _entries;
 
 		private Dictionary<TokenUnit, Token> _cashedDictionary;
 

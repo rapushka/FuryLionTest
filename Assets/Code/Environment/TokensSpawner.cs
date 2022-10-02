@@ -40,7 +40,7 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var token = _tokensFactory.CreateTokenOfType(PickRandomColor(), ScalePosition(x, y));
+			var token = _tokensFactory.CreateTokenForUnit(PickRandomColor(), ScalePosition(x, y));
 			tokens[x, y] = token;
 		}
 

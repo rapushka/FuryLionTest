@@ -7,7 +7,7 @@ namespace Code.Gameplay.Tokens
 {
 	public class TokensCollection : MonoBehaviour
 	{
-		[SerializeField] private TokenToTypeCollection _tokens;
+		[SerializeField] private SerializableTokensCollection _tokens;
 
 		private Dictionary<TokenUnit, Token> _dictionary;
 

@@ -46,7 +46,7 @@ namespace Code.Gameplay
 			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenUnit, i, j));
 
 		private Token Value(TokenUnit tokenUnit, int i, int j)
-			=> _tokensFactory.CreateTokenOfType(tokenUnit, ScalePosition(i, j));
+			=> _tokensFactory.CreateTokenForUnit(tokenUnit, ScalePosition(i, j));
 
 		private Vector3 ScalePosition(int x, int y)
 			=> IndexesToWorldPosition(x, y) * _step + _offset;

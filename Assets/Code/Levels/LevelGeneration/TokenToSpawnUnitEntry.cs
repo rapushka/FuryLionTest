@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 namespace Code.Levels.LevelGeneration
 {
 	[Serializable]
-	public class TokenToTypeEntry
+	public class TokenToSpawnUnitEntry
 	{
 		[FormerlySerializedAs("_type")] [SerializeField] private TokenUnit _unit;
 		[SerializeField] private Token _prefab;

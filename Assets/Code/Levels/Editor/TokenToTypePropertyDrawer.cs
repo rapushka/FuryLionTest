@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Levels.Editor
 {
-	[CustomPropertyDrawer(typeof(TokenToTypeCollection))]
+	[CustomPropertyDrawer(typeof(SerializableTokensCollection))]
 	public class TokenToTypePropertyDrawer : PropertyDrawer
 	{
 		private const float ElementHeight = 20f;
@@ -35,7 +35,7 @@ namespace Code.Levels.Editor
 			{
 				var entry = entries.GetArrayElementAtIndex(i);
 				
-				var type = entry.FindPropertyRelative("_type");
+				var type = entry.FindPropertyRelative("_unit");
 				var prefab = entry.FindPropertyRelative("_prefab");
 
 				currentPosition = currentPosition.SetWidth(position.width / ElementsInRow);
