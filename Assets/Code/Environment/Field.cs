@@ -45,13 +45,9 @@ namespace Code.Environment
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public void OnChainComposed(LinkedList<Vector2> chain)
+		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
-			foreach (var position in chain)
-			{
-				DestroyTokenAt(position);
-			}
-			
+			chain.ForEach(DestroyTokenAt);
 			UpdateField();
 		}
 
