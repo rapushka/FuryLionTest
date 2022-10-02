@@ -1,6 +1,6 @@
 namespace Code.Gameplay.Tokens
 {
-	public enum TokenType
+	public enum TokenUnit
 	{
 		Empty,
 		Red,

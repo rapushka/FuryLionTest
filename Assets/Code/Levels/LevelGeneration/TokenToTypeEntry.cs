@@ -1,16 +1,17 @@
 using System;
 using Code.Gameplay.Tokens;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Levels.LevelGeneration
 {
 	[Serializable]
 	public class TokenToTypeEntry
 	{
-		[SerializeField] private TokenType _type;
+		[FormerlySerializedAs("_type")] [SerializeField] private TokenUnit _unit;
 		[SerializeField] private Token _prefab;
 
-		public TokenType Type => _type;
+		public TokenUnit Unit => _unit;
 
 		public Token Prefab => _prefab;
 	}

@@ -13,13 +13,13 @@ namespace Code.Levels.LevelGeneration
 
 		public List<TokenToTypeEntry> Entries => _entries;
 
-		private Dictionary<TokenType, Token> _cashedDictionary;
+		private Dictionary<TokenUnit, Token> _cashedDictionary;
 
-		private Dictionary<TokenType, Token> Dictionary => _cashedDictionary ??= SerializedArrayToDictionary();
+		private Dictionary<TokenUnit, Token> Dictionary => _cashedDictionary ??= SerializedArrayToDictionary();
 
-		public Token this[TokenType tokenType] => Dictionary[tokenType];
+		public Token this[TokenUnit tokenUnit] => Dictionary[tokenUnit];
 
-		private Dictionary<TokenType, Token> SerializedArrayToDictionary()
-			=> _entries.ToDictionary((e) => e.Type, (e) => e.Prefab);
+		private Dictionary<TokenUnit, Token> SerializedArrayToDictionary()
+			=> _entries.ToDictionary((e) => e.Unit, (e) => e.Prefab);
 	}
 }

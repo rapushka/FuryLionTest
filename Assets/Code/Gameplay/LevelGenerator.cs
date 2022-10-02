@@ -13,16 +13,16 @@ namespace Code.Gameplay
 		private readonly Vector2 _offset;
 		private readonly float _step;
 		private readonly Level _level;
-		private readonly TokensPool _tokensPool;
+		private readonly TokensFactory _tokensFactory;
 
-		private TokenType[,] _tokenTypes;
+		private TokenUnit[,] _tokenTypes;
 		private Token[,] _tokenGameObjects;
 
 		[Inject]
-		public LevelGenerator(Level level, IFieldConfig fieldConfig, TokensPool tokensPool)
+		public LevelGenerator(Level level, IFieldConfig fieldConfig, TokensFactory tokensFactory)
 		{
 			_level = level;
-			_tokensPool = tokensPool;
+			_tokensFactory = tokensFactory;
 			_step = fieldConfig.Step;
 			_offset = fieldConfig.Offset;
 		}
@@ -39,14 +39,14 @@ namespace Code.Gameplay
 
 		private Token[,] CreateAdaptedArray() => new Token[_tokenTypes.GetLength(1), _tokenTypes.GetLength(0)];
 
-		private void InstantiateTokenAt(TokenType item, int i, int j)
+		private void InstantiateTokenAt(TokenUnit item, int i, int j)
 			=> item.Do((tokenType) => CreateInArray(tokenType, i, j), @if: IsForCreation);
 
-		private void CreateInArray(TokenType tokenType, int i, int j)
-			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenType, i, j));
+		private void CreateInArray(TokenUnit tokenUnit, int i, int j)
+			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenUnit, i, j));
 
-		private Token Value(TokenType tokenType, int i, int j)
-			=> _tokensPool.CreateTokenOfType(tokenType, ScalePosition(i, j));
+		private Token Value(TokenUnit tokenUnit, int i, int j)
+			=> _tokensFactory.CreateTokenOfType(tokenUnit, ScalePosition(i, j));
 
 		private Vector3 ScalePosition(int x, int y)
 			=> IndexesToWorldPosition(x, y) * _step + _offset;
@@ -54,6 +54,6 @@ namespace Code.Gameplay
 		private static Vector2 IndexesToWorldPosition(int x, int y)
 			=> new(y, Mathf.Abs(x - (Constants.GameFieldSize.Height - 1)));
 
-		private static bool IsForCreation(TokenType tokenType) => tokenType != TokenType.Empty;
+		private static bool IsForCreation(TokenUnit tokenUnit) => tokenUnit != TokenUnit.Empty;
 	}
 }

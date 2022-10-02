@@ -8,33 +8,33 @@ using Object = UnityEngine.Object;
 
 namespace Code.Gameplay.Tokens
 {
-	public class TokensPool : IInitializable
+	public class TokensFactory : IInitializable
 	{
-		private readonly Dictionary<TokenType, Token> _tokenPrefabForType;
+		private readonly Dictionary<TokenUnit, Token> _tokenPrefabForType;
 		private readonly TokensRoot _tokensRoot;
-		private readonly Dictionary<TokenType, List<Token>> _createdTokens;
+		private readonly Dictionary<TokenUnit, List<Token>> _createdTokens;
 
 		[Inject]
-		public TokensPool(Dictionary<TokenType, Token> tokenPrefabForType, TokensRoot tokensRoot)
+		public TokensFactory(Dictionary<TokenUnit, Token> tokenPrefabForType, TokensRoot tokensRoot)
 		{
 			_tokenPrefabForType = tokenPrefabForType;
 			_tokensRoot = tokensRoot;
 
-			_createdTokens = new Dictionary<TokenType, List<Token>>();
+			_createdTokens = new Dictionary<TokenUnit, List<Token>>();
 		}
 
 		public void Initialize()
 		{
-			for (var i = 0; i < Enum.GetValues(typeof(TokenType)).Length; i++)
+			for (var i = 0; i < Enum.GetValues(typeof(TokenUnit)).Length; i++)
 			{
-				_createdTokens.Add((TokenType)i, new List<Token>());
+				_createdTokens.Add((TokenUnit)i, new List<Token>());
 			}
 		}
 
-		public Token CreateTokenOfType(TokenType tokenType, Vector3 position)
-			=> HasPooledTokenOfRightType(tokenType, out var token)
+		public Token CreateTokenOfType(TokenUnit tokenUnit, Vector3 position)
+			=> HasPooledTokenOfRightType(tokenUnit, out var token)
 				? EnableToken(position, token)
-				: CreateNewToken(tokenType, position);
+				: CreateNewToken(tokenUnit, position);
 
 		public void DestroyToken(Token token) => token.gameObject.SetActive(false);
 
@@ -45,16 +45,16 @@ namespace Code.Gameplay.Tokens
 			return token;
 		}
 
-		private bool HasPooledTokenOfRightType(TokenType tokenType, out Token token)
+		private bool HasPooledTokenOfRightType(TokenUnit tokenUnit, out Token token)
 		{
-			token = _createdTokens[tokenType].FirstOrDefault(IsDisabled);
+			token = _createdTokens[tokenUnit].FirstOrDefault(IsDisabled);
 			return token is not null;
 		}
 
-		private Token CreateNewToken(TokenType tokenType, Vector3 position)
+		private Token CreateNewToken(TokenUnit tokenUnit, Vector3 position)
 		{
-			var token = InstantiateAtRoot(position, _tokenPrefabForType[tokenType]);
-			_createdTokens[tokenType].Add(token);
+			var token = InstantiateAtRoot(position, _tokenPrefabForType[tokenUnit]);
+			_createdTokens[tokenUnit].Add(token);
 			return token;
 		}
 

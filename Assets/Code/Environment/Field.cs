@@ -13,17 +13,17 @@ namespace Code.Environment
 		private readonly LevelGenerator _levelLevelGenerator;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
-		private readonly TokensPool _tokensPool;
+		private readonly TokensFactory _tokensFactory;
 
 		private Token[,] _tokens;
 
 		[Inject]
-		public Field(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner, TokensPool tokensPool)
+		public Field(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner, TokensFactory tokensFactory)
 		{
 			_levelLevelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
-			_tokensPool = tokensPool;
+			_tokensFactory = tokensFactory;
 		}
 
 		public void Initialize()
@@ -53,7 +53,7 @@ namespace Code.Environment
 		{
 			var token = this[position];
 
-			_tokensPool.DestroyToken(token);
+			_tokensFactory.DestroyToken(token);
 			this[position] = null;
 		}
 

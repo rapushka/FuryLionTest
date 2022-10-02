@@ -51,7 +51,7 @@ namespace Code.Infrastructure
 				.BindSingle<TokensDistanceMeter>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
-				.BindSingleWithInterfaces<TokensPool>()
+				.BindSingleWithInterfaces<TokensFactory>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()

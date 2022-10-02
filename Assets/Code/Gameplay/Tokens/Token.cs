@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Gameplay.Tokens
 {
 	public class Token : MonoBehaviour
 	{
-		[SerializeField] private TokenType _tokenType;
+		[FormerlySerializedAs("_tokenType")] [SerializeField] private TokenUnit _tokenUnit;
 		[SerializeField] private bool _applyGravity;
 
-		public TokenType TokenType => _tokenType;
+		public TokenUnit TokenUnit => _tokenUnit;
 		public bool ApplyGravity => _applyGravity;
 	}
 }

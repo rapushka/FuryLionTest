@@ -7,7 +7,7 @@ using static Code.Common.Constants;
 
 namespace Code.Levels.Editor
 {
-	[CustomPropertyDrawer(typeof(ArrayLayout<TokenType>))]
+	[CustomPropertyDrawer(typeof(ArrayLayout<TokenUnit>))]
 	public class LevelPropertyDrawer : PropertyDrawer
 	{
 		private const float ElementHeight = 36f;
@@ -41,7 +41,7 @@ namespace Code.Levels.Editor
 			for (var x = 0; x < GameFieldSize.Width; x++)
 			{
 				var element = row.GetArrayElementAtIndex(x);
-				var tokenType = (TokenType)element.enumValueIndex;
+				var tokenType = (TokenUnit)element.enumValueIndex;
 				
 				var color = tokenType.GetColor();
 				GUI.backgroundColor = color;

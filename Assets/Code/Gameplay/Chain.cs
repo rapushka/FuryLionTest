@@ -83,7 +83,7 @@ namespace Code.Gameplay
 			=> _chainedTokens.Contains(position) == false;
 
 		private bool TokenIsFittingType(Vector2 position)
-			=> _field[ChainHead].TokenType == _field[position].TokenType;
+			=> _field[ChainHead].TokenUnit == _field[position].TokenUnit;
 
 		private bool IsNeighborForLastToken(Vector2 position)
 			=> _distanceMeter.IsNeighboring(_chainedTokens.Last(), position);

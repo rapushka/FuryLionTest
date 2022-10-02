@@ -8,11 +8,11 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private int _actionsCount;
-		[SerializeField] private ArrayLayout<TokenType> _tokens;
+		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
 		public int ActionCount => _actionsCount;
 		
-		public TokenType[,] TokenTypesArray => _tokens.ToRectangularArray();
+		public TokenUnit[,] TokenTypesArray => _tokens.ToRectangularArray();
 
 		private void OnValidate() => _actionsCount = _actionsCount > 0 ? _actionsCount : 1;
 	}

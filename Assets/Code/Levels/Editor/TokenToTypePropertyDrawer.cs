@@ -27,7 +27,7 @@ namespace Code.Levels.Editor
 
 			var entries = property.FindPropertyRelative("_entries");
 			
-			_tokenTypesCount = Enum.GetValues(typeof(TokenType)).Length;
+			_tokenTypesCount = Enum.GetValues(typeof(TokenUnit)).Length;
 			entries.arraySize = _tokenTypesCount;
 
 			var currentPosition = position.AddY(ElementHeight).SetHeight(ElementHeight);
@@ -51,7 +51,7 @@ namespace Code.Levels.Editor
 
 		private void DrawRow(SerializedProperty type, SerializedProperty prefab, Rect currentPosition)
 		{
-			var typeName = Enum.GetName(typeof(TokenType), type.enumValueIndex);
+			var typeName = Enum.GetName(typeof(TokenUnit), type.enumValueIndex);
 			var guiContent = new GUIContent(typeName);
 		
 			EditorGUI.PropertyField(currentPosition, type, guiContent);
