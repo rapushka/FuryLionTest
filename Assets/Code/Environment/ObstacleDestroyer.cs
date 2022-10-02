@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 using Zenject;
@@ -9,35 +11,31 @@ namespace Code.Environment
 	{
 		[Inject] public ObstacleDestroyer() { }
 
-		public void CheckNeighbourTokens(Token[,] tokens, Vector2 destroyedTokenPosition, Field field)
+		public void CheckNeighbourTokens(Token[,] tokens, Vector2 position, Field field)
 		{
-			var startValue = destroyedTokenPosition - Vector2.one;
-			var endValue = destroyedTokenPosition + Vector2.one;
-
-			for (var x = (int)startValue.x; x < endValue.x; x++)
+			var directions = new List<Vector2>
 			{
-				for (var y = (int)startValue.y; y < endValue.y; y++)
+				position + Vector2.up,
+				position + Vector2.down,
+				position + Vector2.left,
+				position + Vector2.right,
+			};
+
+			foreach (var direction in directions.Where((d) => IsNotOutOfBounce(d, tokens)))
+			{
+				var token = field[direction];
+
+				if (token == true
+				    && token.TokenUnit is TokenUnit.Ice or TokenUnit.RockLevel1)
 				{
-					if (IsOutOfBounce(x, 0, tokens.GetLength(0))
-					    || IsOutOfBounce(y, 0, tokens.GetLength(1)))
-					{
-						continue;
-					}
-
-					var token = tokens[x, y];
-					
-					if (token == null)
-					{
-						continue;
-					}
-
-					if (token.TokenUnit is TokenUnit.Ice or TokenUnit.RockLevel1)
-					{
-						field.DestroyTokenAt(token.transform.position);
-					}
+					field.DestroyTokenAt(token.transform.position);
 				}
 			}
 		}
+
+		private static bool IsNotOutOfBounce(Vector2 direction, Token[,] tokens)
+			=> (IsOutOfBounce(direction.x, 0, tokens.GetLength(0))
+			    || IsOutOfBounce(direction.y, 0, tokens.GetLength(1))) == false;
 
 		private static bool IsEqual(float left, float right) => Math.Abs(left - right) < 0.01f;
 
