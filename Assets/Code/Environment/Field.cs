@@ -14,7 +14,6 @@ namespace Code.Environment
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
 		private readonly TokensFactory _tokensFactory;
-		private readonly ObstacleDestroyer _obstacleDestroyer;
 
 		private Token[,] _tokens;
 
@@ -24,15 +23,13 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			TokensFactory tokensFactory,
-			ObstacleDestroyer obstacleDestroyer
+			TokensFactory tokensFactory
 		)
 		{
 			_levelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
 			_tokensFactory = tokensFactory;
-			_obstacleDestroyer = obstacleDestroyer;
 		}
 
 		public void Initialize()
@@ -53,11 +50,8 @@ namespace Code.Environment
 			foreach (var position in chain)
 			{
 				DestroyTokenAt(position);
-				_obstacleDestroyer.CheckNeighbourTokens(_tokens, position, this);
 			}
-
-			_obstacleDestroyer.Clear();
-
+			
 			UpdateField();
 		}
 

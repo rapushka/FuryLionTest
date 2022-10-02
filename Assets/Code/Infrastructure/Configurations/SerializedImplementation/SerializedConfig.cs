@@ -18,6 +18,8 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		Vector2 IFieldConfig.Offset => _serializedFieldConfig.Offset;
 
+		public Vector2Int FieldSizes => _serializedFieldConfig.FieldSizes;
+
 		int IScoreConfig.ScoreMultiplier => _serializedScoreConfig.ScoreMultiplier;
 
 		float IScoreConfig.MultiplierPerTokenInChain => _serializedScoreConfig.MultiplierPerTokenInChain;

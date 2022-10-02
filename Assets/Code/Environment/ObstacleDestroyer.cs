@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
+using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -9,16 +10,18 @@ namespace Code.Environment
 {
 	public class ObstacleDestroyer
 	{
+		private readonly Field _field;
+		private readonly IFieldConfig _fieldConfig;
 		private readonly List<Vector2> _changedTokensOnThisAction;
 		private readonly List<Vector2> _offsets;
 
-		private Field _field;
-
 		[Inject]
-		public ObstacleDestroyer()
+		public ObstacleDestroyer(Field field, IFieldConfig fieldConfig)
 		{
-			_changedTokensOnThisAction = new List<Vector2>();
+			_field = field;
+			_fieldConfig = fieldConfig;
 
+			_changedTokensOnThisAction = new List<Vector2>();
 			_offsets = new List<Vector2>
 			{
 				Vector2.up,
@@ -28,18 +31,18 @@ namespace Code.Environment
 			};
 		}
 
-		public void CheckNeighbourTokens(Token[,] tokens, Vector2 position, Field field)
+		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
-			_field = field;
-
-			GetOffsetDirections(position)
-				.Where((d) => IsInBounces(d, tokens))
-				.Select((d) => field[d])
-				.Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
-				.ForEach(HandleObstacle);
+			chain.ForEach(CheckNeighbourTokens);
+			_changedTokensOnThisAction.Clear();
 		}
 
-		public void Clear() => _changedTokensOnThisAction.Clear();
+		private void CheckNeighbourTokens(Vector2 position)
+			=> GetOffsetDirections(position)
+			   .Where(IsInBounces)
+			   .Select((d) => _field[d])
+			   .Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
+			   .ForEach(HandleObstacle);
 
 		private bool IsNotChangedOnThisAction(Component token)
 			=> _changedTokensOnThisAction.Contains(token.transform.position) == false;
@@ -47,9 +50,9 @@ namespace Code.Environment
 		private IEnumerable<Vector2> GetOffsetDirections(Vector2 position)
 			=> _offsets.Select((offset) => offset + position);
 
-		private static bool IsInBounces(Vector2 position, Token[,] tokens)
-			=> IsInBounce(position.x, 0, tokens.GetLength(0))
-			   && IsInBounce(position.y, 0, tokens.GetLength(1));
+		private bool IsInBounces(Vector2 position)
+			=> IsInBounce(position.x, 0, _fieldConfig.FieldSizes.x)
+			   && IsInBounce(position.y, 0, _fieldConfig.FieldSizes.y);
 
 		private static bool IsNotEmpty(Token token) => token == true;
 
