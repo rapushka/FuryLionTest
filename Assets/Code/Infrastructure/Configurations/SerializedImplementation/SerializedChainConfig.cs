@@ -7,8 +7,8 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 	[Serializable]
 	public class SerializedChainConfig : IChainConfig
 	{
-		[SerializeField] private int _minMinTokensCountForChain = 3;
+		[SerializeField] private int _minTokensCountForChain = 3;
 
-		public int MinTokensCountForChain => _minMinTokensCountForChain;
+		public int MinTokensCountForChain => _minTokensCountForChain;
 	}
 }
