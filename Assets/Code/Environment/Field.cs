@@ -66,7 +66,7 @@ namespace Code.Environment
 			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
 		}
 
-		public Token FirstOrDefault(Func<Token, bool> predicate) => _tokens.FirstOrDefault(predicate);
+		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
 
 		private void UpdateField()
 		{

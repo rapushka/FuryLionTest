@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -60,6 +62,9 @@ namespace Code.Extensions
 			return default;
 		}
 
+		public static IEnumerable<T> Where<T>(this T[,] @this, Func<T, bool> predicate)
+			=> @this.Where((t, _, _) => predicate(t));
+
 		public static IEnumerable<T> Where<T>(this T[,] @this, Func<T, int, int, bool> predicate)
 		{
 			for (var i = 0; i < @this.GetLength(0); i++)
@@ -79,5 +84,13 @@ namespace Code.Extensions
 
 		public static T SetAtVector<T>(this T[,] @this, Vector2Int position, T value)
 			=> @this[position.x, position.y] = value;
+
+		public static T PickRandom<T>(this IEnumerable<T> @this)
+		{
+			var array = @this as T[] ?? @this.ToArray();
+
+			var randomIndex = UnityEngine.Random.Range(0, array.Length);
+			return array[randomIndex];
+		}
 	}
 }

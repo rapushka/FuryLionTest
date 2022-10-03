@@ -1,4 +1,5 @@
 using System.Linq;
+using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
 using UnityEngine;
@@ -30,25 +31,31 @@ namespace Code.Environment.Bonuses
 		{
 			_chain = chain;
 			_unit = unit;
-			var token = _field.FirstOrDefault(CasualTokenOfRightUnit);
-			if (token == false)
+			var token = _field.Where(CasualTokenOfRightUnit).PickRandom();
+			
+			if (token == true)
 			{
-				Debug.Log
-				(
-					"not-bonus token of this color is not exist\n"
-					+ "in future it will be added to some buffer\n"
-					+ "so far so"
-				);
+				token.BonusType = bonusType;
+				_signalBus.Fire(new BonusSpawnedSignal(token));
 				return;
 			}
 
-			token.BonusType = bonusType;
-			_signalBus.Fire(new BonusSpawnedSignal(token));
+			BonusCantBeSpawned();
 		}
 
 		private bool CasualTokenOfRightUnit(Token token)
 			=> token.TokenUnit == _unit
 			   && token.BonusType == BonusType.None
 			   && _chain.Contains(token.transform.position) == false;
+
+		private static void BonusCantBeSpawned()
+		{
+			Debug.Log
+			(
+				"not-bonus token of this color is not exist\n"
+				+ "in future it will be added to some buffer\n"
+				+ "so far so"
+			);
+		}
 	}
 }
