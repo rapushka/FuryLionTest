@@ -30,5 +30,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 		int IBonusesConfig.MaxChainLenghtForRocket => _serializedBonusesConfig.MaxChainLenghtForRocket;
 
 		int IBonusesConfig.MinChainLenghtForBomb => _serializedBonusesConfig.MinChainLenghtForBomb;
+
+		int IBonusesConfig.BombExplosionRange => _serializedBonusesConfig.BombExplosionRange;
 	}
 }

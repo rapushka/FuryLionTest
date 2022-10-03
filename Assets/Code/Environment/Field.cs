@@ -55,6 +55,11 @@ namespace Code.Environment
 		public void DestroyTokenAt(Vector2 position)
 		{
 			var token = this[position];
+			
+			if (token == false)
+			{
+				return;
+			}
 
 			_tokensFactory.DestroyToken(token);
 			this[position] = null;

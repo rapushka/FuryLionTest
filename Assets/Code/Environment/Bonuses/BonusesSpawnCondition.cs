@@ -29,15 +29,20 @@ namespace Code.Environment.Bonuses
 			var rocketMin = _bonusesConfig.MinChainLenghtForRocket;
 			var rocketMax = _bonusesConfig.MaxChainLenghtForRocket;
 			var bombMin = _bonusesConfig.MinChainLenghtForBomb;
-			var chainColor = _field[array.First()].TokenUnit;
+			var chainColor = _field[array.First()]?.TokenUnit;
+
+			if (chainColor is null)
+			{
+				return;
+			}
 
 			if (chainLenght.IsBetweenIncluding(rocketMin, rocketMax))
 			{
-				_bonusSpawner.SpawnHorizontalRocket(array, chainColor);
+				_bonusSpawner.SpawnHorizontalRocket(array, chainColor.Value);
 			}
 			else if (chainLenght >= bombMin)
 			{
-				_bonusSpawner.SpawnBomb(array, chainColor);
+				_bonusSpawner.SpawnBomb(array, chainColor.Value);
 			}
 		}
 	}

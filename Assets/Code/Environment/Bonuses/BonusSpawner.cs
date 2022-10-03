@@ -32,7 +32,7 @@ namespace Code.Environment.Bonuses
 			_chain = chain;
 			_unit = unit;
 			var token = _field.Where(CasualTokenOfRightUnit).PickRandom();
-			
+
 			if (token == true)
 			{
 				token.BonusType = bonusType;
@@ -44,7 +44,8 @@ namespace Code.Environment.Bonuses
 		}
 
 		private bool CasualTokenOfRightUnit(Token token)
-			=> token.TokenUnit == _unit
+			=> token == true
+			   && token.TokenUnit == _unit
 			   && token.BonusType == BonusType.None
 			   && _chain.Contains(token.transform.position) == false;
 
