@@ -23,21 +23,21 @@ namespace Code.Environment.Bonuses
 
 		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
-			var enumerable = chain as Vector2[] ?? chain.ToArray();
+			var array = chain as Vector2[] ?? chain.ToArray();
 			
-			var chainLenght = enumerable.Length;
+			var chainLenght = array.Length;
 			var rocketMin = _bonusesConfig.MinChainLenghtForRocket;
 			var rocketMax = _bonusesConfig.MaxChainLenghtForRocket;
 			var bombMin = _bonusesConfig.MinChainLenghtForBomb;
-			var chainedTokensType = _field[enumerable.First()].TokenUnit;
+			var chainColor = _field[array.First()].TokenUnit;
 
 			if (chainLenght.IsBetweenIncluding(rocketMin, rocketMax))
 			{
-				_bonusSpawner.SpawnHorizontalRocket(chainedTokensType);
+				_bonusSpawner.SpawnHorizontalRocket(array, chainColor);
 			}
 			else if (chainLenght >= bombMin)
 			{
-				_bonusSpawner.SpawnBomb(chainedTokensType);
+				_bonusSpawner.SpawnBomb(array, chainColor);
 			}
 		}
 	}

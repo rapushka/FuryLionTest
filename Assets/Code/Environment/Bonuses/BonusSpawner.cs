@@ -1,3 +1,4 @@
+using System.Linq;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Code.Environment.Bonuses
 	{
 		private readonly Field _field;
 		private readonly SignalBus _signalBus;
+		private TokenUnit _unit;
+		private Vector2[] _chain;
 
 		[Inject]
 		public BonusSpawner(Field field, SignalBus signalBus)
@@ -17,13 +20,17 @@ namespace Code.Environment.Bonuses
 			_signalBus = signalBus;
 		}
 
-		public void SpawnHorizontalRocket(TokenUnit unit) => Spawn(unit, BonusType.HorizontalRocket);
+		public void SpawnHorizontalRocket(Vector2[] chain, TokenUnit unit)
+			=> Spawn(chain, unit, BonusType.HorizontalRocket);
 
-		public void SpawnBomb(TokenUnit unit) => Spawn(unit, BonusType.Bomb);
+		public void SpawnBomb(Vector2[] chain, TokenUnit unit)
+			=> Spawn(chain, unit, BonusType.Bomb);
 
-		private void Spawn(TokenUnit unit, BonusType bonusType)
+		private void Spawn(Vector2[] chain, TokenUnit unit, BonusType bonusType)
 		{
-			var token = _field.FirstOrDefault((t) => NotBonusTokenOfRightUnit(t, unit));
+			_chain = chain;
+			_unit = unit;
+			var token = _field.FirstOrDefault(CasualTokenOfRightUnit);
 			if (token == false)
 			{
 				Debug.Log
@@ -39,7 +46,9 @@ namespace Code.Environment.Bonuses
 			_signalBus.Fire(new BonusSpawnedSignal(token));
 		}
 
-		private static bool NotBonusTokenOfRightUnit(Token token, TokenUnit unit)
-			=> token.TokenUnit == unit && token.BonusType == BonusType.None;
+		private bool CasualTokenOfRightUnit(Token token)
+			=> token.TokenUnit == _unit
+			   && token.BonusType == BonusType.None
+			   && _chain.Contains(token.transform.position) == false;
 	}
 }
