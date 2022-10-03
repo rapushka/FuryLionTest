@@ -1,4 +1,5 @@
 using Code.Gameplay.Tokens;
+using Code.Infrastructure;
 using UnityEngine;
 using Zenject;
 
@@ -7,11 +8,13 @@ namespace Code.Environment.Bonuses
 	public class BonusSpawner
 	{
 		private readonly Field _field;
+		private readonly SignalBus _signalBus;
 
 		[Inject]
-		public BonusSpawner(Field field)
+		public BonusSpawner(Field field, SignalBus signalBus)
 		{
 			_field = field;
+			_signalBus = signalBus;
 		}
 
 		public void SpawnHorizontalRocket(TokenUnit unit) => Spawn(unit, BonusType.HorizontalRocket);
@@ -25,7 +28,7 @@ namespace Code.Environment.Bonuses
 			{
 				Debug.Log
 				(
-					"non-bonus token of this color is not exist\n"
+					"not-bonus token of this color is not exist\n"
 					+ "in future it will be added to some buffer\n"
 					+ "so far so"
 				);
@@ -33,11 +36,10 @@ namespace Code.Environment.Bonuses
 			}
 
 			token.BonusType = bonusType;
-			// TODO: BonusSpawnedSignal<Vector2> — по которому соотв. класс заменит изображение токена на необходимое
-			Debug.Log($"spawn new {token.BonusType} of type {token.TokenUnit} on {token.transform.position}");
+			_signalBus.Fire(new BonusSpawnedSignal(token));
 		}
 
-		private static bool NotBonusTokenOfRightUnit(Token t, TokenUnit unit)
-			=> t.TokenUnit == unit && t.BonusType == BonusType.None;
+		private static bool NotBonusTokenOfRightUnit(Token token, TokenUnit unit)
+			=> token.TokenUnit == unit && token.BonusType == BonusType.None;
 	}
 }

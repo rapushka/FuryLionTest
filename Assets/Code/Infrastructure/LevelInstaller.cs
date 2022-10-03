@@ -28,6 +28,7 @@ namespace Code.Infrastructure
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private SceneField _loseScene;
+		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -41,6 +42,7 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_loseScene)
+				.BindSingleFromInstance(_tokensSpriteSheet)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -52,6 +54,7 @@ namespace Code.Infrastructure
 				.BindSingle<ObstacleDestroyer>()
 				.BindSingle<BonusesSpawnCondition>()
 				.BindSingle<BonusSpawner>()
+				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()
@@ -86,6 +89,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
 				;
 		}
 	}

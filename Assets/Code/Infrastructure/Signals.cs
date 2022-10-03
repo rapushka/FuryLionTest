@@ -1,5 +1,6 @@
 // ReSharper disable ClassNeverInstantiated.Global классы создаются Zenject-ом
 using System.Collections.Generic;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure.BaseSignals;
 using UnityEngine;
 
@@ -52,6 +53,12 @@ namespace Code.Infrastructure
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
 		public RemainingActionsUpdateSignal(int value)
+			: base(value) { }
+	}
+
+	public class BonusSpawnedSignal : ImmutableSignal<Token>
+	{
+		public BonusSpawnedSignal(Token value)
 			: base(value) { }
 	}
 }
