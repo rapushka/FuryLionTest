@@ -10,7 +10,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 		[SerializeField] private int _minValueForRocket = 5;
 		[SerializeField] private int _maxValueForRocket = 7;
 		[SerializeField] private int _minValueForBomb = 8;
-		[SerializeField] private int _bombExplosionRange;
+		[SerializeField] private int _bombExplosionRange = 2;
 
 		public int MinChainLenghtForRocket => _minValueForRocket;
 

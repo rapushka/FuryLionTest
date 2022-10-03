@@ -70,7 +70,7 @@ namespace Code.Environment.Bonuses
 		{
 			var y = position.y;
 
-			for (var x = 0.5f; x < _fieldSizes.x; x++)
+			for (var x = 0.5f; x < _fieldSizes.x; x++) // TODO: prybiary heta
 			{
 				_field.DestroyTokenAt(new Vector2(x, y));
 			}
