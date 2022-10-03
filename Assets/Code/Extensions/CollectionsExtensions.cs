@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Gameplay.Tokens;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -38,6 +39,10 @@ namespace Code.Extensions
 				}
 			}
 		}
+
+		[CanBeNull]
+		public static T FirstOrDefault<T>(this T[,] @this, Func<T, bool> predicate) 
+			=> @this.FirstOrDefault((t, _, _) => predicate(t));
 
 		[CanBeNull]
 		public static T FirstOrDefault<T>(this T[,] @this, Func<T, int, int, bool> predicate)
