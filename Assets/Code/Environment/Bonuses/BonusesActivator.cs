@@ -44,6 +44,16 @@ namespace Code.Environment.Bonuses
 			}
 		}
 
+		private void DestroyHorizontalLine(Vector2 position)
+		{
+			var y = position.y;
+
+			for (var x = 0.5f; x < _fieldSizes.x; x++) // TODO: prybiary heta
+			{
+				_field.DestroyTokenAt(new Vector2(x, y));
+			}
+		}
+
 		private void DestroyRectangleArea(Vector2 position)
 		{
 			var startX = (int)position.x - _bombExplosionRange;
@@ -51,9 +61,9 @@ namespace Code.Environment.Bonuses
 			var startY = (int)position.y - _bombExplosionRange;
 			var endY = (int)position.y + _bombExplosionRange;
 
-			for (var x = startX; x < endX; x++)
+			for (var x = startX; x <= endX; x++)
 			{
-				for (var y = startY; y < endY; y++)
+				for (var y = startY; y <= endY; y++)
 				{
 					if (x >= 0
 					    && x < _fieldSizes.x
@@ -63,16 +73,6 @@ namespace Code.Environment.Bonuses
 						_field.DestroyTokenAt(new Vector2(x, y));
 					}
 				}
-			}
-		}
-
-		private void DestroyHorizontalLine(Vector2 position)
-		{
-			var y = position.y;
-
-			for (var x = 0.5f; x < _fieldSizes.x; x++) // TODO: prybiary heta
-			{
-				_field.DestroyTokenAt(new Vector2(x, y));
 			}
 		}
 	}
