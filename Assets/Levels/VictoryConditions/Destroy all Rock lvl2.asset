@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0919f9f1314cbaa860fc5ae0fe37c9, type: 3}
   m_Name: Destroy all Rock lvl2
   m_EditorClassIdentifier: 
-  _type: 6
+  _type: 7

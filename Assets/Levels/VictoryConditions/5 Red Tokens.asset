@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad11ac8426e41fba67c8f3414eb5db6, type: 3}
   m_Name: 5 Red Tokens
   m_EditorClassIdentifier: 
-  _targetColor: 0
-  _targetCount: 0
+  _targetColor: 1
+  _targetCount: 5

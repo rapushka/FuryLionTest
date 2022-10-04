@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.GameCycle.VictoryConditions.Conditions;
 using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
@@ -10,13 +12,21 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private int _actionsCount;
-		[SerializeField] private List<Goal> _victoryConditions;
+		[SerializeField] private List<Goal> _goals;
 		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
 		public int ActionCount => _actionsCount;
 		
 		public TokenUnit[,] TokenTypesArray => _tokens.ToRectangularArray();
 
-		private void OnValidate() => _actionsCount = _actionsCount > 0 ? _actionsCount : 1;
+		private void OnValidate()
+		{
+			_actionsCount = _actionsCount > 0 ? _actionsCount : 1;
+			
+			if (_goals.Count == 0 || _goals.Any((g) => g is null))
+			{
+				throw new ArgumentException("Level should have at least 1 Goal");
+			}
+		}
 	}
 }
