@@ -1,14 +1,19 @@
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEngine;
 
 namespace Code.Levels
 {
-	[CreateAssetMenu(fileName = "Level ", menuName = "ScriptableObjects/Level", order = 0)]
+	[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level", order = 0)]
 	public class Level : ScriptableObject
 	{
-		[SerializeField] private ArrayLayout<TokenType> _tokens;
+		[SerializeField] private int _actionsCount;
+		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
-		public TokenType[,] GetArray() => _tokens.ToRectangularArray();
+		public int ActionCount => _actionsCount;
+		
+		public TokenUnit[,] TokenTypesArray => _tokens.ToRectangularArray();
+
+		private void OnValidate() => _actionsCount = _actionsCount > 0 ? _actionsCount : 1;
 	}
 }

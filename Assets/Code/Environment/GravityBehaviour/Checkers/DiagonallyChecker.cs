@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.Extensions;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 
 namespace Code.Environment.GravityBehaviour.Checkers

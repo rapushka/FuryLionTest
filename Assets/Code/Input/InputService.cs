@@ -1,18 +1,17 @@
-using System;
 using Code.Extensions;
-using UnityEngine;
+using Code.Infrastructure;
+using Zenject;
 
 namespace Code.Input
 {
-	public class InputService : MonoBehaviour
+	public class InputService : ITickable
 	{
-		public event Action MouseDown;
-		public event Action MouseUp;
+		private readonly SignalBus _signalBus;
 
-		private void Update()
-		{
-			this.Do((_) => MouseDown?.Invoke(), @if: UnityEngine.Input.GetMouseButtonDown(0));
-			this.Do((_) => MouseUp?.Invoke(), @if: UnityEngine.Input.GetMouseButtonUp(0));
-		}
+		[Inject] public InputService(SignalBus signalBus) => _signalBus = signalBus;
+
+		public void Tick()
+			=> _signalBus.Do((s) => s.Fire<MouseDownSignal>(), @if: UnityEngine.Input.GetMouseButtonDown(0))
+			             .Do((s) => s.Fire<MouseUpSignal>(), @if: UnityEngine.Input.GetMouseButtonUp(0));
 	}
 }

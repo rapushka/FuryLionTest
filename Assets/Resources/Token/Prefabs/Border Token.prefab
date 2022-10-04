@@ -11,17 +11,21 @@ PrefabInstance:
       propertyPath: _tokenType
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: _tokenUnit
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.z
@@ -82,18 +86,18 @@ PrefabInstance:
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+      objectReference: {fileID: 2094195157, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.b
-      value: 0.3773585
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.g
-      value: 0.3773585
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.r
-      value: 0.3773585
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5844483592098527437, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Radius

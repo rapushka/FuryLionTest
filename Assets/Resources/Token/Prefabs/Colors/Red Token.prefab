@@ -12,6 +12,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: _tokenUnit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: _applyGravity
       value: 1
       objectReference: {fileID: 0}
@@ -64,16 +68,24 @@ PrefabInstance:
       value: Red Token
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -661730842, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844483592098527437, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}

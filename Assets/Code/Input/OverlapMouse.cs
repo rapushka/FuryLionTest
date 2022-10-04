@@ -1,38 +1,48 @@
-using System;
 using Code.Extensions;
+using Code.Infrastructure;
+using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Input
 {
-	public class OverlapMouse : MonoBehaviour
+	public class OverlapMouse : IInitializable, IFixedTickable
 	{
-		[SerializeField] private float _overlapRadius = 0.01f;
+		private readonly SignalBus _signalBus;
+		private readonly float _overlapRadius;
 
 		private Camera _camera;
 		private bool _isPressed;
 		private Collider2D[] _overlapResults;
 
-		public event Action<Vector2> ClickOnToken;
-		public event Action<Vector2> TokenHit;
+		[Inject]
+		public OverlapMouse(SignalBus signalBus, IInputConfig inputSettings)
+		{
+			_signalBus = signalBus;
+			_overlapRadius = inputSettings.CursorOverlapRadius;
+		}
 
 		public void EnableOverlapping()
 		{
 			_isPressed = true;
-			ClickOnToken.Do(InvokeHitEvent, @if: AnyColliderHit());
+			_signalBus.Do(FireClickSignal, @if: AnyColliderHit());
 		}
 
 		public void DisableOverlapping() => _isPressed = false;
 
-		private void Start()
+		public void Initialize()
 		{
 			_overlapResults = new Collider2D[1];
 			_camera = Camera.main;
 		}
 
-		private void FixedUpdate() => TokenHit.Do(InvokeHitEvent, @if: _isPressed && AnyColliderHit());
+		public void FixedTick() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
 
-		private void InvokeHitEvent(Action<Vector2> @event)
-			=> _overlapResults.ForEach((r) => @event?.Invoke(r.transform.position));
+		private void FireHitSignal(SignalBus signalBus)
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));
+
+		private void FireClickSignal(SignalBus signalBus)
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.transform.position)));
 
 		private bool AnyColliderHit() => Overlap() != 0;
 

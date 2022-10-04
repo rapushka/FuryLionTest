@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bfd36641b69476a859eefb1d830e182, type: 3}
+  m_Name: TokensSpriteSheet
+  m_EditorClassIdentifier: 
+  _spritesEntries:
+  - _color: 1
+    _none: {fileID: -661730842, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _horizontalRocket: {fileID: -1202078231, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _bomb: {fileID: 1207263083, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+  - _color: 2
+    _none: {fileID: -1246554963, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _horizontalRocket: {fileID: -1151238029, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _bomb: {fileID: -1096512516, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+  - _color: 3
+    _none: {fileID: 947585405, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _horizontalRocket: {fileID: 1867113737, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _bomb: {fileID: -735687889, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+  - _color: 4
+    _none: {fileID: -738140784, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _horizontalRocket: {fileID: 824417595, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _bomb: {fileID: -982754683, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+  - _color: 5
+    _none: {fileID: -1257866225, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _horizontalRocket: {fileID: -1484785158, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
+    _bomb: {fileID: 929719064, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}

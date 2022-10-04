@@ -1,30 +1,39 @@
+using System;
 using System.Collections.Generic;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
-using Code.Infrastructure;
+using Code.Gameplay.Tokens;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment
 {
-	public class Field : MonoBehaviour
+	public class Field : IInitializable
 	{
-		[SerializeField] private int _minTokensCountForChain = 3;
+		private readonly LevelGenerator _levelGenerator;
+		private readonly Gravity _gravity;
+		private readonly TokensSpawner _spawner;
+		private readonly TokensFactory _tokensFactory;
 
-		private LevelGenerator _levelGenerator;
-		private float _step;
 		private Token[,] _tokens;
-		private Gravity _gravity;
-		private TokensSpawner _spawner;
 
-		public void Construct(LevelGenerator generator, Gravity gravity, TokensSpawner spawner, GameBalance balance)
+		[Inject]
+		public Field
+		(
+			LevelGenerator levelGenerator,
+			Gravity gravity,
+			TokensSpawner spawner,
+			TokensFactory tokensFactory
+		)
 		{
-			(_levelGenerator, _gravity, _spawner) = (generator, gravity, spawner);
-
-			_step = balance.Field.Step;
+			_levelGenerator = levelGenerator;
+			_gravity = gravity;
+			_spawner = spawner;
+			_tokensFactory = tokensFactory;
 		}
 
-		private void Start()
+		public void Initialize()
 		{
 			_tokens = _levelGenerator.Generate();
 
@@ -34,37 +43,43 @@ namespace Code.Environment
 		public Token this[Vector2 position]
 		{
 			get => _tokens.GetAtVector(position.ToVectorInt());
-			set => _tokens.SetAtVector(position.ToVectorInt(), value);
+			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
-			=> firstPosition.DistanceTo(secondPosition).AsAbs().LessThanOrEqualTo(_step);
-
-		public void OnChainEnded(LinkedList<Vector2> chain)
+		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
-			if (chain.Count < _minTokensCountForChain)
+			chain.ForEach(DestroyTokenAt);
+			UpdateField();
+		}
+
+		public void DestroyTokenAt(Vector2 position)
+		{
+			var token = this[position];
+			
+			if (token == false)
 			{
 				return;
 			}
 
-			foreach (var position in chain)
-			{
-				var token = this[position];
-
-				Destroy(token.gameObject);
-				this[position] = null;
-			}
-
-			UpdateField();
+			_tokensFactory.DestroyToken(token);
+			this[position] = null;
 		}
+
+		public void SwitchTokenAt(Vector2 position, TokenUnit to)
+		{
+			DestroyTokenAt(position);
+			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
+		}
+
+		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
 
 		private void UpdateField()
 		{
-			var tokensWasSpawned = true;
-			while (tokensWasSpawned)
+			var fieldHandled = false;
+			while (fieldHandled == false)
 			{
 				ApplyGravity();
-				tokensWasSpawned = TrySpawnTokens();
+				fieldHandled = TrySpawnTokens() == false;
 			}
 		}
 

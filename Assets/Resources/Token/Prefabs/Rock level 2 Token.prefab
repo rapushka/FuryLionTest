@@ -12,6 +12,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
+      propertyPath: _tokenUnit
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1589647713080509221, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: _applyGravity
       value: 1
       objectReference: {fileID: 0}
@@ -21,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2278442097838522370, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_LocalScale.z
@@ -86,18 +90,18 @@ PrefabInstance:
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: -2075290048, guid: 87ebb17aed7bfad44b91737db38ee5dd, type: 3}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.b
-      value: 0.254717
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.g
-      value: 0.254717
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3340949127831052693, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Color.r
-      value: 0.254717
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5844483592098527437, guid: 48e0cf5d092a3bb4c9a36118dfbb518c, type: 3}
       propertyPath: m_Radius

@@ -1,13 +1,13 @@
 using System;
 using Code.Extensions;
-using Code.Gameplay;
+using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration;
 using UnityEditor;
 using UnityEngine;
 
 namespace Code.Levels.Editor
 {
-	[CustomPropertyDrawer(typeof(TokenToTypeCollection))]
+	[CustomPropertyDrawer(typeof(SerializableTokensCollection))]
 	public class TokenToTypePropertyDrawer : PropertyDrawer
 	{
 		private const float ElementHeight = 20f;
@@ -27,7 +27,7 @@ namespace Code.Levels.Editor
 
 			var entries = property.FindPropertyRelative("_entries");
 			
-			_tokenTypesCount = Enum.GetValues(typeof(TokenType)).Length;
+			_tokenTypesCount = Enum.GetValues(typeof(TokenUnit)).Length;
 			entries.arraySize = _tokenTypesCount;
 
 			var currentPosition = position.AddY(ElementHeight).SetHeight(ElementHeight);
@@ -35,7 +35,7 @@ namespace Code.Levels.Editor
 			{
 				var entry = entries.GetArrayElementAtIndex(i);
 				
-				var type = entry.FindPropertyRelative("_type");
+				var type = entry.FindPropertyRelative("_unit");
 				var prefab = entry.FindPropertyRelative("_prefab");
 
 				currentPosition = currentPosition.SetWidth(position.width / ElementsInRow);
@@ -51,7 +51,7 @@ namespace Code.Levels.Editor
 
 		private void DrawRow(SerializedProperty type, SerializedProperty prefab, Rect currentPosition)
 		{
-			var typeName = Enum.GetName(typeof(TokenType), type.enumValueIndex);
+			var typeName = Enum.GetName(typeof(TokenUnit), type.enumValueIndex);
 			var guiContent = new GUIContent(typeName);
 		
 			EditorGUI.PropertyField(currentPosition, type, guiContent);

@@ -1,36 +1,36 @@
-using System.Collections.Generic;
-using Code.Extensions;
-using Code.Gameplay;
-using Code.Infrastructure;
+using Code.Gameplay.Tokens;
+using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Environment
 {
-	public class TokensSpawner : MonoBehaviour
+	public class TokensSpawner
 	{
-		private Dictionary<TokenType, Token> _tokensDictionary;
-		private float _step;
-		private Vector2 _offset;
+		private readonly TokensFactory _tokensFactory;
+		private readonly float _step;
+		private readonly Vector2 _offset;
 
-		public void Construct(Dictionary<TokenType, Token> tokensDictionary, GameBalance balance)
+		[Inject]
+		public TokensSpawner(IFieldConfig fieldParameters, TokensFactory tokensFactory)
 		{
-			_tokensDictionary = tokensDictionary;
-			_step = balance.Field.Step;
-			_offset = balance.Field.Offset;
+			_tokensFactory = tokensFactory;
+			_step = fieldParameters.Step;
+			_offset = fieldParameters.Offset;
 		}
 
 		public bool Spawn(Token[,] tokens)
 		{
 			var created = false;
 			var y = tokens.GetLength(1) - 1;
-			
+
 			for (var x = 0; x < tokens.GetLength(0); x++)
 			{
 				if (tokens[x, y] == true)
 				{
 					continue;
 				}
-			
+
 				CreateToken(tokens, x, y);
 				created = true;
 			}
@@ -40,11 +40,11 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var tokenPrefab = _tokensDictionary.PickRandomColor();
-
-			var token = Instantiate(tokenPrefab, ScalePosition(x, y), Quaternion.identity);
+			var token = _tokensFactory.CreateTokenForUnit(PickRandomColor(), ScalePosition(x, y));
 			tokens[x, y] = token;
 		}
+
+		private static TokenUnit PickRandomColor() => (TokenUnit)Random.Range(1, 6);
 
 		private Vector3 ScalePosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
 	}
