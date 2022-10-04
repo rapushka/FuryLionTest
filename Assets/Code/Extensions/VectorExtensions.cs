@@ -49,5 +49,22 @@ namespace Code.Extensions
 		public static bool LessThanOrEqualTo(this Vector2 @this, float value) => @this.x <= value && @this.y <= value;
 
 		public static Vector3 AsVector3(this Vector2Int @this) => new(@this.x, @this.y);
+		
+		public static void ForX(this Vector2 @this, float from, float to, Action<Vector2> action)
+		{
+			for (@this.x = from; @this.x < to; @this.x++)
+			{
+				action.Invoke(@this);
+			}
+		}
+		
+		public static void ForY(this Vector2 @this, float from, float to, Action<Vector2> action)
+		{
+			for (@this.y = from; @this.y < to; @this.y++)
+			{
+				action.Invoke(@this);
+			}
+		}
+
 	}
 }

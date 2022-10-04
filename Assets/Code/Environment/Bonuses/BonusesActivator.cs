@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Code.Extensions;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;
@@ -21,6 +23,8 @@ namespace Code.Environment.Bonuses
 			_bombExplosionRange = bonusesConfig.BombExplosionRange;
 			_fieldOffsetX = fieldConfig.Offset.x;
 		}
+
+		private Vector2 DirectedBombExplosionRange => _bombExplosionRange * Vector2.one;
 
 		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
@@ -47,35 +51,39 @@ namespace Code.Environment.Bonuses
 		}
 
 		private void DestroyHorizontalLine(Vector2 position)
-		{
-			var y = position.y;
-
-			for (var x = _fieldOffsetX; x < _fieldSizes.x; x++)
-			{
-				_field.DestroyTokenAt(new Vector2(x, y));
-			}
-		}
+			=> position.ForX(_fieldOffsetX, _fieldOffsetX + _fieldSizes.x, Destroy);
 
 		private void DestroyRectangleArea(Vector2 position)
 		{
-			var startPosition = position - DirectedBombExplosionRange;
-			var endPosition = position + DirectedBombExplosionRange;
+			var start = position - DirectedBombExplosionRange;
+			var end = position + DirectedBombExplosionRange;
 
-			for (var x = startPosition.x; x <= endPosition.x; x++)
+			position.ForX(start.x, end.x, (p) => DestroyExplosionLine(p, start.y, end.y));
+		}
+
+		private void DestroyExplosionLine(Vector2 position, float from, float to)
+		{
+			for (position.y = from; position.y <= to; position.y++)
 			{
-				for (var y = startPosition.y; y <= endPosition.y; y++)
-				{
-					if (x >= 0
-					    && x < _fieldSizes.x
-					    && y >= 0
-					    && y < _fieldSizes.y)
-					{
-						_field.DestroyTokenAt(new Vector2(x, y));
-					}
-				}
+				Destroy(position);
 			}
 		}
 
-		private Vector2 DirectedBombExplosionRange => _bombExplosionRange * Vector2.one;
+		private void Destroy(Vector2 position)
+		{
+			if (IsInBounces(position)
+			    && IsDestroyable(_field[position]))
+			{
+				_field.DestroyTokenAt(position);
+			}
+		}
+
+		private bool IsInBounces(Vector2 position)
+			=> position.x >= 0
+			   && position.x < _fieldSizes.x
+			   && position.y >= 0
+			   && position.y < _fieldSizes.y;
+
+		private static bool IsDestroyable(Token token) => token.TokenUnit is not TokenUnit.Border;
 	}
 }
