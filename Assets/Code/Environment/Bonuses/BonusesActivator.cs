@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
@@ -13,7 +12,7 @@ namespace Code.Environment.Bonuses
 		private readonly Field _field;
 		private readonly Vector2Int _fieldSizes;
 		private readonly int _bombExplosionRange;
-		private readonly float _fieldOffsetX;
+		private readonly Vector2 _fieldOffset;
 
 		[Inject]
 		public BonusesActivator(Field field, IFieldConfig fieldConfig, IBonusesConfig bonusesConfig)
@@ -21,10 +20,10 @@ namespace Code.Environment.Bonuses
 			_field = field;
 			_fieldSizes = fieldConfig.FieldSizes;
 			_bombExplosionRange = bonusesConfig.BombExplosionRange;
-			_fieldOffsetX = fieldConfig.Offset.x;
+			_fieldOffset = fieldConfig.Offset;
 		}
 
-		private Vector2 DirectedBombExplosionRange => _bombExplosionRange * Vector2.one;
+		private Vector2 DirectedRange => _bombExplosionRange * Vector2.one;
 
 		public void OnChainComposed(IEnumerable<Vector2> chain)
 		{
@@ -51,38 +50,22 @@ namespace Code.Environment.Bonuses
 		}
 
 		private void DestroyHorizontalLine(Vector2 position)
-			=> position.ForX(_fieldOffsetX, _fieldOffsetX + _fieldSizes.x, Destroy);
+			=> position.ForX(_fieldOffset.x, _fieldOffset.x + _fieldSizes.x, Destroy);
 
 		private void DestroyRectangleArea(Vector2 position)
-		{
-			var start = position - DirectedBombExplosionRange;
-			var end = position + DirectedBombExplosionRange;
-
-			position.ForX(start.x, end.x, (p) => DestroyExplosionLine(p, start.y, end.y));
-		}
-
-		private void DestroyExplosionLine(Vector2 position, float from, float to)
-		{
-			for (position.y = from; position.y <= to; position.y++)
-			{
-				Destroy(position);
-			}
-		}
+			=> position.DoubleFor(from: position - DirectedRange, to: position + DirectedRange, Destroy);
 
 		private void Destroy(Vector2 position)
 		{
-			if (IsInBounces(position)
+			if (IsInFieldBounces(position)
 			    && IsDestroyable(_field[position]))
 			{
 				_field.DestroyTokenAt(position);
 			}
 		}
 
-		private bool IsInBounces(Vector2 position)
-			=> position.x >= 0
-			   && position.x < _fieldSizes.x
-			   && position.y >= 0
-			   && position.y < _fieldSizes.y;
+		private bool IsInFieldBounces(Vector2 position) 
+			=> position.IsInBouncesIncluding(_fieldOffset, _fieldSizes - _fieldOffset);
 
 		private static bool IsDestroyable(Token token) => token.TokenUnit is not TokenUnit.Border;
 	}
