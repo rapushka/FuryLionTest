@@ -15,35 +15,40 @@ namespace Code.GameCycle.Goals.Progress
 		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory)
 		{
 			_progressObservers = observersFactory.GenerateObserversListFor(currentLevel.Goals);
+			Subscribe();
+		}
+
+		private void Subscribe()
+		{
+			foreach (var observer in _progressObservers)
+			{
+				observer.GoalReached += OnGoalReached;
+			}
+		}
+
+		private void OnGoalReached()
+		{
+			Debug.Log("Цель достигнута!");
 		}
 
 		public void OnTokenDestroyed(TokenUnit unit)
 		{
 			foreach (var observer in _progressObservers)
 			{
-				if (observer is DestroyTokensOfTypeObserver<TokenUnit> destroyTokens)
+				if (observer is DestroyTokensOfTypeObserver destroyTokens)
 				{
 					destroyTokens.OnTokenDestroyed(unit);
-				}
-				else if (observer is DestroyNTokensOfColorObserver destroyTokensOfColor)
-				{
-					Debug.Log("он не считает обобщённый:(");
-					destroyTokensOfColor.OnTokenDestroyed(unit);
-				}
-				else if (observer is DestroyAllObstaclesOfTypeObserver destroyObstacles)
-				{
-					destroyObstacles.OnTokenDestroyed(unit);
 				}
 			}
 		}
 
-		public void OnScoreUpdated(int value)
+		public void OnScoreUpdate(int value)
 		{
 			foreach (var observer in _progressObservers)
 			{
 				if (observer is ScoreValueReachedObserver destroyTokens)
 				{
-					destroyTokens.OnScoreAdded(value);
+					destroyTokens.OnScoreUpdated(value);
 				}
 			}
 		}

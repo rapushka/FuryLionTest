@@ -4,23 +4,16 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
 	public class ScoreValueReachedObserver : ProgressObserver
 	{
-		private int _scoreValueRemain;
+		private readonly int _targetScoreValue;
 
 		public ScoreValueReachedObserver(ReachScoreValue goal)
 		{
-			_scoreValueRemain = goal.TargetScoreValue;
+			_targetScoreValue = goal.TargetScoreValue;
 		}
 
-		public void OnScoreAdded(int value)
+		public void OnScoreUpdated(int value)
 		{
-			if (value <= 0)
-			{
-				return;
-			}
-
-			_scoreValueRemain -= value;
-			
-			if (_scoreValueRemain <= 0)
+			if (value >= _targetScoreValue)
 			{
 				GoalReachedInvoke();
 			}

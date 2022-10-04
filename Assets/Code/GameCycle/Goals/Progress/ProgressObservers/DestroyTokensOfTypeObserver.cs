@@ -4,7 +4,7 @@ using Code.Gameplay.Tokens;
 
 namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
-	public abstract class DestroyTokensOfTypeObserver<T> : ProgressObserver
+	public abstract class DestroyTokensOfTypeObserver : ProgressObserver
 	{
 		private readonly TokenUnit _targetUnit;
 
@@ -12,11 +12,6 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 
 		protected DestroyTokensOfTypeObserver(int countRemain, TokenUnit targetUnit)
 		{
-			if (targetUnit.IsDefinedInEnum<T>() == false)
-			{
-				throw new ArgumentException($"Use this observer only for {typeof(T).Name} Progress");
-			}
-
 			_countRemain = countRemain;
 			_targetUnit = targetUnit;
 		}

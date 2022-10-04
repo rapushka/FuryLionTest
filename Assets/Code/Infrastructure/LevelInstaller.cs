@@ -59,6 +59,7 @@ namespace Code.Infrastructure
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
 				.BindSingle<GoalsProgress>()
+				.BindSingle<ObserversFactory>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()
@@ -91,6 +92,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, ActionsRemaining>((x, _) => x.OnChainComposed())
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
+				.BindSignalTo<ScoreUpdateSignal, GoalsProgress>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)

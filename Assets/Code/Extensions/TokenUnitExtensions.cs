@@ -22,7 +22,5 @@ namespace Code.Extensions
 				TokenUnit.RandomColor => Color.white,
 				_                     => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
-		
-		public static bool IsDefinedInEnum<T>(this TokenUnit @this) => Enum.IsDefined(typeof(T), @this);
 	}
 }
