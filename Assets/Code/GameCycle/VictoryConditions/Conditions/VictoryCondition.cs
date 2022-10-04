@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace Code.GameCycle.VictoryConditions
+namespace Code.GameCycle.VictoryConditions.Conditions
 {
 	[Serializable] 
-	public abstract class VictoryCondition
+	public class VictoryCondition
 	{
 		[SerializeField] private int _targetAmount;
 

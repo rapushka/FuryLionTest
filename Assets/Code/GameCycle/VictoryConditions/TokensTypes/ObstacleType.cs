@@ -1,4 +1,4 @@
-namespace Code.GameCycle.VictoryConditions
+namespace Code.GameCycle.VictoryConditions.TokensTypes
 {
 	public enum ObstacleType
 	{

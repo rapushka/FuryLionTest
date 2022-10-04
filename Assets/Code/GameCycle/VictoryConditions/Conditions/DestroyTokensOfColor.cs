@@ -1,8 +1,8 @@
 using System;
-using Code.Gameplay.Tokens;
+using Code.GameCycle.VictoryConditions.TokensTypes;
 using UnityEngine;
 
-namespace Code.GameCycle.VictoryConditions
+namespace Code.GameCycle.VictoryConditions.Conditions
 {
 	[Serializable]
 	public class DestroyTokensOfColor : VictoryCondition

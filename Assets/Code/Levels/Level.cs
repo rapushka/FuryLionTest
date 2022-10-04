@@ -1,3 +1,4 @@
+using Code.GameCycle.VictoryConditions;
 using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private int _actionsCount;
+		[SerializeField] private VictoryConditionsCollection _victoryConditions;
 		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
 		public int ActionCount => _actionsCount;
