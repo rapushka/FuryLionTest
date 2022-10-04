@@ -4,6 +4,7 @@ using Code.Environment.GravityBehaviour;
 using Code.Environment.Obstacles;
 using Code.Extensions;
 using Code.GameCycle;
+using Code.GameCycle.Goals.Progress;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
@@ -57,6 +58,7 @@ namespace Code.Infrastructure
 				.BindSingle<BonusSpawner>()
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
+				.BindSingle<GoalsProgress>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()

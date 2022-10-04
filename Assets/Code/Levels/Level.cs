@@ -19,6 +19,8 @@ namespace Code.Levels
 		
 		public TokenUnit[,] TokenTypesArray => _tokens.ToRectangularArray();
 
+		public List<Goal> Goals => _goals;
+
 		private void OnValidate()
 		{
 			_actionsCount = _actionsCount > 0 ? _actionsCount : 1;

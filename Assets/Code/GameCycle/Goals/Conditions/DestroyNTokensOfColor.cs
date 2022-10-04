@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Code.GameCycle.Goals.Conditions
 {
-	[CreateAssetMenu(fileName = "N COLOR Tokens", menuName = "ScriptableObjects/Goal/DestroyTokensOfColor")]
-	public class DestroyTokensOfColor : Goal
+	[CreateAssetMenu(fileName = "N COLOR Tokens", menuName = "ScriptableObjects/Goal/DestroyNTokensOfColor")]
+	public class DestroyNTokensOfColor : Goal
 	{
 		[SerializeField] private TokenColor _targetColor;
 		[SerializeField] private int _targetCount;

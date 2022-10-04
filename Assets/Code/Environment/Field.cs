@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
@@ -55,7 +56,7 @@ namespace Code.Environment
 		public void DestroyTokenAt(Vector2 position)
 		{
 			var token = this[position];
-			
+
 			if (token == false)
 			{
 				return;
@@ -72,6 +73,8 @@ namespace Code.Environment
 		}
 
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
+
+		public int Count(Func<Token, bool> predicate) => _tokens.Where(predicate).Count();
 
 		private void UpdateField()
 		{
