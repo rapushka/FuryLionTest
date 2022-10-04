@@ -1,4 +1,4 @@
 namespace Code.Infrastructure.Configurations.Interfaces
 {
-	public interface IConfig : IFieldConfig, IChainConfig, IInputConfig, IScoreConfig { }
+	public interface IConfig : IFieldConfig, IChainConfig, IInputConfig, IScoreConfig, IBonusesConfig { }
 }

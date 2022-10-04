@@ -6,7 +6,7 @@ using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Environment
+namespace Code.Environment.Obstacles
 {
 	public class ObstacleDestroyer
 	{

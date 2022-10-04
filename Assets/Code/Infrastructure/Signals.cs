@@ -1,5 +1,6 @@
 // ReSharper disable ClassNeverInstantiated.Global классы создаются Zenject-ом
 using System.Collections.Generic;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure.BaseSignals;
 using UnityEngine;
 
@@ -29,9 +30,9 @@ namespace Code.Infrastructure
 
 	public class ChainLastTokenRemovedSignal { }
 
-	public class ChainEndedSignal : ImmutableSignal<LinkedList<Vector2>>
+	public class ChainEndedSignal : ImmutableSignal<IEnumerable<Vector2>>
 	{
-		public ChainEndedSignal(LinkedList<Vector2> value)
+		public ChainEndedSignal(IEnumerable<Vector2> value)
 			: base(value) { }
 	}
 
@@ -41,17 +42,23 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class ChainComposedSignal : ImmutableSignal<LinkedList<Vector2>>
+	public class ChainComposedSignal : ImmutableSignal<IEnumerable<Vector2>>
 	{
-		public ChainComposedSignal(LinkedList<Vector2> value)
+		public ChainComposedSignal(IEnumerable<Vector2> value)
 			: base(value) { }
 	}
 
 	public class LevelLostSignal { }
-	
+
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
 		public RemainingActionsUpdateSignal(int value)
+			: base(value) { }
+	}
+
+	public class BonusSpawnedSignal : ImmutableSignal<Token>
+	{
+		public BonusSpawnedSignal(Token value)
 			: base(value) { }
 	}
 }

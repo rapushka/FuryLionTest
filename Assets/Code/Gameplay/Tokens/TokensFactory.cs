@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Environment.Bonuses;
+using Code.Infrastructure;
 using Code.Infrastructure.IdComponents;
 using UnityEngine;
 using Zenject;
@@ -12,13 +14,15 @@ namespace Code.Gameplay.Tokens
 	{
 		private readonly Dictionary<TokenUnit, Token> _tokenPrefabForType;
 		private readonly TokensRoot _tokensRoot;
+		private readonly SignalBus _signalBus;
 		private readonly Dictionary<TokenUnit, List<Token>> _createdTokens;
 
 		[Inject]
-		public TokensFactory(TokensCollection tokenPrefabForType, TokensRoot tokensRoot)
+		public TokensFactory(TokensCollection tokenPrefabForType, TokensRoot tokensRoot, SignalBus signalBus)
 		{
 			_tokenPrefabForType = tokenPrefabForType.AsDictionary();
 			_tokensRoot = tokensRoot;
+			_signalBus = signalBus;
 
 			_createdTokens = new Dictionary<TokenUnit, List<Token>>();
 		}
@@ -36,7 +40,17 @@ namespace Code.Gameplay.Tokens
 				? EnableToken(position, token)
 				: CreateNewToken(tokenUnit, position);
 
-		public void DestroyToken(Token token) => token.gameObject.SetActive(false);
+		public void DestroyToken(Token token)
+		{
+			token.gameObject.SetActive(false);
+
+			if (token.BonusType == BonusType.None)
+			{
+				return;
+			}
+			token.BonusType = BonusType.None;
+			_signalBus.Fire(new BonusSpawnedSignal(token));
+		}
 
 		private static Token EnableToken(Vector3 position, Token token)
 		{

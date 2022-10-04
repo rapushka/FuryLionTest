@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
@@ -54,15 +55,23 @@ namespace Code.Environment
 		public void DestroyTokenAt(Vector2 position)
 		{
 			var token = this[position];
+			
+			if (token == false)
+			{
+				return;
+			}
 
 			_tokensFactory.DestroyToken(token);
 			this[position] = null;
 		}
+
 		public void SwitchTokenAt(Vector2 position, TokenUnit to)
 		{
 			DestroyTokenAt(position);
 			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
 		}
+
+		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
 
 		private void UpdateField()
 		{

@@ -540,11 +540,12 @@ MonoBehaviour:
   _lineRenderer: {fileID: 798181301}
   _tokensCollection: {fileID: 7662115227024407912, guid: 106ee065d8d10614c9371a0147b7398e, type: 3}
   _serializedConfig: {fileID: 5060126106096961876, guid: 869da90139e21284e98fc72fba7d3405, type: 3}
-  _debugLevel: {fileID: 11400000, guid: 803ace59c213bee4b82fc239682e1336, type: 2}
+  _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
   _scoreView: {fileID: 2071517002}
   _remainingActionsView: {fileID: 1120159372}
   _loseScene:
     _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
+  _tokensSpriteSheet: {fileID: 11400000, guid: 3da395e4fcd048c48a36cafa93a6bb93, type: 2}
 --- !u!1 &1774494709
 GameObject:
   m_ObjectHideFlags: 0

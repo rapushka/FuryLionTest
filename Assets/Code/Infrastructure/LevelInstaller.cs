@@ -1,5 +1,7 @@
 using Code.Environment;
+using Code.Environment.Bonuses;
 using Code.Environment.GravityBehaviour;
+using Code.Environment.Obstacles;
 using Code.Extensions;
 using Code.GameCycle;
 using Code.Gameplay;
@@ -26,6 +28,7 @@ namespace Code.Infrastructure
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private SceneField _loseScene;
+		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -39,6 +42,7 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_loseScene)
+				.BindSingleFromInstance(_tokensSpriteSheet)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -48,6 +52,10 @@ namespace Code.Infrastructure
 				.BindSingle<SceneTransfer>()
 				.BindSingle<TokensDistanceMeter>()
 				.BindSingle<ObstacleDestroyer>()
+				.BindSingle<BonusesSpawnCondition>()
+				.BindSingle<BonusSpawner>()
+				.BindSingle<TokenSpritesSwitcher>()
+				.BindSingle<BonusesActivator>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensFactory>()
@@ -73,6 +81,8 @@ namespace Code.Infrastructure
 				.BindSignalTo<ChainLastTokenRemovedSignal, ChainView>((x) => x.OnLastTokenRemoved)
 				.BindSignalTo<ChainEndedSignal, ChainView>((x, _) => x.OnChainEnded())
 				.BindSignalTo<ChainEndedSignal, CompletedChain>((x, v) => x.OnChainEnded(v.Value))
+				.BindSignalTo<ChainComposedSignal, BonusesActivator>((x, v) => x.OnChainComposed(v.Value))
+				.BindSignalTo<ChainComposedSignal, BonusesSpawnCondition>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, ObstacleDestroyer>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
@@ -81,6 +91,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
 				;
 		}
 	}
