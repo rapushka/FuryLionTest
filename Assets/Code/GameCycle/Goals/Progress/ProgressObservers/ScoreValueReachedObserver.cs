@@ -5,24 +5,23 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
 	public class ScoreValueReachedObserver : ProgressObserver
 	{
-		private readonly int _targetScoreValue;
-
-		private int _currentScoreValue;
+		private int _scoreValueRemain;
 
 		public ScoreValueReachedObserver(ReachScoreValue goal)
 		{
-			_targetScoreValue = goal.TargetScoreValue;
+			_scoreValueRemain = goal.TargetScoreValue;
 		}
 
-		public void ScoreAdded(int value)
+		public void OnScoreAdded(int value)
 		{
 			if (value <= 0)
 			{
-				throw new InvalidOperationException("Score can't be negative");
+				return;
 			}
 
-			_currentScoreValue += value;
-			if (_currentScoreValue >= _targetScoreValue)
+			_scoreValueRemain -= value;
+			
+			if (_scoreValueRemain <= 0)
 			{
 				GoalReachedInvoke();
 			}

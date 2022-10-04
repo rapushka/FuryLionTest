@@ -7,12 +7,12 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 	{
 		private readonly TokenUnit _targetColor;
 		
-		private int _destroyTokensRemain;
+		private int _tokensDestroyRemain;
 
 		public DestroyNTokensOfColorObserver(DestroyNTokensOfColor destroyNTokensOfColor)
 		{
 			_targetColor = destroyNTokensOfColor.Color;
-			_destroyTokensRemain = destroyNTokensOfColor.TargetCount;
+			_tokensDestroyRemain = destroyNTokensOfColor.TargetCount;
 		}
 
 		public void OnTokenDestroyed(TokenUnit tokenUnit)
@@ -22,9 +22,9 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 				return;
 			}
 			
-			_destroyTokensRemain--;
+			_tokensDestroyRemain--;
 
-			if (_destroyTokensRemain <= 0)
+			if (_tokensDestroyRemain <= 0)
 			{
 				GoalReachedInvoke();
 			} 

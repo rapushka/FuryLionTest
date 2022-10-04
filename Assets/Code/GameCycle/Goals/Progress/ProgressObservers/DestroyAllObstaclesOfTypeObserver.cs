@@ -8,12 +8,12 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 	{
 		private readonly TokenUnit _targetObstacleType;
 
-		private int _currentObstaclesCountOnField;
+		private int _obstaclesDestroyRemain;
 
 		public DestroyAllObstaclesOfTypeObserver(DestroyAllObstaclesOfType goal, Field field)
 		{
 			_targetObstacleType = goal.Type;
-			_currentObstaclesCountOnField = field.Count((t) => t.TokenUnit == _targetObstacleType);
+			_obstaclesDestroyRemain = field.Count((t) => t.TokenUnit == _targetObstacleType);
 		}
 
 		public void OnTokenDestroyed(TokenUnit tokenUnit)
@@ -23,9 +23,9 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 				return;
 			}
 
-			_currentObstaclesCountOnField--;
+			_obstaclesDestroyRemain--;
 
-			if (_currentObstaclesCountOnField <= 0)
+			if (_obstaclesDestroyRemain <= 0)
 			{
 				GoalReachedInvoke();
 			} 
