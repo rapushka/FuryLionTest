@@ -2,10 +2,11 @@ using UnityEngine;
 
 namespace Code.GameCycle.VictoryConditions.Conditions
 {
-	[CreateAssetMenu(fileName = FileName, menuName = MenuName)]
-	public class ReachScoreValue : VictoryCondition
+	[CreateAssetMenu(fileName = "Score N", menuName = "ScriptableObjects/Goal/ReachScoreValue")]
+	public class ReachScoreValue : Goal
 	{
-		private const string FileName = "Reach Score Value X";
-		private const string MenuName = "ScriptableObjects/VictoryCondition/ReachScoreValue";
+		[SerializeField] private int _targetScoreValue;
+
+		public int TargetScoreValue => _targetScoreValue;
 	}
 }

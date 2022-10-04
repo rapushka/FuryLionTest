@@ -10,7 +10,7 @@ namespace Code.Levels
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private int _actionsCount;
-		[SerializeField] private List<VictoryCondition> _victoryConditions;
+		[SerializeField] private List<Goal> _victoryConditions;
 		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
 		public int ActionCount => _actionsCount;
