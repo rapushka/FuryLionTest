@@ -1,33 +1,11 @@
 using Code.GameCycle.Goals.Conditions;
-using Code.Gameplay.Tokens;
+using Code.GameCycle.Goals.TokensTypes;
 
 namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
-	public class DestroyNTokensOfColorObserver : ProgressObserver
+	public class DestroyNTokensOfColorObserver : DestroyTokensOfTypeObserver<TokenColor>
 	{
-		private readonly TokenUnit _targetColor;
-		
-		private int _tokensDestroyRemain;
-
-		public DestroyNTokensOfColorObserver(DestroyNTokensOfColor destroyNTokensOfColor)
-		{
-			_targetColor = destroyNTokensOfColor.Color;
-			_tokensDestroyRemain = destroyNTokensOfColor.TargetCount;
-		}
-
-		public void OnTokenDestroyed(TokenUnit tokenUnit)
-		{
-			if (tokenUnit != _targetColor)
-			{
-				return;
-			}
-			
-			_tokensDestroyRemain--;
-
-			if (_tokensDestroyRemain <= 0)
-			{
-				GoalReachedInvoke();
-			} 
-		}
+		public DestroyNTokensOfColorObserver(DestroyNTokensOfColor goal)
+			: base(goal.TargetCount, goal.Color) { }
 	}
 }

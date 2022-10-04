@@ -1,4 +1,3 @@
-using System;
 using Code.GameCycle.Goals.Conditions;
 
 namespace Code.GameCycle.Goals.Progress.ProgressObservers

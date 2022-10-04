@@ -1,10 +1,11 @@
 using System;
+using Code.GameCycle.Goals.TokensTypes;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 
 namespace Code.Extensions
 {
-	public static class TokenTypeExtensions
+	public static class TokenUnitExtensions
 	{
 		public static Color GetColor(this TokenUnit @this)
 			=> @this switch
@@ -22,5 +23,7 @@ namespace Code.Extensions
 				TokenUnit.RandomColor => Color.white,
 				_                     => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
+		
+		public static bool IsDefinedInEnum<T>(this TokenUnit @this) => Enum.IsDefined(typeof(T), @this);
 	}
 }

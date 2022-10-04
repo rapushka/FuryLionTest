@@ -1,34 +1,12 @@
 using Code.Environment;
 using Code.GameCycle.Goals.Conditions;
-using Code.Gameplay.Tokens;
+using Code.GameCycle.Goals.TokensTypes;
 
 namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
-	public class DestroyAllObstaclesOfTypeObserver : ProgressObserver
+	public class DestroyAllObstaclesOfTypeObserver : DestroyTokensOfTypeObserver<ObstacleType>
 	{
-		private readonly TokenUnit _targetObstacleType;
-
-		private int _obstaclesDestroyRemain;
-
 		public DestroyAllObstaclesOfTypeObserver(DestroyAllObstaclesOfType goal, Field field)
-		{
-			_targetObstacleType = goal.Type;
-			_obstaclesDestroyRemain = field.Count((t) => t.TokenUnit == _targetObstacleType);
-		}
-
-		public void OnTokenDestroyed(TokenUnit tokenUnit)
-		{
-			if (tokenUnit != _targetObstacleType)
-			{
-				return;
-			}
-
-			_obstaclesDestroyRemain--;
-
-			if (_obstaclesDestroyRemain <= 0)
-			{
-				GoalReachedInvoke();
-			} 
-		}
+			: base(field.Count((t) => t.TokenUnit == goal.Type), goal.Type) { }
 	}
 }
