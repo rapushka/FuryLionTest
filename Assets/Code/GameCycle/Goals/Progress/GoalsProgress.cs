@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Code.Environment;
-using Code.GameCycle.Goals.Conditions;
 using Code.GameCycle.Goals.Progress.ProgressObservers;
+using Code.Gameplay.Tokens;
 using Code.Levels;
+using UnityEngine;
 using Zenject;
 
 namespace Code.GameCycle.Goals.Progress
@@ -11,32 +10,42 @@ namespace Code.GameCycle.Goals.Progress
 	public class GoalsProgress
 	{
 		private readonly List<ProgressObserver> _progressObservers;
-		private readonly Field _field;
 
 		[Inject]
-		public GoalsProgress(Level currentLevel, Field field)
+		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory)
 		{
-			_progressObservers = GenerateObserversFor(currentLevel.Goals);
-			_field = field;
+			_progressObservers = observersFactory.GenerateObserversListFor(currentLevel.Goals);
 		}
 
-		private List<ProgressObserver> GenerateObserversFor(List<Goal> goals)
+		public void OnTokenDestroyed(TokenUnit unit)
 		{
-			var result = new List<ProgressObserver>(goals.Count);
-
-			foreach (var goal in goals)
+			foreach (var observer in _progressObservers)
 			{
-				ProgressObserver observer = goal switch
+				if (observer is DestroyTokensOfTypeObserver<TokenUnit> destroyTokens)
 				{
-					ReachScoreValue rs           => new ScoreValueReachedObserver(rs),
-					DestroyAllObstaclesOfType @do => new DestroyAllObstaclesOfTypeObserver(@do, _field),
-					DestroyNTokensOfColor dt      => new DestroyNTokensOfColorObserver(dt),
-					_                             => throw new ArgumentException()
-				};
-				result.Add(observer);
+					destroyTokens.OnTokenDestroyed(unit);
+				}
+				else if (observer is DestroyNTokensOfColorObserver destroyTokensOfColor)
+				{
+					Debug.Log("он не считает обобщённый:(");
+					destroyTokensOfColor.OnTokenDestroyed(unit);
+				}
+				else if (observer is DestroyAllObstaclesOfTypeObserver destroyObstacles)
+				{
+					destroyObstacles.OnTokenDestroyed(unit);
+				}
 			}
+		}
 
-			return result;
+		public void OnScoreUpdated(int value)
+		{
+			foreach (var observer in _progressObservers)
+			{
+				if (observer is ScoreValueReachedObserver destroyTokens)
+				{
+					destroyTokens.OnScoreAdded(value);
+				}
+			}
 		}
 	}
 }
