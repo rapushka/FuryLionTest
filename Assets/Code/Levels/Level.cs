@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.GameCycle.VictoryConditions.Conditions;
+using Code.GameCycle.Goals.Conditions;
 using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEngine;

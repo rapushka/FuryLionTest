@@ -1,8 +1,8 @@
-using Code.GameCycle.VictoryConditions.TokensTypes;
+using Code.GameCycle.Goals.TokensTypes;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 
-namespace Code.GameCycle.VictoryConditions.Conditions
+namespace Code.GameCycle.Goals.Conditions
 {
 	[CreateAssetMenu(fileName = "Destroy all X", menuName = "ScriptableObjects/Goal/DestroyAllObstaclesOfType")]
 	public class DestroyAllObstaclesOfType : Goal

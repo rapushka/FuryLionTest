@@ -1,4 +1,4 @@
-namespace Code.GameCycle.VictoryConditions.TokensTypes
+namespace Code.GameCycle.Goals.TokensTypes
 {
 	public enum TokenColor
 	{

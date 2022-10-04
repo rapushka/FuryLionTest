@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.GameCycle.VictoryConditions.Conditions
+namespace Code.GameCycle.Goals.Conditions
 {
 	[CreateAssetMenu(fileName = "Score N", menuName = "ScriptableObjects/Goal/ReachScoreValue")]
 	public class ReachScoreValue : Goal
