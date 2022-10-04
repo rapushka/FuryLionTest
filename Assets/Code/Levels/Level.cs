@@ -1,15 +1,16 @@
-using Code.GameCycle.VictoryConditions;
+using System.Collections.Generic;
+using Code.GameCycle.VictoryConditions.Conditions;
 using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEngine;
 
 namespace Code.Levels
 {
-	[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level", order = 0)]
+	[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level")]
 	public class Level : ScriptableObject
 	{
 		[SerializeField] private int _actionsCount;
-		[SerializeField] private VictoryConditionsCollection _victoryConditions;
+		[SerializeField] private List<VictoryCondition> _victoryConditions;
 		[SerializeField] private ArrayLayout<TokenUnit> _tokens;
 
 		public int ActionCount => _actionsCount;

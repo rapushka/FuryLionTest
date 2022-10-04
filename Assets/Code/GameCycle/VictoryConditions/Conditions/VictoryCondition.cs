@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace Code.GameCycle.VictoryConditions.Conditions
 {
-	[Serializable] 
-	public class VictoryCondition
+	public abstract class VictoryCondition : ScriptableObject
 	{
 		[SerializeField] private int _targetAmount;
 
