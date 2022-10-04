@@ -30,7 +30,7 @@ namespace Code.Environment.Bonuses
 		private void HandleToken(Vector2 position)
 		{
 			var token = _field[position];
-			 
+
 			if (token == false)
 			{
 				return;
@@ -58,14 +58,12 @@ namespace Code.Environment.Bonuses
 
 		private void DestroyRectangleArea(Vector2 position)
 		{
-			var startX = (int)position.x - _bombExplosionRange;
-			var endX = (int)position.x + _bombExplosionRange;
-			var startY = (int)position.y - _bombExplosionRange;
-			var endY = (int)position.y + _bombExplosionRange;
+			var startPosition = position - DirectedBombExplosionRange;
+			var endPosition = position + DirectedBombExplosionRange;
 
-			for (var x = startX; x <= endX; x++)
+			for (var x = startPosition.x; x <= endPosition.x; x++)
 			{
-				for (var y = startY; y <= endY; y++)
+				for (var y = startPosition.y; y <= endPosition.y; y++)
 				{
 					if (x >= 0
 					    && x < _fieldSizes.x
@@ -77,5 +75,7 @@ namespace Code.Environment.Bonuses
 				}
 			}
 		}
+
+		private Vector2 DirectedBombExplosionRange => _bombExplosionRange * Vector2.one;
 	}
 }
