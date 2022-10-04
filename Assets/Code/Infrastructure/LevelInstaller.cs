@@ -13,6 +13,7 @@ using Code.Infrastructure.SceneManagement;
 using Code.Input;
 using Code.Levels;
 using Code.View;
+using Code.View.SpritesBehaviour;
 using UnityEngine;
 using Zenject;
 

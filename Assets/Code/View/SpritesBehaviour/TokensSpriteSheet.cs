@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Environment.Bonuses;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 
-namespace Code.Environment.Bonuses
+namespace Code.View.SpritesBehaviour
 {
 	[CreateAssetMenu(menuName = "ScriptableObjects/TokensSpriteSheet", fileName = "TokensSpriteSheet")]
 	public class TokensSpriteSheet : ScriptableObject

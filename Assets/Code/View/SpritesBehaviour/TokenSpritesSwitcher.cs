@@ -2,7 +2,7 @@ using Code.Gameplay.Tokens;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Environment.Bonuses
+namespace Code.View.SpritesBehaviour
 {
 	public class TokenSpritesSwitcher
 	{
