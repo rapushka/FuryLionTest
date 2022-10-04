@@ -11,6 +11,7 @@ namespace Code.Environment.Bonuses
 		private readonly Field _field;
 		private readonly Vector2Int _fieldSizes;
 		private readonly int _bombExplosionRange;
+		private readonly float _fieldOffsetX;
 
 		[Inject]
 		public BonusesActivator(Field field, IFieldConfig fieldConfig, IBonusesConfig bonusesConfig)
@@ -18,6 +19,7 @@ namespace Code.Environment.Bonuses
 			_field = field;
 			_fieldSizes = fieldConfig.FieldSizes;
 			_bombExplosionRange = bonusesConfig.BombExplosionRange;
+			_fieldOffsetX = fieldConfig.Offset.x;
 		}
 
 		public void OnChainComposed(IEnumerable<Vector2> chain)
@@ -48,7 +50,7 @@ namespace Code.Environment.Bonuses
 		{
 			var y = position.y;
 
-			for (var x = 0.5f; x < _fieldSizes.x; x++) // TODO: prybiary heta
+			for (var x = _fieldOffsetX; x < _fieldSizes.x; x++)
 			{
 				_field.DestroyTokenAt(new Vector2(x, y));
 			}
