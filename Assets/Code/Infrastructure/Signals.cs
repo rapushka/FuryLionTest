@@ -50,6 +50,8 @@ namespace Code.Infrastructure
 
 	public class LevelLostSignal { }
 
+	public class GameVictorySignal { }
+
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
 		public RemainingActionsUpdateSignal(int value)

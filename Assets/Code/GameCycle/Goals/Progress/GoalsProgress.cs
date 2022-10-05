@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.GameCycle.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Tokens;
+using Code.Infrastructure;
 using Code.Levels;
 using UnityEngine;
 using Zenject;
@@ -11,21 +13,21 @@ namespace Code.GameCycle.Goals.Progress
 	{
 		private readonly Level _currentLevel;
 		private readonly ObserversFactory _observersFactory;
-		
+		private readonly SignalBus _signalBus;
+
 		private List<ProgressObserver> _progressObservers;
 		private List<ProgressObserver> _markForDeleting;
 
 		[Inject]
-		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory)
+		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory, SignalBus signalBus)
 		{
 			_currentLevel = currentLevel;
 			_observersFactory = observersFactory;
-
+			_signalBus = signalBus;
 		}
 
 		public void Initialize()
 		{
-			// _progressObservers = new List<ProgressObserver>();
 			_markForDeleting = new List<ProgressObserver>();
 			_progressObservers = _observersFactory.GenerateObserversListFor(_currentLevel.Goals);
 			Subscribe();
@@ -67,7 +69,7 @@ namespace Code.GameCycle.Goals.Progress
 
 		private void OnGoalReached(ProgressObserver sender)
 		{
-			Debug.Log("Цель достигнута!");
+			Debug.Log($"Цель {sender.GetType().Name} достигнута!");
 			_markForDeleting.Add(sender);
 		}
 
@@ -78,6 +80,16 @@ namespace Code.GameCycle.Goals.Progress
 				_progressObservers.Remove(observer);
 			}
 			_markForDeleting.Clear();
+
+			CheckOnAllGoalsReached();
+		}
+
+		private void CheckOnAllGoalsReached()
+		{
+			if (_progressObservers.Any() == false)
+			{
+				_signalBus.Fire<GameVictorySignal>();
+			}
 		}
 	}
 }

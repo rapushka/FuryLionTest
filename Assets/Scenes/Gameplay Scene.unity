@@ -545,6 +545,8 @@ MonoBehaviour:
   _remainingActionsView: {fileID: 1120159372}
   _loseScene:
     _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
+  _victoryScene:
+    _scene: {fileID: 102900000, guid: f591ce9bfb0ade84b9640632db5ad7b1, type: 3}
   _tokensSpriteSheet: {fileID: 11400000, guid: 3da395e4fcd048c48a36cafa93a6bb93, type: 2}
 --- !u!1 &1774494709
 GameObject:

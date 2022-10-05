@@ -30,11 +30,14 @@ namespace Code.Infrastructure
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private SceneField _loseScene;
+		[SerializeField] private SceneField _victoryScene;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
+			var sceneTransfer = new SceneTransfer(_loseScene, _victoryScene);
+			
 			Container
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(_tokensCollection)
@@ -43,15 +46,14 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_lineRenderer)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
-				.BindSingleFromInstance(_loseScene)
 				.BindSingleFromInstance(_tokensSpriteSheet)
+				.BindSingleFromInstance(sceneTransfer)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
 				.BindSingle<CompletedChain>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
-				.BindSingle<SceneTransfer>()
 				.BindSingle<TokensDistanceMeter>()
 				.BindSingle<ObstacleDestroyer>()
 				.BindSingle<BonusesSpawnCondition>()
@@ -96,6 +98,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
