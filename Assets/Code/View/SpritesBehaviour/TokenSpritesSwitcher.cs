@@ -12,6 +12,11 @@ namespace Code.View.SpritesBehaviour
 
 		public void OnTokenDestroyed(Token token)
 		{
+			if (token.BonusType is BonusType.None)
+			{
+				return;
+			}
+
 			token.BonusType = BonusType.None;
 			UpdateTokenSprite(token);
 		}
