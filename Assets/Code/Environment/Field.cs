@@ -47,10 +47,19 @@ namespace Code.Environment
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public void OnChainComposed(IEnumerable<Vector2> chain)
+		public void DestroyTokensInChain(IEnumerable<Vector2> chain)
 		{
 			chain.ForEach(DestroyTokenAt);
-			UpdateField();
+		}
+
+		public void UpdateField()
+		{
+			var fieldHandled = false;
+			while (fieldHandled == false)
+			{
+				ApplyGravity();
+				fieldHandled = TrySpawnTokens() == false;
+			}
 		}
 
 		public void DestroyTokenAt(Vector2 position)
@@ -75,16 +84,6 @@ namespace Code.Environment
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
 
 		public int Count(Func<Token, bool> predicate) => _tokens.Where(predicate).Count();
-
-		private void UpdateField()
-		{
-			var fieldHandled = false;
-			while (fieldHandled == false)
-			{
-				ApplyGravity();
-				fieldHandled = TrySpawnTokens() == false;
-			}
-		}
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
 
