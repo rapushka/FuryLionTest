@@ -58,14 +58,14 @@ namespace Code.Infrastructure
 				.BindSingle<BonusSpawner>()
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
-				.BindSingle<GoalsProgress>()
 				.BindSingle<ObserversFactory>()
-				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()
+				.BindSingleWithInterfaces<GoalsProgress>()
+				.BindSingleWithInterfaces<Score>()
 				;
 
 			SubscribeSignals();
@@ -97,6 +97,7 @@ namespace Code.Infrastructure
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
+				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
 				;
 		}

@@ -7,33 +7,28 @@ using Zenject;
 
 namespace Code.GameCycle.Goals.Progress
 {
-	public class GoalsProgress
+	public class GoalsProgress : IInitializable
 	{
-		private readonly List<ProgressObserver> _progressObservers;
+		private readonly Level _currentLevel;
+		private readonly ObserversFactory _observersFactory;
 		
-		private readonly List<ProgressObserver> _markForDeleting;
+		private List<ProgressObserver> _progressObservers;
+		private List<ProgressObserver> _markForDeleting;
 
 		[Inject]
 		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory)
 		{
-			_progressObservers = observersFactory.GenerateObserversListFor(currentLevel.Goals);
-			
+			_currentLevel = currentLevel;
+			_observersFactory = observersFactory;
+
+		}
+
+		public void Initialize()
+		{
+			// _progressObservers = new List<ProgressObserver>();
 			_markForDeleting = new List<ProgressObserver>();
+			_progressObservers = _observersFactory.GenerateObserversListFor(_currentLevel.Goals);
 			Subscribe();
-		}
-
-		private void Subscribe()
-		{
-			foreach (var observer in _progressObservers)
-			{
-				observer.GoalReached += OnGoalReached;
-			}
-		}
-
-		private void OnGoalReached(ProgressObserver sender)
-		{
-			Debug.Log("Цель достигнута!");
-			_markForDeleting.Add(sender);
 		}
 
 		public void OnTokenDestroyed(Token token)
@@ -60,6 +55,20 @@ namespace Code.GameCycle.Goals.Progress
 			}
 
 			RemoveReachedGoals();
+		}
+
+		private void Subscribe()
+		{
+			foreach (var observer in _progressObservers)
+			{
+				observer.GoalReached += OnGoalReached;
+			}
+		}
+
+		private void OnGoalReached(ProgressObserver sender)
+		{
+			Debug.Log("Цель достигнута!");
+			_markForDeleting.Add(sender);
 		}
 
 		private void RemoveReachedGoals()
