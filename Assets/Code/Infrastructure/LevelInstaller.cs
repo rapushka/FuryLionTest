@@ -62,7 +62,7 @@ namespace Code.Infrastructure
 				.BindSingle<ObserversFactory>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
-				.BindSingleWithInterfaces<TokensFactory>()
+				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()

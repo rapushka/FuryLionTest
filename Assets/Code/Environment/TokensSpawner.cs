@@ -7,14 +7,14 @@ namespace Code.Environment
 {
 	public class TokensSpawner
 	{
-		private readonly TokensFactory _tokensFactory;
+		private readonly TokensPool _tokensPool;
 		private readonly float _step;
 		private readonly Vector2 _offset;
 
 		[Inject]
-		public TokensSpawner(IFieldConfig fieldParameters, TokensFactory tokensFactory)
+		public TokensSpawner(IFieldConfig fieldParameters, TokensPool tokensPool)
 		{
-			_tokensFactory = tokensFactory;
+			_tokensPool = tokensPool;
 			_step = fieldParameters.Step;
 			_offset = fieldParameters.Offset;
 		}
@@ -40,7 +40,7 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var token = _tokensFactory.CreateTokenForUnit(PickRandomColor(), ScalePosition(x, y));
+			var token = _tokensPool.CreateTokenForUnit(PickRandomColor(), ScalePosition(x, y));
 			tokens[x, y] = token;
 		}
 

@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Code.Gameplay.Tokens
 {
-	public class TokensFactory : IInitializable
+	public class TokensPool : IInitializable
 	{
 		private readonly Dictionary<TokenUnit, Token> _tokenPrefabForType;
 		private readonly TokensRoot _tokensRoot;
@@ -18,7 +18,7 @@ namespace Code.Gameplay.Tokens
 		private readonly Dictionary<TokenUnit, List<Token>> _createdTokens;
 
 		[Inject]
-		public TokensFactory(TokensCollection tokenPrefabForType, TokensRoot tokensRoot, SignalBus signalBus)
+		public TokensPool(TokensCollection tokenPrefabForType, TokensRoot tokensRoot, SignalBus signalBus)
 		{
 			_tokenPrefabForType = tokenPrefabForType.AsDictionary();
 			_tokensRoot = tokensRoot;

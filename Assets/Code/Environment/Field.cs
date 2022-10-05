@@ -15,7 +15,7 @@ namespace Code.Environment
 		private readonly LevelGenerator _levelGenerator;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
-		private readonly TokensFactory _tokensFactory;
+		private readonly TokensPool _tokensPool;
 
 		private Token[,] _tokens;
 
@@ -25,13 +25,13 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			TokensFactory tokensFactory
+			TokensPool tokensPool
 		)
 		{
 			_levelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
-			_tokensFactory = tokensFactory;
+			_tokensPool = tokensPool;
 		}
 
 		public void Initialize()
@@ -62,14 +62,14 @@ namespace Code.Environment
 				return;
 			}
 
-			_tokensFactory.DestroyToken(token);
+			_tokensPool.DestroyToken(token);
 			this[position] = null;
 		}
 
 		public void SwitchTokenAt(Vector2 position, TokenUnit to)
 		{
 			DestroyTokenAt(position);
-			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
+			this[position] = _tokensPool.CreateTokenForUnit(to, position);
 		}
 
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
