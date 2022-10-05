@@ -83,6 +83,7 @@ namespace Code.Infrastructure
 				.BindSignalTo<MouseUpSignal, Chain>((x) => x.EndComposing)
 				.BindSignalTo<TokenHitSignal, Chain>((x, v) => x.NextToken(v.Value))
 				.BindSignalTo<TokenClickSignal, Chain>((x, v) => x.StartComposing(v.Value))
+				.BindSignalTo<TokenClickSignal, BonusesActivator>((x, v) => x.OnTokenClick(v.Value))
 				.BindSignalTo<ChainTokenAddedSignal, ChainView>((x, v) => x.OnTokenAdded(v.Value))
 				.BindSignalTo<ChainLastTokenRemovedSignal, ChainView>((x) => x.OnLastTokenRemoved)
 				.BindSignalTo<ChainEndedSignal, ChainView>((x, _) => x.OnChainEnded())
