@@ -49,7 +49,7 @@ namespace Code.Gameplay.Tokens
 				return;
 			}
 			token.BonusType = BonusType.None;
-			_signalBus.Fire(new BonusSpawnedSignal(token));
+			_signalBus.Fire(new BonusActiveChangedSignal(token));
 		}
 
 		private static Token EnableToken(Vector3 position, Token token)
