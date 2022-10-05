@@ -116,3 +116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tokenUnit: 0
   _applyGravity: 0
+  _spriteRenderer: {fileID: 3340949127831052693}

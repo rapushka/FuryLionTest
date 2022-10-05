@@ -58,6 +58,7 @@ namespace Code.Environment.Bonuses
 		private void Destroy(Vector2 position)
 		{
 			if (IsInFieldBounces(position)
+			    && _field[position] == true
 			    && IsDestroyable(_field[position]))
 			{
 				_field.DestroyTokenAt(position);

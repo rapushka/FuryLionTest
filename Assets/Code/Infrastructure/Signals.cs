@@ -50,6 +50,8 @@ namespace Code.Infrastructure
 
 	public class LevelLostSignal { }
 
+	public class GameVictorySignal { }
+
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
 		public RemainingActionsUpdateSignal(int value)
@@ -60,5 +62,11 @@ namespace Code.Infrastructure
 	{
 		public BonusSpawnedSignal(Token value)
 			: base(value) { }
+	}
+
+	public class TokenDestroyedSignal : ImmutableSignal<Token>
+	{
+		public TokenDestroyedSignal(Token token)
+			: base(token) { }
 	}
 }

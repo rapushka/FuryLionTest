@@ -2,7 +2,7 @@ using System;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 
-namespace Code.Environment.Bonuses
+namespace Code.View.SpritesBehaviour
 {
 	[Serializable]
 	public class TokenSpritesEntry

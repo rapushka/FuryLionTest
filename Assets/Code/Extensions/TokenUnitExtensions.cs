@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Extensions
 {
-	public static class TokenTypeExtensions
+	public static class TokenUnitExtensions
 	{
 		public static Color GetColor(this TokenUnit @this)
 			=> @this switch

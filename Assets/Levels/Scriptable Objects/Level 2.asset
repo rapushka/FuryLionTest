@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   _actionsCount: 10
+  _goals:
+  - {fileID: 11400000, guid: 5d03598607204164899ed030077c2733, type: 2}
   _tokens:
     Rows:
     - Value: 09000000090000000900000000000000090000000900000009000000
