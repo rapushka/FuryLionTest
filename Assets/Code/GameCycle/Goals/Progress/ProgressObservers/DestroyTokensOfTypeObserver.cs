@@ -1,5 +1,3 @@
-using System;
-using Code.Extensions;
 using Code.Gameplay.Tokens;
 
 namespace Code.GameCycle.Goals.Progress.ProgressObservers
