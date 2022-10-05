@@ -10,11 +10,15 @@ namespace Code.GameCycle.Goals.Progress
 	public class GoalsProgress
 	{
 		private readonly List<ProgressObserver> _progressObservers;
+		
+		private readonly List<ProgressObserver> _markForDeleting;
 
 		[Inject]
 		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory)
 		{
 			_progressObservers = observersFactory.GenerateObserversListFor(currentLevel.Goals);
+			
+			_markForDeleting = new List<ProgressObserver>();
 			Subscribe();
 		}
 
@@ -26,20 +30,23 @@ namespace Code.GameCycle.Goals.Progress
 			}
 		}
 
-		private void OnGoalReached()
+		private void OnGoalReached(ProgressObserver sender)
 		{
 			Debug.Log("Цель достигнута!");
+			_markForDeleting.Add(sender);
 		}
 
-		public void OnTokenDestroyed(TokenUnit unit)
+		public void OnTokenDestroyed(Token token)
 		{
 			foreach (var observer in _progressObservers)
 			{
 				if (observer is DestroyTokensOfTypeObserver destroyTokens)
 				{
-					destroyTokens.OnTokenDestroyed(unit);
+					destroyTokens.OnTokenDestroyed(token.TokenUnit);
 				}
 			}
+			
+			RemoveReachedGoals();
 		}
 
 		public void OnScoreUpdate(int value)
@@ -51,6 +58,17 @@ namespace Code.GameCycle.Goals.Progress
 					destroyTokens.OnScoreUpdated(value);
 				}
 			}
+
+			RemoveReachedGoals();
+		}
+
+		private void RemoveReachedGoals()
+		{
+			foreach (var observer in _markForDeleting)
+			{
+				_progressObservers.Remove(observer);
+			}
+			_markForDeleting.Clear();
 		}
 	}
 }

@@ -4,8 +4,8 @@ namespace Code.GameCycle.Goals.Progress.ProgressObservers
 {
 	public abstract class ProgressObserver
 	{
-		public event Action GoalReached;
+		public event Action<ProgressObserver> GoalReached;
 
-		protected void GoalReachedInvoke() => GoalReached?.Invoke();
+		protected void GoalReachedInvoke() => GoalReached?.Invoke(this);
 	}
 }
