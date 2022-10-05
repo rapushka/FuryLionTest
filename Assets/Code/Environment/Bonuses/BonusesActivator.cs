@@ -64,7 +64,7 @@ namespace Code.Environment.Bonuses
 			=> position.ForX(_fieldOffset.x, _fieldOffset.x + _fieldSizes.x, Destroy);
 
 		private void ActivateBomb(Vector2 position)
-			=> position.DoubleFor(from: position - DirectedRange, to: position + DirectedRange, Destroy);
+			=> position.DoubleFor(from: position - DirectedRange, to: position + DirectedRange + Vector2.one, Destroy);
 
 		private void Destroy(Vector2 position)
 		{
