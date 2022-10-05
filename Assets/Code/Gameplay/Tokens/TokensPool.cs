@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Environment.Bonuses;
 using Code.Infrastructure;
 using Code.Infrastructure.IdComponents;
 using UnityEngine;
@@ -44,12 +43,7 @@ namespace Code.Gameplay.Tokens
 		{
 			token.gameObject.SetActive(false);
 
-			if (token.BonusType == BonusType.None)
-			{
-				return;
-			}
-			token.BonusType = BonusType.None;
-			_signalBus.Fire(new BonusActiveChangedSignal(token));
+			_signalBus.Fire(new TokenDestroyedSignal(token));
 		}
 
 		private static Token EnableToken(Vector3 position, Token token)

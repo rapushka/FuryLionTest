@@ -96,7 +96,8 @@ namespace Code.Infrastructure
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
-				.BindSignalTo<BonusActiveChangedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
+				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
+				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
 				;
 		}
 	}

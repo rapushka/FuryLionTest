@@ -36,7 +36,7 @@ namespace Code.Environment.Bonuses
 			if (token == true)
 			{
 				token.BonusType = bonusType;
-				_signalBus.Fire(new BonusActiveChangedSignal(token));
+				_signalBus.Fire(new BonusSpawnedSignal(token));
 				return;
 			}
 

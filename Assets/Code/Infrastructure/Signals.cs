@@ -56,9 +56,16 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class BonusActiveChangedSignal : ImmutableSignal<Token>
+	public class BonusSpawnedSignal : ImmutableSignal<Token>
 	{
-		public BonusActiveChangedSignal(Token value)
+		public BonusSpawnedSignal(Token value)
 			: base(value) { }
 	}
+	
+	public class TokenDestroyedSignal : ImmutableSignal<Token>
+	{
+		public TokenDestroyedSignal(Token token)
+			: base(token) { }
+	}
+
 }
