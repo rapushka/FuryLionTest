@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.GameCycle.Goals.Progress.ProgressObservers
+namespace Code.GameLoop.Goals.Progress.ProgressObservers
 {
 	public abstract class ProgressObserver
 	{

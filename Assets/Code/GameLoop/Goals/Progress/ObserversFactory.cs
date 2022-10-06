@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Code.Environment;
-using Code.GameCycle.Goals.Conditions;
-using Code.GameCycle.Goals.Progress.ProgressObservers;
+using Code.GameLoop.Goals.Conditions;
+using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Zenject;
 
-namespace Code.GameCycle.Goals.Progress
+namespace Code.GameLoop.Goals.Progress
 {
 	public class ObserversFactory
 	{

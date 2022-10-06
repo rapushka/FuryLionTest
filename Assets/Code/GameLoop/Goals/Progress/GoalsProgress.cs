@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.GameCycle.Goals.Progress.ProgressObservers;
+using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
 using Code.Levels;
-using UnityEngine;
 using Zenject;
 
-namespace Code.GameCycle.Goals.Progress
+namespace Code.GameLoop.Goals.Progress
 {
 	public class GoalsProgress : IInitializable
 	{
@@ -42,7 +41,7 @@ namespace Code.GameCycle.Goals.Progress
 					destroyTokens.OnTokenDestroyed(token.TokenUnit);
 				}
 			}
-			
+
 			RemoveReachedGoals();
 		}
 
@@ -50,9 +49,9 @@ namespace Code.GameCycle.Goals.Progress
 		{
 			foreach (var observer in _progressObservers)
 			{
-				if (observer is ScoreValueReachedObserver destroyTokens)
+				if (observer is ScoreValueReachedObserver reachScore)
 				{
-					destroyTokens.OnScoreUpdated(value);
+					reachScore.OnScoreUpdated(value);
 				}
 			}
 
@@ -69,7 +68,6 @@ namespace Code.GameCycle.Goals.Progress
 
 		private void OnGoalReached(ProgressObserver sender)
 		{
-			Debug.Log($"Цель {sender.GetType().Name} достигнута!");
 			_markForDeleting.Add(sender);
 		}
 
@@ -79,6 +77,7 @@ namespace Code.GameCycle.Goals.Progress
 			{
 				_progressObservers.Remove(observer);
 			}
+
 			_markForDeleting.Clear();
 
 			CheckOnAllGoalsReached();
@@ -88,7 +87,7 @@ namespace Code.GameCycle.Goals.Progress
 		{
 			if (_progressObservers.Any() == false)
 			{
-				_signalBus.Fire<GameVictorySignal>();
+				_signalBus.Fire<AllGoalsReachedSignal>();
 			}
 		}
 	}

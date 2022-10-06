@@ -1,6 +1,6 @@
 using Code.Gameplay.Tokens;
 
-namespace Code.GameCycle.Goals.Progress.ProgressObservers
+namespace Code.GameLoop.Goals.Progress.ProgressObservers
 {
 	public abstract class DestroyTokensOfTypeObserver : ProgressObserver
 	{

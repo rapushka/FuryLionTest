@@ -1,8 +1,8 @@
-using Code.GameCycle.Goals.TokensTypes;
+using Code.GameLoop.Goals.TokensTypes;
 using Code.Gameplay.Tokens;
 using UnityEngine;
 
-namespace Code.GameCycle.Goals.Conditions
+namespace Code.GameLoop.Goals.Conditions
 {
 	[CreateAssetMenu(fileName = "N COLOR Tokens", menuName = "ScriptableObjects/Goal/DestroyNTokensOfColor")]
 	public class DestroyNTokensOfColor : Goal

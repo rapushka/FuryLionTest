@@ -71,4 +71,8 @@ namespace Code.Infrastructure
 	}
 	
 	public class ResetButtonClickSignal { }
+	
+	public class AllGoalsReachedSignal { }
+
+	public class ActionsOverSignal { }
 }

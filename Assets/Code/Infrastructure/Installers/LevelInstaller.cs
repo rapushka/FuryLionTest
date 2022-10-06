@@ -3,8 +3,8 @@ using Code.Environment.Bonuses;
 using Code.Environment.GravityBehaviour;
 using Code.Environment.Obstacles;
 using Code.Extensions;
-using Code.GameCycle;
-using Code.GameCycle.Goals.Progress;
+using Code.GameLoop;
+using Code.GameLoop.Goals.Progress;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
@@ -62,6 +62,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleWithInterfaces<OverlapMouse>()
 				.BindSingleWithInterfaces<InputService>()
 				.BindSingleWithInterfaces<GoalsProgress>()
+				.BindSingleWithInterfaces<GameCycle>()
 				.BindSingleWithInterfaces<Score>()
 				;
 
@@ -95,8 +96,10 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
-				.BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<AllGoalsReachedSignal, GameCycle>((x) => x.OnAllGoalsReached)
+				.BindSignalTo<ActionsOverSignal, GameCycle>((x) => x.OnActionsOver)
 				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
+				.BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
 				;
 		}
 	}
