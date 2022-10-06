@@ -29,15 +29,11 @@ namespace Code.Infrastructure
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
-		[SerializeField] private SceneField _loseScene;
-		[SerializeField] private SceneField _victoryScene;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			var sceneTransfer = new SceneTransfer(_loseScene, _victoryScene);
-			
 			Container
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(_tokensCollection)
@@ -47,7 +43,6 @@ namespace Code.Infrastructure
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_tokensSpriteSheet)
-				.BindSingleFromInstance(sceneTransfer)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -77,6 +72,9 @@ namespace Code.Infrastructure
 		{
 			SignalBusInstaller.Install(Container);
 
+			Container.DeclareSignal<LevelLostSignal>();
+			Container.DeclareSignal<GameVictorySignal>();
+
 			Container
 				.BindSignalTo<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping)
 				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
@@ -99,11 +97,11 @@ namespace Code.Infrastructure
 				.BindSignalTo<ScoreUpdateSignal, GoalsProgress>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
 					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
-				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
-				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
+				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
 				;
 		}
 	}
