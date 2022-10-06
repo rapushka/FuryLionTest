@@ -95,7 +95,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
-				.BindSignalTo<LevelLostSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
 				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
 				;
 		}

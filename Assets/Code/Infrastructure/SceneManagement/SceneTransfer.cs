@@ -8,7 +8,7 @@ namespace Code.Infrastructure.SceneManagement
 		private readonly SceneField _loseScene;
 		private readonly SceneField _victoryScene;
 
-		public SceneTransfer(SceneField gameplayScene,  SceneField loseScene, SceneField victoryScene)
+		public SceneTransfer(SceneField gameplayScene, SceneField victoryScene, SceneField loseScene)
 		{
 			_gameplayScene = gameplayScene;
 			_loseScene = loseScene;

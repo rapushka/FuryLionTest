@@ -30,6 +30,6 @@ namespace Code.GameCycle
 		private void InvokeValueUpdate() => _signalBus.Fire(new RemainingActionsUpdateSignal(_actionsRemain));
 
 		private void LoseIfActionsOver() 
-			=> _signalBus.Do((signalBus) => signalBus.Fire<LevelLostSignal>(), @if: _actionsRemain <= 0);
+			=> _signalBus.Do((signalBus) => signalBus.Fire<GameLoseSignal>(), @if: _actionsRemain <= 0);
 	}
 }

@@ -48,7 +48,7 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class LevelLostSignal { }
+	public class GameLoseSignal { }
 
 	public class GameVictorySignal { }
 
