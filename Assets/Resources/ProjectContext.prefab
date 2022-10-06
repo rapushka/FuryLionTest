@@ -78,3 +78,5 @@ MonoBehaviour:
     _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
   _victoryScene:
     _scene: {fileID: 102900000, guid: f591ce9bfb0ade84b9640632db5ad7b1, type: 3}
+  _gameplayScene:
+    _scene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}

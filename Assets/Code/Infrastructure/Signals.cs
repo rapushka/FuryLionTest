@@ -69,4 +69,6 @@ namespace Code.Infrastructure
 		public TokenDestroyedSignal(Token token)
 			: base(token) { }
 	}
+	
+	public class ResetButtonClickSignal { }
 }

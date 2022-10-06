@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &55448771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354488, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 6285064905656225239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &55857002
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 942169481}
   - component: {fileID: 942169480}
+  - component: {fileID: 942169482}
   m_Layer: 0
   m_Name: Lose Scene Context
   m_TagString: Untagged
@@ -412,7 +418,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 942169482}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -445,11 +452,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &942169482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942169479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1cc3ab437c408388faed05ca776fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resetButton: {fileID: 999545716}
 --- !u!224 &999545712 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
   m_PrefabInstance: {fileID: 6285064905656225239}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &999545713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354470, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 6285064905656225239}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55448771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &999545716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55448771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b26b70890c47d9abfff74484e7ee39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 999545713}
 --- !u!1001 &6285064905656225239
 PrefabInstance:
   m_ObjectHideFlags: 0

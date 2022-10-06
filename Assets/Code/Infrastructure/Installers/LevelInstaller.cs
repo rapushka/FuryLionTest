@@ -70,11 +70,6 @@ namespace Code.Infrastructure.Installers
 
 		private void SubscribeSignals()
 		{
-			SignalBusInstaller.Install(Container);
-
-			Container.DeclareSignal<LevelLostSignal>();
-			Container.DeclareSignal<GameVictorySignal>();
-
 			Container
 				.BindSignalTo<MouseDownSignal, OverlapMouse>((x) => x.EnableOverlapping)
 				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
