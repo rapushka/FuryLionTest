@@ -55,7 +55,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingle<BonusSpawner>()
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
-				.BindSingle<ObserversFactory>()
+				.BindSingle<ObserversCreator>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()

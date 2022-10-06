@@ -7,17 +7,17 @@ using Zenject;
 
 namespace Code.GameLoop.Goals.Progress
 {
-	public class ObserversFactory
+	public class ObserversCreator
 	{
 		private readonly Field _field;
 
 		[Inject]
-		public ObserversFactory(Field field)
+		public ObserversCreator(Field field)
 		{
 			_field = field;
 		}
 
-		public List<ProgressObserver> GenerateObserversListFor(IEnumerable<Goal> goals)
+		public List<ProgressObserver> CreateObserversListFor(IEnumerable<Goal> goals)
 		{
 			var result = new List<ProgressObserver>();
 

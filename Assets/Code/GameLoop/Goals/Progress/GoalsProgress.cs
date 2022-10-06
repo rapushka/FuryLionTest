@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
@@ -8,63 +9,61 @@ using Zenject;
 
 namespace Code.GameLoop.Goals.Progress
 {
-	public class GoalsProgress : IInitializable
+	public class GoalsProgress : IInitializable, IDisposable
 	{
 		private readonly Level _currentLevel;
-		private readonly ObserversFactory _observersFactory;
+		private readonly ObserversCreator _observersCreator;
 		private readonly SignalBus _signalBus;
 
 		private List<ProgressObserver> _progressObservers;
 		private List<ProgressObserver> _markForDeleting;
 
 		[Inject]
-		public GoalsProgress(Level currentLevel, ObserversFactory observersFactory, SignalBus signalBus)
+		public GoalsProgress(Level currentLevel, ObserversCreator observersCreator, SignalBus signalBus)
 		{
 			_currentLevel = currentLevel;
-			_observersFactory = observersFactory;
+			_observersCreator = observersCreator;
 			_signalBus = signalBus;
 		}
 
 		public void Initialize()
 		{
 			_markForDeleting = new List<ProgressObserver>();
-			_progressObservers = _observersFactory.GenerateObserversListFor(_currentLevel.Goals);
+			_progressObservers = _observersCreator.CreateObserversListFor(_currentLevel.Goals);
 			Subscribe();
 		}
 
-		public void OnTokenDestroyed(Token token)
+		public void Dispose() => Unsubscribe();
+
+		public void OnTokenDestroyed(Token token) 
+			=> CheckObserversOfType<DestroyTokensOfTypeObserver, Token>(token, InvokeOnTokenDestroyed);
+
+		public void OnScoreUpdate(int value) 
+			=> CheckObserversOfType<ScoreValueReachedObserver, int>(value, InvokeOnScoreUpdated);
+
+		private void Subscribe() => _progressObservers.ForEach((o) => o.GoalReached += OnGoalReached);
+
+		private void Unsubscribe() => _progressObservers.ForEach((o) => o.GoalReached -= OnGoalReached);
+
+		private void CheckObserversOfType<TObserver, TParam>
+			(TParam param, Action<TObserver, TParam> action)
 		{
 			foreach (var observer in _progressObservers)
 			{
-				if (observer is DestroyTokensOfTypeObserver destroyTokens)
+				if (observer is TObserver tObserver)
 				{
-					destroyTokens.OnTokenDestroyed(token.TokenUnit);
+					action.Invoke(tObserver, param);
 				}
 			}
 
 			RemoveReachedGoals();
 		}
 
-		public void OnScoreUpdate(int value)
-		{
-			foreach (var observer in _progressObservers)
-			{
-				if (observer is ScoreValueReachedObserver reachScore)
-				{
-					reachScore.OnScoreUpdated(value);
-				}
-			}
+		private void InvokeOnScoreUpdated(ScoreValueReachedObserver observer, int value)
+			=> observer.OnScoreUpdated(value);
 
-			RemoveReachedGoals();
-		}
-
-		private void Subscribe()
-		{
-			foreach (var observer in _progressObservers)
-			{
-				observer.GoalReached += OnGoalReached;
-			}
-		}
+		private void InvokeOnTokenDestroyed(DestroyTokensOfTypeObserver observer, Token param) 
+			=> observer.OnTokenDestroyed(param.TokenUnit);
 
 		private void OnGoalReached(ProgressObserver sender)
 		{
