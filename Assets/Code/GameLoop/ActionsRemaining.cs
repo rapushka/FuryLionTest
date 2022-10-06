@@ -3,7 +3,7 @@ using Code.Infrastructure;
 using Code.Levels;
 using Zenject;
 
-namespace Code.GameCycle
+namespace Code.GameLoop
 {
 	public class ActionsRemaining : IInitializable
 	{
@@ -24,12 +24,12 @@ namespace Code.GameCycle
 			_actionsRemain--;
 			
 			InvokeValueUpdate();
-			LoseIfActionsOver();
+			CheckActionsOver();
 		}
 
 		private void InvokeValueUpdate() => _signalBus.Fire(new RemainingActionsUpdateSignal(_actionsRemain));
 
-		private void LoseIfActionsOver() 
-			=> _signalBus.Do((signalBus) => signalBus.Fire<LevelLostSignal>(), @if: _actionsRemain <= 0);
+		private void CheckActionsOver() 
+			=> _signalBus.Do((signalBus) => signalBus.Fire<ActionsOverSignal>(), @if: _actionsRemain <= 0);
 	}
 }

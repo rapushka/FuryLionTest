@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.59, y: 5.51, z: -10}
+  m_LocalPosition: {x: 3.5, y: 6.53, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 1560406894}
   - component: {fileID: 1560406895}
   m_Layer: 0
-  m_Name: Scene Context
+  m_Name: Gameplay Scene Context
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,10 +543,6 @@ MonoBehaviour:
   _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
   _scoreView: {fileID: 2071517002}
   _remainingActionsView: {fileID: 1120159372}
-  _loseScene:
-    _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
-  _victoryScene:
-    _scene: {fileID: 102900000, guid: f591ce9bfb0ade84b9640632db5ad7b1, type: 3}
   _tokensSpriteSheet: {fileID: 11400000, guid: 3da395e4fcd048c48a36cafa93a6bb93, type: 2}
 --- !u!1 &1774494709
 GameObject:

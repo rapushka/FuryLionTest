@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.GameCycle.Goals.Conditions
+namespace Code.GameLoop.Goals.Conditions
 {
 	public abstract class Goal : ScriptableObject { }
 }

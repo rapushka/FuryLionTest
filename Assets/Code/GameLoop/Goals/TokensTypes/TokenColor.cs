@@ -1,4 +1,4 @@
-namespace Code.GameCycle.Goals.TokensTypes
+namespace Code.GameLoop.Goals.TokensTypes
 {
 	public enum TokenColor
 	{

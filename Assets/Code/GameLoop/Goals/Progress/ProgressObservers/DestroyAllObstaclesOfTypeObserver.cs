@@ -1,7 +1,7 @@
 using Code.Environment;
-using Code.GameCycle.Goals.Conditions;
+using Code.GameLoop.Goals.Conditions;
 
-namespace Code.GameCycle.Goals.Progress.ProgressObservers
+namespace Code.GameLoop.Goals.Progress.ProgressObservers
 {
 	public class DestroyAllObstaclesOfTypeObserver : DestroyTokensOfTypeObserver
 	{

@@ -48,7 +48,7 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class LevelLostSignal { }
+	public class GameLoseSignal { }
 
 	public class GameVictorySignal { }
 
@@ -69,4 +69,10 @@ namespace Code.Infrastructure
 		public TokenDestroyedSignal(Token token)
 			: base(token) { }
 	}
+	
+	public class ResetButtonClickSignal { }
+	
+	public class AllGoalsReachedSignal { }
+
+	public class ActionsOverSignal { }
 }
