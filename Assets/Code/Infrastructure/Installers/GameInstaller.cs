@@ -3,7 +3,7 @@ using Code.Infrastructure.SceneManagement;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure
+namespace Code.Infrastructure.Installers
 {
 	public class GameInstaller : MonoInstaller
 	{

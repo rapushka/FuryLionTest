@@ -18,7 +18,7 @@ using Code.View.SpritesBehaviour;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure
+namespace Code.Infrastructure.Installers
 {
 	public class LevelInstaller : MonoInstaller
 	{
