@@ -12,8 +12,8 @@ namespace Code.Environment.Obstacles
 	{
 		private readonly Field _field;
 		private readonly IFieldConfig _fieldConfig;
-		private readonly List<Vector2> _changedTokensOnThisAction;
-		private readonly List<Vector2> _offsets;
+		private readonly List<Token> _changedTokensOnThisAction;
+		private readonly List<Vector2Int> _offsets;
 
 		[Inject]
 		public ObstacleDestroyer(Field field, IFieldConfig fieldConfig)
@@ -21,45 +21,41 @@ namespace Code.Environment.Obstacles
 			_field = field;
 			_fieldConfig = fieldConfig;
 
-			_changedTokensOnThisAction = new List<Vector2>();
-			_offsets = new List<Vector2>
+			_changedTokensOnThisAction = new List<Token>();
+			_offsets = new List<Vector2Int>
 			{
-				Vector2.up,
-				Vector2.down,
-				Vector2.left,
-				Vector2.right,
+				Vector2Int.up,
+				Vector2Int.down,
+				Vector2Int.left,
+				Vector2Int.right,
 			};
 		}
 
-		public void OnChainComposed(IEnumerable<Vector2> chain)
+		public void OnChainComposed(IEnumerable<Token> chain)
 		{
 			chain.ForEach(CheckNeighbourTokens);
 			_changedTokensOnThisAction.Clear();
 		}
 
-		private void CheckNeighbourTokens(Vector2 position)
-			=> GetOffsetDirections(position)
+		private void CheckNeighbourTokens(Token token)
+			=> GetOffsetDirections(token)
 			   .Where(IsInBounces)
 			   .Select((d) => _field[d])
 			   .Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
 			   .ForEach(HandleObstacle);
 
-		private bool IsNotChangedOnThisAction(Component token)
-			=> _changedTokensOnThisAction.Contains(token.transform.position) == false; // TODO: !!!
+		private bool IsNotChangedOnThisAction(Token token)
+			=> _changedTokensOnThisAction.Contains(token) == false;
 
-		private IEnumerable<Vector2> GetOffsetDirections(Vector2 position)
-			=> _offsets.Select((offset) => offset + position);
-
-		private bool IsInBounces(Vector2 position)
-			=> IsInBounce(position.x, 0, _fieldConfig.FieldSizes.x)
-			   && IsInBounce(position.y, 0, _fieldConfig.FieldSizes.y);
+		private IEnumerable<Vector2Int> GetOffsetDirections(Token token)
+			=> _offsets.Select((offset) => offset + _field.GetIndexesFor(token));
 
 		private static bool IsNotEmpty(Token token) => token == true;
 
 		private void HandleObstacle(Token token)
 		{
 			var unit = token.TokenUnit;
-			var position = token.transform.position; // TODO: !!!
+			var position = _field.GetIndexesFor(token);
 
 			if (unit is TokenUnit.Ice or TokenUnit.RockLevel1)
 			{
@@ -68,11 +64,15 @@ namespace Code.Environment.Obstacles
 			else if (unit is TokenUnit.RockLevel2)
 			{
 				_field.SwitchTokenAt(position, TokenUnit.RockLevel1);
-				_changedTokensOnThisAction.Add(position);
+				_changedTokensOnThisAction.Add(token);
 			}
 		}
 
-		private static bool IsInBounce(float number, int minValue, int maxValue)
+		private bool IsInBounces(Vector2Int indexes)
+			=> IsInBounce(indexes.x, 0, _fieldConfig.FieldSizes.x)
+			   && IsInBounce(indexes.y, 0, _fieldConfig.FieldSizes.y);
+
+		private static bool IsInBounce(int number, int minValue, int maxValue)
 			=> number >= minValue && number < maxValue;
 	}
 }

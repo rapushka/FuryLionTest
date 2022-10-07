@@ -12,7 +12,7 @@ namespace Code.Environment.Bonuses
 		private readonly Field _field;
 		private readonly SignalBus _signalBus;
 		private TokenUnit _unit;
-		private Vector2[] _chain;
+		private Token[] _chain;
 
 		[Inject]
 		public BonusSpawner(Field field, SignalBus signalBus)
@@ -21,13 +21,13 @@ namespace Code.Environment.Bonuses
 			_signalBus = signalBus;
 		}
 
-		public void SpawnHorizontalRocket(Vector2[] chain, TokenUnit unit)
+		public void SpawnHorizontalRocket(Token[] chain, TokenUnit unit)
 			=> Spawn(chain, unit, BonusType.HorizontalRocket);
 
-		public void SpawnBomb(Vector2[] chain, TokenUnit unit)
+		public void SpawnBomb(Token[] chain, TokenUnit unit)
 			=> Spawn(chain, unit, BonusType.Bomb);
 
-		private void Spawn(Vector2[] chain, TokenUnit unit, BonusType bonusType)
+		private void Spawn(Token[] chain, TokenUnit unit, BonusType bonusType)
 		{
 			_chain = chain;
 			_unit = unit;
@@ -47,7 +47,7 @@ namespace Code.Environment.Bonuses
 			=> token == true
 			   && token.TokenUnit == _unit
 			   && token.BonusType == BonusType.None
-			   && _chain.Contains(token.transform.position) == false; // TODO: !!!
+			   && _chain.Contains(token) == false;
 
 		private static void BonusCantBeSpawned()
 		{

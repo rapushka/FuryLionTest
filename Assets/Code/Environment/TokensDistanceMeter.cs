@@ -1,5 +1,4 @@
-using Code.Extensions;
-using Code.Infrastructure.Configurations.Interfaces;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 using Zenject;
 
@@ -7,15 +6,21 @@ namespace Code.Environment
 {
 	public class TokensDistanceMeter
 	{
-		private readonly float _step;
+		private readonly Field _field;
 
-		[Inject]
-		public TokensDistanceMeter(IFieldConfig fieldParameters)
+		[Inject] public TokensDistanceMeter(Field field) => _field = field;
+
+		public bool IsNeighboring(Token firstToken, Token secondToken)
 		{
-			_step = fieldParameters.Step;
+			var first = _field.GetIndexesFor(firstToken);
+			var second = _field.GetIndexesFor(secondToken);
+
+			return IsNeighbourIndexes(first, second);
 		}
 
-		public bool IsNeighboring(Vector2 firstPosition, Vector2 secondPosition)
-			=> firstPosition.DistanceTo(secondPosition).VectorAbs().IsLessIncluding(_step);
+		private static bool IsNeighbourIndexes(Vector2Int first, Vector2Int second)
+			=> IsNeighbourAt(first.x, second.x) && IsNeighbourAt(first.y, second.y);
+
+		private static bool IsNeighbourAt(int first, int second) => Mathf.Abs(first - second) >= 1;
 	}
 }

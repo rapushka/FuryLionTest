@@ -47,9 +47,22 @@ namespace Code.Environment
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public void DestroyTokensInChain(IEnumerable<Vector2> chain)
+		public Vector2Int GetIndexesFor(Token token) => _tokens.IndexesOf(token);
+
+		public void DestroyTokensInChain(IEnumerable<Token> chain)
 		{
-			chain.ForEach(DestroyTokenAt);
+			chain.ForEach(DestroyToken);
+		}
+
+		private void DestroyToken(Token token)
+		{
+			if (token == false)
+			{
+				return;
+			}
+
+			_tokensPool.DestroyToken(token);
+			this[GetIndexesFor(token)] = null;
 		}
 
 		public void UpdateField()
