@@ -11,6 +11,7 @@ using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations.SerializedImplementation;
 using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
+using Code.Inner.CustomMonoBehaviours;
 using Code.Input;
 using Code.Levels;
 using Code.UI.GoalViews;
@@ -34,6 +35,7 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private Transform _goalsRootTransform;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
+		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -50,6 +52,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(new GoalsRoot(_goalsRootTransform))
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
+				.BindSingleFromInstance(_coroutinesHandler)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -63,6 +66,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
 				.BindSingle<ObserversCreator>()
+				.BindSingle<TokensViewsMover>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()

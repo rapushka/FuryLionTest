@@ -20,7 +20,7 @@ namespace Code.Environment.GravityBehaviour.Movers
 			return Tokens;
 		}
 
-		protected abstract void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> obj);
+		protected abstract void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> pair);
 
 		protected void MoveToken(int x, int y, Vector3 to)
 		{

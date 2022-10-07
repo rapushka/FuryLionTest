@@ -16,9 +16,8 @@ namespace Code.Environment.GravityBehaviour
 		private bool _mayBeContender;
 
 		[Inject]
-		public Gravity()
+		public Gravity(TokensViewsMover tokensViewsMover)
 		{
-			var tokensViewsMover = new TokensViewsMover();
 			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover(), tokensViewsMover);
 			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover(), tokensViewsMover);
 		}
