@@ -38,10 +38,10 @@ namespace Code.GameLoop.Goals.Progress
 
 		public void Dispose() => Unsubscribe();
 
-		public void OnTokenDestroyed(Token token) 
+		public void OnTokenDestroyed(Token token)
 			=> CheckObserversOfType<DestroyTokensOfTypeObserver, Token>(token, InvokeOnTokenDestroyed);
 
-		public void OnScoreUpdate(int value) 
+		public void OnScoreUpdate(int value)
 			=> CheckObserversOfType<ScoreValueReachedObserver, int>(value, InvokeOnScoreUpdated);
 
 		private void Subscribe() => _progressObservers.ForEach((o) => o.GoalReached += OnGoalReached);
@@ -65,7 +65,7 @@ namespace Code.GameLoop.Goals.Progress
 		private void InvokeOnScoreUpdated(ScoreValueReachedObserver observer, int value)
 			=> observer.OnScoreUpdated(value);
 
-		private void InvokeOnTokenDestroyed(DestroyTokensOfTypeObserver observer, Token param) 
+		private void InvokeOnTokenDestroyed(DestroyTokensOfTypeObserver observer, Token param)
 			=> observer.OnTokenDestroyed(param.TokenUnit);
 
 		private void OnGoalReached(ProgressObserver sender)
