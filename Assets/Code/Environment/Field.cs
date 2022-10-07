@@ -54,17 +54,6 @@ namespace Code.Environment
 			chain.ForEach(DestroyToken);
 		}
 
-		private void DestroyToken(Token token)
-		{
-			if (token == false)
-			{
-				return;
-			}
-
-			_tokensPool.DestroyToken(token);
-			this[GetIndexesFor(token)] = null;
-		}
-
 		public void UpdateField()
 		{
 			var fieldNeedHandle = true;
@@ -87,6 +76,8 @@ namespace Code.Environment
 			_tokensPool.DestroyToken(token);
 			this[position] = null;
 		}
+
+		private void DestroyToken(Token token) => DestroyTokenAt(GetIndexesFor(token));
 
 		public void SwitchTokenAt(Vector2 position, TokenUnit to)
 		{

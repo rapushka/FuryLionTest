@@ -13,10 +13,10 @@ namespace Code.Environment.GravityBehaviour
 		private Token[,] _tokens;
 
 		[Inject]
-		public Gravity(TokensViewsMover tokensViewsMover, Field field)
+		public Gravity(TokensViewsMover tokensViewsMover)
 		{
-			_vertical = new DirectionEmit(new VerticallyChecker(field), new VerticallyMover(), tokensViewsMover);
-			_diagonal = new DirectionEmit(new DiagonallyChecker(field), new DiagonallyMover(), tokensViewsMover);
+			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover(), tokensViewsMover);
+			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover(), tokensViewsMover);
 		}
 
 		public Token[,] Apply(Token[,] tokens)

@@ -38,11 +38,18 @@ namespace Code.Environment.Obstacles
 		}
 
 		private void CheckNeighbourTokens(Token token)
-			=> GetOffsetDirections(token)
-			   .Where(IsInBounces)
-			   .Select((d) => _field[d])
-			   .Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
-			   .ForEach(HandleObstacle);
+		{
+			if (token == false)
+			{
+				return;
+			}
+
+			GetOffsetDirections(token)
+				.Where(IsInBounces)
+				.Select((d) => _field[d])
+				.Where((t) => IsNotEmpty(t) && IsNotChangedOnThisAction(t))
+				.ForEach(HandleObstacle);
+		}
 
 		private bool IsNotChangedOnThisAction(Token token)
 			=> _changedTokensOnThisAction.Contains(token) == false;

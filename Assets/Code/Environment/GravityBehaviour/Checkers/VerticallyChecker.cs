@@ -8,17 +8,17 @@ namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public class VerticallyChecker : BaseDirectionChecker
 	{
-		public VerticallyChecker(Field field)
-			: base(field) { }
+		private Token[,] _tokens;
 
 		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
 		{
+			_tokens = tokens;
 			return tokens.Where(TokenIsContender)
 			             .Select(Indexes)
 			             .ToDictionary((p) => p, GetDirection);
 		}
 
-		private Vector2Int Indexes(Token token) => Field.GetIndexesFor(token); // TODO: !!!
+		private Vector2Int Indexes(Token token) => _tokens.IndexesOf(token);
 
 		protected override Vector3 GetDirection(int x, int y) => Vector3.down;
 

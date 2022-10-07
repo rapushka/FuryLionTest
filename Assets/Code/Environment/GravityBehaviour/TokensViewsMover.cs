@@ -23,7 +23,9 @@ namespace Code.Environment.GravityBehaviour
 
 		public void MoveView(Token token, Vector3 to)
 		{
-			_coroutines.StartRoutine(Move(token, to));
+			token.transform.Translate(to);
+
+			// _coroutines.StartRoutine(Move(token, to));
 		}
 
 		private IEnumerator Move(Component token, Vector3 to)
