@@ -21,6 +21,6 @@ namespace Code.Environment
 		private static bool IsNeighbourIndexes(Vector2Int first, Vector2Int second)
 			=> IsNeighbourAt(first.x, second.x) && IsNeighbourAt(first.y, second.y);
 
-		private static bool IsNeighbourAt(int first, int second) => Mathf.Abs(first - second) >= 1;
+		private static bool IsNeighbourAt(int first, int second) => Mathf.Abs(first - second) <= 1;
 	}
 }
