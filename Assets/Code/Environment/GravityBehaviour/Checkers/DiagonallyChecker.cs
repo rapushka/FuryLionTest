@@ -7,11 +7,23 @@ namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public class DiagonallyChecker : BaseDirectionChecker
 	{
+		public DiagonallyChecker(Field field)
+			: base(field) { }
+
 		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
-			=> tokens.FirstOrDefault(TokenIsContender)
-			         ?.transform.position.ToVectorInt() // TODO: !!!
-			         .ToDictionary((p) => p, GetDirection)
-			         ?? new Dictionary<Vector2Int, Vector3>();
+		{
+			var token = tokens.FirstOrDefault(TokenIsContender);
+
+			return token == null
+				? EmptyDictionary()
+				: DictionaryWithSingleToken(token);
+		}
+
+		private static Dictionary<Vector2Int, Vector3> EmptyDictionary() => new();
+
+		private Dictionary<Vector2Int, Vector3> DictionaryWithSingleToken(Token token)
+			=> Field.GetIndexesFor(token)
+			        .ToDictionary((p) => p, GetDirection);
 
 		protected override Vector3 GetDirection(int x, int y)
 			=> IsOnBottomBorder(y) ? Vector3.zero

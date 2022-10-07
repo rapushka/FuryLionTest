@@ -7,6 +7,13 @@ namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public abstract class BaseDirectionChecker : IDirectionChecker
 	{
+		protected readonly Field Field;
+
+		protected BaseDirectionChecker(Field field)
+		{
+			Field = field;
+		}
+		
 		protected Token[,] Tokens { get; private set; }
 
 		public bool HasContenderTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
