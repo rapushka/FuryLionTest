@@ -27,17 +27,13 @@ namespace Code.Environment.GravityBehaviour
 				return;
 			}
 
-			var target = Vector3.Lerp(token.transform.position, to, ScaledSpeed);
-			token.transform.DOMove(target, 1f);
-			// _coroutines.StartRoutine(Move(token, to));
+			token.transform.Translate(to);
 		}
 
 		private IEnumerator Move(Component token, Vector3 direction)
 		{
 			var target = Vector3.Lerp(token.transform.position, direction, ScaledSpeed);
 			token.transform.DOMove(target, 1f);
-			
-			// token.transform.position = target;
 			
 			yield break;
 		}
