@@ -1,6 +1,7 @@
 using System.Collections;
 using Code.Gameplay.Tokens;
 using Code.Inner.CustomMonoBehaviours;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -26,12 +27,18 @@ namespace Code.Environment.GravityBehaviour
 				return;
 			}
 
-			_coroutines.StartRoutine(Move(token, to));
+			var target = Vector3.Lerp(token.transform.position, to, ScaledSpeed);
+			token.transform.DOMove(target, 1f);
+			// _coroutines.StartRoutine(Move(token, to));
 		}
 
-		private IEnumerator Move(Component token, Vector3 targetPosition)
+		private IEnumerator Move(Component token, Vector3 direction)
 		{
-			token.transform.Translate(targetPosition);
+			var target = Vector3.Lerp(token.transform.position, direction, ScaledSpeed);
+			token.transform.DOMove(target, 1f);
+			
+			// token.transform.position = target;
+			
 			yield break;
 		}
 	}

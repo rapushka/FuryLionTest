@@ -47,7 +47,7 @@ namespace Code.Environment.Bonuses
 			=> token == true
 			   && token.TokenUnit == _unit
 			   && token.BonusType == BonusType.None
-			   && _chain.Contains(token.transform.position) == false;
+			   && _chain.Contains(token.transform.position) == false; // TODO: !!!
 
 		private static void BonusCantBeSpawned()
 		{

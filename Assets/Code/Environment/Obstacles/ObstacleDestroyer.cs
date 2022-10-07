@@ -45,7 +45,7 @@ namespace Code.Environment.Obstacles
 			   .ForEach(HandleObstacle);
 
 		private bool IsNotChangedOnThisAction(Component token)
-			=> _changedTokensOnThisAction.Contains(token.transform.position) == false;
+			=> _changedTokensOnThisAction.Contains(token.transform.position) == false; // TODO: !!!
 
 		private IEnumerable<Vector2> GetOffsetDirections(Vector2 position)
 			=> _offsets.Select((offset) => offset + position);
@@ -59,7 +59,7 @@ namespace Code.Environment.Obstacles
 		private void HandleObstacle(Token token)
 		{
 			var unit = token.TokenUnit;
-			var position = token.transform.position;
+			var position = token.transform.position; // TODO: !!!
 
 			if (unit is TokenUnit.Ice or TokenUnit.RockLevel1)
 			{
