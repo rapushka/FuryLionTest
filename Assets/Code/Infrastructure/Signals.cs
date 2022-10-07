@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.BaseSignals;
-using UnityEngine;
 
 namespace Code.Infrastructure
 {
@@ -10,29 +9,29 @@ namespace Code.Infrastructure
 
 	public class MouseUpSignal { }
 
-	public class TokenHitSignal : ImmutableSignal<Vector2>
+	public class TokenHitSignal : ImmutableSignal<Token>
 	{
-		public TokenHitSignal(Vector2 value)
+		public TokenHitSignal(Token value)
 			: base(value) { }
 	}
 
-	public class TokenClickSignal : ImmutableSignal<Vector2>
+	public class TokenClickSignal : ImmutableSignal<Token>
 	{
-		public TokenClickSignal(Vector2 value)
+		public TokenClickSignal(Token value)
 			: base(value) { }
 	}
 
-	public class ChainTokenAddedSignal : ImmutableSignal<Vector2>
+	public class ChainTokenAddedSignal : ImmutableSignal<Token>
 	{
-		public ChainTokenAddedSignal(Vector2 value)
+		public ChainTokenAddedSignal(Token value)
 			: base(value) { }
 	}
 
 	public class ChainLastTokenRemovedSignal { }
 
-	public class ChainEndedSignal : ImmutableSignal<IEnumerable<Vector2>>
+	public class ChainEndedSignal : ImmutableSignal<IEnumerable<Token>>
 	{
-		public ChainEndedSignal(IEnumerable<Vector2> value)
+		public ChainEndedSignal(IEnumerable<Token> value)
 			: base(value) { }
 	}
 
@@ -42,9 +41,9 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class ChainComposedSignal : ImmutableSignal<IEnumerable<Vector2>>
+	public class ChainComposedSignal : ImmutableSignal<IEnumerable<Token>>
 	{
-		public ChainComposedSignal(IEnumerable<Vector2> value)
+		public ChainComposedSignal(IEnumerable<Token> value)
 			: base(value) { }
 	}
 

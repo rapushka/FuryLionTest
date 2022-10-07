@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Code.Gameplay.ScoreSystem
 
 		public void Initialize() => InvokeValueUpdate();
 
-		public void OnChainComposed(IEnumerable<Vector2> chain)
+		public void OnChainComposed(IEnumerable<Token> chain)
 		{
 			_currentScore += ScaleScore(chain.Count());
 			InvokeValueUpdate();

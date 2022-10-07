@@ -36,8 +36,8 @@ namespace Code.Gameplay.Tokens
 
 		public Token CreateTokenForUnit(TokenUnit tokenUnit, Vector3 position)
 			=> HasPooledTokenForThisUnit(tokenUnit, out var token)
-				? EnableToken(position, token)
-				: CreateNewToken(tokenUnit, position);
+				? EnableTokenAt(position, token)
+				: CreateNewTokenAt(position, tokenUnit);
 
 		public void DestroyToken(Token token)
 		{
@@ -46,10 +46,10 @@ namespace Code.Gameplay.Tokens
 			_signalBus.Fire(new TokenDestroyedSignal(token));
 		}
 
-		private static Token EnableToken(Vector3 position, Token token)
+		private static Token EnableTokenAt(Vector3 position, Token token)
 		{
-			token.gameObject.SetActive(true);
 			token.transform.position = position;
+			token.gameObject.SetActive(true);
 			return token;
 		}
 
@@ -59,7 +59,7 @@ namespace Code.Gameplay.Tokens
 			return token is not null;
 		}
 
-		private Token CreateNewToken(TokenUnit tokenUnit, Vector3 position)
+		private Token CreateNewTokenAt(Vector3 position, TokenUnit tokenUnit)
 		{
 			var token = InstantiateAtRoot(position, _tokenPrefabForType[tokenUnit]);
 			_createdTokens[tokenUnit].Add(token);

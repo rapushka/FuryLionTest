@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Code.Environment.GravityBehaviour.Checkers;
 using Code.Environment.GravityBehaviour.Movers;
 using Code.Gameplay.Tokens;
-using UnityEngine;
 using Zenject;
 
 namespace Code.Environment.GravityBehaviour
@@ -13,55 +11,54 @@ namespace Code.Environment.GravityBehaviour
 		private readonly DirectionEmit _diagonal;
 
 		private Token[,] _tokens;
-		private bool _mayBePrecedents;
 
 		[Inject]
-		public Gravity()
+		public Gravity(TokensViewsMover tokensViewsMover)
 		{
-			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover());
-			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover());
+			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover(), tokensViewsMover);
+			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover(), tokensViewsMover);
 		}
 
 		public Token[,] Apply(Token[,] tokens)
 		{
 			_tokens = tokens;
-			_mayBePrecedents = true;
+			var mayBeContender = true;
 
-			while (_mayBePrecedents)
+			while (mayBeContender)
 			{
-				VerticallyCheck();
-				DiagonallyCheck();
+				mayBeContender = VerticallyCheck();
+				mayBeContender = DiagonallyCheck(mayBeContender);
 			}
 
 			return _tokens;
 		}
 
-		private void VerticallyCheck()
+		private bool VerticallyCheck()
 		{
-			if (_vertical.HasPrecedent(_tokens, out var positions))
+			var hasContender = _vertical.HasContender(_tokens, out var directionsForIndexes);
+			if (hasContender)
 			{
-				_tokens = _vertical.Move(_tokens, positions);
+				_tokens = _vertical.Move(_tokens, directionsForIndexes);
 			}
-			else
-			{
-				_mayBePrecedents = false;
-			}
+
+			return hasContender;
 		}
 
-		private void DiagonallyCheck()
+		private bool DiagonallyCheck(bool mayBeContender)
 		{
-			if (_mayBePrecedents == false
-			    && _diagonal.HasPrecedent(_tokens, out var positions)
-			    && positions is not null)
+			if (mayBeContender)
 			{
-				MoveDiagonally(positions);
+				return true;
 			}
-		}
 
-		private void MoveDiagonally(Dictionary<Vector2Int, Vector3> positions)
-		{
-			_tokens = _diagonal.Move(_tokens, positions);
-			_mayBePrecedents = true;
+			var hasContender = _diagonal.HasContender(_tokens, out var positions)
+			        && positions is not null;
+			if (hasContender)
+			{
+				_tokens = _diagonal.Move(_tokens, positions);
+			}
+
+			return hasContender;
 		}
 	}
 }

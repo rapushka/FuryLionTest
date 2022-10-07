@@ -8,12 +8,12 @@ namespace Code.Environment.GravityBehaviour.Movers
 	{
 		protected override void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> pair)
 		{
-			var position = pair.Key;
+			var indexes = pair.Key;
 			var direction = pair.Value;
 			
-			for (var y = position.y; y > 0 && BellowIsEmpty(Tokens, position.x, y); y--)
+			for (var y = indexes.y; y > 0 && BellowIsEmpty(Tokens, indexes.x, y); y--)
 			{
-				MoveToken(position.x, y, direction);
+				MoveToken(indexes.x, y, direction);
 			}
 		}
 

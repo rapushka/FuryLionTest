@@ -91,5 +91,21 @@ namespace Code.Extensions
 			var randomIndex = UnityEngine.Random.Range(0, array.Length);
 			return array[randomIndex];
 		}
+
+		public static Vector2Int IndexesOf<T>(this T[,] @this, T element)
+		{
+			for (var x = 0; x < @this.GetLength(0); x++)
+			{
+				for (var y = 0; y < @this.GetLength(1); y++)
+				{
+					if (Equals(@this[x, y], element))
+					{
+						return new Vector2Int(x, y);
+					}
+				}
+			}
+
+			throw new ArgumentException("Array don't contain that element");
+		}
 	}
 }

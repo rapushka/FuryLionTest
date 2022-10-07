@@ -14,7 +14,6 @@ namespace Code.Environment.Bonuses
 		private readonly SignalBus _signalBus;
 		private readonly Vector2Int _fieldSizes;
 		private readonly int _bombExplosionRange;
-		private readonly Vector2 _fieldOffset;
 
 		[Inject]
 		public BonusesActivator
@@ -24,27 +23,24 @@ namespace Code.Environment.Bonuses
 			_signalBus = signalBus;
 			_fieldSizes = fieldConfig.FieldSizes;
 			_bombExplosionRange = bonusesConfig.BombExplosionRange;
-			_fieldOffset = fieldConfig.Offset;
 		}
 
-		private Vector2 DirectedRange => _bombExplosionRange * Vector2.one;
+		private Vector2Int DirectedRange => _bombExplosionRange * Vector2Int.one;
 
-		public void OnChainComposed(IEnumerable<Vector2> chain) => chain.ForEach(HandleToken);
+		public void OnChainComposed(IEnumerable<Token> chain) => chain.ForEach(HandleToken);
 
-		public void OnTokenClick(Vector2 position)
+		public void OnTokenClick(Token token)
 		{
-			var b = _field[position].BonusType is BonusType.HorizontalRocket or BonusType.Bomb;
-			HandleToken(position);
+			var b = token.BonusType is BonusType.HorizontalRocket or BonusType.Bomb;
+			HandleToken(token);
 			if (b)
 			{
 				_signalBus.Fire<MouseUpSignal>();
 			}
 		}
 
-		private void HandleToken(Vector2 position)
+		private void HandleToken(Token token)
 		{
-			var token = _field[position];
-
 			if (token == false)
 			{
 				return;
@@ -52,32 +48,34 @@ namespace Code.Environment.Bonuses
 
 			if (token.BonusType == BonusType.HorizontalRocket)
 			{
-				ActivateHorizontalRocket(position);
+				ActivateHorizontalRocket(_field.GetIndexesFor(token));
 			}
 			else if (token.BonusType == BonusType.Bomb)
 			{
-				ActivateBomb(position);
+				ActivateBomb(_field.GetIndexesFor(token));
 			}
 		}
 
-		private void ActivateHorizontalRocket(Vector2 position)
-			=> position.ForX(_fieldOffset.x, _fieldOffset.x + _fieldSizes.x, Destroy);
+		private void ActivateHorizontalRocket(Vector2Int indexes)
+			=> indexes.ForX(0, _fieldSizes.x, Destroy);
 
-		private void ActivateBomb(Vector2 position)
-			=> position.DoubleFor(from: position - DirectedRange, to: position + DirectedRange + Vector2.one, Destroy);
-
-		private void Destroy(Vector2 position)
+		private void ActivateBomb(Vector2Int indexes)
 		{
-			if (IsInFieldBounces(position)
-			    && _field[position] == true
-			    && IsDestroyable(_field[position]))
+			indexes.DoubleFor(from: indexes - DirectedRange, to: indexes + DirectedRange + Vector2Int.one, Destroy);
+		}
+
+		private void Destroy(Vector2Int indexes)
+		{
+			if (IsInFieldBounces(indexes)
+			    && _field[indexes] == true
+			    && IsDestroyable(_field[indexes]))
 			{
-				_field.DestroyTokenAt(position);
+				_field.DestroyTokenAt(indexes);
 			}
 		}
 
-		private bool IsInFieldBounces(Vector2 position)
-			=> position.IsInBouncesIncluding(_fieldOffset, _fieldSizes - _fieldOffset);
+		private bool IsInFieldBounces(Vector2Int indexes)
+			=> indexes.IsInBouncesIncluding(Vector2Int.zero, _fieldSizes - Vector2Int.one);
 
 		private static bool IsDestroyable(Token token) => token.TokenUnit is not TokenUnit.Border;
 	}

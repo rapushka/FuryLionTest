@@ -47,18 +47,20 @@ namespace Code.Environment
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public void DestroyTokensInChain(IEnumerable<Vector2> chain)
+		public Vector2Int GetIndexesFor(Token token) => _tokens.IndexesOf(token);
+
+		public void DestroyTokensInChain(IEnumerable<Token> chain)
 		{
-			chain.ForEach(DestroyTokenAt);
+			chain.ForEach(DestroyToken);
 		}
 
 		public void UpdateField()
 		{
-			var fieldHandled = false;
-			while (fieldHandled == false)
+			var fieldNeedHandle = true;
+			while (fieldNeedHandle)
 			{
 				ApplyGravity();
-				fieldHandled = TrySpawnTokens() == false;
+				fieldNeedHandle = TrySpawnTokens();
 			}
 		}
 
@@ -74,6 +76,8 @@ namespace Code.Environment
 			_tokensPool.DestroyToken(token);
 			this[position] = null;
 		}
+
+		private void DestroyToken(Token token) => DestroyTokenAt(GetIndexesFor(token));
 
 		public void SwitchTokenAt(Vector2 position, TokenUnit to)
 		{

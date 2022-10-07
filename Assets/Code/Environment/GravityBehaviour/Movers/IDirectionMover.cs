@@ -6,6 +6,6 @@ namespace Code.Environment.GravityBehaviour.Movers
 {
 	public interface IDirectionMover
 	{
-		Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions);
+		Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> directionsForIndexes, TokensViewsMover mover);
 	}
 }
