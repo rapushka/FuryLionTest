@@ -23,19 +23,29 @@ namespace Code.Environment.GravityBehaviour
 
 		public void MoveView(Token token, Vector3 to)
 		{
-			token.transform.Translate(to);
-
-			// _coroutines.StartRoutine(Move(token, to));
+			_coroutines.StartRoutine(CoroutineRealization(token, to));
 		}
 
-		private IEnumerator Move(Component token, Vector3 to)
+		private IEnumerator CoroutineRealization(Component token, Vector3 to)
 		{
-			// token.transform.Translate(to);
+			var target = token.transform.position + to;
 			
-			var target = Vector3.Lerp(token.transform.position, to, ScaledSpeed);
-			token.transform.DOMove(target, 1f);
+			while (token.transform.position !=target)
+			{
+				token.transform.position = Vector3.Lerp(token.transform.position, target, ScaledSpeed);
+				yield return null;
+			}
+		}
 
-			yield break;
+		private void OneFrameRealization(Component token, Vector3 to)
+		{
+			token.transform.Translate(to);
+		}
+
+		private void DoTweenRealization(Token token, Vector3 to)
+		{
+			var target = token.transform.position + to;
+			token.transform.DOMove(target, 0.5f);
 		}
 	}
 }
