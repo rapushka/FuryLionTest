@@ -23,6 +23,7 @@ namespace Code.GameLoop.Goals.Progress.ProgressObservers
 
 			_countRemain--;
 
+			GoalProgressInvoke(_countRemain);
 			if (_countRemain <= 0)
 			{
 				GoalReachedInvoke();

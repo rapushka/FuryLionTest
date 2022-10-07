@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
@@ -11,17 +12,19 @@ namespace Code.GameLoop.Goals.Progress
 {
 	public class GoalsProgress : IInitializable, IDisposable
 	{
-		private readonly Level _currentLevel;
+		private readonly List<Goal> _goals;
 		private readonly ObserversCreator _observersCreator;
 		private readonly SignalBus _signalBus;
 
 		private List<ProgressObserver> _progressObservers;
 		private List<ProgressObserver> _markForDeleting;
 
+		public IEnumerable<ProgressObserver> ProgressObservers => _progressObservers;
+
 		[Inject]
 		public GoalsProgress(Level currentLevel, ObserversCreator observersCreator, SignalBus signalBus)
 		{
-			_currentLevel = currentLevel;
+			_goals = currentLevel.Goals;
 			_observersCreator = observersCreator;
 			_signalBus = signalBus;
 		}
@@ -29,7 +32,7 @@ namespace Code.GameLoop.Goals.Progress
 		public void Initialize()
 		{
 			_markForDeleting = new List<ProgressObserver>();
-			_progressObservers = _observersCreator.CreateObserversListFor(_currentLevel.Goals);
+			_progressObservers = _observersCreator.CreateObserversListFor(_goals);
 			Subscribe();
 		}
 
