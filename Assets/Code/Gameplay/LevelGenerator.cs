@@ -13,16 +13,16 @@ namespace Code.Gameplay
 		private readonly Vector2 _offset;
 		private readonly float _step;
 		private readonly Level _level;
-		private readonly TokensFactory _tokensFactory;
+		private readonly TokensPool _tokensPool;
 
 		private TokenUnit[,] _tokenTypes;
 		private Token[,] _tokenGameObjects;
 
 		[Inject]
-		public LevelGenerator(Level level, IFieldConfig fieldConfig, TokensFactory tokensFactory)
+		public LevelGenerator(Level level, IFieldConfig fieldConfig, TokensPool tokensPool)
 		{
 			_level = level;
-			_tokensFactory = tokensFactory;
+			_tokensPool = tokensPool;
 			_step = fieldConfig.Step;
 			_offset = fieldConfig.Offset;
 		}
@@ -46,7 +46,7 @@ namespace Code.Gameplay
 			=> _tokenGameObjects.SetAtVector(IndexesToWorldPosition(i, j).ToVectorInt(), Value(tokenUnit, i, j));
 
 		private Token Value(TokenUnit tokenUnit, int i, int j)
-			=> _tokensFactory.CreateTokenForUnit(tokenUnit, ScalePosition(i, j));
+			=> _tokensPool.CreateTokenForUnit(tokenUnit, ScalePosition(i, j));
 
 		private Vector3 ScalePosition(int x, int y)
 			=> IndexesToWorldPosition(x, y) * _step + _offset;

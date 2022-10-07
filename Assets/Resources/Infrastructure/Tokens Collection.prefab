@@ -46,25 +46,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tokens:
     _entries:
-    - _type: 0
+    - _unit: 0
       _prefab: {fileID: 0}
-    - _type: 1
+    - _unit: 1
       _prefab: {fileID: 4161296535719208669, guid: 9126a807cd5a6524b8fd5f56e7d94aeb, type: 3}
-    - _type: 2
+    - _unit: 2
       _prefab: {fileID: 4161296535719208669, guid: 6f07209b866eaa54a9c4ecdffa976bf1, type: 3}
-    - _type: 3
+    - _unit: 3
       _prefab: {fileID: 4161296535719208669, guid: 5cee4e7ff233d4944af50fd42b183c13, type: 3}
-    - _type: 4
+    - _unit: 4
       _prefab: {fileID: 4161296535719208669, guid: 4a8f843cffcab2d43a45d51b44a577a9, type: 3}
-    - _type: 5
+    - _unit: 5
       _prefab: {fileID: 4161296535719208669, guid: 9829e13af9e6d4b4084f83dfedeb91b0, type: 3}
-    - _type: 6
+    - _unit: 6
       _prefab: {fileID: 185589334710097505, guid: c8b26499ff463a143ada27ec852a8330, type: 3}
-    - _type: 7
+    - _unit: 7
       _prefab: {fileID: 185589334710097505, guid: a452eff0ad8708f4396efc036aca8219, type: 3}
-    - _type: 8
+    - _unit: 8
       _prefab: {fileID: 185589334710097505, guid: b6168f4ef2b50204fbaf7239951b2103, type: 3}
-    - _type: 9
+    - _unit: 9
       _prefab: {fileID: 185589334710097505, guid: ce6093f64a3ff6946a60234438d425de, type: 3}
-    - _type: 10
-      _prefab: {fileID: 0}

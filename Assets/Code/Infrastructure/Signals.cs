@@ -48,7 +48,9 @@ namespace Code.Infrastructure
 			: base(value) { }
 	}
 
-	public class LevelLostSignal { }
+	public class GameLoseSignal { }
+
+	public class GameVictorySignal { }
 
 	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
 	{
@@ -61,4 +63,16 @@ namespace Code.Infrastructure
 		public BonusSpawnedSignal(Token value)
 			: base(value) { }
 	}
+
+	public class TokenDestroyedSignal : ImmutableSignal<Token>
+	{
+		public TokenDestroyedSignal(Token token)
+			: base(token) { }
+	}
+	
+	public class ResetButtonClickSignal { }
+	
+	public class AllGoalsReachedSignal { }
+
+	public class ActionsOverSignal { }
 }

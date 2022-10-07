@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Environment.GravityBehaviour;
 using Code.Gameplay;
 using Code.Extensions;
@@ -14,7 +15,7 @@ namespace Code.Environment
 		private readonly LevelGenerator _levelGenerator;
 		private readonly Gravity _gravity;
 		private readonly TokensSpawner _spawner;
-		private readonly TokensFactory _tokensFactory;
+		private readonly TokensPool _tokensPool;
 
 		private Token[,] _tokens;
 
@@ -24,13 +25,13 @@ namespace Code.Environment
 			LevelGenerator levelGenerator,
 			Gravity gravity,
 			TokensSpawner spawner,
-			TokensFactory tokensFactory
+			TokensPool tokensPool
 		)
 		{
 			_levelGenerator = levelGenerator;
 			_gravity = gravity;
 			_spawner = spawner;
-			_tokensFactory = tokensFactory;
+			_tokensPool = tokensPool;
 		}
 
 		public void Initialize()
@@ -46,34 +47,12 @@ namespace Code.Environment
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
-		public void OnChainComposed(IEnumerable<Vector2> chain)
+		public void DestroyTokensInChain(IEnumerable<Vector2> chain)
 		{
 			chain.ForEach(DestroyTokenAt);
-			UpdateField();
 		}
 
-		public void DestroyTokenAt(Vector2 position)
-		{
-			var token = this[position];
-			
-			if (token == false)
-			{
-				return;
-			}
-
-			_tokensFactory.DestroyToken(token);
-			this[position] = null;
-		}
-
-		public void SwitchTokenAt(Vector2 position, TokenUnit to)
-		{
-			DestroyTokenAt(position);
-			this[position] = _tokensFactory.CreateTokenForUnit(to, position);
-		}
-
-		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
-
-		private void UpdateField()
+		public void UpdateField()
 		{
 			var fieldHandled = false;
 			while (fieldHandled == false)
@@ -82,6 +61,29 @@ namespace Code.Environment
 				fieldHandled = TrySpawnTokens() == false;
 			}
 		}
+
+		public void DestroyTokenAt(Vector2 position)
+		{
+			var token = this[position];
+
+			if (token == false)
+			{
+				return;
+			}
+
+			_tokensPool.DestroyToken(token);
+			this[position] = null;
+		}
+
+		public void SwitchTokenAt(Vector2 position, TokenUnit to)
+		{
+			DestroyTokenAt(position);
+			this[position] = _tokensPool.CreateTokenForUnit(to, position);
+		}
+
+		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
+
+		public int Count(Func<Token, bool> predicate) => _tokens.Where(predicate).Count();
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
 
