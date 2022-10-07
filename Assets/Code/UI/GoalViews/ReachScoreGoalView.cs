@@ -17,9 +17,15 @@ namespace Code.UI.GoalViews
 			base.Construct(observer);
 			
 			_targetValue = targetValue;
+			UpdateView(0);
 		}
 
 		protected override void OnGoalProgress(ProgressObserver sender, int newValue)
+		{
+			UpdateView(newValue);
+		}
+
+		private void UpdateView(int newValue)
 		{
 			_mask.fillAmount = (float)newValue / _targetValue;
 			_text.text = $"{newValue} / {_targetValue}";
