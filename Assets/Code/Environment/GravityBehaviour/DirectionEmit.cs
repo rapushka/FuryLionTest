@@ -19,9 +19,9 @@ namespace Code.Environment.GravityBehaviour
 		}
 
 		public bool HasContender(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
-			=> _checker.HasPrecedentTokens(tokens, out result);
+			=> _checker.HasContenderTokens(tokens, out result);
 
-		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions)
-			=> _mover.Move(tokens, positions, _tokensViewsMover);
+		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> directionsForIndexes)
+			=> _mover.Move(tokens, directionsForIndexes, _tokensViewsMover);
 	}
 }

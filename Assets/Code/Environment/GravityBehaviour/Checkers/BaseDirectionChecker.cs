@@ -9,7 +9,7 @@ namespace Code.Environment.GravityBehaviour.Checkers
 	{
 		protected Token[,] Tokens { get; private set; }
 
-		public bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
+		public bool HasContenderTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result)
 		{
 			Tokens = tokens;
 
@@ -17,7 +17,7 @@ namespace Code.Environment.GravityBehaviour.Checkers
 			return result.Any();
 		}
 
-		protected bool TokenIsPrecedent(Token token, int x, int y)
+		protected bool TokenIsContender(Token token, int x, int y)
 			=> token == true
 			   && token.ApplyGravity
 			   && TokenOnDirectionIsEmpty(x, y);

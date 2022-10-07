@@ -12,15 +12,15 @@ namespace Code.Environment.GravityBehaviour.Movers
 		private TokensViewsMover _mover;
 		protected Token[,] Tokens { get; private set; }
 
-		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> positions, TokensViewsMover mover)
+		public Token[,] Move(Token[,] tokens, Dictionary<Vector2Int, Vector3> directionsForIndexes, TokensViewsMover mover)
 		{
 			_mover = mover;
 			Tokens = tokens;
-			positions.ForEach(FallTokenAtDirection);
+			directionsForIndexes.ForEach(FallTokenAtDirection);
 			return Tokens;
 		}
 
-		protected abstract void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> obj);
+		protected abstract void FallTokenAtDirection(KeyValuePair<Vector2Int, Vector3> pair);
 
 		protected void MoveToken(int x, int y, Vector3 to)
 		{
