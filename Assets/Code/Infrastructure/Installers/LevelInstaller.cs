@@ -16,6 +16,7 @@ using Code.Input;
 using Code.Levels;
 using Code.UI.GoalViews;
 using Code.View;
+using Code.View.Animations;
 using Code.View.SpritesBehaviour;
 using UnityEngine;
 using Zenject;
@@ -67,6 +68,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingle<BonusesActivator>()
 				.BindSingle<ObserversCreator>()
 				.BindSingle<TokensViewsMover>()
+				.BindSingle<BonusAnimator>()
 				.BindSingleWithInterfaces<ActionsRemaining>()
 				.BindSingleWithInterfaces<TokensPool>()
 				.BindSingleWithInterfaces<Field>()
@@ -108,6 +110,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
+				.BindSignalTo<BonusSpawnedSignal, BonusAnimator>((x, v) => x.OnBonusSpawned(v.Value))
 				.BindSignalTo<AllGoalsReachedSignal, GameCycle>((x) => x.OnAllGoalsReached)
 				.BindSignalTo<ActionsOverSignal, GameCycle>((x) => x.OnActionsOver)
 				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
