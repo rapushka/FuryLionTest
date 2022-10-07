@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.GameLoop.Goals.Progress;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using UnityEngine;

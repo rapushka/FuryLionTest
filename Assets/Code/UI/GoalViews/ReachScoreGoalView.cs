@@ -20,10 +20,7 @@ namespace Code.UI.GoalViews
 			UpdateView(0);
 		}
 
-		protected override void OnGoalProgress(ProgressObserver sender, int newValue)
-		{
-			UpdateView(newValue);
-		}
+		protected override void OnGoalProgress(ProgressObserver sender, int newValue) => UpdateView(newValue);
 
 		private void UpdateView(int newValue)
 		{

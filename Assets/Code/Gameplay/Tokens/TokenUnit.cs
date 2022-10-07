@@ -11,7 +11,6 @@ namespace Code.Gameplay.Tokens
 		RockLevel1,
 		RockLevel2,
 		Ice,
-		Border,
-		RandomColor
+		Border
 	}
 }

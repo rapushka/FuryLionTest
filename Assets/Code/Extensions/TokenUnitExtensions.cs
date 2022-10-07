@@ -19,7 +19,6 @@ namespace Code.Extensions
 				TokenUnit.RockLevel2  => Color.HSVToRGB(0.3f, 0.3f, 0.3f),
 				TokenUnit.Ice         => Color.cyan,
 				TokenUnit.Border      => Color.black,
-				TokenUnit.RandomColor => Color.white,
 				_                     => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
 	}
