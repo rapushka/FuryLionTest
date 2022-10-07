@@ -17,6 +17,15 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(new MusicAudioSource(_musicSource))
 				.BindSingleFromInstance(new SfxAudioSource(_sfxSource))
 				;
+			
+			SubscribeSignals();
+		}
+
+		private void SubscribeSignals()
+		{
+			Container
+				.BindSignalTo<ChainTokenAddedSignal, SfxAudioSource>((x) => x.PlayTokenAddedToChain)
+				;
 		}
 	}
 }

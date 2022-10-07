@@ -10,5 +10,10 @@ namespace Code.Audio
 		{
 			_sfxSource = sfxSource;
 		}
+
+		public void PlayTokenAddedToChain()
+		{
+			_sfxSource.PlayOneShot(_sfxSource.clip);
+		}
 	}
 }
