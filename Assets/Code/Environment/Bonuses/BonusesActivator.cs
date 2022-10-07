@@ -75,7 +75,7 @@ namespace Code.Environment.Bonuses
 		}
 
 		private bool IsInFieldBounces(Vector2Int indexes)
-			=> indexes.IsInBouncesIncluding(Vector2Int.zero, _fieldSizes);
+			=> indexes.IsInBouncesIncluding(Vector2Int.zero, _fieldSizes - Vector2Int.one);
 
 		private static bool IsDestroyable(Token token) => token.TokenUnit is not TokenUnit.Border;
 	}
