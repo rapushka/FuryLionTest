@@ -16,25 +16,26 @@ namespace Code.Environment.GravityBehaviour
 		public TokensViewsMover(CoroutinesHandler coroutines)
 		{
 			_coroutines = coroutines;
-			_speed = 3f;
+			_speed = 50f;
 		}
 
 		private float ScaledSpeed => Time.deltaTime * _speed;
 
 		public void MoveView(Token token, Vector3 to)
 		{
-			_coroutines.StartRoutine(CoroutineRealization(token, to));
+			_coroutines.StartCoroutine(CoroutineRealization(token, to));
 		}
 
 		private IEnumerator CoroutineRealization(Component token, Vector3 to)
 		{
-			var target = token.transform.position + to;
-			
-			while (token.transform.position !=target)
+			for (var i = 0; i < _speed; i++)
 			{
-				token.transform.position = Vector3.Lerp(token.transform.position, target, ScaledSpeed);
+				token.transform.Translate(to * (1 / _speed));
 				yield return null;
+
 			}
+			
+			yield break;
 		}
 
 		private void OneFrameRealization(Component token, Vector3 to)
@@ -42,10 +43,10 @@ namespace Code.Environment.GravityBehaviour
 			token.transform.Translate(to);
 		}
 
-		private void DoTweenRealization(Token token, Vector3 to)
+		private void DoTweenRealization(Component token, Vector3 to)
 		{
 			var target = token.transform.position + to;
-			token.transform.DOMove(target, 0.5f);
+			token.transform.DOMove(target, 1 / _speed);
 		}
 	}
 }
