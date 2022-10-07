@@ -857,6 +857,7 @@ MonoBehaviour:
   _tokensSpriteSheet: {fileID: 11400000, guid: 3da395e4fcd048c48a36cafa93a6bb93, type: 2}
   _goalsRootTransform: {fileID: 1597377807}
   _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
+  _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
 --- !u!1 &1597377806
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ namespace Code.UI.GoalViews
 	public abstract class GoalView : MonoBehaviour
 	{
 		[SerializeField] private CanvasGroup _canvasGroup;
+		
 		private ProgressObserver _observer;
 
 		protected void Construct(ProgressObserver observer)

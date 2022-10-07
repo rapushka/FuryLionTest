@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Code.Extensions;
 using Code.GameLoop.Goals.Progress;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
+using Code.Gameplay.Tokens;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +13,8 @@ namespace Code.UI.GoalViews
 		private readonly GoalsProgress _observers;
 		private readonly Transform _goalsRoot;
 		private readonly ReachScoreGoalView _reachScoreViewPrefab;
+		private readonly DestroyTokensGoalView _destroyTokensViewPrefab;
+		private readonly Dictionary<TokenUnit, Token> _tokens;
 
 		private Dictionary<ProgressObserver, GoalView> _viewsForObservers;
 
@@ -19,24 +23,49 @@ namespace Code.UI.GoalViews
 		(
 			GoalsProgress goalsProgress,
 			GoalsRoot goalsRoot,
-			ReachScoreGoalView reachScoreViewPrefab
+			ReachScoreGoalView reachScoreViewPrefab,
+			DestroyTokensGoalView destroyTokensViewPrefab,
+			TokensCollection tokens
 		)
 		{
-			_reachScoreViewPrefab = reachScoreViewPrefab;
 			_observers = goalsProgress;
 			_goalsRoot = goalsRoot.Transform;
+			_reachScoreViewPrefab = reachScoreViewPrefab;
+			_destroyTokensViewPrefab = destroyTokensViewPrefab;
+			_tokens = tokens.AsDictionary();
 		}
 
-		public void Initialize()
+		public void Initialize() => CreateViewsForGoalsObservers();
+
+		private void CreateViewsForGoalsObservers() => _observers.ProgressObservers.ForEach(CreateViewForEntry);
+
+		private void CreateViewForEntry(ProgressObserver observer)
 		{
-			foreach (var observer in _observers.ProgressObservers)
+			if (observer is ScoreValueReachedObserver scoreValueReachedObserver)
 			{
-				if (observer is ScoreValueReachedObserver reachScoreValue)
-				{
-					Object.Instantiate(_reachScoreViewPrefab, _goalsRoot)
-					      .Construct(reachScoreValue, reachScoreValue.TargetScoreValue);
-				}
+				CreateScoreReachGoal(scoreValueReachedObserver);
+			}
+			else if (observer is DestroyTokensOfTypeObserver destroyTokensOfTypeObserver)
+			{
+				CreateDestroyTokensGoal(destroyTokensOfTypeObserver);
 			}
 		}
+
+		private void CreateScoreReachGoal(ScoreValueReachedObserver observer)
+		{
+			Object.Instantiate(_reachScoreViewPrefab, _goalsRoot)
+			      .Construct(observer, observer.TargetScoreValue);
+		}
+
+		private void CreateDestroyTokensGoal(DestroyTokensOfTypeObserver observer)
+		{
+			var sprite = GetSpriteForToken(observer.TargetUnit);
+			var targetCount = observer.TargetCount;
+
+			Object.Instantiate(_destroyTokensViewPrefab, _goalsRoot)
+			      .Construct(observer, targetCount, sprite);
+		}
+
+		private Sprite GetSpriteForToken(TokenUnit unit) => _tokens[unit].Sprite;
 	}
 }

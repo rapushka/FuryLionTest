@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 6537140933483028020}
   - component: {fileID: 8237919886893590426}
   - component: {fileID: 8018331010628278352}
+  - component: {fileID: 2069276241008988132}
   m_Layer: 5
   m_Name: Destroy Tokens Goal
   m_TagString: Untagged
@@ -331,3 +332,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2069276241008988132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481578495975194629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d84573d1d9140238ce67729e6bbeb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 8018331010628278352}
+  _tokenSprite: {fileID: 2032143628677689048}
+  _text: {fileID: 4317444632763321780}
