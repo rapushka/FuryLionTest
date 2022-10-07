@@ -8,8 +8,8 @@ namespace Code.Environment.GravityBehaviour.Checkers
 	public class DiagonallyChecker : BaseDirectionChecker
 	{
 		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
-			=> tokens.FirstOrDefault(TokenIsPrecedent)
-			         ?.transform.position.ToVectorInt()
+			=> tokens.FirstOrDefault(TokenIsContender)
+			         ?.transform.position.ToVectorInt() // TODO: !!!
 			         .ToDictionary((p) => p, GetDirection)
 			         ?? new Dictionary<Vector2Int, Vector3>();
 

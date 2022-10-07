@@ -9,32 +9,30 @@ namespace Code.Environment.GravityBehaviour
 {
 	public class TokensViewsMover
 	{
-		private const float Speed = 3f;
+		private readonly float _speed;
 		private readonly CoroutinesHandler _coroutines;
 
 		[Inject]
 		public TokensViewsMover(CoroutinesHandler coroutines)
 		{
 			_coroutines = coroutines;
-		}
-		
-		private float ScaledSpeed => Time.deltaTime * Speed;
-
-		public void MoveView(Token token, in Vector3 to)
-		{
-			if (token == false)
-			{
-				return;
-			}
-
-			token.transform.Translate(to);
+			_speed = 3f;
 		}
 
-		private IEnumerator Move(Component token, Vector3 direction)
+		private float ScaledSpeed => Time.deltaTime * _speed;
+
+		public void MoveView(Token token, Vector3 to)
 		{
-			var target = Vector3.Lerp(token.transform.position, direction, ScaledSpeed);
-			token.transform.DOMove(target, 1f);
+			_coroutines.StartRoutine(Move(token, to));
+		}
+
+		private IEnumerator Move(Component token, Vector3 to)
+		{
+			// token.transform.Translate(to);
 			
+			var target = Vector3.Lerp(token.transform.position, to, ScaledSpeed);
+			token.transform.DOMove(target, 1f);
+
 			yield break;
 		}
 	}

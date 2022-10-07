@@ -6,6 +6,6 @@ namespace Code.Environment.GravityBehaviour.Checkers
 {
 	public interface IDirectionChecker
 	{
-		bool HasPrecedentTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result);
+		bool HasContenderTokens(Token[,] tokens, out Dictionary<Vector2Int, Vector3> result);
 	}
 }

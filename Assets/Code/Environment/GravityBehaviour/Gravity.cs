@@ -13,7 +13,6 @@ namespace Code.Environment.GravityBehaviour
 		private readonly DirectionEmit _diagonal;
 
 		private Token[,] _tokens;
-		private bool _mayBeContender;
 
 		[Inject]
 		public Gravity(TokensViewsMover tokensViewsMover)
@@ -25,43 +24,43 @@ namespace Code.Environment.GravityBehaviour
 		public Token[,] Apply(Token[,] tokens)
 		{
 			_tokens = tokens;
-			_mayBeContender = true;
+			var mayBeContender = true;
 
-			while (_mayBeContender)
+			while (mayBeContender)
 			{
-				VerticallyCheck();
-				DiagonallyCheck();
+				mayBeContender = VerticallyCheck();
+				mayBeContender = DiagonallyCheck(mayBeContender);
 			}
 
 			return _tokens;
 		}
 
-		private void VerticallyCheck()
+		private bool VerticallyCheck()
 		{
-			if (_vertical.HasContender(_tokens, out var positions))
+			var hasContender = _vertical.HasContender(_tokens, out var directionsForIndexes);
+			if (hasContender)
 			{
-				_tokens = _vertical.Move(_tokens, positions);
+				_tokens = _vertical.Move(_tokens, directionsForIndexes);
 			}
-			else
-			{
-				_mayBeContender = false;
-			}
+
+			return hasContender;
 		}
 
-		private void DiagonallyCheck()
+		private bool DiagonallyCheck(bool mayBeContender)
 		{
-			if (_mayBeContender == false
-			    && _diagonal.HasContender(_tokens, out var positions)
-			    && positions is not null)
+			if (mayBeContender)
 			{
-				MoveDiagonally(positions);
+				return true;
 			}
-		}
 
-		private void MoveDiagonally(Dictionary<Vector2Int, Vector3> positions)
-		{
-			_tokens = _diagonal.Move(_tokens, positions);
-			_mayBeContender = true;
+			var hasContender = _diagonal.HasContender(_tokens, out var positions)
+			        && positions is not null;
+			if (hasContender)
+			{
+				_tokens = _diagonal.Move(_tokens, positions);
+			}
+
+			return hasContender;
 		}
 	}
 }

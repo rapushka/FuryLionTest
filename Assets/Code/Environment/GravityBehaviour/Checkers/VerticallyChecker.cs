@@ -10,12 +10,12 @@ namespace Code.Environment.GravityBehaviour.Checkers
 	{
 		protected override Dictionary<Vector2Int, Vector3> FillResults(Token[,] tokens)
 		{
-			return tokens.Where(TokenIsPrecedent)
-			             .Select(Selector)
+			return tokens.Where(TokenIsContender)
+			             .Select(Indexes)
 			             .ToDictionary((p) => p, GetDirection);
 		}
 
-		private Vector2Int Selector(Token t) => t.transform.position.ToVectorInt();
+		private Vector2Int Indexes(Token t) => t.transform.position.ToVectorInt(); // TODO: !!!
 
 		protected override Vector3 GetDirection(int x, int y) => Vector3.down;
 
