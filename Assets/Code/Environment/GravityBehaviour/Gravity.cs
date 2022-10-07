@@ -13,21 +13,22 @@ namespace Code.Environment.GravityBehaviour
 		private readonly DirectionEmit _diagonal;
 
 		private Token[,] _tokens;
-		private bool _mayBePrecedents;
+		private bool _mayBeContender;
 
 		[Inject]
 		public Gravity()
 		{
-			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover());
-			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover());
+			var tokensViewsMover = new TokensViewsMover();
+			_vertical = new DirectionEmit(new VerticallyChecker(), new VerticallyMover(), tokensViewsMover);
+			_diagonal = new DirectionEmit(new DiagonallyChecker(), new DiagonallyMover(), tokensViewsMover);
 		}
 
 		public Token[,] Apply(Token[,] tokens)
 		{
 			_tokens = tokens;
-			_mayBePrecedents = true;
+			_mayBeContender = true;
 
-			while (_mayBePrecedents)
+			while (_mayBeContender)
 			{
 				VerticallyCheck();
 				DiagonallyCheck();
@@ -38,20 +39,20 @@ namespace Code.Environment.GravityBehaviour
 
 		private void VerticallyCheck()
 		{
-			if (_vertical.HasPrecedent(_tokens, out var positions))
+			if (_vertical.HasContender(_tokens, out var positions))
 			{
 				_tokens = _vertical.Move(_tokens, positions);
 			}
 			else
 			{
-				_mayBePrecedents = false;
+				_mayBeContender = false;
 			}
 		}
 
 		private void DiagonallyCheck()
 		{
-			if (_mayBePrecedents == false
-			    && _diagonal.HasPrecedent(_tokens, out var positions)
+			if (_mayBeContender == false
+			    && _diagonal.HasContender(_tokens, out var positions)
 			    && positions is not null)
 			{
 				MoveDiagonally(positions);
@@ -61,7 +62,7 @@ namespace Code.Environment.GravityBehaviour
 		private void MoveDiagonally(Dictionary<Vector2Int, Vector3> positions)
 		{
 			_tokens = _diagonal.Move(_tokens, positions);
-			_mayBePrecedents = true;
+			_mayBeContender = true;
 		}
 	}
 }

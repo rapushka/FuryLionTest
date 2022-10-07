@@ -54,11 +54,11 @@ namespace Code.Environment
 
 		public void UpdateField()
 		{
-			var fieldHandled = false;
-			while (fieldHandled == false)
+			var fieldNeedHandle = true;
+			while (fieldNeedHandle)
 			{
 				ApplyGravity();
-				fieldHandled = TrySpawnTokens() == false;
+				fieldNeedHandle = TrySpawnTokens();
 			}
 		}
 
