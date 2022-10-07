@@ -13,6 +13,7 @@ using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
 using Code.Input;
 using Code.Levels;
+using Code.UI.GoalViews;
 using Code.View;
 using Code.View.SpritesBehaviour;
 using UnityEngine;
@@ -30,6 +31,9 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
+		[SerializeField] private Transform _goalsRootTransform;
+		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
+		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -43,6 +47,9 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_tokensSpriteSheet)
+				.BindSingleFromInstance(new GoalsRoot(_goalsRootTransform))
+				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
+				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
 				.BindSingle<ChainView>()
@@ -64,6 +71,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleWithInterfaces<GoalsProgress>()
 				.BindSingleWithInterfaces<GameCycle>()
 				.BindSingleWithInterfaces<Score>()
+				.BindSingleWithInterfaces<GoalViewsContainer>()
 				;
 
 			SubscribeSignals();

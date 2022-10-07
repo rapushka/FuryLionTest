@@ -17,6 +17,7 @@ namespace Code.Gameplay.Tokens
 
 		public Sprite Sprite
 		{
+			get => _spriteRenderer.sprite;
 			set => _spriteRenderer.sprite = value;
 		}
 	}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
@@ -11,17 +12,19 @@ namespace Code.GameLoop.Goals.Progress
 {
 	public class GoalsProgress : IInitializable, IDisposable
 	{
-		private readonly Level _currentLevel;
+		private readonly List<Goal> _goals;
 		private readonly ObserversCreator _observersCreator;
 		private readonly SignalBus _signalBus;
 
 		private List<ProgressObserver> _progressObservers;
 		private List<ProgressObserver> _markForDeleting;
 
+		public IEnumerable<ProgressObserver> ProgressObservers => _progressObservers;
+
 		[Inject]
 		public GoalsProgress(Level currentLevel, ObserversCreator observersCreator, SignalBus signalBus)
 		{
-			_currentLevel = currentLevel;
+			_goals = currentLevel.Goals;
 			_observersCreator = observersCreator;
 			_signalBus = signalBus;
 		}
@@ -29,16 +32,16 @@ namespace Code.GameLoop.Goals.Progress
 		public void Initialize()
 		{
 			_markForDeleting = new List<ProgressObserver>();
-			_progressObservers = _observersCreator.CreateObserversListFor(_currentLevel.Goals);
+			_progressObservers = _observersCreator.CreateObserversListFor(_goals);
 			Subscribe();
 		}
 
 		public void Dispose() => Unsubscribe();
 
-		public void OnTokenDestroyed(Token token) 
+		public void OnTokenDestroyed(Token token)
 			=> CheckObserversOfType<DestroyTokensOfTypeObserver, Token>(token, InvokeOnTokenDestroyed);
 
-		public void OnScoreUpdate(int value) 
+		public void OnScoreUpdate(int value)
 			=> CheckObserversOfType<ScoreValueReachedObserver, int>(value, InvokeOnScoreUpdated);
 
 		private void Subscribe() => _progressObservers.ForEach((o) => o.GoalReached += OnGoalReached);
@@ -62,7 +65,7 @@ namespace Code.GameLoop.Goals.Progress
 		private void InvokeOnScoreUpdated(ScoreValueReachedObserver observer, int value)
 			=> observer.OnScoreUpdated(value);
 
-		private void InvokeOnTokenDestroyed(DestroyTokensOfTypeObserver observer, Token param) 
+		private void InvokeOnTokenDestroyed(DestroyTokensOfTypeObserver observer, Token param)
 			=> observer.OnTokenDestroyed(param.TokenUnit);
 
 		private void OnGoalReached(ProgressObserver sender)

@@ -4,26 +4,29 @@ namespace Code.GameLoop.Goals.Progress.ProgressObservers
 {
 	public abstract class DestroyTokensOfTypeObserver : ProgressObserver
 	{
-		private readonly TokenUnit _targetUnit;
+		private int _destroyedCount;
 
-		private int _countRemain;
-
-		protected DestroyTokensOfTypeObserver(int countRemain, TokenUnit targetUnit)
+		protected DestroyTokensOfTypeObserver(int targetCount, TokenUnit targetUnit)
 		{
-			_countRemain = countRemain;
-			_targetUnit = targetUnit;
+			TargetCount = targetCount;
+			TargetUnit = targetUnit;
 		}
+
+		public int TargetCount { get; }
+
+		public TokenUnit TargetUnit { get; }
 
 		public void OnTokenDestroyed(TokenUnit unit)
 		{
-			if (unit != _targetUnit)
+			if (unit != TargetUnit)
 			{
 				return;
 			}
 
-			_countRemain--;
+			_destroyedCount++;
+			GoalProgressInvoke(_destroyedCount);
 
-			if (_countRemain <= 0)
+			if (_destroyedCount >= TargetCount)
 			{
 				GoalReachedInvoke();
 			}
