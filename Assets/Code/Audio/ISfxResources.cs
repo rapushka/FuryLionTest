@@ -9,5 +9,7 @@ namespace Code.Audio
 		AudioClip BonusSpawned { get; }
 		
 		AudioClip TokenRemovedFromChain { get; }
+		
+		AudioClip GoalCompleted { get; }
 	}
 }

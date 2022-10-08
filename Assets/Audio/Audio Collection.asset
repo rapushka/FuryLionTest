@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: {fileID: 8300000, guid: b0b2b6ea91c95904a97c76b9f6e1c096, type: 3}
   _tokenAddedToChain: {fileID: 8300000, guid: 48c570ef3de4cae4185d6d5f0fdb888f, type: 3}
+  _tokenAddedToChainSfxPitchStep: 0.05
   _chainComposed: {fileID: 8300000, guid: 85b05da8e0f758140961931e75062b77, type: 3}
   _bonusSpawned: {fileID: 8300000, guid: a7d8e1b4e6daed94ca20e89f246d2015, type: 3}
-  _tokenAddedToChainSfxPitchStep: 0.05
+  _tokenRemovedFromChain: {fileID: 8300000, guid: 7da1490f66cb7114bb347877d412a7a5, type: 3}
+  _goalCompleted: {fileID: 8300000, guid: e7bc49584efdf354f8a2582ea4a7e8cf, type: 3}
