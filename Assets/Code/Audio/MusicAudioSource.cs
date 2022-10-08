@@ -7,6 +7,7 @@ namespace Code.Audio
 		public MusicAudioSource(AudioSource musicSource, AudioClip audiosMusic)
 		{
 			musicSource.clip = audiosMusic;
+			musicSource.Play();
 		}
 	}
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660572fb973845e6a5a1f34a400a011f, type: 3}
   m_Name: Audio Collection
   m_EditorClassIdentifier: 
-  _music: {fileID: 0}
-  _tokenAddedToChainSfx: {fileID: 0}
-  _chainComposedSfx: {fileID: 0}
+  _music: {fileID: 8300000, guid: b0b2b6ea91c95904a97c76b9f6e1c096, type: 3}
+  _tokenAddedToChainSfx: {fileID: 8300000, guid: 48c570ef3de4cae4185d6d5f0fdb888f, type: 3}
+  _chainComposedSfx: {fileID: 8300000, guid: a7d8e1b4e6daed94ca20e89f246d2015, type: 3}
