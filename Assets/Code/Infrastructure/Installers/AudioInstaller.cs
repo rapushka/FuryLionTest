@@ -18,7 +18,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstanceWithInterfaces(_audios)
 				.BindSingleFromInstance(new MusicAudioSource(_musicSource, _audios.Music))
 				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource, _audios.TokenAddedToChainSfxPitchStep))
-				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChainSfx))
+				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChain))
 				.BindSingleFromInstance(new SfiAudioSource(_sfxSource, _audios))
 				;
 			
@@ -33,6 +33,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<ChainLastTokenRemovedSignal, TokenAddedAudioPitch>((x) => x.DecreasePitch)
 				.BindSignalTo<ChainEndedSignal, TokenAddedAudioPitch>((x) => x.ResetPitch)
 				.BindSignalTo<ChainComposedSignal, SfiAudioSource>((x) => x.PlayChainComposed)
+				.BindSignalTo<BonusSpawnedSignal, SfiAudioSource>((x) => x.PlayBonusSpawned)
 				;
 		}
 	}

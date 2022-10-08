@@ -5,5 +5,6 @@ namespace Code.Audio
 	public interface ISfxResources
 	{
 		AudioClip ChainComposed { get; }
+		AudioClip BonusSpawned { get; }
 	}
 }
