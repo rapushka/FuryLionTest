@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -29,7 +28,7 @@ namespace Code.UI.Settings
 			_sfxToggle.onValueChanged.AddListener(OnSfxToggle);
 		}
 
-		private void OnDisable()
+		private void OnDestroy()
 		{
 			_buttonOK.onClick.RemoveListener(CloseWindow);
 			_musicToggle.onValueChanged.RemoveListener(OnMusicToggle);
@@ -38,6 +37,8 @@ namespace Code.UI.Settings
 
 		public void OpenWindow() => gameObject.SetActive(true);
 
+		private void CloseWindow() => gameObject.SetActive(false);
+		
 		private void OnMusicToggle(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, MusicVolume);
 
 		private void OnSfxToggle(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, SfxVolume);
@@ -50,7 +51,5 @@ namespace Code.UI.Settings
 			float volume = isEnabled ? defaultSoundVolume : soundTurnedOff;
 			_audioMixer.SetFloat(sfxVolume, volume);
 		}
-
-		private void CloseWindow() => gameObject.SetActive(false);
 	}
 }

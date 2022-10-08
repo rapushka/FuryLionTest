@@ -18,6 +18,6 @@ namespace Code.UI.Settings
 
 		private void OnEnable() => _buttonComponent.onClick.AddListener(_settingsWindow.OpenWindow);
 
-		private void OnDisable() => _buttonComponent.onClick.RemoveListener(_settingsWindow.OpenWindow);
+		private void OnDestroy() => _buttonComponent.onClick.RemoveListener(_settingsWindow.OpenWindow);
 	}
 }
