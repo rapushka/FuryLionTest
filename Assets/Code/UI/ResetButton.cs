@@ -1,6 +1,6 @@
-using Code.UI;
+using Code.Infrastructure;
 
-namespace Code.Infrastructure.Installers
+namespace Code.UI
 {
 	public class ResetButton : UnityActionToSignalAdapter<ResetButtonClickSignal> { }
 }

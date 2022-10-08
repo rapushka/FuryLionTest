@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
-using Code.Infrastructure.BaseSignals;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;

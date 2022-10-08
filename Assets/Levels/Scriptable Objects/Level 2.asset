@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d81f074d0b3426c80dd96fad4fe3288, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  _actionsCount: 25
+  _actionsCount: 17
   _goals:
-  - {fileID: 11400000, guid: 5d03598607204164899ed030077c2733, type: 2}
+  - {fileID: 11400000, guid: 9903841860af25f4eb89a219ea3d0fdf, type: 2}
   _tokens:
     Rows:
     - Value: 09000000090000000900000000000000090000000900000009000000

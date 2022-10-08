@@ -7,13 +7,13 @@ using Zenject;
 
 namespace Code.Environment.Bonuses
 {
-	public class BonusesSpawnCondition
+	public class BonusSpawnCondition
 	{
 		private readonly IBonusesConfig _bonusesConfig;
 		private readonly BonusSpawner _bonusSpawner;
 
 		[Inject]
-		public BonusesSpawnCondition(IBonusesConfig bonusesConfig, BonusSpawner bonusSpawner)
+		public BonusSpawnCondition(IBonusesConfig bonusesConfig, BonusSpawner bonusSpawner)
 		{
 			_bonusesConfig = bonusesConfig;
 			_bonusSpawner = bonusSpawner;

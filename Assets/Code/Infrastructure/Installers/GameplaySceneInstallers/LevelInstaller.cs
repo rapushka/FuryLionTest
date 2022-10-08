@@ -13,7 +13,6 @@ using Code.Infrastructure.IdComponents;
 using Code.Infrastructure.SceneManagement;
 using Code.Inner.CustomMonoBehaviours;
 using Code.Input;
-using Code.Levels;
 using Code.UI.GoalViews;
 using Code.View;
 using Code.View.Animations;
@@ -21,22 +20,18 @@ using Code.View.SpritesBehaviour;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.Installers
+namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 {
 	public class LevelInstaller : MonoInstaller
 	{
 		[SerializeField] private Transform _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private Transform _goalsRootTransform;
+		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 		
 		[SerializeField] private TokensCollection _tokensCollection;
 		[SerializeField] private SerializedConfig _serializedConfig;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
-		
-		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
-		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
-		
-		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -48,18 +43,16 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(_lineRenderer)
 				.BindSingleFromInstance(_tokensSpriteSheet)
 				.BindSingleFromInstance(new GoalsRoot(_goalsRootTransform))
-				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
-				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingleFromInstance(_coroutinesHandler)
 				.BindSingle<Gravity>()
 				.BindSingle<Chain>()
-				.BindSingle<ChainView>()
+				.BindSingle<ChainLineRenderer>()
 				.BindSingle<CompletedChain>()
 				.BindSingle<TokensSpawner>()
 				.BindSingle<LevelGenerator>()
 				.BindSingle<TokensDistanceMeter>()
 				.BindSingle<ObstacleDestroyer>()
-				.BindSingle<BonusesSpawnCondition>()
+				.BindSingle<BonusSpawnCondition>()
 				.BindSingle<BonusSpawner>()
 				.BindSingle<TokenSpritesSwitcher>()
 				.BindSingle<BonusesActivator>()
@@ -89,12 +82,12 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<TokenHitSignal, Chain>((x, v) => x.NextToken(v.Value))
 				.BindSignalTo<TokenClickSignal, Chain>((x, v) => x.StartComposing(v.Value))
 				.BindSignalTo<TokenClickSignal, BonusesActivator>((x, v) => x.OnTokenClick(v.Value))
-				.BindSignalTo<ChainTokenAddedSignal, ChainView>((x, v) => x.OnTokenAdded(v.Value))
-				.BindSignalTo<ChainLastTokenRemovedSignal, ChainView>((x) => x.OnLastTokenRemoved)
-				.BindSignalTo<ChainEndedSignal, ChainView>((x, _) => x.OnChainEnded())
+				.BindSignalTo<ChainTokenAddedSignal, ChainLineRenderer>((x, v) => x.OnTokenAdded(v.Value))
+				.BindSignalTo<ChainLastTokenRemovedSignal, ChainLineRenderer>((x) => x.OnLastTokenRemoved)
+				.BindSignalTo<ChainEndedSignal, ChainLineRenderer>((x, _) => x.OnChainEnded())
 				.BindSignalTo<ChainEndedSignal, CompletedChain>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainComposedSignal, BonusesActivator>((x, v) => x.OnChainComposed(v.Value))
-				.BindSignalTo<ChainComposedSignal, BonusesSpawnCondition>((x, v) => x.OnChainComposed(v.Value))
+				.BindSignalTo<ChainComposedSignal, BonusSpawnCondition>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, ObstacleDestroyer>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.DestroyTokensInChain(v.Value))
 				.BindSignalTo<ChainEndedSignal, Field>((x, _) => x.UpdateField())

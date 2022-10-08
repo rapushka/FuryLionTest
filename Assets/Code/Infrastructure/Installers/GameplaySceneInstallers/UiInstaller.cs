@@ -1,10 +1,11 @@
 using Code.Extensions;
+using Code.UI.GoalViews;
 using Code.UI.Settings;
 using Code.View;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.Installers
+namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 {
 	public class UiInstaller : MonoInstaller
 	{
@@ -12,7 +13,8 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private SettingsWindow _settings;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
-
+		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
+		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()
@@ -22,6 +24,8 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(_settingsButton)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
+				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
+				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				;
 
 			SubscribeSignals();

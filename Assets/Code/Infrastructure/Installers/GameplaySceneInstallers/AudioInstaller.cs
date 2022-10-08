@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
 
-namespace Code.Infrastructure.Installers
+namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 {
 	public class AudioInstaller : MonoInstaller
 	{
