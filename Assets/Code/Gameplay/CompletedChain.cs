@@ -25,6 +25,7 @@ namespace Code.Gameplay
 			if (array.Length >= _minTokensCountForChain)
 			{
 				_signalBus.Fire(new ChainComposedSignal(array));
+				_signalBus.Fire<ActionDoneSignal>();
 			}
 		}
 	}

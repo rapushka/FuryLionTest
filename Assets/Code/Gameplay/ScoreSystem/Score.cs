@@ -11,7 +11,7 @@ namespace Code.Gameplay.ScoreSystem
 	public class Score : IInitializable
 	{
 		private readonly int _scoreMultiplier;
-		private readonly float _multiplierPerTokenInChain;
+		private readonly float _comboMultiplier;
 		private readonly SignalBus _signalBus;
 
 		private int _currentScore;
@@ -20,7 +20,7 @@ namespace Code.Gameplay.ScoreSystem
 		public Score(IScoreConfig scoreSettings, SignalBus signalBus)
 		{
 			_scoreMultiplier = scoreSettings.ScoreMultiplier;
-			_multiplierPerTokenInChain = scoreSettings.MultiplierPerTokenInChain;
+			_comboMultiplier = scoreSettings.MultiplierPerTokenInChain;
 			_signalBus = signalBus;
 		}
 
@@ -32,7 +32,13 @@ namespace Code.Gameplay.ScoreSystem
 			InvokeValueUpdate();
 		}
 
-		private int ScaleScore(int chainLenght) => IntPow(chainLenght, _multiplierPerTokenInChain) * _scoreMultiplier;
+		public void OnTokensDestroyed(int count)
+		{
+			_currentScore += count * _scoreMultiplier / 2;
+			InvokeValueUpdate();
+		}
+
+		private int ScaleScore(int chainLenght) => IntPow(chainLenght, _comboMultiplier) * _scoreMultiplier;
 
 		private static int IntPow(int number, float power) => Mathf.CeilToInt(Mathf.Pow(number, power));
 

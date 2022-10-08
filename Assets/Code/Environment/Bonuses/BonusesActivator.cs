@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure;
+using Code.Infrastructure.BaseSignals;
 using Code.Infrastructure.Configurations.Interfaces;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,8 @@ namespace Code.Environment.Bonuses
 		private readonly Vector2Int _fieldSizes;
 		private readonly int _bombExplosionRange;
 
+		private int _destroyedTokensCountPerAction;
+
 		[Inject]
 		public BonusesActivator
 			(Field field, IFieldConfig fieldConfig, IBonusesConfig bonusesConfig, SignalBus signalBus)
@@ -27,33 +30,51 @@ namespace Code.Environment.Bonuses
 
 		private Vector2Int DirectedRange => _bombExplosionRange * Vector2Int.one;
 
-		public void OnChainComposed(IEnumerable<Token> chain) => chain.ForEach(HandleToken);
+		public void OnChainComposed(IEnumerable<Token> chain)
+		{
+			chain.ForEach(HandleToken);
+			InvokeTokensDestroyed();
+		}
 
 		public void OnTokenClick(Token token)
 		{
-			var b = token.BonusType is BonusType.HorizontalRocket or BonusType.Bomb;
-			HandleToken(token);
-			if (b)
-			{
-				_signalBus.Fire<MouseUpSignal>();
-			}
-		}
-
-		private void HandleToken(Token token)
-		{
-			if (token == false)
+			if (TryHandleToken(token) == false)
 			{
 				return;
 			}
 
-			if (token.BonusType == BonusType.HorizontalRocket)
+			InvokeTokensDestroyed();
+			_signalBus.Fire<ActionDoneSignal>();
+		}
+
+		private void InvokeTokensDestroyed()
+		{
+			_signalBus.Fire(new TokensDestroyedByBonusSignal(_destroyedTokensCountPerAction));
+			_destroyedTokensCountPerAction = 0;
+		}
+
+		private void HandleToken(Token token) => TryHandleToken(token);
+
+		private bool TryHandleToken(Token token)
+		{
+			if (token == false)
+			{
+				return false;
+			}
+
+			if (token.BonusType is BonusType.HorizontalRocket)
 			{
 				ActivateHorizontalRocket(_field.GetIndexesFor(token));
+				return true;
 			}
-			else if (token.BonusType == BonusType.Bomb)
+
+			if (token.BonusType is BonusType.Bomb)
 			{
 				ActivateBomb(_field.GetIndexesFor(token));
+				return true;
 			}
+
+			return false;
 		}
 
 		private void ActivateHorizontalRocket(Vector2Int indexes)
@@ -71,6 +92,7 @@ namespace Code.Environment.Bonuses
 			    && IsDestroyable(_field[indexes]))
 			{
 				_field.DestroyTokenAt(indexes);
+				_destroyedTokensCountPerAction++;
 			}
 		}
 

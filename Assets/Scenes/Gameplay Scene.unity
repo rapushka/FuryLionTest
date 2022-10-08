@@ -684,7 +684,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1160769000}
-  - component: {fileID: 1160769001}
   m_Layer: 0
   m_Name: Tokens Root
   m_TagString: Untagged
@@ -707,18 +706,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160769001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160768999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad840fd663df46a39bf96543f94f769a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1210347828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1248,7 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c28a7ddc6b442dd870a46ef3bc5a776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tokensRoot: {fileID: 1160769001}
+  _tokensRoot: {fileID: 1160769000}
   _lineRenderer: {fileID: 798181301}
   _tokensCollection: {fileID: 7662115227024407912, guid: 106ee065d8d10614c9371a0147b7398e, type: 3}
   _serializedConfig: {fileID: 5060126106096961876, guid: 869da90139e21284e98fc72fba7d3405, type: 3}

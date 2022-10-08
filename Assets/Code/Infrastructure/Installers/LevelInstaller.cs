@@ -25,7 +25,7 @@ namespace Code.Infrastructure.Installers
 {
 	public class LevelInstaller : MonoInstaller
 	{
-		[SerializeField] private TokensRoot _tokensRoot;
+		[SerializeField] private Transform _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokensCollection;
 		[SerializeField] private SerializedConfig _serializedConfig;
@@ -44,7 +44,7 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(_tokensCollection)
-				.BindSingleFromInstance(_tokensRoot)
+				.BindSingleFromInstance(new TokensRoot(_tokensRoot))
 				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(_lineRenderer)
 				.BindSingleFromInstance(_scoreView)
@@ -102,7 +102,8 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.DestroyTokensInChain(v.Value))
 				.BindSignalTo<ChainEndedSignal, Field>((x, _) => x.UpdateField())
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
-				.BindSignalTo<ChainComposedSignal, ActionsRemaining>((x, _) => x.OnChainComposed())
+				.BindSignalTo<TokensDestroyedByBonusSignal, Score>((x, v) => x.OnTokensDestroyed(v.Value))
+				.BindSignalTo<ActionDoneSignal, ActionsRemaining>((x, _) => x.OnActionDone())
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<ScoreUpdateSignal, GoalsProgress>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>

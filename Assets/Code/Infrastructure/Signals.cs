@@ -76,4 +76,12 @@ namespace Code.Infrastructure
 	public class ActionsOverSignal { }
 	
 	public class GoalReachedSignal { }
+	
+	public class TokensDestroyedByBonusSignal : ImmutableSignal<int>
+	{
+		public TokensDestroyedByBonusSignal(int value)
+			: base(value) { }
+	}
+
+	public class ActionDoneSignal { }
 }

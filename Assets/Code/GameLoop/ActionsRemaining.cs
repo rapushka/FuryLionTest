@@ -19,7 +19,7 @@ namespace Code.GameLoop
 
 		public void Initialize() => InvokeValueUpdate();
 
-		public void OnChainComposed()
+		public void OnActionDone()
 		{
 			_actionsRemain--;
 			
