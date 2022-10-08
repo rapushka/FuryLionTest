@@ -1,7 +1,8 @@
+using Code.Infrastructure.SceneManagement;
 using UnityEditor;
 using UnityEngine;
 
-namespace Code.Infrastructure.SceneManagement.Editor
+namespace Code.Inner.Editor
 {
 	[CustomPropertyDrawer(typeof(SceneField))]
 	public class SceneFieldPropertyDrawer : PropertyDrawer

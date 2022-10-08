@@ -5,7 +5,7 @@ using Code.Levels.LevelGeneration;
 using UnityEditor;
 using UnityEngine;
 
-namespace Code.Levels.Editor
+namespace Code.Inner.Editor
 {
 	[CustomPropertyDrawer(typeof(SerializableTokensCollection))]
 	public class TokenToTypePropertyDrawer : PropertyDrawer

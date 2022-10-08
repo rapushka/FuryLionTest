@@ -475,8 +475,8 @@ MonoBehaviour:
   _settings: {fileID: 215778728}
   _scoreView: {fileID: 5154984740560444959}
   _remainingActionsView: {fileID: 2559511329264655007}
-  _reachScoreGoalViewPrefab: {fileID: 0}
-  _destroyTokensGoalViewPrefab: {fileID: 0}
+  _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
+  _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
 --- !u!224 &791260619 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
@@ -677,7 +677,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032635521
 GameObject:
@@ -723,10 +723,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf258ec6bc946749b8f6c1702ae9c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tokensRootTransform: {fileID: 0}
-  _goalsRootTransform: {fileID: 0}
-  _lineRenderer: {fileID: 0}
-  _coroutinesHandler: {fileID: 0}
+  _tokensRootTransform: {fileID: 1160769000}
+  _goalsRootTransform: {fileID: 1597377807}
+  _lineRenderer: {fileID: 798181301}
+  _coroutinesHandler: {fileID: 1697958864}
 --- !u!1 &1160768999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1259,7 @@ MonoBehaviour:
   - {fileID: 2032454269}
   - {fileID: 1326605631}
   - {fileID: 550237128}
+  - {fileID: 1032635523}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1392,7 +1393,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774494709
 GameObject:
@@ -1576,7 +1577,7 @@ RectTransform:
   - {fileID: 8339403698592000769}
   - {fileID: 1597377807}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

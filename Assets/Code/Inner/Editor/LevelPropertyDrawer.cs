@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using static Code.Common.Constants;
 
-namespace Code.Levels.Editor
+namespace Code.Inner.Editor
 {
 	[CustomPropertyDrawer(typeof(ArrayLayout<TokenUnit>))]
 	public class LevelPropertyDrawer : PropertyDrawer
