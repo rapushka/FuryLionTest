@@ -34,6 +34,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<ChainEndedSignal, TokenAddedAudioPitch>((x) => x.ResetPitch)
 				.BindSignalTo<ChainComposedSignal, SfiAudioSource>((x) => x.PlayChainComposed)
 				.BindSignalTo<BonusSpawnedSignal, SfiAudioSource>((x) => x.PlayBonusSpawned)
+				.BindSignalTo<ChainLastTokenRemovedSignal, SfiAudioSource>((x) => x.PlayTokenRemoved)
 				;
 		}
 	}
