@@ -6,6 +6,6 @@ namespace Code.View
 	{
 		[SerializeField] private TMPro.TextMeshProUGUI _remainingActionsText;
 		
-		public void OnRemainingActionsUpdateSignal(int newValue) => _remainingActionsText.text = newValue.ToString();
+		public void UpdateView(int newValue) => _remainingActionsText.text = newValue.ToString();
 	}
 }

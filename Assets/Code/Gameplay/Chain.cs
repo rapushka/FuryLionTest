@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Environment;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Gameplay.TokensField;
+using Code.Infrastructure.Signals.Chain;
 using Zenject;
 
 namespace Code.Gameplay
@@ -34,13 +34,17 @@ namespace Code.Gameplay
 			position.Do(AddTokenAt, @if: isNotStartedYet);
 		}
 
-		public void NextToken(Token nextPosition)
-			=> nextPosition.Do
-			(
-				@if: IsPenultimateToken,
-				@true: RemoveLastToken,
-				@false: TryAddTokenAt
-			);
+		public void NextToken(Token nextToken)
+		{
+			if (IsPenultimateToken(nextToken))
+			{
+				RemoveLastToken();
+			}
+			else
+			{
+				TryAddTokenAt(nextToken);
+			}
+		}
 
 		public void EndComposing()
 		{
@@ -57,7 +61,7 @@ namespace Code.Gameplay
 		private bool IsPenultimateToken(Token nextToken)
 			=> nextToken == _chainedTokens.Last?.Previous?.Value;
 
-		private void RemoveLastToken(Token nextPosition)
+		private void RemoveLastToken()
 		{
 			_chainedTokens.RemoveLast();
 			_signalBus.Fire<ChainLastTokenRemovedSignal>();
@@ -70,8 +74,10 @@ namespace Code.Gameplay
 			   && IsNeighborForLastToken(token);
 
 		private void AddTokenAt(Token token)
-			=> token.Do(AddTokenToChain)
-			           .Do(TokenAddedInvoke);
+		{
+			AddTokenToChain(token);
+			TokenAddedInvoke(token);
+		}
 
 		private void AddTokenToChain(Token token) => _chainedTokens.AddLast(token);
 

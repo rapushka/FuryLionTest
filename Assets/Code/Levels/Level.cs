@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.GameLoop.Goals.Conditions;
 using Code.Gameplay.Tokens;
-using Code.Levels.LevelGeneration.LeverEditor;
+using Code.Levels.LevelGeneration.LevedEditor;
 using UnityEngine;
 
 namespace Code.Levels
