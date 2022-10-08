@@ -27,15 +27,15 @@ namespace Code.Infrastructure.Installers
 	{
 		[SerializeField] private Transform _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
+		[SerializeField] private Transform _goalsRootTransform;
+		
 		[SerializeField] private TokensCollection _tokensCollection;
 		[SerializeField] private SerializedConfig _serializedConfig;
-		[SerializeField] private Level _debugLevel;
-		[SerializeField] private ScoreView _scoreView;
-		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
-		[SerializeField] private Transform _goalsRootTransform;
+		
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
+		
 		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
@@ -45,10 +45,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(_tokensCollection)
 				.BindSingleFromInstance(new TokensRoot(_tokensRoot))
-				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(_lineRenderer)
-				.BindSingleFromInstance(_scoreView)
-				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_tokensSpriteSheet)
 				.BindSingleFromInstance(new GoalsRoot(_goalsRootTransform))
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
@@ -104,10 +101,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<TokensDestroyedByBonusSignal, Score>((x, v) => x.OnTokensDestroyed(v.Value))
 				.BindSignalTo<ActionDoneSignal, ActionsRemaining>((x, _) => x.OnActionDone())
-				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<ScoreUpdateSignal, GoalsProgress>((x, v) => x.OnScoreUpdate(v.Value))
-				.BindSignalTo<RemainingActionsUpdateSignal, RemainingActionsView>
-					((x, v) => x.OnRemainingActionsUpdateSignal(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))

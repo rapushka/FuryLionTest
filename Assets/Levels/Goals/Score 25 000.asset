@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0919f9f1314cbaa860fc5ae0fe37c9, type: 3}
-  m_Name: Destroy all Rock lvl2
+  m_Script: {fileID: 11500000, guid: 1a29dd64b90e4f03ac9eaa176adc3094, type: 3}
+  m_Name: Score 25 000
   m_EditorClassIdentifier: 
-  _type: 7
+  _targetScoreValue: 50000

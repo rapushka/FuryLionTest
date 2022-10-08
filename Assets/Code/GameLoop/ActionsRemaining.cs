@@ -27,7 +27,7 @@ namespace Code.GameLoop
 			CheckActionsOver();
 		}
 
-		private void InvokeValueUpdate() => _signalBus.Fire(new RemainingActionsUpdateSignal(_actionsRemain));
+		private void InvokeValueUpdate() => _signalBus.Fire(new ActionsLeftUpdateSignal(_actionsRemain));
 
 		private void CheckActionsOver() 
 			=> _signalBus.Do((signalBus) => signalBus.Fire<ActionsOverSignal>(), @if: _actionsRemain <= 0);

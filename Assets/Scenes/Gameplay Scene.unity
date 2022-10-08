@@ -473,6 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingsButton: {fileID: 1210347830}
   _settings: {fileID: 215778728}
+  _scoreView: {fileID: 5154984740560444959}
+  _remainingActionsView: {fileID: 2559511329264655007}
 --- !u!224 &791260619 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
@@ -1352,7 +1354,7 @@ GameObject:
   - component: {fileID: 1774494711}
   - component: {fileID: 1774494710}
   m_Layer: 0
-  m_Name: Grid View
+  m_Name: Grid Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1576,13 +1578,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tokensRoot: {fileID: 1160769000}
   _lineRenderer: {fileID: 798181301}
+  _goalsRootTransform: {fileID: 1597377807}
   _tokensCollection: {fileID: 7662115227024407912, guid: 106ee065d8d10614c9371a0147b7398e, type: 3}
   _serializedConfig: {fileID: 5060126106096961876, guid: 869da90139e21284e98fc72fba7d3405, type: 3}
-  _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
-  _scoreView: {fileID: 5154984740560444959}
-  _remainingActionsView: {fileID: 2559511329264655007}
   _tokensSpriteSheet: {fileID: 11400000, guid: 3da395e4fcd048c48a36cafa93a6bb93, type: 2}
-  _goalsRootTransform: {fileID: 1597377807}
   _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
   _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
   _coroutinesHandler: {fileID: 1697958864}

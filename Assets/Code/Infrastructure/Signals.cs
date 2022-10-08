@@ -51,9 +51,9 @@ namespace Code.Infrastructure
 
 	public class GameVictorySignal { }
 
-	public class RemainingActionsUpdateSignal : ImmutableSignal<int>
+	public class ActionsLeftUpdateSignal : ImmutableSignal<int>
 	{
-		public RemainingActionsUpdateSignal(int value)
+		public ActionsLeftUpdateSignal(int value)
 			: base(value) { }
 	}
 
