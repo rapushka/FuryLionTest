@@ -24,7 +24,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(new MusicAudioSource(_musicSource, _audios.Music))
 				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource, _audios.TokenAddedToChainSfxPitchStep))
 				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChain))
-				.BindSingleFromInstance(new SfiAudioSource(_sfxSource, _audios))
+				.BindSingleFromInstance(new SfxAudioSource(_sfxSource, _audios))
 				.BindSingleFromInstance(_audioMixer)
 				;
 			
@@ -38,10 +38,10 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSignalTo<ChainTokenAddedSignal, TokenAddedAudioPitch>((x) => x.IncreasePitch)
 				.BindSignalTo<ChainLastTokenRemovedSignal, TokenAddedAudioPitch>((x) => x.DecreasePitch)
 				.BindSignalTo<ChainEndedSignal, TokenAddedAudioPitch>((x) => x.ResetPitch)
-				.BindSignalTo<ChainComposedSignal, SfiAudioSource>((x) => x.PlayChainComposed)
-				.BindSignalTo<BonusSpawnedSignal, SfiAudioSource>((x) => x.PlayBonusSpawned)
-				.BindSignalTo<ChainLastTokenRemovedSignal, SfiAudioSource>((x) => x.PlayTokenRemoved)
-				.BindSignalTo<GoalReachedSignal, SfiAudioSource>((x) => x.PlayGoalCompleted)
+				.BindSignalTo<ChainComposedSignal, SfxAudioSource>((x) => x.PlayChainComposed)
+				.BindSignalTo<BonusSpawnedSignal, SfxAudioSource>((x) => x.PlayBonusSpawned)
+				.BindSignalTo<ChainLastTokenRemovedSignal, SfxAudioSource>((x) => x.PlayTokenRemoved)
+				.BindSignalTo<GoalReachedSignal, SfxAudioSource>((x) => x.PlayGoalCompleted)
 				;
 		}
 	}

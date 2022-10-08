@@ -3,7 +3,7 @@ using Code.Gameplay.Tokens;
 using Code.Levels.LevelGeneration.LeverEditor;
 using UnityEditor;
 using UnityEngine;
-using static Code.Common.Constants;
+using static Code.Inner.Constants;
 
 namespace Code.Inner.Editor
 {

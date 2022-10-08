@@ -1,6 +1,6 @@
 using System;
-using Code.Common;
 using Code.Extensions;
+using Code.Inner;
 
 namespace Code.Levels.LevelGeneration.LeverEditor
 {

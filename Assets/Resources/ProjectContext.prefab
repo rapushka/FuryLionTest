@@ -80,4 +80,4 @@ MonoBehaviour:
     _scene: {fileID: 102900000, guid: f591ce9bfb0ade84b9640632db5ad7b1, type: 3}
   _loseScene:
     _scene: {fileID: 102900000, guid: 8d9ec5a802a6931449fe4937ef800198, type: 3}
-  _debugLevel: {fileID: 11400000, guid: a31fce1a6fcc4154cb3b6ad280c0900b, type: 2}
+  _debugLevel: {fileID: 11400000, guid: 3f44e96029f837f49a47b2868135ec07, type: 2}

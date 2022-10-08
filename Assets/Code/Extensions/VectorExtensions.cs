@@ -31,7 +31,5 @@ namespace Code.Extensions
 			   && @this.x <= max.x
 			   && @this.y >= min.y
 			   && @this.y <= max.y;
-
-		public static Vector3 AsVector3(this Vector2Int @this) => new(@this.x, @this.y);
 	}
 }

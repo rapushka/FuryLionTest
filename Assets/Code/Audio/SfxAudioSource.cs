@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Audio
 {
-	public class SfiAudioSource
+	public class SfxAudioSource
 	{
 		private readonly AudioSource _sfxSource;
 		private readonly AudioClip _chainComposedSfx;
@@ -10,7 +10,7 @@ namespace Code.Audio
 		private readonly AudioClip _tokenRemovedFromChainSfx;
 		private readonly AudioClip _goalCompleted;
 
-		public SfiAudioSource(AudioSource sfxSource, ISfxResources audios)
+		public SfxAudioSource(AudioSource sfxSource, ISfxResources audios)
 		{
 			_sfxSource = sfxSource;
 			_chainComposedSfx = audios.ChainComposed;

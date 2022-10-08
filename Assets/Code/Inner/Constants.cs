@@ -1,4 +1,4 @@
-namespace Code.Common
+namespace Code.Inner
 {
 	public static class Constants
 	{
