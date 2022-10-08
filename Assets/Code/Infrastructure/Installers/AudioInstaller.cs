@@ -1,6 +1,7 @@
 using Code.Audio;
 using Code.Extensions;
 using UnityEngine;
+using UnityEngine.Audio;
 using Zenject;
 
 namespace Code.Infrastructure.Installers
@@ -10,6 +11,7 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private AudioSource _musicSource;
 		[SerializeField] private AudioSource _sfxSource;
 		[SerializeField] private AudioCollection _audios;
+		[SerializeField] private AudioMixer _audioMixer;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -20,6 +22,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource, _audios.TokenAddedToChainSfxPitchStep))
 				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChain))
 				.BindSingleFromInstance(new SfiAudioSource(_sfxSource, _audios))
+				.BindSingleFromInstance(_audioMixer)
 				;
 			
 			SubscribeSignals();

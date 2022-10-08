@@ -1038,6 +1038,7 @@ MonoBehaviour:
   _musicSource: {fileID: 1349944560}
   _sfxSource: {fileID: 5503475}
   _audios: {fileID: 11400000, guid: cc8f356eedd7e9743a0d5d8e9b4f86cb, type: 2}
+  _audioMixer: {fileID: 24100000, guid: d17c60eca46fb074588e2c5611bff550, type: 2}
 --- !u!1 &1349944559
 GameObject:
   m_ObjectHideFlags: 0
