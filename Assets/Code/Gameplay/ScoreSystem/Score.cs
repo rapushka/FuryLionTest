@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
 using Code.Infrastructure.Configurations.Interfaces;
+using Code.Infrastructure.Signals.Goals;
 using UnityEngine;
 using Zenject;
 

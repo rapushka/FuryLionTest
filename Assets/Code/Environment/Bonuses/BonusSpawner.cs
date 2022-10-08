@@ -1,8 +1,7 @@
 using System.Linq;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
-using UnityEngine;
+using Code.Infrastructure.Signals.Bonuses;
 using Zenject;
 
 namespace Code.Environment.Bonuses

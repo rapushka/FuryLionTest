@@ -1,11 +1,11 @@
 using Code.Extensions;
 using Code.Infrastructure.IdComponents;
+using Code.Infrastructure.Signals.Chain;
 using Code.Inner.CustomMonoBehaviours;
 using Code.UI.GoalViews;
 using Code.View;
 using UnityEngine;
 using Zenject;
-using Zenject.Internal;
 
 namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 {

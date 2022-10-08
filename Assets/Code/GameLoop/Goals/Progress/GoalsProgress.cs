@@ -4,7 +4,7 @@ using System.Linq;
 using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.Goals;
 using Code.Levels;
 using Zenject;
 

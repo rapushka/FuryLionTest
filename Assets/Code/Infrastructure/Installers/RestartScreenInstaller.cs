@@ -1,5 +1,6 @@
 using Code.Extensions;
 using Code.Infrastructure.SceneManagement;
+using Code.Infrastructure.Signals.GameLoop;
 using Code.UI;
 using UnityEngine;
 using Zenject;

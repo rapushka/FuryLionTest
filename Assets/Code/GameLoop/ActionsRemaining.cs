@@ -1,5 +1,5 @@
 using Code.Extensions;
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Levels;
 using Zenject;
 

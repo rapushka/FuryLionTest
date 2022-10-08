@@ -1,4 +1,4 @@
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.GameLoop;
 
 namespace Code.UI
 {

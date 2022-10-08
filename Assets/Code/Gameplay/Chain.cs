@@ -3,7 +3,7 @@ using System.Linq;
 using Code.Environment;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.Chain;
 using Zenject;
 
 namespace Code.Gameplay

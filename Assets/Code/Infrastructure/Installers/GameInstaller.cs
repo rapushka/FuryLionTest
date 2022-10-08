@@ -1,6 +1,9 @@
 using Code.Extensions;
 using Code.GameLoop.Goals.Progress;
 using Code.Infrastructure.SceneManagement;
+using Code.Infrastructure.Signals.ActionsLeftSignals;
+using Code.Infrastructure.Signals.GameLoop;
+using Code.Infrastructure.Signals.Goals;
 using Code.Levels;
 using UnityEngine;
 using Zenject;

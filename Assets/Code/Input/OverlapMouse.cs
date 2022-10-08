@@ -1,7 +1,7 @@
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Infrastructure;
 using Code.Infrastructure.Configurations.Interfaces;
+using Code.Infrastructure.Signals.Tokens;
 using UnityEngine;
 using Zenject;
 
