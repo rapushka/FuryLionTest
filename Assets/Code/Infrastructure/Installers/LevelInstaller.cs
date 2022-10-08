@@ -25,7 +25,7 @@ namespace Code.Infrastructure.Installers
 {
 	public class LevelInstaller : MonoInstaller
 	{
-		[SerializeField] private TokensRoot _tokensRoot;
+		[SerializeField] private Transform _tokensRoot;
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private TokensCollection _tokensCollection;
 		[SerializeField] private SerializedConfig _serializedConfig;
@@ -44,7 +44,7 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleFromInstanceWithInterfaces(_serializedConfig)
 				.BindSingleFromInstance(_tokensCollection)
-				.BindSingleFromInstance(_tokensRoot)
+				.BindSingleFromInstance(new TokensRoot(_tokensRoot))
 				.BindSingleFromInstance(_debugLevel)
 				.BindSingleFromInstance(_lineRenderer)
 				.BindSingleFromInstance(_scoreView)

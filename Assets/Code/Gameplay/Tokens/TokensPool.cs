@@ -69,6 +69,6 @@ namespace Code.Gameplay.Tokens
 		private static bool IsDisabled(Token token) => token.gameObject.activeInHierarchy == false;
 
 		private Token InstantiateAtRoot(Vector3 position, Token original)
-			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.transform);
+			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.Transform);
 	}
 }
