@@ -82,4 +82,6 @@ namespace Code.Infrastructure
 		public TokensDestroyedByBonusSignal(int value)
 			: base(value) { }
 	}
+
+	public class ActionDoneSignal { }
 }

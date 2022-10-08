@@ -38,8 +38,13 @@ namespace Code.Environment.Bonuses
 
 		public void OnTokenClick(Token token)
 		{
-			HandleToken(token);
+			if (TryHandleToken(token) == false)
+			{
+				return;
+			}
+
 			InvokeTokensDestroyed();
+			_signalBus.Fire<ActionDoneSignal>();
 		}
 
 		private void InvokeTokensDestroyed()
@@ -48,21 +53,28 @@ namespace Code.Environment.Bonuses
 			_destroyedTokensCountPerAction = 0;
 		}
 
-		private void HandleToken(Token token)
+		private void HandleToken(Token token) => TryHandleToken(token);
+
+		private bool TryHandleToken(Token token)
 		{
 			if (token == false)
 			{
-				return;
+				return false;
 			}
 
 			if (token.BonusType is BonusType.HorizontalRocket)
 			{
 				ActivateHorizontalRocket(_field.GetIndexesFor(token));
+				return true;
 			}
-			else if (token.BonusType is BonusType.Bomb)
+
+			if (token.BonusType is BonusType.Bomb)
 			{
 				ActivateBomb(_field.GetIndexesFor(token));
+				return true;
 			}
+
+			return false;
 		}
 
 		private void ActivateHorizontalRocket(Vector2Int indexes)
