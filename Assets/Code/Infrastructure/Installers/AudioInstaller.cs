@@ -16,7 +16,8 @@ namespace Code.Infrastructure.Installers
 		{
 			Container
 				.BindSingleFromInstance(new MusicAudioSource(_musicSource, _audios.Music))
-				.BindSingleFromInstance(new SfxTokenAddedToChainAudioSource(_sfxSource))
+				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource))
+				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChainSfx))
 				;
 			
 			SubscribeSignals();
@@ -25,9 +26,10 @@ namespace Code.Infrastructure.Installers
 		private void SubscribeSignals()
 		{
 			Container
-				.BindSignalTo<ChainTokenAddedSignal, SfxTokenAddedToChainAudioSource>((x) => x.PlayTokenAddedToChain)
-				.BindSignalTo<ChainLastTokenRemovedSignal, SfxTokenAddedToChainAudioSource>((x) => x.DecreasePitch)
-				.BindSignalTo<ChainEndedSignal, SfxTokenAddedToChainAudioSource>((x) => x.ResetPitch)
+				.BindSignalTo<ChainTokenAddedSignal, TokenAddedAudioSource>((x) => x.Play)
+				.BindSignalTo<ChainTokenAddedSignal, TokenAddedAudioPitch>((x) => x.IncreasePitch)
+				.BindSignalTo<ChainLastTokenRemovedSignal, TokenAddedAudioPitch>((x) => x.DecreasePitch)
+				.BindSignalTo<ChainEndedSignal, TokenAddedAudioPitch>((x) => x.ResetPitch)
 				;
 		}
 	}
