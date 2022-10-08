@@ -31,16 +31,13 @@ namespace Code.Environment.Bonuses
 		{
 			_chain = chain;
 			_unit = unit;
-			var token = _field.Where(CasualTokenOfRightUnit).PickRandom();
+			var token = _field.Where(CasualTokenOfRightUnit)?.PickRandom();
 
 			if (token == true)
 			{
 				token.BonusType = bonusType;
 				_signalBus.Fire(new BonusSpawnedSignal(token));
-				return;
 			}
-
-			BonusCantBeSpawned();
 		}
 
 		private bool CasualTokenOfRightUnit(Token token)
@@ -48,15 +45,5 @@ namespace Code.Environment.Bonuses
 			   && token.TokenUnit == _unit
 			   && token.BonusType == BonusType.None
 			   && _chain.Contains(token) == false;
-
-		private static void BonusCantBeSpawned()
-		{
-			Debug.Log
-			(
-				"not-bonus token of this color is not exist\n"
-				+ "in future it will be added to some buffer\n"
-				+ "so far so"
-			);
-		}
 	}
 }

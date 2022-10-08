@@ -79,10 +79,8 @@ namespace Code.Environment.Bonuses
 		private void ActivateHorizontalRocket(Vector2Int indexes)
 			=> indexes.ForX(0, _fieldSizes.x, Destroy);
 
-		private void ActivateBomb(Vector2Int indexes)
-		{
-			indexes.DoubleFor(from: indexes - DirectedRange, to: indexes + DirectedRange + Vector2Int.one, Destroy);
-		}
+		private void ActivateBomb(Vector2Int indexes) 
+			=> indexes.DoubleFor(from: indexes - DirectedRange, to: indexes + DirectedRange + Vector2Int.one, Destroy);
 
 		private void Destroy(Vector2Int indexes)
 		{

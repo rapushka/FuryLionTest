@@ -20,13 +20,7 @@ namespace Code.Environment
 		private Token[,] _tokens;
 
 		[Inject]
-		public Field
-		(
-			LevelGenerator levelGenerator,
-			Gravity gravity,
-			TokensSpawner spawner,
-			TokensPool tokensPool
-		)
+		public Field(LevelGenerator levelGenerator, Gravity gravity, TokensSpawner spawner, TokensPool tokensPool)
 		{
 			_levelGenerator = levelGenerator;
 			_gravity = gravity;

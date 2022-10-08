@@ -1,4 +1,5 @@
 using Code.Extensions;
+using Code.GameLoop.Goals.Progress;
 using Code.Infrastructure.SceneManagement;
 using Code.Levels;
 using UnityEngine;
@@ -21,9 +22,22 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleFromInstance(sceneTransfer)
 				.BindSingleFromInstance(_debugLevel)
+				.BindSingleWithInterfaces<GameCycle>()
 				;
 			
 			SignalBusInstaller.Install(Container);
+
+			SubscribeSignals();
+		}
+
+		private void SubscribeSignals()
+		{
+			Container
+				.BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
+				.BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
+				.BindSignalTo<AllGoalsReachedSignal, GameCycle>((x) => x.OnAllGoalsReached)
+				.BindSignalTo<ActionsOverSignal, GameCycle>((x) => x.OnActionsOver)
+				;
 		}
 	}
 }
