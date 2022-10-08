@@ -1,6 +1,6 @@
 using Code.Extensions;
 using Code.Gameplay.Tokens;
-using Code.Levels.LevelGeneration.LeverEditor;
+using Code.Levels.LevelGeneration.LevedEditor;
 using UnityEditor;
 using UnityEngine;
 using static Code.Inner.Constants;

@@ -1,5 +1,5 @@
-using Code.Environment;
 using Code.GameLoop.Goals.Conditions;
+using Code.Gameplay.TokensField;
 
 namespace Code.GameLoop.Goals.Progress.ProgressObservers
 {

@@ -1,13 +1,13 @@
-using Code.Environment;
-using Code.Environment.Bonuses;
-using Code.Environment.GravityBehaviour;
-using Code.Environment.Obstacles;
 using Code.Extensions;
 using Code.GameLoop;
 using Code.GameLoop.Goals.Progress;
 using Code.Gameplay;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
+using Code.Gameplay.TokensField;
+using Code.Gameplay.TokensField.Bonuses;
+using Code.Gameplay.TokensField.GravityBehaviour;
+using Code.Gameplay.TokensField.Obstacles;
 using Code.Infrastructure.Configurations.SerializedImplementation;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Bonuses;
