@@ -63,15 +63,15 @@ namespace Code.Environment.Obstacles
 		private void HandleObstacle(Token token)
 		{
 			var unit = token.TokenUnit;
-			var position = _field.GetIndexesFor(token);
+			var indexes = _field.GetIndexesFor(token);
 
 			if (unit is TokenUnit.Ice or TokenUnit.RockLevel1)
 			{
-				_field.DestroyTokenAt(position);
+				_field.DestroyTokenAt(indexes);
 			}
 			else if (unit is TokenUnit.RockLevel2)
 			{
-				_field.SwitchTokenAt(position, TokenUnit.RockLevel1);
+				_field.SwitchTokenAt(indexes, TokenUnit.RockLevel1);
 				_changedTokensOnThisAction.Add(token);
 			}
 		}

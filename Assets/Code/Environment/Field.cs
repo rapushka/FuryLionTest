@@ -85,10 +85,11 @@ namespace Code.Environment
 			}
 		}
 
-		public void SwitchTokenAt(Vector2Int position, TokenUnit to)
+		public void SwitchTokenAt(Vector2Int indexes, TokenUnit to)
 		{
-			DestroyTokenAt(position);
-			this[position] = _tokensPool.CreateTokenForUnit(to, position.AsVector3());
+			var gameObjectPosition = this[indexes].transform.position;
+			DestroyTokenAt(indexes);
+			this[indexes] = _tokensPool.CreateTokenForUnit(to, gameObjectPosition);
 		}
 
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
