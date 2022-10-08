@@ -40,12 +40,12 @@ namespace Code.Environment
 
 		private void CreateToken(Token[,] tokens, int x, int y)
 		{
-			var token = _tokensPool.CreateTokenForUnit(PickRandomColor(), ScalePosition(x, y));
+			var token = _tokensPool.CreateTokenForUnit(PickRandomColor(), ToWorldPosition(x, y));
 			tokens[x, y] = token;
 		}
 
 		private static TokenUnit PickRandomColor() => (TokenUnit)Random.Range(1, 6);
 
-		private Vector3 ScalePosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
+		private Vector3 ToWorldPosition(int x, int y) => new Vector3(x, y) + (Vector3)_offset * _step;
 	}
 }

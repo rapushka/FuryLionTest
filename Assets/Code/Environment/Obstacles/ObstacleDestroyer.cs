@@ -39,7 +39,8 @@ namespace Code.Environment.Obstacles
 
 		private void CheckNeighbourTokens(Token token)
 		{
-			if (token == false)
+			if (token == false
+			    || token.gameObject.activeSelf == false)
 			{
 				return;
 			}

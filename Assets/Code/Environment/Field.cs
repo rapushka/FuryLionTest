@@ -64,9 +64,9 @@ namespace Code.Environment
 			}
 		}
 
-		public void DestroyTokenAt(Vector2 position)
+		public void DestroyTokenAt(Vector2Int indexes)
 		{
-			var token = this[position];
+			var token = this[indexes];
 
 			if (token == false)
 			{
@@ -74,15 +74,21 @@ namespace Code.Environment
 			}
 
 			_tokensPool.DestroyToken(token);
-			this[position] = null;
+			this[indexes] = null;
 		}
 
-		private void DestroyToken(Token token) => DestroyTokenAt(GetIndexesFor(token));
+		private void DestroyToken(Token token)
+		{
+			if (token.gameObject.activeSelf)
+			{
+				DestroyTokenAt(GetIndexesFor(token));
+			}
+		}
 
-		public void SwitchTokenAt(Vector2 position, TokenUnit to)
+		public void SwitchTokenAt(Vector2Int position, TokenUnit to)
 		{
 			DestroyTokenAt(position);
-			this[position] = _tokensPool.CreateTokenForUnit(to, position);
+			this[position] = _tokensPool.CreateTokenForUnit(to, position.AsVector3());
 		}
 
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
