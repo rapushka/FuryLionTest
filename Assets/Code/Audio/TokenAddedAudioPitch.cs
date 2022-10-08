@@ -8,33 +8,25 @@ namespace Code.Audio
 		private readonly float _pitchStep;
 		private readonly float _initialPitch;
 
-		private float _pitch;
-
-		public TokenAddedAudioPitch(AudioSource tokenAddedSfxSource)
+		public TokenAddedAudioPitch(AudioSource tokenAddedSfxSource, float pitchStep)
 		{
 			_tokenAddedSfxSource = tokenAddedSfxSource;
+			_pitchStep = pitchStep;
 
-			_pitchStep = 0.05f;
-			_initialPitch = _tokenAddedSfxSource.pitch;
+			_initialPitch = Pitch;
 			ResetPitch();
 		}
 
-		public void IncreasePitch()
+		private float Pitch
 		{
-			_pitch += _pitchStep;
-			_tokenAddedSfxSource.pitch = _pitch;
+			get => _tokenAddedSfxSource.pitch;
+			set => _tokenAddedSfxSource.pitch = value;
 		}
 
-		public void DecreasePitch()
-		{
-			_pitch -= _pitchStep;
-			_tokenAddedSfxSource.pitch = _pitch;
-		}
+		public void IncreasePitch() => Pitch += _pitchStep;
 
-		public void ResetPitch()
-		{
-			_pitch = _initialPitch;
-			_tokenAddedSfxSource.pitch = _pitch;
-		}
+		public void DecreasePitch() => Pitch -= _pitchStep;
+
+		public void ResetPitch() => Pitch = _initialPitch;
 	}
 }

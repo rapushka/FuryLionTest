@@ -16,7 +16,7 @@ namespace Code.Infrastructure.Installers
 		{
 			Container
 				.BindSingleFromInstance(new MusicAudioSource(_musicSource, _audios.Music))
-				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource))
+				.BindSingleFromInstance(new TokenAddedAudioPitch(_sfxSource, _audios.TokenAddedToChainSfxPitchStep))
 				.BindSingleFromInstance(new TokenAddedAudioSource(_sfxSource, _audios.TokenAddedToChainSfx))
 				;
 			
