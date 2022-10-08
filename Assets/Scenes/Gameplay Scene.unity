@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 5503474}
   - component: {fileID: 5503475}
   m_Layer: 0
-  m_Name: SFX Audio Source
+  m_Name: Token Added Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

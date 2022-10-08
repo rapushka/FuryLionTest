@@ -4,11 +4,9 @@ namespace Code.Audio
 {
 	public class MusicAudioSource
 	{
-		private readonly AudioSource _musicSource;
-
-		public MusicAudioSource(AudioSource musicSource)
+		public MusicAudioSource(AudioSource musicSource, AudioClip audiosMusic)
 		{
-			_musicSource = musicSource;
+			musicSource.clip = audiosMusic;
 		}
 	}
 }
