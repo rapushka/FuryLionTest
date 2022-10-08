@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 147541383}
   - component: {fileID: 147541384}
   m_Layer: 0
-  m_Name: Chain Composed Audio Source
+  m_Name: Sfx Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1314309109092187724, guid: d17c60eca46fb074588e2c5611bff550, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a7d8e1b4e6daed94ca20e89f246d2015, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
