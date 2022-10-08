@@ -70,6 +70,7 @@ namespace Code.GameLoop.Goals.Progress
 
 		private void OnGoalReached(ProgressObserver sender)
 		{
+			_signalBus.Fire<GoalReachedSignal>();
 			_markForDeleting.Add(sender);
 		}
 

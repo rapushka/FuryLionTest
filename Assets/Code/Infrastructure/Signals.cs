@@ -74,4 +74,6 @@ namespace Code.Infrastructure
 	public class AllGoalsReachedSignal { }
 
 	public class ActionsOverSignal { }
+	
+	public class GoalReachedSignal { }
 }
