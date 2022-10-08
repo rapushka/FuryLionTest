@@ -1,6 +1,7 @@
 using Code.Extensions;
-using Code.Infrastructure;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations.Interfaces;
+using Code.Infrastructure.Signals.Tokens;
 using UnityEngine;
 using Zenject;
 
@@ -39,10 +40,10 @@ namespace Code.Input
 		public void FixedTick() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
 
 		private void FireHitSignal(SignalBus signalBus)
-			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.transform.position)));
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.GetComponent<Token>())));
 
 		private void FireClickSignal(SignalBus signalBus)
-			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.transform.position)));
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.GetComponent<Token>())));
 
 		private bool AnyColliderHit() => Overlap() != 0;
 

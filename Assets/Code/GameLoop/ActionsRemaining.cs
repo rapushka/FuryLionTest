@@ -1,5 +1,5 @@
 using Code.Extensions;
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Levels;
 using Zenject;
 
@@ -19,7 +19,7 @@ namespace Code.GameLoop
 
 		public void Initialize() => InvokeValueUpdate();
 
-		public void OnChainComposed()
+		public void OnActionDone()
 		{
 			_actionsRemain--;
 			
@@ -27,7 +27,7 @@ namespace Code.GameLoop
 			CheckActionsOver();
 		}
 
-		private void InvokeValueUpdate() => _signalBus.Fire(new RemainingActionsUpdateSignal(_actionsRemain));
+		private void InvokeValueUpdate() => _signalBus.Fire(new ActionsLeftUpdateSignal(_actionsRemain));
 
 		private void CheckActionsOver() 
 			=> _signalBus.Do((signalBus) => signalBus.Fire<ActionsOverSignal>(), @if: _actionsRemain <= 0);

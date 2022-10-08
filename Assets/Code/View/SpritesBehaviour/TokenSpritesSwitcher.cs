@@ -1,5 +1,5 @@
-using Code.Environment.Bonuses;
 using Code.Gameplay.Tokens;
+using Code.Gameplay.TokensField.Bonuses;
 using Zenject;
 
 namespace Code.View.SpritesBehaviour

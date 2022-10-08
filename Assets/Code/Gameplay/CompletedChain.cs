@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Infrastructure;
+using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations.Interfaces;
-using UnityEngine;
+using Code.Infrastructure.Signals.ActionsLeftSignals;
+using Code.Infrastructure.Signals.Chain;
 using Zenject;
 
 namespace Code.Gameplay
@@ -19,12 +20,13 @@ namespace Code.Gameplay
 			_minTokensCountForChain = chainParameters.MinTokensCountForChain;
 		}
 
-		public void OnChainEnded(IEnumerable<Vector2> chain)
+		public void OnChainEnded(IEnumerable<Token> chain)
 		{
-			var array = chain as Vector2[] ?? chain.ToArray();
+			var array = chain as Token[] ?? chain.ToArray();
 			if (array.Length >= _minTokensCountForChain)
 			{
 				_signalBus.Fire(new ChainComposedSignal(array));
+				_signalBus.Fire<ActionDoneSignal>();
 			}
 		}
 	}

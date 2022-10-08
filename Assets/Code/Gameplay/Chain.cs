@@ -1,48 +1,50 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Environment;
 using Code.Extensions;
-using Code.Infrastructure;
-using UnityEngine;
+using Code.Gameplay.Tokens;
+using Code.Gameplay.TokensField;
+using Code.Infrastructure.Signals.Chain;
 using Zenject;
 
 namespace Code.Gameplay
 {
 	public class Chain
 	{
-		private readonly Field _field;
 		private readonly SignalBus _signalBus;
 		private readonly TokensDistanceMeter _distanceMeter;
-		private readonly LinkedList<Vector2> _chainedTokens;
+		private readonly LinkedList<Token> _chainedTokens;
 
 		private bool _chainComposingInProcess;
 
 		[Inject]
-		public Chain(Field field, SignalBus signalBus, TokensDistanceMeter distanceMeter)
+		public Chain(SignalBus signalBus, TokensDistanceMeter distanceMeter)
 		{
-			_field = field;
 			_signalBus = signalBus;
 			_distanceMeter = distanceMeter;
 
-			_chainedTokens = new LinkedList<Vector2>();
+			_chainedTokens = new LinkedList<Token>();
 		}
 
-		private Vector2 ChainHead => _chainedTokens.First();
+		private Token ChainHead => _chainedTokens.First();
 
-		public void StartComposing(Vector2 position)
+		public void StartComposing(Token position)
 		{
 			var isNotStartedYet = _chainComposingInProcess == false;
 			_chainComposingInProcess = true;
 			position.Do(AddTokenAt, @if: isNotStartedYet);
 		}
 
-		public void NextToken(Vector2 nextPosition)
-			=> nextPosition.Do
-			(
-				@if: IsPenultimateToken,
-				@true: RemoveLastToken,
-				@false: TryAddTokenAt
-			);
+		public void NextToken(Token nextToken)
+		{
+			if (IsPenultimateToken(nextToken))
+			{
+				RemoveLastToken();
+			}
+			else
+			{
+				TryAddTokenAt(nextToken);
+			}
+		}
 
 		public void EndComposing()
 		{
@@ -54,38 +56,40 @@ namespace Code.Gameplay
 			_chainedTokens.Do((tokens) => tokens.Clear(), @if: isNotEndedYet);
 		}
 
-		private void TryAddTokenAt(Vector2 position) => position.Do(AddTokenAt, @if: TokenShouldBeAdded);
+		private void TryAddTokenAt(Token token) => token.Do(AddTokenAt, @if: TokenShouldBeAdded);
 
-		private bool IsPenultimateToken(Vector2 nextPosition)
-			=> nextPosition == _chainedTokens.Last?.Previous?.Value;
+		private bool IsPenultimateToken(Token nextToken)
+			=> nextToken == _chainedTokens.Last?.Previous?.Value;
 
-		private void RemoveLastToken(Vector2 nextPosition)
+		private void RemoveLastToken()
 		{
 			_chainedTokens.RemoveLast();
 			_signalBus.Fire<ChainLastTokenRemovedSignal>();
 		}
 
-		private bool TokenShouldBeAdded(Vector2 position)
+		private bool TokenShouldBeAdded(Token token)
 			=> _chainComposingInProcess
-			   && TokenNotYetAdded(position)
-			   && TokenIsFittingType(position)
-			   && IsNeighborForLastToken(position);
+			   && TokenNotYetAdded(token)
+			   && TokenIsFittingType(token)
+			   && IsNeighborForLastToken(token);
 
-		private void AddTokenAt(Vector2 position)
-			=> position.Do(AddTokenToChain)
-			           .Do(TokenAddedInvoke);
+		private void AddTokenAt(Token token)
+		{
+			AddTokenToChain(token);
+			TokenAddedInvoke(token);
+		}
 
-		private void AddTokenToChain(Vector2 position) => _chainedTokens.AddLast(position);
+		private void AddTokenToChain(Token token) => _chainedTokens.AddLast(token);
 
-		private void TokenAddedInvoke(Vector2 position) => _signalBus.Fire(new ChainTokenAddedSignal(position));
+		private void TokenAddedInvoke(Token token) => _signalBus.Fire(new ChainTokenAddedSignal(token));
 
-		private bool TokenNotYetAdded(Vector2 position)
-			=> _chainedTokens.Contains(position) == false;
+		private bool TokenNotYetAdded(Token token)
+			=> _chainedTokens.Contains(token) == false;
 
-		private bool TokenIsFittingType(Vector2 position)
-			=> _field[ChainHead].TokenUnit == _field[position].TokenUnit;
+		private bool TokenIsFittingType(Token token)
+			=> ChainHead.TokenUnit == token.TokenUnit;
 
-		private bool IsNeighborForLastToken(Vector2 position)
-			=> _distanceMeter.IsNeighboring(_chainedTokens.Last(), position);
+		private bool IsNeighborForLastToken(Token token)
+			=> _distanceMeter.IsNeighboring(_chainedTokens.Last(), token);
 	}
 }

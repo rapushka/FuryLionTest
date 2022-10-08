@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Code.Environment;
 using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
+using Code.Gameplay.TokensField;
 using Zenject;
 
 namespace Code.GameLoop.Goals.Progress

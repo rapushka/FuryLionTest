@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Infrastructure;
-using Code.Infrastructure.IdComponents;
+using Code.Infrastructure.Signals.Tokens;
+using Code.Inner.CustomMonoBehaviours;
+using Code.Inner.RootContainers;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
@@ -12,16 +15,18 @@ namespace Code.Gameplay.Tokens
 	public class TokensPool : IInitializable
 	{
 		private readonly Dictionary<TokenUnit, Token> _tokenPrefabForType;
-		private readonly TokensRoot _tokensRoot;
+		private readonly TokensRoot _root;
 		private readonly SignalBus _signalBus;
+		private readonly CoroutinesHandler _coroutines;
 		private readonly Dictionary<TokenUnit, List<Token>> _createdTokens;
 
 		[Inject]
-		public TokensPool(TokensCollection tokenPrefabForType, TokensRoot tokensRoot, SignalBus signalBus)
+		public TokensPool(TokensCollection tokens, TokensRoot root, SignalBus signalBus, CoroutinesHandler coroutines)
 		{
-			_tokenPrefabForType = tokenPrefabForType.AsDictionary();
-			_tokensRoot = tokensRoot;
+			_tokenPrefabForType = tokens.AsDictionary();
+			_root = root;
 			_signalBus = signalBus;
+			_coroutines = coroutines;
 
 			_createdTokens = new Dictionary<TokenUnit, List<Token>>();
 		}
@@ -36,20 +41,31 @@ namespace Code.Gameplay.Tokens
 
 		public Token CreateTokenForUnit(TokenUnit tokenUnit, Vector3 position)
 			=> HasPooledTokenForThisUnit(tokenUnit, out var token)
-				? EnableToken(position, token)
-				: CreateNewToken(tokenUnit, position);
+				? EnableTokenAt(position, token)
+				: CreateNewTokenAt(position, tokenUnit);
 
 		public void DestroyToken(Token token)
 		{
-			token.gameObject.SetActive(false);
-
+			_coroutines.StartRoutine(FadeRoutine(token));
 			_signalBus.Fire(new TokenDestroyedSignal(token));
 		}
 
-		private static Token EnableToken(Vector3 position, Token token)
+		private static IEnumerator FadeRoutine(Component token)
 		{
-			token.gameObject.SetActive(true);
+			const float fadeDuration = 0.3f;
+			var cashedScale = token.transform.localScale;
+			token.transform.DOScale(Vector3.zero, fadeDuration);
+			
+			yield return new WaitForSeconds(fadeDuration);
+			
+			token.gameObject.SetActive(false);
+			token.transform.localScale = cashedScale;
+		}
+
+		private static Token EnableTokenAt(Vector3 position, Token token)
+		{
 			token.transform.position = position;
+			token.gameObject.SetActive(true);
 			return token;
 		}
 
@@ -59,7 +75,7 @@ namespace Code.Gameplay.Tokens
 			return token is not null;
 		}
 
-		private Token CreateNewToken(TokenUnit tokenUnit, Vector3 position)
+		private Token CreateNewTokenAt(Vector3 position, TokenUnit tokenUnit)
 		{
 			var token = InstantiateAtRoot(position, _tokenPrefabForType[tokenUnit]);
 			_createdTokens[tokenUnit].Add(token);
@@ -69,6 +85,6 @@ namespace Code.Gameplay.Tokens
 		private static bool IsDisabled(Token token) => token.gameObject.activeInHierarchy == false;
 
 		private Token InstantiateAtRoot(Vector3 position, Token original)
-			=> Object.Instantiate(original, position, Quaternion.identity, _tokensRoot.transform);
+			=> Object.Instantiate(original, position, Quaternion.identity, _root.Transform);
 	}
 }

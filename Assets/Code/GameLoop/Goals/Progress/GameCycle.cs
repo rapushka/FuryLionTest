@@ -1,4 +1,4 @@
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.GameLoop;
 using Zenject;
 
 namespace Code.GameLoop.Goals.Progress

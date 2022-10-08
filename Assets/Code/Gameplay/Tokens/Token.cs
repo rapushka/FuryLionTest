@@ -1,4 +1,4 @@
-using Code.Environment.Bonuses;
+using Code.Gameplay.TokensField.Bonuses;
 using UnityEngine;
 
 namespace Code.Gameplay.Tokens

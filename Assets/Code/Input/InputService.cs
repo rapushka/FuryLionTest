@@ -1,5 +1,5 @@
 using Code.Extensions;
-using Code.Infrastructure;
+using Code.Infrastructure.Signals.Input;
 using Zenject;
 
 namespace Code.Input
