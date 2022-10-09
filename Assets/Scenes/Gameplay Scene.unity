@@ -396,7 +396,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 7.43
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -420,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 6.53, z: -10}
+  m_LocalPosition: {x: 3.5, y: 7.09, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -799,7 +799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.93555576
+      value: 0.943
       objectReference: {fileID: 0}
     - target: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1814,6 +1814,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3506632320063387923, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.792196
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.642
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.21419592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.36800003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506632321093410232, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

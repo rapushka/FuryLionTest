@@ -54,10 +54,11 @@ namespace Code.Gameplay.Tokens
 		{
 			const float fadeDuration = 0.3f;
 			var cashedScale = token.transform.localScale;
-			token.transform.DOScale(Vector3.zero, fadeDuration);
-			
+			var tweenCore = token.transform.DOScale(Vector3.zero, fadeDuration);
+
 			yield return new WaitForSeconds(fadeDuration);
 			
+			tweenCore.Kill();
 			token.gameObject.SetActive(false);
 			token.transform.localScale = cashedScale;
 		}

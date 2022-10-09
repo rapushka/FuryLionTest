@@ -18,15 +18,16 @@ namespace Code.Gameplay.TokensField.GravityBehaviour
 			_framesCountForMovingToken = 50f;
 		}
 
-		public void MoveView(Token token, Vector3 to)
-		{
-			_coroutines.StartCoroutine(CoroutineRealization(token, to));
-		}
+		public void MoveView(Token token, Vector3 to) => _coroutines.StartCoroutine(MoveRoutine(token, to));
 
-		private IEnumerator CoroutineRealization(Component token, Vector3 to)
+		private IEnumerator MoveRoutine(Component token, Vector3 to)
 		{
 			for (var i = 0; i < _framesCountForMovingToken; i++)
 			{
+				if (token == false)
+				{
+					yield break;
+				} 
 				token.transform.Translate(to * (1 / _framesCountForMovingToken));
 				yield return null;
 			}
