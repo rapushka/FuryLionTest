@@ -1,4 +1,4 @@
-using UnityEngine;
+using Code.Inner;
 using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.ScenesTransfers
@@ -16,10 +16,10 @@ namespace Code.Infrastructure.ScenesTransfers
 			_victoryScene = victoryScene;
 		}
 
-		public void ToGameplayScene() => SceneManager.LoadScene(0);
+		public void ToGameplayScene() => SceneManager.LoadScene(Constants.SceneIndex.Gameplay);
 
-		public void ToLoseScene() => SceneManager.LoadScene(1);
+		public void ToLoseScene() => SceneManager.LoadScene(Constants.SceneIndex.Lose);
 
-		public void ToVictoryScene() => SceneManager.LoadScene(2);
+		public void ToVictoryScene() => SceneManager.LoadScene(Constants.SceneIndex.Victory);
 	}
 }
