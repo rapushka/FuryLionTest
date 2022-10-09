@@ -59,6 +59,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleWithInterfaces<GoalsProgress>()
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<GoalViewsContainer>()
+				.BindSingleWithInterfaces<GameCycle>()
 				;
 
 			SubscribeSignals();
@@ -87,6 +88,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSignalTo<TokenDestroyedSignal, GoalsProgress>((x, v) => x.OnTokenDestroyed(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, TokenSpritesSwitcher>((x, v) => x.OnBonusSpawned(v.Value))
 				.BindSignalTo<BonusSpawnedSignal, BonusAnimator>((x, v) => x.OnBonusSpawned(v.Value))
+				.BindSignalTo<AllGoalsReachedSignal, GameCycle>((x) => x.OnAllGoalsReached)
+				.BindSignalTo<ActionsOverSignal, GameCycle>((x) => x.OnActionsOver)
 				;
 		}
 	}

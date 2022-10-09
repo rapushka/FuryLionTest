@@ -12,8 +12,6 @@ namespace Code.Infrastructure.ScenesTransfers
 
 		public string SceneName => _scene.name;
 
-		public static implicit operator string(SceneField sceneField) => sceneField.SceneName;
-		
-		public static implicit operator Scene(SceneField sceneField) => SceneManager.GetSceneByName(sceneField);
+		public int BuildIndex => SceneManager.GetSceneByName(SceneName).buildIndex;
 	}
 }

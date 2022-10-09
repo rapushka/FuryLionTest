@@ -53,13 +53,20 @@ namespace Code.Gameplay.Tokens
 		private static IEnumerator FadeRoutine(Component token)
 		{
 			const float fadeDuration = 0.3f;
-			var cashedScale = token.transform.localScale;
-			token.transform.DOScale(Vector3.zero, fadeDuration);
-			
-			yield return new WaitForSeconds(fadeDuration);
-			
+			var tokenTransform = token.transform;
+
+			if (tokenTransform == true)
+			{
+				var initialScale = tokenTransform.localScale;
+				
+				var tweenCore = tokenTransform.DOScale(Vector3.zero, fadeDuration);
+				yield return new WaitForSeconds(fadeDuration);
+				tweenCore.Kill();
+				
+				tokenTransform.localScale = initialScale;
+			}
+
 			token.gameObject.SetActive(false);
-			token.transform.localScale = cashedScale;
 		}
 
 		private static Token EnableTokenAt(Vector3 position, Token token)

@@ -15,6 +15,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private LineRenderer _lineRenderer;
 		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 		
+		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			Container

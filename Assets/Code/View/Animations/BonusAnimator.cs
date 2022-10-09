@@ -10,7 +10,10 @@ namespace Code.View.Animations
 
 		public void OnBonusSpawned(Token token)
 		{
-			token.transform.DOShakeScale(0.5f);
+			if (token.transform != null)
+			{
+				token.transform.DOShakeScale(0.5f);
+			}
 		}
 	}
 }

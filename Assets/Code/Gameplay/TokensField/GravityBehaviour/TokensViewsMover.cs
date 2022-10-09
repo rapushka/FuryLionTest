@@ -10,25 +10,24 @@ namespace Code.Gameplay.TokensField.GravityBehaviour
 	{
 		private readonly float _framesCountForMovingToken;
 		private readonly CoroutinesHandler _coroutines;
+		private readonly WaitForSeconds _waitForOneMillisecond;
 
 		[Inject]
 		public TokensViewsMover(CoroutinesHandler coroutines)
 		{
 			_coroutines = coroutines;
-			_framesCountForMovingToken = 50f;
+			_framesCountForMovingToken = 10f;
+			_waitForOneMillisecond = new WaitForSeconds(0.01f);
 		}
 
-		public void MoveView(Token token, Vector3 to)
-		{
-			_coroutines.StartCoroutine(CoroutineRealization(token, to));
-		}
+		public void MoveView(Token token, Vector3 to) => _coroutines.StartCoroutine(MoveRoutine(token, to));
 
-		private IEnumerator CoroutineRealization(Component token, Vector3 to)
+		private IEnumerator MoveRoutine(Component token, Vector3 to)
 		{
 			for (var i = 0; i < _framesCountForMovingToken; i++)
 			{
 				token.transform.Translate(to * (1 / _framesCountForMovingToken));
-				yield return null;
+				yield return _waitForOneMillisecond;
 			}
 		}
 	}

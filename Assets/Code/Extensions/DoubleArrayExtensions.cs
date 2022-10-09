@@ -73,5 +73,20 @@ namespace Code.Extensions
 
 			throw new ArgumentException("Array don't contain that element");
 		}
+		public static bool Contain<T>(this T[,] @this, T element)
+		{
+			for (var x = 0; x < @this.GetLength(0); x++)
+			{
+				for (var y = 0; y < @this.GetLength(1); y++)
+				{
+					if (Equals(@this[x, y], element))
+					{
+						return true;
+					}
+				}
+			}
+
+			return false;
+		}
 	}
 }
