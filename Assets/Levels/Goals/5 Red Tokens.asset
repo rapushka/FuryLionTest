@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ad11ac8426e41fba67c8f3414eb5db6, type: 3}
-  m_Name: 10 Red Tokens
+  m_Name: 5 Red Tokens
   m_EditorClassIdentifier: 
   _targetColor: 1
-  _targetCount: 10
+  _targetCount: 5
