@@ -24,10 +24,6 @@ namespace Code.Gameplay.TokensField.GravityBehaviour
 		{
 			for (var i = 0; i < _framesCountForMovingToken; i++)
 			{
-				if (token == false)
-				{
-					yield break;
-				} 
 				token.transform.Translate(to * (1 / _framesCountForMovingToken));
 				yield return null;
 			}
