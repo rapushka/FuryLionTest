@@ -56,9 +56,15 @@ namespace Code.Gameplay.TokensField.Obstacles
 			=> _changedTokensOnThisAction.Contains(token) == false;
 
 		private IEnumerable<Vector2Int> GetOffsetDirections(Token token)
-			=> token == true
-				? _offsets.Select((offset) => offset + _field.GetIndexesFor(token))
-				: Enumerable.Empty<Vector2Int>();
+		{
+			if (_field.Contain(token) == false)
+			{
+				return Enumerable.Empty<Vector2Int>();
+			}
+
+			var indexes = _field.GetIndexesFor(token);
+			return _offsets.Select((offset) => offset + indexes);
+		}
 
 		private static bool IsNotEmpty(Token token) => token == true;
 

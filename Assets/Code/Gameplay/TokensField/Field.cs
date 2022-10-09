@@ -40,6 +40,8 @@ namespace Code.Gameplay.TokensField
 			private set => _tokens.SetAtVector(position.ToVectorInt(), value);
 		}
 
+		public bool Contain(Token token) => _tokens.Contain(token);
+		
 		public Vector2Int GetIndexesFor(Token token) => _tokens.IndexesOf(token);
 
 		public void DestroyTokensInChain(IEnumerable<Token> chain)
@@ -72,7 +74,7 @@ namespace Code.Gameplay.TokensField
 
 		private void DestroyToken(Token token)
 		{
-			if (token.gameObject.activeSelf)
+			if (Contain(token))
 			{
 				DestroyTokenAt(GetIndexesFor(token));
 			}
