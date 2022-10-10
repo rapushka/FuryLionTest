@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Code.Infrastructure.Installers
 {
-	public class RestartScreenInstaller : MonoInstaller
+	public class VictoryScreenInstaller : MonoInstaller
 	{
 		[SerializeField] private ResetButton _resetButton;
 
