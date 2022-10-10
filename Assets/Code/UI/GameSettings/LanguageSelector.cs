@@ -34,6 +34,8 @@ namespace Code.UI.GameSettings
 		{
 			_dropdown.onValueChanged.AddListener(OnValueChanged);
 			_dropdown.AddOptions(Enum.GetNames(typeof(LanguageLocale)).ToList());
+			
+			_dropdown.SetValueWithoutNotify(_currentLocaleId);
 		}
 
 		private void OnDisable()
