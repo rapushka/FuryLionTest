@@ -17,6 +17,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
+		[SerializeField] private LanguageSelector _languageSelector;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()
@@ -28,6 +29,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
+				.BindSingleFromInstance(_languageSelector)
 				;
 
 			SubscribeSignals();

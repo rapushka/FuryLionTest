@@ -12,17 +12,18 @@ namespace Code.UI.GameSettings
 		[SerializeField] private Button _buttonOK;
 		[SerializeField] private Toggle _musicToggle;
 		[SerializeField] private Toggle _sfxToggle;
-		[SerializeField] private LanguageSelector _languageSelector;
 
 		private const string MusicVolume = nameof(MusicVolume);
 		private const string SfxVolume = nameof(SfxVolume);
 		
 		private AudioMixer _audioMixer;
 		private IStorage _storage;
+		private LanguageSelector _languageSelector;
 
 		[Inject]
-		public void Construct(AudioMixer audioMixer, IStorage storage)
+		public void Construct(AudioMixer audioMixer, IStorage storage, LanguageSelector languageSelector)
 		{
+			_languageSelector = languageSelector;
 			_audioMixer = audioMixer;
 			_storage = storage;
 		}

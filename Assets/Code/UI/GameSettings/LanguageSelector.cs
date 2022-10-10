@@ -24,8 +24,13 @@ namespace Code.UI.GameSettings
 		private void OnEnable()
 		{
 			_dropdown.onValueChanged.AddListener(OnValueChanged);
-			
 			_dropdown.AddOptions(Enum.GetNames(typeof(LanguageLocale)).ToList());
+		}
+
+		private void OnDisable()
+		{
+			_dropdown.onValueChanged.RemoveListener(OnValueChanged);
+			_dropdown.ClearOptions();
 		}
 
 		private void OnValueChanged(int selectedIndex)
