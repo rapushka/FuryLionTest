@@ -29,6 +29,13 @@ namespace Code.Extensions
 			return @this;
 		}
 
+		public static DiContainer BindInterfaceSingleTo<TContract, TRealization>(this DiContainer @this)
+			where TRealization : TContract
+		{
+			@this.Bind<TContract>().To<TRealization>().AsSingle();
+			return @this;
+		}
+
 		public static DiContainer BindSingleWithInterfaces<TContract>(this DiContainer @this)
 		{
 			@this.BindInterfacesAndSelfTo<TContract>().AsSingle();

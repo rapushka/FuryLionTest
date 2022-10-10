@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringsTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringsTable
+  m_TableCollectionNameGuidString: eecea88b0661cc04ea6a60f9a19b20e5
+  m_Entries:
+  - m_Id: 7816524021760
+    m_Key: SettingsTItle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16216335007744
+    m_Key: SettingsSFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17293822345216
+    m_Key: SettingsMusic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17437326262272
+    m_Key: SettingsApply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18347209211904
+    m_Key: GameOverRestart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18491233222656
+    m_Key: GameOverLose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19359202492416
+    m_Key: GameOverVictory
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8465812059181809688
+  references:
+    version: 2
+    RefIds:
+    - rid: 8465812059181809688
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1665394087050

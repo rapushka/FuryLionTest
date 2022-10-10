@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Victory Scene.unity
     guid: f591ce9bfb0ade84b9640632db5ad7b1
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: d090e5d0ce9e5ff42b09b632f0ee8e75, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: c1b19f03174d17b478d8067c3ed7cea8, type: 2}
