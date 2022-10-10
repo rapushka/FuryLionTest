@@ -1,8 +1,8 @@
 using Code.Extensions;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Goals;
+using Code.UI.GameSettings;
 using Code.UI.GoalViews;
-using Code.UI.Settings;
 using Code.View;
 using UnityEngine;
 using Zenject;
@@ -17,6 +17,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
+		[SerializeField] private LanguageSelector _languageSelector;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()
@@ -28,6 +29,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
+				.BindSingleFromInstance(_languageSelector)
+				.BindSingleWithInterfaces<SettingsInitializer>()
 				;
 
 			SubscribeSignals();
