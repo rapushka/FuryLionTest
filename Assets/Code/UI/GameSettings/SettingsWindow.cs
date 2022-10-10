@@ -12,6 +12,7 @@ namespace Code.UI.GameSettings
 		[SerializeField] private Button _buttonOK;
 		[SerializeField] private Toggle _musicToggle;
 		[SerializeField] private Toggle _sfxToggle;
+		[SerializeField] private LanguageSelector _languageSelector;
 
 		private const string MusicVolume = nameof(MusicVolume);
 		private const string SfxVolume = nameof(SfxVolume);
@@ -35,6 +36,7 @@ namespace Code.UI.GameSettings
 			var settings = _storage.Load(Settings.DefaultSettings);
 			_musicToggle.isOn = settings.PlayingMusic;
 			_sfxToggle.isOn = settings.PlayingSFX;
+			_languageSelector.CurrentLocale = settings.Locale;
 		}
 
 		private void OnDisable()
@@ -47,6 +49,7 @@ namespace Code.UI.GameSettings
 			{
 				PlayingMusic = _musicToggle.isOn,
 				PlayingSFX = _sfxToggle.isOn,
+				Locale = _languageSelector.CurrentLocale
 			};
 			_storage.Save(settings);
 		}
