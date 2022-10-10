@@ -28,17 +28,7 @@ namespace Code.UI.GameSettings
 			_storage = storage;
 		}
 
-		private void OnEnable()
-		{
-			_buttonOK.onClick.AddListener(CloseWindow);
-			_musicToggle.onValueChanged.AddListener(OnMusicToggle);
-			_sfxToggle.onValueChanged.AddListener(OnSfxToggle);
-
-			var settings = _storage.Load(Settings.DefaultSettings);
-			_musicToggle.isOn = settings.PlayingMusic;
-			_sfxToggle.isOn = settings.PlayingSFX;
-			_languageSelector.CurrentLocale = settings.Locale;
-		}
+		private void OnEnable() => LoadSettings();
 
 		private void OnDisable()
 		{
@@ -53,6 +43,18 @@ namespace Code.UI.GameSettings
 				Locale = _languageSelector.CurrentLocale
 			};
 			_storage.Save(settings);
+		}
+
+		public void LoadSettings()
+		{
+			_buttonOK.onClick.AddListener(CloseWindow);
+			_musicToggle.onValueChanged.AddListener(OnMusicToggle);
+			_sfxToggle.onValueChanged.AddListener(OnSfxToggle);
+			
+			var settings = _storage.Load(Settings.DefaultSettings);
+			_musicToggle.isOn = settings.PlayingMusic;
+			_sfxToggle.isOn = settings.PlayingSFX;
+			_languageSelector.CurrentLocale = settings.Locale;
 		}
 
 		public void OpenWindow() => gameObject.SetActive(true);

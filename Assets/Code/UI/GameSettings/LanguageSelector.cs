@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Linq;
 using Code.DataStoring.Localizations;
+using Code.Inner.CustomMonoBehaviours;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using Zenject;
 
 namespace Code.UI.GameSettings
 {
@@ -14,7 +16,14 @@ namespace Code.UI.GameSettings
 
 		private bool _isActive;
 		private int _currentLocaleId;
+		private CoroutinesHandler _coroutines;
 
+		[Inject]
+		public void Construct(CoroutinesHandler coroutines)
+		{
+			_coroutines = coroutines;
+		}
+		
 		public LanguageLocale CurrentLocale
 		{
 			get => (LanguageLocale)_currentLocaleId;
@@ -37,7 +46,7 @@ namespace Code.UI.GameSettings
 		{
 			if (_isActive == false)
 			{
-				StartCoroutine(SetLocale(selectedIndex));
+				_coroutines.StartRoutine(SetLocale(selectedIndex));
 			} 
 		}
 

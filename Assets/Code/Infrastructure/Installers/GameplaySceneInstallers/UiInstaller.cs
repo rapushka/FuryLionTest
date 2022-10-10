@@ -30,6 +30,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingleFromInstance(_languageSelector)
+				.BindSingleWithInterfaces<SettingsInitializer>()
 				;
 
 			SubscribeSignals();

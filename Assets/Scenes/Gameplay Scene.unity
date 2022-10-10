@@ -589,6 +589,7 @@ MonoBehaviour:
   _remainingActionsView: {fileID: 2559511329264655007}
   _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
   _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
+  _languageSelector: {fileID: 1523846194}
 --- !u!1 &786270577 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7463316426078285186, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
