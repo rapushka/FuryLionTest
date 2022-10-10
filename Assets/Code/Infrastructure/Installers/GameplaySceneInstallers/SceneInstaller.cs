@@ -1,4 +1,3 @@
-using Code.Ads;
 using Code.Extensions;
 using Code.Infrastructure.Signals.Chain;
 using Code.Inner.CustomMonoBehaviours;
