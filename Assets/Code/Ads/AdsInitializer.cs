@@ -14,7 +14,7 @@ namespace Code.Ads
 
 		private void Awake() => InitializeAds();
 
-		public void InitializeAds()
+		private void InitializeAds()
 		{
 			SetIdByPlatform();
 
@@ -26,7 +26,11 @@ namespace Code.Ads
 				? _iOSGameId
 				: _androidGameId;
 
-		public void OnInitializationComplete() => _adsOnLose.LoadAd();
+		public void OnInitializationComplete()
+		{
+			_adsOnLose.LoadAd();
+			_adsOnLose.ShowAd();
+		}
 
 		public void OnInitializationFailed(UnityAdsInitializationError error, string message)
 			=> Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");

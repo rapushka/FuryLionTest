@@ -15,9 +15,7 @@ namespace Code.Ads
 			=> _adUnitId = Application.platform == RuntimePlatform.IPhonePlayer
 				? _iOsAdUnitId
 				: _androidAdUnitId;
-
-		private void Start() => ShowAd();
-
+		
 		public void LoadAd() => Advertisement.Load(_adUnitId, this);
 
 		public void ShowAd() => Advertisement.Show(_adUnitId, this);
