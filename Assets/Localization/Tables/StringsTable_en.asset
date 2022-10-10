@@ -18,31 +18,7 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 270115487744
-    m_Localized: Music
-    m_Metadata:
-      m_Items: []
-  - m_Id: 859784298496
-    m_Localized: Sound effects
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1303713628160
-    m_Localized: Apply
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1714684116992
-    m_Localized: Congratulations!
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3231340249088
-    m_Localized: Game Over
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3451402797056
-    m_Localized: Restart
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4179911458816
+  - m_Id: 7816524021760
     m_Localized: Settings
     m_Metadata:
       m_Items: []

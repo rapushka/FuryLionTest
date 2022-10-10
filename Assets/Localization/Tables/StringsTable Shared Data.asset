@@ -15,32 +15,8 @@ MonoBehaviour:
   m_TableCollectionName: StringsTable
   m_TableCollectionNameGuidString: eecea88b0661cc04ea6a60f9a19b20e5
   m_Entries:
-  - m_Id: 270115487744
-    m_Key: SettingsMusic
-    m_Metadata:
-      m_Items: []
-  - m_Id: 859784298496
-    m_Key: SettingsSFX
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1303713628160
-    m_Key: SettingsApply
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1714684116992
-    m_Key: GameOverVictory
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3231340249088
-    m_Key: GameOverLose
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3451402797056
-    m_Key: GameOverRestart
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4179911458816
-    m_Key: SettingsTitle
+  - m_Id: 7816524021760
+    m_Key: SettingsTItle
     m_Metadata:
       m_Items: []
   m_Metadata:
