@@ -31,6 +31,14 @@ MonoBehaviour:
     m_Key: SettingsApply
     m_Metadata:
       m_Items: []
+  - m_Id: 18347209211904
+    m_Key: GameOverRestart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18491233222656
+    m_Key: GameOverLose
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
