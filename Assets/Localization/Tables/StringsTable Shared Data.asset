@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: SettingsSFX
     m_Metadata:
       m_Items: []
+  - m_Id: 17293822345216
+    m_Key: SettingsMusic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17437326262272
+    m_Key: SettingsApply
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
