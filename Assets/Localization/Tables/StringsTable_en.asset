@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Game Over
     m_Metadata:
       m_Items: []
+  - m_Id: 19359202492416
+    m_Localized: Congratulations!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

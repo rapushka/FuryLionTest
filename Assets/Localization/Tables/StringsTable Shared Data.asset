@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: GameOverLose
     m_Metadata:
       m_Items: []
+  - m_Id: 19359202492416
+    m_Key: GameOverVictory
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
