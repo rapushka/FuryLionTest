@@ -1,3 +1,4 @@
+using Code.DataStoring;
 using Code.Extensions;
 using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
@@ -22,8 +23,12 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleFromInstance(sceneTransfer)
 				.BindSingleFromInstance(_debugLevel)
+				.BindSingle<BinaryStorage>()
+				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
 				;
-			
+
+			Container.Bind<IStorage>().To<BinaryStorage>().AsSingle();
+
 			SignalBusInstaller.Install(Container);
 
 			SubscribeSignals();
