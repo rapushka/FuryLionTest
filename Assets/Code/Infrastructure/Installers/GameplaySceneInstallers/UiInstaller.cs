@@ -1,8 +1,8 @@
 using Code.Extensions;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Goals;
+using Code.UI.GameSettings;
 using Code.UI.GoalViews;
-using Code.UI.Settings;
 using Code.View;
 using UnityEngine;
 using Zenject;

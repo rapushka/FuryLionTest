@@ -34,6 +34,6 @@ namespace Code.DataStoring
 		}
 
 		private static string GetFilePathForType<T>() 
-			=> $"{Application.persistentDataPath}/Saves/{typeof(T).Name}.save";
+			=> $"{Application.persistentDataPath}/{typeof(T).Name}.save";
 	}
 }

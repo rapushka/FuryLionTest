@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Code.UI.Settings
+namespace Code.UI.GameSettings
 {
 	public class OpenSettingsButton : MonoBehaviour
 	{

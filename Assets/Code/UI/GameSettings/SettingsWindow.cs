@@ -1,9 +1,11 @@
+using Code.DataStoring;
+using Code.DataStoring.Preferences;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Code.UI.Settings
+namespace Code.UI.GameSettings
 {
 	public class SettingsWindow : MonoBehaviour
 	{
@@ -13,12 +15,15 @@ namespace Code.UI.Settings
 
 		private const string MusicVolume = nameof(MusicVolume);
 		private const string SfxVolume = nameof(SfxVolume);
+		
 		private AudioMixer _audioMixer;
+		private IStorage _storage;
 
 		[Inject]
-		public void Construct(AudioMixer audioMixer)
+		public void Construct(AudioMixer audioMixer, IStorage storage)
 		{
 			_audioMixer = audioMixer;
+			_storage = storage;
 		}
 
 		private void OnEnable()
@@ -26,13 +31,24 @@ namespace Code.UI.Settings
 			_buttonOK.onClick.AddListener(CloseWindow);
 			_musicToggle.onValueChanged.AddListener(OnMusicToggle);
 			_sfxToggle.onValueChanged.AddListener(OnSfxToggle);
+
+			var settings = _storage.Load(Settings.DefaultSettings);
+			_musicToggle.isOn = settings.PlayingMusic;
+			_sfxToggle.isOn = settings.PlayingSFX;
 		}
 
-		private void OnDestroy()
+		private void OnDisable()
 		{
 			_buttonOK.onClick.RemoveListener(CloseWindow);
 			_musicToggle.onValueChanged.RemoveListener(OnMusicToggle);
 			_sfxToggle.onValueChanged.RemoveListener(OnSfxToggle);
+			
+			var settings = new Settings
+			{
+				PlayingMusic = _musicToggle.isOn,
+				PlayingSFX = _sfxToggle.isOn,
+			};
+			_storage.Save(settings);
 		}
 
 		public void OpenWindow() => gameObject.SetActive(true);
