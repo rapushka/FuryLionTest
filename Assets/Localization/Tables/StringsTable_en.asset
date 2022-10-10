@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: Settings
     m_Metadata:
       m_Items: []
+  - m_Id: 16216335007744
+    m_Localized: Sound effects
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

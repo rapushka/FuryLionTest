@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: SettingsTItle
     m_Metadata:
       m_Items: []
+  - m_Id: 16216335007744
+    m_Key: SettingsSFX
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
