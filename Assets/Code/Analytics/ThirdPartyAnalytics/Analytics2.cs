@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Analytics.ThirdPartyCode
+namespace Code.Analytics.ThirdPartyAnalytics
 {
 	public class Analytics2
 	{
