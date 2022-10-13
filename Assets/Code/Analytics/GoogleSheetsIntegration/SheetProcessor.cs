@@ -37,7 +37,6 @@ namespace Code.Analytics.GoogleSheetsIntegration
 				);
 			}
 
-			Debug.Log(list.ToString());
 			return list;
 		}
 		

@@ -9,7 +9,7 @@ namespace Code.Extensions.GoogleSheetsParsing
 	{
 		private static readonly Regex Regex = new(@"\((.+?)\) (\w+)");
 
-		public static List<(string, string)> GetParsedParameters(this string[] @this) 
+		public static List<(string type, string name)> GetParsedParameters(this string[] @this) 
 			=> @this.GetRawParameters().ParseParameters();
 
 		private static IEnumerable<string> GetRawParameters(this string[] @this)

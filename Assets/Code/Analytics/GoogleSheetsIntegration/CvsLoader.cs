@@ -25,18 +25,10 @@ namespace Code.Analytics.GoogleSheetsIntegration
 			    or UnityWebRequest.Result.ProtocolError
 			    or UnityWebRequest.Result.DataProcessingError)
 			{
-				Debug.LogError(request.error);
-			}
-			else
-			{
-#if DEBUG
-				Debug.Log("Successful download");
-				Debug.Log(request.downloadHandler.text);
-#endif
-
-				callback.Invoke(request.downloadHandler.text);
+				throw new InvalidOperationException(request.error);
 			}
 
+			callback.Invoke(request.downloadHandler.text);
 			yield return null;
 		}
 	}
