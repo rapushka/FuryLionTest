@@ -11,8 +11,7 @@ namespace Code.Analytics.AnalyticsAdapters
 
 		public void HandleEvent(string eventName, params (string, object)[] @params)
 		{
-			var tuples = @params.Select((p) => (p.Item1, p.Item2));
-			_analytic.Event(eventName, tuples.ToList());
+			_analytic.Event(eventName, @params.ToList());
 		}
 	}
 }
