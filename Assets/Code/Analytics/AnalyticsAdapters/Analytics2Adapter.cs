@@ -9,9 +9,9 @@ namespace Code.Analytics.AnalyticsAdapters
 
 		public Analytics2Adapter() => _analytic = new Analytics2();
 
-		public void HandleEvent(string eventName, params object[] @params)
+		public void HandleEvent(string eventName, params (string, object)[] @params)
 		{
-			var tuples = @params.Select((p) => (p.ToString(), x: p));
+			var tuples = @params.Select((p) => (p.Item1, p.Item2));
 			_analytic.Event(eventName, tuples.ToList());
 		}
 	}

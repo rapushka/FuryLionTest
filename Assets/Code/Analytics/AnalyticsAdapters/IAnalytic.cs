@@ -2,6 +2,6 @@ namespace Code.Analytics.AnalyticsAdapters
 {
 	public interface IAnalytic
 	{
-		void HandleEvent(string eventName, params object[] @params);
+		void HandleEvent(string eventName, params (string, object)[] @params);
 	}
 }

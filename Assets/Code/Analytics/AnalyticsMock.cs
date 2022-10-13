@@ -18,11 +18,11 @@ namespace Code.Analytics
 		{
 			foreach (var analytic in _analytics)
 			{
-				analytic.HandleEvent("Level closed", 1, true);
-				analytic.HandleEvent("Level opened", 1);
+				analytic.HandleEvent("Level closed", ("levelIndex", 1), ("result", true));
+				analytic.HandleEvent("Level opened", ("levelIndex", 1));
 				analytic.HandleEvent("Settings opened");
-				analytic.HandleEvent("Music changed", 0f);
-				analytic.HandleEvent("Sound Changed", 1f);
+				analytic.HandleEvent("Music changed", ("value", 0f));
+				analytic.HandleEvent("Sound Changed", ("value", 1f));
 			}
 		}
 	}
