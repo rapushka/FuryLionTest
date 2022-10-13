@@ -1,3 +1,4 @@
+// ReSharper disable All имитируем код на третьей стороне, потому менять ничего не можем
 using System.Collections.Generic;
 using UnityEngine;
 
