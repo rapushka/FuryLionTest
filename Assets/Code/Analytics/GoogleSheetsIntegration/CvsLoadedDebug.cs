@@ -1,25 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
-	public class CvsLoadMock : IInitializable
+	public class CvsLoadedDebug
 	{
-		private readonly GoogleSheetLoader _googleSheetLoader;
-
-		[Inject]
-		public CvsLoadMock(GoogleSheetLoader googleSheetLoader)
-		{
-			_googleSheetLoader = googleSheetLoader;
-		}
-
-		public void Initialize()
-		{
-			_googleSheetLoader.DataProcessed += OnDataProcessed;
-		}
-
-		private void OnDataProcessed(List<AnalyticEventHandler> handlers)
+		// googleSheetLoader.DataProcessed += OnDataProcessed
+		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
 		{
 			foreach (var handler in handlers)
 			{
@@ -29,6 +16,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 				{
 					Debug.Log($"\t{parameter.type} {parameter.name}");
 				}
+
 				Debug.Log($"action — {handler.ColumnAction}");
 			}
 		}

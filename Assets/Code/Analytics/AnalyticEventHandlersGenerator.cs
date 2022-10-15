@@ -2,18 +2,20 @@ using System.Collections.Generic;
 using Code.Analytics.AnalyticsAdapters;
 using UnityEditor;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Analytics
 {
-	public class AnalyticsMock
+	public class AnalyticEventHandlersGenerator
 	{
 		private readonly IEnumerable<IAnalytic> _analytics;
 
-		[Inject]
-		public AnalyticsMock(IEnumerable<IAnalytic> analytics)
+		public AnalyticEventHandlersGenerator()
 		{
-			_analytics = analytics;
+			_analytics = new List<IAnalytic>
+			{
+				new Analytics1Adapter(),
+				new Analytics2Adapter(),
+			};
 		}
 
 		public void Initialize()
