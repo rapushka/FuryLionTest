@@ -13,8 +13,13 @@ namespace Code.Extensions.Generation
 		public static string GetInvokeParameters(this List<(string type, string name)> @this)
 			=> FormatParameters(@this, prefix: ", ", (p) => p.ForInvoke());
 
+		public static string GetBaseSignal(this List<(string type, string name)> @this)
+			=> @this.Any()
+				? $": ImmutableSignal<{@this.FormatParameters(string.Empty, (p) => $"{p.type}, ")}>"
+				: string.Empty;
+
 		private static string FormatParameters
-			(this List<(string type, string name)> @this, string prefix, Func<(string, string), string> getEntry)
+			(this List<(string, string)> @this, string prefix, Func<(string type, string name), string> getEntry)
 		{
 			const int postfixLenght = 2;
 
