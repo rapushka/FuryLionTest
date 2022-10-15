@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Analytics.AnalyticsAdapters;
+using Code.Analytics.GoogleSheetsIntegration;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Code.Analytics
 			};
 		}
 
-		public void Initialize()
+		public void InvokeAnalytics()
 		{
 			foreach (var analytic in _analytics)
 			{
@@ -33,7 +34,14 @@ namespace Code.Analytics
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()
 		{
-			Debug.Log("Generating...");
+			var cvsLoader = new CvsLoader();
+			var sheetProcessor = new SheetProcessor();
+			var sheetLoader = new GoogleSheetLoader(cvsLoader, sheetProcessor);
+
+			var cvsLoadedDebug = new CvsLoadedDebug();
+			sheetLoader.DataProcessed += cvsLoadedDebug.OnDataProcessed;
+
+			sheetLoader.DownloadTable();
 		}
 	}
 }

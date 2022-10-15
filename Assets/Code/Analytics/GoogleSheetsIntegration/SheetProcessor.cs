@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Extensions.GoogleSheetsParsing;
-using Zenject;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class SheetProcessor
 	{
 		private const char Separator = ',';
-
-		[Inject] public SheetProcessor() { }
 
 		public List<AnalyticEventHandler> ProcessData(string cvsRawData)
 		{
