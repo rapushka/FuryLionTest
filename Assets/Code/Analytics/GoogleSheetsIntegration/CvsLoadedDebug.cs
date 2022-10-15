@@ -18,7 +18,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 				{
 					message += "parameters: ";
 				}
-				message = handler.ColumnParameters.Aggregate(message, (m, p) => m + $"\t{p.type} {p.name} ");
+				message = handler.ColumnParameters.Aggregate(message, (m, p) => m + $" {p.type} {p.name} ");
 				message += '\n';
 
 				message += $"action — {handler.ColumnAction}\n";

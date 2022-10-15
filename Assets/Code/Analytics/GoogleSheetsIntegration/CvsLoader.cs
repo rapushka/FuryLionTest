@@ -7,16 +7,21 @@ namespace Code.Analytics.GoogleSheetsIntegration
 	{
 		private const string URL = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
 
-		public async void DownloadTable(string sheetId, Action<string> onSheetLoadedAction)
+		public void DownloadTable(string sheetId, Action<string> onSheetLoadedAction)
 		{
 			var actualUrl = URL.Replace("*", sheetId);
 			using var request = UnityWebRequest.Get(actualUrl);
 
+			WaitForRequestExecuting(request);
+			HandleErrors(request);
+
+			onSheetLoadedAction.Invoke(request.downloadHandler.text);
+		}
+
+		private static void WaitForRequestExecuting(UnityWebRequest request)
+		{
 			request.SendWebRequest();
 			while (request.isDone == false) { }
-
-			HandleErrors(request);
-			onSheetLoadedAction.Invoke(request.downloadHandler.text);
 		}
 
 		private static void HandleErrors(UnityWebRequest request)
