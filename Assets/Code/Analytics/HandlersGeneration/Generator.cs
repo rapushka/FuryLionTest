@@ -13,19 +13,20 @@ namespace Code.Analytics.HandlersGeneration
 		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
 		{
 			_handlers = handlers;
-			
+
 			const string @namespace = "Code.Generated.Analytics";
 			const string className = "AnalyticEventsHandler";
 
 			var path = $@"{Directory.GetCurrentDirectory()}\Assets\{@namespace.Replace('.', '\\')}";
-			using var streamWriter = File.CreateText(path + @$"\{className}.cs");
+			using var file = File.CreateText(path + @$"\{className}.cs");
 
-			var code = CodeTemplates.AnalyticEventHandlerClass(@namespace, className, GenerateHandlers());
-			
-			streamWriter.Write(code);
+			file.Write(GenerateClass(@namespace, className));
 		}
 
-		private string GenerateHandlers()
+		private string GenerateClass(string @namespace, string className)
+			=> AnalyticEventHandlerCodeTemplates.Class(@namespace, className, GenerateMethods());
+
+		private string GenerateMethods()
 		{
 			const int twoLineBreaks = 4;
 
@@ -42,12 +43,6 @@ namespace Code.Analytics.HandlersGeneration
 		}
 
 		private static string GenerateHandler(AnalyticEventHandler handler)
-			=> CodeTemplates.AnalyticEventHandlerMethod
-			(
-				handler.Action,
-				handler.Event,
-				handler.Parameters.GetMethodParameters(),
-				handler.Parameters.GetInvokeParameters()
-			);
+			=> AnalyticEventHandlerCodeTemplates.Method(handler.Deconstruct());
 	}
 }
