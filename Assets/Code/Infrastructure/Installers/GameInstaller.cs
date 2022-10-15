@@ -1,5 +1,5 @@
 using Code.DataStoring;
-using Code.Extensions;
+using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.Inner.CustomMonoBehaviours;

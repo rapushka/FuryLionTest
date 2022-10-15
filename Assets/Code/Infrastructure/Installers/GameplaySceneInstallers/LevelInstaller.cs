@@ -1,4 +1,4 @@
-using Code.Extensions;
+using Code.Extensions.DiContainerExtensions;
 using Code.GameLoop;
 using Code.GameLoop.Goals.Progress;
 using Code.Gameplay;

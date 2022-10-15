@@ -1,4 +1,4 @@
-using Code.Extensions;
+using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Goals;
 using Code.UI.GameSettings;
