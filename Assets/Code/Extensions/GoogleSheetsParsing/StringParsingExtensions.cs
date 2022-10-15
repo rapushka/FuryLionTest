@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Code.Extensions.GoogleSheetsParsing
 {
-	public static class StringExtensions
+	public static class StringParsingExtensions
 	{
 		public static string AsMethodName(this string @this)
 		{

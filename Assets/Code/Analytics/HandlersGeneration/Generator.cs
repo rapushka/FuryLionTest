@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Code.Analytics.GoogleSheetsIntegration;
+using Code.Extensions.Generation;
+using Code.Extensions.GoogleSheetsParsing;
 
 namespace Code.Analytics.HandlersGeneration
 {
 	public class Generator
 	{
+		private List<AnalyticEventHandler> _handlers;
+
 		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
 		{
+			_handlers = handlers;
+			
 			const string @namespace = "Code.Generated.Analytics";
 			const string className = "AnalyticEventsHandler";
 
@@ -25,66 +30,35 @@ namespace {@namespace}
 	{{
 		private readonly AnalyticsCollection _analytics = new();
 
-{GenerateCodeForHandlers(handlers)}
+{GenerateCodeForHandlers()}
 	}}
 }}
 ";
 			streamWriter.Write(codeTemplate);
 		}
 
-		private string GenerateCodeForHandlers(List<AnalyticEventHandler> handlers)
+		private string GenerateCodeForHandlers()
 		{
+			const int twoLineBreaks = 4;
+
 			var result = new StringBuilder();
 
-			foreach (var handler in handlers)
+			foreach (var handler in _handlers)
 			{
 				result.AppendLine(GenerateHandler(handler));
 			}
 
+			result.RemoveLasSymbols(twoLineBreaks);
+
 			return result.ToString();
 		}
 
-		private string GenerateHandler(AnalyticEventHandler handler)
+		private static string GenerateHandler(AnalyticEventHandler handler)
 			=> $@"		// Action: {handler.Action}
-		public void On{handler.Event}({GetMethodParameters(handler.Parameters)})
+		public void On{handler.Event}({handler.Parameters.GetMethodParameters()})
 		{{
-			_analytics.HandleEvent(""{handler.Event}""{GetNamedParameters(handler.Parameters)});
+			_analytics.HandleEvent(""{handler.Event}""{handler.Parameters.GetInvokeParameters()});
 		}}
 ";
-
-		private string GetMethodParameters(List<(string type, string name)> parameters)
-		{
-			if (parameters.Any() == false)
-			{
-				return string.Empty;
-			}
-
-			var stringBuilder = new StringBuilder();
-			foreach (var parameter in parameters)
-			{
-				stringBuilder.Append($"{parameter.type} {parameter.name}, ");
-			}
-
-			stringBuilder.Remove(stringBuilder.Length - 2, 2);
-			return stringBuilder.ToString();
-		}
-
-		private string GetNamedParameters(List<(string type, string name)> parameters)
-		{
-			if (parameters.Any() == false)
-			{
-				return string.Empty;
-			}
-
-			var stringBuilder = new StringBuilder();
-			stringBuilder.Append(", ");
-			foreach (var parameter in parameters)
-			{
-				stringBuilder.Append($"(nameof({parameter.name}), {parameter.name}), ");
-			}
-
-			stringBuilder.Remove(stringBuilder.Length - 2, 2);
-			return stringBuilder.ToString();
-		}
 	}
 }
