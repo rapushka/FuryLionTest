@@ -9,25 +9,23 @@ namespace Code.Extensions.GoogleSheetsParsing
 	{
 		private static readonly Regex Regex = new(@"\((.+?)\) (\w+)");
 
-		public static List<(string type, string name)> GetParsedParameters(this string[] @this) 
-			=> @this.GetRawParameters().ParseParameters();
+		public static List<(string type, string name)> GetParsedParameters(this string[] @this)
+			=> @this.GetRawParameters()
+			        .LinqQuery()
+			        .ToList();
 
-		private static IEnumerable<string> GetRawParameters(this string[] @this)
+		private static IEnumerable<string> GetRawParameters(this IReadOnlyList<string> @this)
 		{
 			var parametersStartIndex = 1;
-			var parametersEndIndex = @this.Length - 1;
-			
+			var parametersEndIndex = @this.Count - 1;
+
 			for (var i = parametersStartIndex; i < parametersEndIndex; i++)
 			{
 				yield return @this[i];
 			}
 		}
 
-		private static List<(string, string)> ParseParameters(this IEnumerable<string> @this)
-			=> LinqQuery(@this)
-				.ToList();
-
-		private static IEnumerable<(string type, string name)> LinqQuery(IEnumerable<string> @this)
+		private static IEnumerable<(string type, string name)> LinqQuery(this IEnumerable<string> @this)
 			=> from parameter in @this
 			   where parameter.IsEmpty() == false
 			   select Regex.Match(parameter)

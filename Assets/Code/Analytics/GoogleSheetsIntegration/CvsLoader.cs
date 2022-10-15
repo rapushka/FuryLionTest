@@ -1,19 +1,22 @@
 using System;
 using System.Collections;
-using UnityEngine;
+using Code.Inner.CustomMonoBehaviours;
 using UnityEngine.Networking;
+using Zenject;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
-	public class CvsLoader : MonoBehaviour
+	public class CvsLoader
 	{
+		private readonly CoroutinesHandler _coroutines;
 		private const string URL = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
+
+		[Inject] public CvsLoader(CoroutinesHandler coroutines) => _coroutines = coroutines;
 
 		public void DownloadTable(string sheetId, Action<string> onSheetLoadedAction)
 		{
-			// sheetId = 1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk
 			var actualUrl = URL.Replace("*", sheetId);
-			StartCoroutine(DownloadRawCvsTable(actualUrl, onSheetLoadedAction));
+			_coroutines.StartRoutine(DownloadRawCvsTable(actualUrl, onSheetLoadedAction));
 		}
 
 		private IEnumerator DownloadRawCvsTable(string actualUrl, Action<string> callback)

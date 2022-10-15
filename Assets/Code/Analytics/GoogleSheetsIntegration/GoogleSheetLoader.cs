@@ -1,32 +1,35 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Zenject;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
-	public class GoogleSheetLoader : MonoBehaviour
+	public class GoogleSheetLoader : IInitializable
 	{
-		[SerializeField] private string _sheetId;
-    
-		private CvsLoader _cvsLoader;
-		private SheetProcessor _sheetProcessor;
+		private const string SheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
+
+		private readonly CvsLoader _cvsLoader;
+		private readonly SheetProcessor _sheetProcessor;
+		
 		private List<AnalyticEventHandler> _handlers;
 
-		public event Action<List<AnalyticEventHandler>> OnProcessData;
-		
-		private void Start()
+		public event Action<List<AnalyticEventHandler>> DataProcessed;
+
+		[Inject]
+		public GoogleSheetLoader(CvsLoader cvsLoader, SheetProcessor sheetProcessor)
 		{
-			_cvsLoader = GetComponent<CvsLoader>();
-			_sheetProcessor = GetComponent<SheetProcessor>();
-			DownloadTable();
+			_cvsLoader = cvsLoader;
+			_sheetProcessor = sheetProcessor;
 		}
 
-		private void DownloadTable() => _cvsLoader.DownloadTable(_sheetId, OnRawCvsLoaded);
+		public void Initialize() => DownloadTable();
+
+		private void DownloadTable() => _cvsLoader.DownloadTable(SheetId, OnRawCvsLoaded);
 
 		private void OnRawCvsLoaded(string rawCvsText)
 		{
 			_handlers = _sheetProcessor.ProcessData(rawCvsText);
-			OnProcessData?.Invoke(_handlers);
+			DataProcessed?.Invoke(_handlers);
 		}
 	}
 }

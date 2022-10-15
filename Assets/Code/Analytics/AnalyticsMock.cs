@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using Code.Analytics.AnalyticsAdapters;
+using UnityEditor;
+using UnityEngine;
 using Zenject;
 
 namespace Code.Analytics
 {
-	public class AnalyticsMock : IInitializable
+	public class AnalyticsMock
 	{
 		private readonly IEnumerable<IAnalytic> _analytics;
 
@@ -24,6 +26,12 @@ namespace Code.Analytics
 				analytic.HandleEvent("Music changed", ("value", 0f));
 				analytic.HandleEvent("Sound Changed", ("value", 1f));
 			}
+		}
+		
+		[MenuItem("Tools/Analytics/Generate handlers")]
+		public static void Generate()
+		{
+			Debug.Log("Generating...");
 		}
 	}
 }

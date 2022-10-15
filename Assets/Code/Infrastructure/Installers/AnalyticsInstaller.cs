@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Analytics;
 using Code.Analytics.AnalyticsAdapters;
+using Code.Analytics.GoogleSheetsIntegration;
 using Code.Extensions;
 using Zenject;
 
@@ -18,7 +19,11 @@ namespace Code.Infrastructure.Installers
 
 			Container
 				.BindSingleFromInstance(analytics)
-				.BindSingleWithInterfaces<AnalyticsMock>()
+				// .BindSingleWithInterfaces<AnalyticsMock>()
+				.BindSingleWithInterfaces<CvsLoadMock>()
+				.BindSingleWithInterfaces<GoogleSheetLoader>()
+				.BindSingle<CvsLoader>()
+				.BindSingle<SheetProcessor>()
 				;
 		}
 	}

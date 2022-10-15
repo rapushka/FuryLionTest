@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Extensions.GoogleSheetsParsing;
-using UnityEngine;
+using Zenject;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
-	public class SheetProcessor : MonoBehaviour
+	public class SheetProcessor
 	{
 		private const char Separator = ',';
+
+		[Inject] public SheetProcessor() { }
 
 		public List<AnalyticEventHandler> ProcessData(string cvsRawData)
 		{
@@ -39,7 +41,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 
 			return list;
 		}
-		
+
 		private char GetPlatformSpecificLineEnd()
 		{
 			var lineEnding = '\n';
