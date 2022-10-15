@@ -13,7 +13,7 @@ namespace Code.Extensions.Generation
 		public static string GetInvokeParameters(this List<(string type, string name)> @this)
 			=> FormatParameters(@this, prefix: ", ", (p) => p.ForInvoke());
 
-		public static string GetBaseImmutableSignal(this List<(string type, string name)> @this)
+		public static string GetBaseSignal(this List<(string type, string name)> @this)
 			=> @this.Any()
 				? $": ImmutableSignal<{@this.FormatParameters(string.Empty, (p) => $"{p.type}, ")}>"
 				: string.Empty;

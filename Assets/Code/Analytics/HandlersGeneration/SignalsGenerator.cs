@@ -27,20 +27,10 @@ namespace Code.Analytics.HandlersGeneration
 			}
 		}
 
-		private string GenerateSignal(string @namespace, string className, List<(string, string)> parameters)
-			=> @$"// Generated
-using Code.Infrastructure.BaseSignals;
+		private string GenerateSignal(string @namespace, string name, List<(string, string)> p)
+			=> SignalsCodeTemplates.Class(@namespace, name, p.GetBaseSignal(), GenerateConstructor(p));
 
-namespace {@namespace}
-{{
-	public class {className} {parameters.GetBaseImmutableSignal()}
-	{{
-		{GenerateCtor(parameters)}
-	}}
-}}
-";
-
-		private string GenerateCtor(List<(string type, string name)> parameters)
+		private string GenerateConstructor(List<(string type, string name)> parameters)
 		{
 			const int postfixLenght = 2;
 			
@@ -50,18 +40,18 @@ namespace {@namespace}
 			}
 			
 			var names = new StringBuilder();
-			var @params = new StringBuilder();
+			var constructorParameters = new StringBuilder();
 			
-			foreach (var p in parameters)
+			foreach (var parameter in parameters)
 			{
-				names.Append($"{p.name}, ");
-				@params.Append(p.ForMethod());
+				names.Append($"{parameter.name}, ");
+				constructorParameters.Append(parameter.ForMethod());
 			}
 
 			names.RemoveLasSymbols(postfixLenght);
-			@params.RemoveLasSymbols(postfixLenght);
+			constructorParameters.RemoveLasSymbols(postfixLenght);
 
-			return $"public {_currentClassName}({@params}) : base({names}) {{ }}";
+			return $"public {_currentClassName}({constructorParameters}) : base({names}) {{ }}";
 		}
 	}
 }
