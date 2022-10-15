@@ -8,6 +8,12 @@ namespace Code.Inner.CustomMonoBehaviours
 	{
 		private readonly List<Coroutine> _startedRoutines = new();
 
+		public void OnSceneChanged()
+		{
+			StopAllCoroutines();
+			_startedRoutines.Clear();
+		}
+
 		public int StartRoutine(IEnumerator routine)
 		{
 			_startedRoutines.Add(StartCoroutine(routine));

@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugLevel: {fileID: 11400000, guid: 3f44e96029f837f49a47b2868135ec07, type: 2}
+  _coroutinesHandlerPrefab: {fileID: 5996804090670529041, guid: 7cf8a11e7c2d9ef409264672c9ba238f, type: 3}
 --- !u!114 &2649538792163832576
 MonoBehaviour:
   m_ObjectHideFlags: 0
