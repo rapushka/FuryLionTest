@@ -10,42 +10,32 @@ namespace Code.Analytics.GoogleSheetsIntegration
 
 		public List<AnalyticEventHandler> ProcessData(string cvsRawData)
 		{
-			const int dataStartRawIndex = 1;
+			const int indexOfFirstRowWithData = 1;
 
-			var lineEnding = GetPlatformSpecificLineEnd();
-			var rows = cvsRawData.Split(lineEnding);
+			var rows = cvsRawData.Split("\n\r");
 
 			var list = new List<AnalyticEventHandler>();
 
-			for (var i = dataStartRawIndex; i < rows.Length; i++)
+			for (var i = indexOfFirstRowWithData; i < rows.Length; i++)
 			{
 				var cells = rows[i].Split(Separator);
 
 				var columnEvent = cells.First().AsMethodName();
 				var columnParameters = cells.GetParsedParameters();
-				var columnAction = cells.Last();
+				var columnAction = cells.Last().Replace("\n\r", "\0");
 
 				list.Add
 				(
 					new AnalyticEventHandler
 					{
-						ColumnEvent = columnEvent,
-						ColumnParameters = columnParameters,
-						ColumnAction = columnAction
+						Event = columnEvent,
+						Parameters = columnParameters,
+						Action = columnAction
 					}
 				);
 			}
 
 			return list;
-		}
-
-		private char GetPlatformSpecificLineEnd()
-		{
-			var lineEnding = '\n';
-#if UNITY_IOS
-			lineEnding = '\r';
-#endif
-			return lineEnding;
 		}
 	}
 }

@@ -1,37 +1,29 @@
 using System;
+using Code.Extensions;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class CvsLoader
 	{
-		private const string URL = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
+		private readonly string _sheetId;
+		private const string Url = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
 
-		public void DownloadTable(string sheetId, Action<string> onSheetLoadedAction)
+		public CvsLoader(string sheetId) => _sheetId = sheetId;
+
+		public void DownloadTable(Action<string> onSheetLoadedAction)
 		{
-			var actualUrl = URL.Replace("*", sheetId);
+			var actualUrl = Url.Replace("*", _sheetId);
 			using var request = UnityWebRequest.Get(actualUrl);
 
-			WaitForRequestExecuting(request);
-			HandleErrors(request);
+			request.WaitForRequestExecuting()
+			       .CheckForErrors(OnRequestError);
 
 			onSheetLoadedAction.Invoke(request.downloadHandler.text);
 		}
 
-		private static void WaitForRequestExecuting(UnityWebRequest request)
-		{
-			request.SendWebRequest();
-			while (request.isDone == false) { }
-		}
-
-		private static void HandleErrors(UnityWebRequest request)
-		{
-			if (request.result is UnityWebRequest.Result.ConnectionError
-			    or UnityWebRequest.Result.ProtocolError
-			    or UnityWebRequest.Result.DataProcessingError)
-			{
-				throw new InvalidOperationException(request.error);
-			}
-		}
+		private static void OnRequestError(UnityWebRequest unityWebRequest)
+			=> Debug.LogError(unityWebRequest.error);
 	}
 }

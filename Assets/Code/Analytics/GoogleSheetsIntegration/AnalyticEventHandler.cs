@@ -4,8 +4,8 @@ namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class AnalyticEventHandler
 	{
-		public string ColumnEvent;
-		public List<(string type, string name)> ColumnParameters;
-		public string ColumnAction;
+		public string Event;
+		public List<(string type, string name)> Parameters;
+		public string Action;
 	}
 }

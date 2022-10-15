@@ -1,4 +1,5 @@
 using Code.Analytics.GoogleSheetsIntegration;
+using Code.Analytics.HandlersGeneration;
 using UnityEditor;
 
 namespace Code.Analytics
@@ -15,7 +16,9 @@ namespace Code.Analytics
 
 		private static GoogleSheetLoader Initialize()
 		{
-			var cvsLoader = new CvsLoader();
+			const string sheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
+			
+			var cvsLoader = new CvsLoader(sheetId);
 			var sheetProcessor = new SheetProcessor();
 			var sheetLoader = new GoogleSheetLoader(cvsLoader, sheetProcessor);
 
@@ -26,7 +29,7 @@ namespace Code.Analytics
 
 		private static void InitializeDownloadedTableHandler(GoogleSheetLoader sheetLoader)
 		{
-			var cvsLoadedDebug = new CvsLoadedDebug();
+			var cvsLoadedDebug = new Generator();
 			sheetLoader.DataProcessed += cvsLoadedDebug.OnDataProcessed;
 		}
 	}

@@ -12,16 +12,16 @@ namespace Code.Analytics.GoogleSheetsIntegration
 			{
 				var message = string.Empty;
 				
-				message += $"event — {handler.ColumnEvent}\n";
+				message += $"event — {handler.Event}\n";
 
-				if (handler.ColumnParameters.Any())
+				if (handler.Parameters.Any())
 				{
 					message += "parameters: ";
 				}
-				message = handler.ColumnParameters.Aggregate(message, (m, p) => m + $" {p.type} {p.name} ");
+				message = handler.Parameters.Aggregate(message, (m, p) => m + $" {p.type} {p.name} ");
 				message += '\n';
 
-				message += $"action — {handler.ColumnAction}\n";
+				message += $"action — {handler.Action}\n";
 				Debug.Log(message);
 			}
 		}
