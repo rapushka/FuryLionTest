@@ -34,6 +34,7 @@ namespace Code.Analytics
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()
 		{
+			Debug.Log("Generating...");
 			var cvsLoader = new CvsLoader();
 			var sheetProcessor = new SheetProcessor();
 			var sheetLoader = new GoogleSheetLoader(cvsLoader, sheetProcessor);
@@ -42,6 +43,7 @@ namespace Code.Analytics
 			sheetLoader.DataProcessed += cvsLoadedDebug.OnDataProcessed;
 
 			sheetLoader.DownloadTable();
+			Debug.Log("Downloaded");
 		}
 	}
 }

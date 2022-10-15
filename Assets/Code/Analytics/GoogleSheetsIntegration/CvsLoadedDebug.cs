@@ -1,23 +1,28 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class CvsLoadedDebug
 	{
-		// googleSheetLoader.DataProcessed += OnDataProcessed
 		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
 		{
 			foreach (var handler in handlers)
 			{
-				Debug.Log($"event — {handler.ColumnEvent}");
-				Debug.Log("parameters:");
-				foreach (var parameter in handler.ColumnParameters)
-				{
-					Debug.Log($"\t{parameter.type} {parameter.name}");
-				}
+				var message = string.Empty;
+				
+				message += $"event — {handler.ColumnEvent}\n";
 
-				Debug.Log($"action — {handler.ColumnAction}");
+				if (handler.ColumnParameters.Any())
+				{
+					message += "parameters: ";
+				}
+				message = handler.ColumnParameters.Aggregate(message, (m, p) => m + $"\t{p.type} {p.name} ");
+				message += '\n';
+
+				message += $"action — {handler.ColumnAction}\n";
+				Debug.Log(message);
 			}
 		}
 	}
