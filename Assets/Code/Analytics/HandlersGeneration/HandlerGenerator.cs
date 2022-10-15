@@ -6,7 +6,7 @@ using Code.Extensions.Generation;
 
 namespace Code.Analytics.HandlersGeneration
 {
-	public class Generator
+	public class HandlerGenerator
 	{
 		private List<AnalyticEventHandler> _handlers;
 

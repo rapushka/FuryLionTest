@@ -31,8 +31,11 @@ namespace Code.Analytics
 
 		private static void InitializeDownloadedTableHandler(GoogleSheetLoader sheetLoader)
 		{
-			var cvsLoadedDebug = new Generator();
-			sheetLoader.DataProcessed += cvsLoadedDebug.OnDataProcessed;
+			var handlerGenerator = new HandlerGenerator();
+			var signalsGenerator = new SignalsGenerator();
+			
+			sheetLoader.DataProcessed += handlerGenerator.OnDataProcessed;
+			sheetLoader.DataProcessed += signalsGenerator.OnDataProcessed;
 		}
 	}
 }
