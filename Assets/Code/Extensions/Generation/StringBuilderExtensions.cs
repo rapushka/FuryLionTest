@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Code.Extensions.GoogleSheetsParsing
+namespace Code.Extensions.Generation
 {
 	public static class StringBuilderExtensions
 	{
