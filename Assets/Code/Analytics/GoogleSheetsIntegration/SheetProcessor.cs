@@ -11,8 +11,9 @@ namespace Code.Analytics.GoogleSheetsIntegration
 		public List<AnalyticEventHandler> ProcessData(string cvsRawData)
 		{
 			const int indexOfFirstRowWithData = 1;
+			const string lineBreak = "\r\n";
 
-			var rows = cvsRawData.Split("\n\r");
+			var rows = cvsRawData.Split(lineBreak);
 
 			var list = new List<AnalyticEventHandler>();
 
@@ -22,7 +23,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 
 				var columnEvent = cells.First().AsMethodName();
 				var columnParameters = cells.GetParsedParameters();
-				var columnAction = cells.Last().Replace("\n\r", "\0");
+				var columnAction = cells.Last();
 
 				list.Add
 				(

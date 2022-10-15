@@ -1,6 +1,7 @@
 using Code.Analytics.GoogleSheetsIntegration;
 using Code.Analytics.HandlersGeneration;
 using UnityEditor;
+using UnityEngine;
 
 namespace Code.Analytics
 {
@@ -10,8 +11,9 @@ namespace Code.Analytics
 		public static void Generate()
 		{
 			var sheetLoader = Initialize();
-
 			sheetLoader.DownloadTable();
+
+			Debug.Log("Generated");
 		}
 
 		private static GoogleSheetLoader Initialize()

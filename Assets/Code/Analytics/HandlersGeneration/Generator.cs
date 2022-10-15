@@ -46,7 +46,7 @@ namespace {@namespace}
 
 		private string GenerateHandler(AnalyticEventHandler handler)
 			=> $@"		// Action: {handler.Action}
-		public void {handler.Event}({GetMethodParameters(handler.Parameters)})
+		public void On{handler.Event}({GetMethodParameters(handler.Parameters)})
 		{{
 			_analytics.HandleEvent(""{handler.Event}""{GetNamedParameters(handler.Parameters)});
 		}}
