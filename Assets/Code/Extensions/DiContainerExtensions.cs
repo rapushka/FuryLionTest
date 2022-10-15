@@ -1,5 +1,7 @@
 using System;
 using Zenject;
+using Component = UnityEngine.Component;
+using Object = UnityEngine.Object;
 
 namespace Code.Extensions
 {

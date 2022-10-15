@@ -17,14 +17,14 @@ namespace Code.Infrastructure.Installers
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			var sceneTransfer = new SceneTransfer();
-			var coroutines = Container.InstantiatePrefab(_coroutinesHandlerPrefab);
+			var coroutinesHandler = Instantiate(_coroutinesHandlerPrefab);
+			DontDestroyOnLoad(coroutinesHandler);
 
 			Container
-				.BindSingleFromInstance(sceneTransfer)
+				.BindSingleWithInterfaces<SceneTransfer>()
 				.BindSingleFromInstance(_debugLevel)
 				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
-				.BindSingleFromInstance(coroutines)
+				.BindSingleFromInstance(coroutinesHandler)
 				;
 
 			SignalBusInstaller.Install(Container);
@@ -35,6 +35,8 @@ namespace Code.Infrastructure.Installers
 		private void SubscribeSignals()
 			=> Container
 			   .BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
-			   .BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene);
+			   .BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
+			   .BindSignalTo<SceneLoadedSignal, CoroutinesHandler>((x) => x.OnSceneChanged)
+			   ;
 	}
 }
