@@ -1,7 +1,9 @@
 using Code.Analytics.GoogleSheetsIntegration;
+using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 using Code.Analytics.HandlersGeneration.Handler;
 using Code.Analytics.HandlersGeneration.Signals;
 using Code.Analytics.HandlersGeneration.SignalsBindingExtensions;
+using Code.Inner;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,17 +14,15 @@ namespace Code.Analytics
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()
 		{
-			var sheetLoader = Initialize();
+			var sheetLoader = InitializeSheetLoader();
 			sheetLoader.DownloadTable();
 
 			Debug.Log("Generated");
 		}
 
-		private static GoogleSheetLoader Initialize()
+		private static GoogleSheetLoader InitializeSheetLoader()
 		{
-			const string sheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
-			
-			var cvsLoader = new GoogleSheetToCvsDownloader(sheetId);
+			var cvsLoader = new GoogleSheetToCvsDownloader(Constants.Analytics.GoogleSheetId);
 			var sheetLoader = new GoogleSheetLoader(cvsLoader);
 
 			InitializeDownloadedTableHandler(sheetLoader);

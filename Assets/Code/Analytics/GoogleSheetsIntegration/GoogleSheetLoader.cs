@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 using Code.Extensions.GoogleSheetsParsing;
 
 namespace Code.Analytics.GoogleSheetsIntegration
@@ -17,7 +18,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 			_googleSheetToCvsDownloader = googleSheetToCvsDownloader;
 		}
 
-		public void DownloadTable() => _googleSheetToCvsDownloader.DownloadTable(OnRawCvsLoaded);
+		public void DownloadTable() => _googleSheetToCvsDownloader.LoadTable(OnRawCvsLoaded);
 
 		private void OnRawCvsLoaded(string rawCvsText)
 		{
