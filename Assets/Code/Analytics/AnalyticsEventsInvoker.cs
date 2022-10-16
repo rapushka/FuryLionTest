@@ -19,12 +19,10 @@ namespace Code.Analytics
 
 		public void OnSceneChanged()
 		{
-			if (_sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Gameplay)
+			if (_sceneTransfer.CurrentSceneIndex == Constants.SceneIndex.Gameplay)
 			{
-				return;
+				_signalBus.Fire(new LevelOpenedSignal(Constants.SceneIndex.Gameplay));
 			}
-
-			_signalBus.Fire(new LevelOpenedSignal(Constants.SceneIndex.Gameplay));
 		}
 
 		public void OnGameLose() => OnLevelClosed(victory: false);
