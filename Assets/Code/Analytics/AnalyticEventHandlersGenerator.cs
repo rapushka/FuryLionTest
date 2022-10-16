@@ -22,7 +22,7 @@ namespace Code.Analytics
 
 		private static GoogleSheetLoader InitializeSheetLoader()
 		{
-			var cvsLoader = new GoogleSheetToCvsDownloader(Constants.Analytics.GoogleSheetId);
+			var cvsLoader = new GoogleSheetAsCvsDownloader(Constants.Analytics.GoogleSheetId);
 			var sheetLoader = new GoogleSheetLoader(cvsLoader);
 
 			InitializeDownloadedTableHandler(sheetLoader);

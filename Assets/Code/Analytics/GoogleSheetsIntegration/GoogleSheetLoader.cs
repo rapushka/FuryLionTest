@@ -7,18 +7,15 @@ namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class GoogleSheetLoader
 	{
-		private readonly GoogleSheetToCvsDownloader _googleSheetToCvsDownloader;
+		private readonly ICvsLoader _cvsLoader;
 		
 		private List<AnalyticEventHandler> _handlers;
 
 		public event Action<List<AnalyticEventHandler>> DataProcessed;
 
-		public GoogleSheetLoader(GoogleSheetToCvsDownloader googleSheetToCvsDownloader)
-		{
-			_googleSheetToCvsDownloader = googleSheetToCvsDownloader;
-		}
+		public GoogleSheetLoader(ICvsLoader cvsLoader) => _cvsLoader = cvsLoader;
 
-		public void DownloadTable() => _googleSheetToCvsDownloader.LoadTable(OnRawCvsLoaded);
+		public void DownloadTable() => _cvsLoader.LoadTable(OnRawCvsLoaded);
 
 		private void OnRawCvsLoaded(string rawCvsText)
 		{
