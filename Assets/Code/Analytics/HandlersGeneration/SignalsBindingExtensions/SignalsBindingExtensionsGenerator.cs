@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,71 +30,43 @@ namespace Code.Analytics.HandlersGeneration.SignalsBindingExtensions
 		}
 
 		private string GenerateCode(string @namespace, string className)
-			=> @$"// generated
-using Code.Extensions.DiContainerExtensions;
-using Code.Generated.Analytics.Signals;
-using Zenject;
-
-namespace {@namespace}
-{{
-	public static class {className}
-	{{
-		public static DiContainer BindGeneratedHandlers(this DiContainer @this)
-		{{
-			{GenerateBindings()}
-
-			return @this;
-		}}
-	}}
-}}";
+			=> BindingCodeTemplates.Class(@namespace, className, GenerateBindings());
 
 		private string GenerateBindings()
-		{
-			return _handlers.Any() == false
+			=> _handlers.Any() == false
 				? string.Empty
 				: $"@this{NewLineWithSameOffset}{GenerateInvokes()};";
-		}
 
 		private string GenerateInvokes()
 		{
 			var result = new StringBuilder();
-
-			foreach (var handler in _handlers)
-			{
-				result.Append(HandlerAsTemplate(handler));
-			}
-
+			_handlers.ForEach((h) => result.Append(HandlerAsTemplate(h)));
 			return result.ToString();
 		}
 
 		private string HandlerAsTemplate(AnalyticEventHandler handler)
-			=> $".BindSignalTo<{handler.Event}Signal, "
-			   + $"AnalyticEventsHandler>((x{GetArgsDeclaration(handler.Parameters)}) "
-			   + $"=> x.On{handler.Event}{GetArgsUsage(handler.Parameters)})"
-			   + NewLineWithSameOffset;
+			=> BindingCodeTemplates.Method
+				(handler.Event, GetArgsDeclaration(handler.Parameters), GetArgsUsage(handler.Parameters));
 
 		private string GetArgsDeclaration(IEnumerable<(string type, string name)> parameters)
 			=> parameters.Any() ? ", v" : string.Empty;
 
-		private string GetArgsUsage(List<(string type, string name)> parameters)
+		private string GetArgsUsage(ICollection parameters)
+			=> parameters.Count switch
+			{
+				0 => string.Empty,
+				1 => "(v.Value)",
+				_ => GenerateArgsForTwoAndMore(parameters.Count)
+			};
+
+		private static string GenerateArgsForTwoAndMore(int parametersCount)
 		{
 			const int postfixLenght = 2;
-			var count = parameters.Count;
-
-			if (count == 0)
-			{
-				return string.Empty;
-			}
-
-			if (count == 1)
-			{
-				return "(v.Value)";
-			}
 
 			var result = new StringBuilder();
 			result.Append('(');
 
-			for (var i = 0; i < count; i++)
+			for (var i = 0; i < parametersCount; i++)
 			{
 				result.Append($"v.Value{i + 1}, ");
 			}
