@@ -1,6 +1,7 @@
 using Code.Analytics;
 using Code.Extensions.DiContainerExtensions;
 using Code.Generated.Analytics;
+using Code.Infrastructure.Signals.GameLoop;
 using Zenject;
 
 namespace Code.Infrastructure.Installers
@@ -20,7 +21,12 @@ namespace Code.Infrastructure.Installers
 
 		private void SubscribeSignals()
 		{
-			Container.BindGeneratedHandlers();
+			Container
+				.BindGeneratedHandlers()
+				.BindSignalTo<SceneLoadedSignal, AnalyticsEventsInvoker>((x) => x.OnSceneChanged)
+				.BindSignalTo<GameLoseSignal, AnalyticsEventsInvoker>((x) => x.OnGameLose)
+				.BindSignalTo<GameVictorySignal, AnalyticsEventsInvoker>((x) => x.OnGameVictory)
+				;
 		}
 	}
 }

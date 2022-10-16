@@ -16,13 +16,27 @@ namespace Code.Analytics
 			_signalBus = signalBus;
 			_sceneTransfer = sceneTransfer;
 		}
-		
+
 		public void OnSceneChanged()
 		{
-			if (_sceneTransfer.CurrentSceneIndex == Constants.SceneIndex.Gameplay)
-			{
-				_signalBus.Fire(new LevelOpenedSignal(Constants.SceneIndex.Gameplay));
-			}
+			CheckAtLevelOpened();
 		}
+
+		private void CheckAtLevelOpened()
+		{
+			if (_sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Gameplay)
+			{
+				return;
+			}
+
+			_signalBus.Fire(new LevelOpenedSignal(Constants.SceneIndex.Gameplay));
+		}
+
+		public void OnGameLose() => OnLevelClosed(victory: false);
+
+		public void OnGameVictory() => OnLevelClosed(victory: true);
+
+		private void OnLevelClosed(bool victory)
+			=> _signalBus.Fire(new LevelClosedSignal(_sceneTransfer.CurrentSceneIndex, victory));
 	}
 }
