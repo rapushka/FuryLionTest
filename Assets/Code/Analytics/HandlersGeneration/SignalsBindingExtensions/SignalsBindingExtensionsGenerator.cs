@@ -9,6 +9,8 @@ namespace Code.Analytics.HandlersGeneration.SignalsBindingExtensions
 {
 	public class SignalsBindingExtensionsGenerator
 	{
+		private const string NewLineWithSameOffset = "\r\n\t\t\t\t";
+
 		private List<AnalyticEventHandler> _handlers;
 
 		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
@@ -47,14 +49,9 @@ namespace {@namespace}
 
 		private string GenerateBindings()
 		{
-			if (_handlers.Any() == false)
-			{
-				return string.Empty;
-			}
-
-			return $@"@this
-				{GenerateInvokes()}
-				;";
+			return _handlers.Any() == false
+				? string.Empty
+				: $"@this{NewLineWithSameOffset}{GenerateInvokes()};";
 		}
 
 		private string GenerateInvokes()
@@ -73,9 +70,9 @@ namespace {@namespace}
 			=> $".BindSignalTo<{handler.Event}Signal, "
 			   + $"AnalyticEventsHandler>((x{GetArgsDeclaration(handler.Parameters)}) "
 			   + $"=> x.On{handler.Event}{GetArgsUsage(handler.Parameters)})"
-			   + "\r\n\t\t\t\t";
+			   + NewLineWithSameOffset;
 
-		private string GetArgsDeclaration(IEnumerable<(string type, string name)> parameters) 
+		private string GetArgsDeclaration(IEnumerable<(string type, string name)> parameters)
 			=> parameters.Any() ? ", v" : string.Empty;
 
 		private string GetArgsUsage(List<(string type, string name)> parameters)
@@ -95,7 +92,7 @@ namespace {@namespace}
 
 			var result = new StringBuilder();
 			result.Append('(');
-			
+
 			for (var i = 0; i < count; i++)
 			{
 				result.Append($"v.Value{i + 1}, ");
