@@ -1,6 +1,7 @@
 using Code.Analytics.GoogleSheetsIntegration;
 using Code.Analytics.HandlersGeneration.Handler;
 using Code.Analytics.HandlersGeneration.Signals;
+using Code.Analytics.HandlersGeneration.SignalsBindingExtensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,9 +35,11 @@ namespace Code.Analytics
 		{
 			var handlerGenerator = new HandlerGenerator();
 			var signalsGenerator = new SignalsGenerator();
+			var bindingsGenerator = new SignalsBindingExtensionsGenerator();
 			
 			sheetLoader.DataProcessed += handlerGenerator.OnDataProcessed;
 			sheetLoader.DataProcessed += signalsGenerator.OnDataProcessed;
+			sheetLoader.DataProcessed += bindingsGenerator.OnDataProcessed;
 		}
 	}
 }
