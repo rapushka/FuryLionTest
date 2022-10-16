@@ -5,13 +5,13 @@ using UnityEngine.Networking;
 
 namespace Code.Analytics.GoogleSheetsIntegration.CvsLoader
 {
-	public class GoogleSheetAsCvsDownloader : ICvsLoader
+	public class GoogleSheetAsCsvDownloader : ICsvLoader
 	{
 		private const string Url = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
 
 		private readonly string _sheetId;
 
-		public GoogleSheetAsCvsDownloader(string sheetId) => _sheetId = sheetId;
+		public GoogleSheetAsCsvDownloader(string sheetId) => _sheetId = sheetId;
 
 		public void LoadTable(Action<string> onSheetLoaded)
 		{

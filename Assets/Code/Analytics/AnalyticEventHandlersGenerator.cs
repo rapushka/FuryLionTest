@@ -3,7 +3,6 @@ using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 using Code.Analytics.HandlersGeneration.Handler;
 using Code.Analytics.HandlersGeneration.Signals;
 using Code.Analytics.HandlersGeneration.SignalsBindingExtensions;
-using Code.Inner;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,8 +21,8 @@ namespace Code.Analytics
 
 		private static GoogleSheetLoader InitializeSheetLoader()
 		{
-			var cvsLoader = new GoogleSheetAsCvsDownloader(Constants.Analytics.GoogleSheetId);
-			var sheetLoader = new GoogleSheetLoader(cvsLoader);
+			var debugCsvLoader = new LocalCsvLoaderForDebug();
+			var sheetLoader = new GoogleSheetLoader(debugCsvLoader);
 
 			InitializeDownloadedTableHandler(sheetLoader);
 
