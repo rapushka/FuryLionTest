@@ -1,5 +1,6 @@
 using System;
 using Code.Extensions;
+using Code.Inner;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,15 +8,13 @@ namespace Code.Analytics.GoogleSheetsIntegration.CvsLoader
 {
 	public class GoogleSheetAsCsvDownloader : ICsvLoader
 	{
-		private const string Url = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
-
 		private readonly string _sheetId;
 
 		public GoogleSheetAsCsvDownloader(string sheetId) => _sheetId = sheetId;
 
 		public void LoadTable(Action<string> onSheetLoaded)
 		{
-			var actualUrl = Url.Replace("*", _sheetId);
+			var actualUrl = Constants.Analytics.SheetExportAsCsvUrl.Replace("*", _sheetId);
 			using var request = UnityWebRequest.Get(actualUrl);
 
 			request.WaitForRequestExecuting()
