@@ -1,4 +1,4 @@
-namespace Code.Analytics.HandlersGeneration
+namespace Code.Analytics.HandlersGeneration.Signals
 {
 	public static class SignalsCodeTemplates
 	{

@@ -1,5 +1,6 @@
 using Code.Analytics.GoogleSheetsIntegration;
-using Code.Analytics.HandlersGeneration;
+using Code.Analytics.HandlersGeneration.Handler;
+using Code.Analytics.HandlersGeneration.Signals;
 using UnityEditor;
 using UnityEngine;
 

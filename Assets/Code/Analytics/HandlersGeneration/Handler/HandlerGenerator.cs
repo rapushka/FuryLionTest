@@ -4,7 +4,7 @@ using System.Text;
 using Code.Analytics.GoogleSheetsIntegration;
 using Code.Extensions.Generation;
 
-namespace Code.Analytics.HandlersGeneration
+namespace Code.Analytics.HandlersGeneration.Handler
 {
 	public class HandlerGenerator
 	{
