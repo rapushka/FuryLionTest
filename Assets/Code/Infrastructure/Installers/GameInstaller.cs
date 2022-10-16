@@ -1,3 +1,4 @@
+using Code.Analytics;
 using Code.DataStoring;
 using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.ScenesTransfers;
@@ -37,6 +38,7 @@ namespace Code.Infrastructure.Installers
 			   .BindSignalTo<GameVictorySignal, SceneTransfer>((x) => x.ToVictoryScene)
 			   .BindSignalTo<GameLoseSignal, SceneTransfer>((x) => x.ToLoseScene)
 			   .BindSignalTo<SceneLoadedSignal, CoroutinesHandler>((x) => x.OnSceneChanged)
+			   .BindSignalTo<SceneLoadedSignal, AnalyticsEventsInvoker>((x) => x.OnSceneChanged)
 			   ;
 	}
 }
