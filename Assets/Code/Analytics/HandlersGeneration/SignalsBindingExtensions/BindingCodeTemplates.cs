@@ -1,9 +1,12 @@
+using Code.Analytics.GoogleSheetsIntegration;
+using Code.Extensions.Generation;
+
 namespace Code.Analytics.HandlersGeneration.SignalsBindingExtensions
 {
 	public static class BindingCodeTemplates
 	{
 		private const string NewLineWithSameOffset = "\r\n\t\t\t\t";
-		
+
 		public static string Class(string @namespace, string className, string bindings)
 			=> @$"// generated
 using Code.Extensions.DiContainerExtensions;
@@ -22,11 +25,14 @@ namespace {@namespace}
 		}}
 	}}
 }}";
-		
-		public static string Method(string @event, string argsDeclaration, string argsUsage)
-		=> $".BindSignalTo<{@event}Signal, "
-		   + $"AnalyticEventsHandler>((x{argsDeclaration}) "
-		   + $"=> x.On{@event}{argsUsage})"
-		   + NewLineWithSameOffset;
+
+		public static string Method(AnalyticEventHandler handler)
+			=> Method(handler.Event, handler.Parameters.GetArgsDeclaration(), handler.Parameters.GetArgsUsage());
+
+		private static string Method(string @event, string argsDeclaration, string argsUsage)
+			=> $".BindSignalTo<{@event}Signal, "
+			   + $"AnalyticEventsHandler>((x{argsDeclaration}) "
+			   + $"=> x.On{@event}{argsUsage})"
+			   + NewLineWithSameOffset;
 	}
 }
