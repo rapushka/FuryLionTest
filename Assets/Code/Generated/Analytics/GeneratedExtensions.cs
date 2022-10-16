@@ -15,6 +15,7 @@ namespace Code.Generated.Analytics
 				.BindSignalTo<SettingsOpenedSignal, AnalyticEventsHandler>((x) => x.OnSettingsOpened)
 				.BindSignalTo<MusicChangedSignal, AnalyticEventsHandler>((x, v) => x.OnMusicChanged(v.Value))
 				.BindSignalTo<SoundChangedSignal, AnalyticEventsHandler>((x, v) => x.OnSoundChanged(v.Value))
+				
 				;
 
 			return @this;

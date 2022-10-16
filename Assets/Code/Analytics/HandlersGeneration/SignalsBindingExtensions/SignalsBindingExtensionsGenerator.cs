@@ -72,29 +72,11 @@ namespace {@namespace}
 		private string HandlerAsTemplate(AnalyticEventHandler handler)
 			=> $".BindSignalTo<{handler.Event}Signal, "
 			   + $"AnalyticEventsHandler>((x{GetArgsDeclaration(handler.Parameters)}) "
-			   + $"=> x.On{handler.Event}{GetArgsUsage(handler.Parameters)})\n";
+			   + $"=> x.On{handler.Event}{GetArgsUsage(handler.Parameters)})"
+			   + "\r\n\t\t\t\t";
 
-		private string GetArgsDeclaration(List<(string type, string name)> parameters)
-		{
-			var count = parameters.Count;
-
-			if (count == 0)
-			{
-				return string.Empty;
-			}
-			if (count == 1)
-			{
-				return ", v";
-			}
-			
-			var result = new StringBuilder();
-			for (var i = 0; i < count; i++)
-			{
-				result.Append($", v{i + 1}");
-			}
-
-			return result.ToString();
-		}
+		private string GetArgsDeclaration(IEnumerable<(string type, string name)> parameters) 
+			=> parameters.Any() ? ", v" : string.Empty;
 
 		private string GetArgsUsage(List<(string type, string name)> parameters)
 		{
