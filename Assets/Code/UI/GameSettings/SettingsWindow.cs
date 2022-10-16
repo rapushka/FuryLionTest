@@ -1,5 +1,6 @@
 using Code.DataStoring;
 using Code.DataStoring.Preferences;
+using Code.Generated.Analytics.Signals;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -19,11 +20,13 @@ namespace Code.UI.GameSettings
 		private AudioMixer _audioMixer;
 		private IStorage _storage;
 		private LanguageSelector _languageSelector;
+		private SignalBus _signalBus;
 
 		[Inject]
-		public void Construct(AudioMixer audioMixer, IStorage storage, LanguageSelector languageSelector)
+		public void Construct(AudioMixer audioMixer, IStorage storage, LanguageSelector language, SignalBus signalBus)
 		{
-			_languageSelector = languageSelector;
+			_signalBus = signalBus;
+			_languageSelector = language;
 			_audioMixer = audioMixer;
 			_storage = storage;
 		}
@@ -57,7 +60,16 @@ namespace Code.UI.GameSettings
 			_languageSelector.CurrentLocale = settings.Locale;
 		}
 
-		public void OpenWindow() => gameObject.SetActive(true);
+		public void OpenWindow()
+		{
+			if (gameObject.activeSelf)
+			{
+				return;
+			}
+
+			_signalBus.Fire<SettingsOpenedSignal>();
+			gameObject.SetActive(true);
+		}
 
 		private void CloseWindow() => gameObject.SetActive(false);
 		
