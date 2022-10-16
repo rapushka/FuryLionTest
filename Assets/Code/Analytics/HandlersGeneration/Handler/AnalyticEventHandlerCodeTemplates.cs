@@ -1,4 +1,4 @@
-namespace Code.Analytics.HandlersGeneration
+namespace Code.Analytics.HandlersGeneration.Handler
 {
 	public static class AnalyticEventHandlerCodeTemplates
 	{
