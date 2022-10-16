@@ -5,24 +5,22 @@ namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public class GoogleSheetLoader
 	{
-		private readonly CvsLoader _cvsLoader;
-		private readonly SheetProcessor _sheetProcessor;
+		private readonly GoogleSheetToCvsDownloader _googleSheetToCvsDownloader;
 		
 		private List<AnalyticEventHandler> _handlers;
 
 		public event Action<List<AnalyticEventHandler>> DataProcessed;
 
-		public GoogleSheetLoader(CvsLoader cvsLoader, SheetProcessor sheetProcessor)
+		public GoogleSheetLoader(GoogleSheetToCvsDownloader googleSheetToCvsDownloader)
 		{
-			_cvsLoader = cvsLoader;
-			_sheetProcessor = sheetProcessor;
+			_googleSheetToCvsDownloader = googleSheetToCvsDownloader;
 		}
 
-		public void DownloadTable() => _cvsLoader.DownloadTable(OnRawCvsLoaded);
+		public void DownloadTable() => _googleSheetToCvsDownloader.DownloadTable(OnRawCvsLoaded);
 
 		private void OnRawCvsLoaded(string rawCvsText)
 		{
-			_handlers = _sheetProcessor.ProcessData(rawCvsText);
+			_handlers = rawCvsText.ProcessData();
 			DataProcessed?.Invoke(_handlers);
 		}
 	}

@@ -22,9 +22,8 @@ namespace Code.Analytics
 		{
 			const string sheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
 			
-			var cvsLoader = new CvsLoader(sheetId);
-			var sheetProcessor = new SheetProcessor();
-			var sheetLoader = new GoogleSheetLoader(cvsLoader, sheetProcessor);
+			var cvsLoader = new GoogleSheetToCvsDownloader(sheetId);
+			var sheetLoader = new GoogleSheetLoader(cvsLoader);
 
 			InitializeDownloadedTableHandler(sheetLoader);
 
