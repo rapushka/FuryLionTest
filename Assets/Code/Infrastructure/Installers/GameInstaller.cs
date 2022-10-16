@@ -1,4 +1,3 @@
-using Code.Analytics;
 using Code.DataStoring;
 using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.ScenesTransfers;

@@ -19,11 +19,6 @@ namespace Code.Analytics
 
 		public void OnSceneChanged()
 		{
-			CheckAtLevelOpened();
-		}
-
-		private void CheckAtLevelOpened()
-		{
 			if (_sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Gameplay)
 			{
 				return;
