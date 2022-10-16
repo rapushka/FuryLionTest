@@ -6,31 +6,23 @@ namespace Code.Analytics.GoogleSheetsIntegration
 {
 	public static class StringToHandlersListExtension
 	{
-		private const char Separator = ',';
-		private const int HeaderRowsCount = 1;
 		private const string LineBreak = "\r\n";
+		private const int HeaderRowsCount = 1;
+		private const char Separator = ',';
 
 		public static List<AnalyticEventHandler> ProcessData(this string cvsRawData)
 			=> cvsRawData
 			   .Split(LineBreak)
 			   .Skip(HeaderRowsCount)
-			   .Select((row) => row.Split(Separator))
-			   .Select((cells) => cells.ParseToHandler())
+			   .Select((row) => row.Split(Separator).ParseToHandler())
 			   .ToList();
 
 		private static AnalyticEventHandler ParseToHandler(this string[] cells)
-		{
-			var columnEvent = cells.First().AsMethodName();
-			var columnParameters = cells.GetParsedParameters();
-			var columnAction = cells.Last();
-
-			var newHandler = new AnalyticEventHandler
+			=> new()
 			{
-				Event = columnEvent,
-				Parameters = columnParameters,
-				Action = columnAction
+				Event = cells.First().AsMethodName(),
+				Parameters = cells.GetParsedParameters(),
+				Action = cells.Last()
 			};
-			return newHandler;
-		}
 	}
 }
