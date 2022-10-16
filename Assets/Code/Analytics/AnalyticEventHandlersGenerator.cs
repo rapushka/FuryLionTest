@@ -13,31 +13,30 @@ namespace Code.Analytics
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()
 		{
-			var sheetLoader = InitializeSheetLoader();
-			sheetLoader.DownloadTable();
+			var handlersLoader = InitializeSheetLoader();
+			SubscribeGenerators(handlersLoader);
+			handlersLoader.DownloadTable();
 
 			Debug.Log("Generated");
 		}
 
-		private static GoogleSheetLoader InitializeSheetLoader()
+		private static HandlersLoader InitializeSheetLoader()
 		{
-			var debugCsvLoader = new LocalCsvLoaderForDebug();
-			var sheetLoader = new GoogleSheetLoader(debugCsvLoader);
+			// var csvLoader = new GoogleSheetAsCsvDownloader(Constants.Analytics.GoogleSheetId);
+			var csvLoader = new LocalCsvLoaderForDebug();
 
-			InitializeDownloadedTableHandler(sheetLoader);
-
-			return sheetLoader;
+			return new HandlersLoader(csvLoader);
 		}
 
-		private static void InitializeDownloadedTableHandler(GoogleSheetLoader sheetLoader)
+		private static void SubscribeGenerators(HandlersLoader handlersLoader)
 		{
 			var handlerGenerator = new HandlerGenerator();
 			var signalsGenerator = new SignalsGenerator();
 			var bindingsGenerator = new SignalsBindingExtensionsGenerator();
 			
-			sheetLoader.DataProcessed += handlerGenerator.OnDataProcessed;
-			sheetLoader.DataProcessed += signalsGenerator.OnDataProcessed;
-			sheetLoader.DataProcessed += bindingsGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += handlerGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += signalsGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += bindingsGenerator.OnDataProcessed;
 		}
 	}
 }

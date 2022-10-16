@@ -5,7 +5,7 @@ using Code.Extensions.GoogleSheetsParsing;
 
 namespace Code.Analytics.GoogleSheetsIntegration
 {
-	public class GoogleSheetLoader
+	public class HandlersLoader
 	{
 		private readonly ICsvLoader _csvLoader;
 		
@@ -13,7 +13,7 @@ namespace Code.Analytics.GoogleSheetsIntegration
 
 		public event Action<List<AnalyticEventHandler>> DataProcessed;
 
-		public GoogleSheetLoader(ICsvLoader csvLoader) => _csvLoader = csvLoader;
+		public HandlersLoader(ICsvLoader csvLoader) => _csvLoader = csvLoader;
 
 		public void DownloadTable() => _csvLoader.LoadTable(OnRawCvsLoaded);
 
