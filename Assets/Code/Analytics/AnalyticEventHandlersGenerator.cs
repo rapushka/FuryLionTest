@@ -1,4 +1,5 @@
 using Code.Analytics.GoogleSheetsIntegration;
+using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 using Code.Analytics.HandlersGeneration.Handler;
 using Code.Analytics.HandlersGeneration.Signals;
 using Code.Analytics.HandlersGeneration.SignalsBindingExtensions;
@@ -12,34 +13,30 @@ namespace Code.Analytics
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()
 		{
-			var sheetLoader = Initialize();
-			sheetLoader.DownloadTable();
+			var handlersLoader = InitializeSheetLoader();
+			SubscribeGenerators(handlersLoader);
+			handlersLoader.DownloadTable();
 
 			Debug.Log("Generated");
 		}
 
-		private static GoogleSheetLoader Initialize()
+		private static HandlersLoader InitializeSheetLoader()
 		{
-			const string sheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
-			
-			var cvsLoader = new CvsLoader(sheetId);
-			var sheetProcessor = new SheetProcessor();
-			var sheetLoader = new GoogleSheetLoader(cvsLoader, sheetProcessor);
+			// var csvLoader = new GoogleSheetAsCsvDownloader(Constants.Analytics.GoogleSheetId);
+			var csvLoader = new LocalCsvLoaderForDebug();
 
-			InitializeDownloadedTableHandler(sheetLoader);
-
-			return sheetLoader;
+			return new HandlersLoader(csvLoader);
 		}
 
-		private static void InitializeDownloadedTableHandler(GoogleSheetLoader sheetLoader)
+		private static void SubscribeGenerators(HandlersLoader handlersLoader)
 		{
 			var handlerGenerator = new HandlerGenerator();
 			var signalsGenerator = new SignalsGenerator();
 			var bindingsGenerator = new SignalsBindingExtensionsGenerator();
 			
-			sheetLoader.DataProcessed += handlerGenerator.OnDataProcessed;
-			sheetLoader.DataProcessed += signalsGenerator.OnDataProcessed;
-			sheetLoader.DataProcessed += bindingsGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += handlerGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += signalsGenerator.OnDataProcessed;
+			handlersLoader.DataProcessed += bindingsGenerator.OnDataProcessed;
 		}
 	}
 }

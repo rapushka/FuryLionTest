@@ -14,5 +14,11 @@ namespace Code.Inner
 			public const int Lose = 1;
 			public const int Victory = 2;
 		}
+
+		public static class Analytics
+		{
+			public const string GoogleSheetId = "1A9Zk0BHFY8-hhSt-A_IZs2s7Z9pjylu4GNhd65EcFMk";
+			public const string SheetExportAsCsvUrl = "https://docs.google.com/spreadsheets/d/*/export?format=csv";
+		}
 	}
 }
