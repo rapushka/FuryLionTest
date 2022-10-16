@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Extensions.GoogleSheetsParsing;
+using Code.Analytics.GoogleSheetsIntegration;
 
-namespace Code.Analytics.GoogleSheetsIntegration
+namespace Code.Extensions.GoogleSheetsParsing
 {
 	public static class StringToHandlersListExtension
 	{
