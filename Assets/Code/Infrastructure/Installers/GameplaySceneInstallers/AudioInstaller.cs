@@ -1,5 +1,5 @@
 using Code.Audio;
-using Code.Extensions;
+using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.Signals.Bonuses;
 using Code.Infrastructure.Signals.Chain;
 using Code.Infrastructure.Signals.Goals;

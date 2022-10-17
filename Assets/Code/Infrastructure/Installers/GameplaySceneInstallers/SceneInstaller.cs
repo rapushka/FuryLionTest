@@ -1,6 +1,5 @@
-using Code.Extensions;
+using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.Signals.Chain;
-using Code.Inner.CustomMonoBehaviours;
 using Code.Inner.RootContainers;
 using Code.View;
 using UnityEngine;
@@ -13,7 +12,6 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private Transform _tokensRootTransform;
 		[SerializeField] private Transform _goalsRootTransform;
 		[SerializeField] private LineRenderer _lineRenderer;
-		[SerializeField] private CoroutinesHandler _coroutinesHandler;
 
 		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -22,7 +20,6 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(new TokensRoot(_tokensRootTransform))
 				.BindSingleFromInstance(new GoalsRoot(_goalsRootTransform))
 				.BindSingleFromInstance(_lineRenderer)
-				.BindSingleFromInstance(_coroutinesHandler)
 				.BindSingle<ChainLineRenderer>()
 				;
 

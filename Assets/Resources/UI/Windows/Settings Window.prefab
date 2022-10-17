@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3506632320063387920}
   - component: {fileID: 3506632320063387921}
   - component: {fileID: 3506632320063387935}
+  - component: {fileID: 7590339823417085646}
   m_Layer: 5
   m_Name: Settings Window
   m_TagString: Untagged
@@ -91,6 +92,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonOK: {fileID: 7463316425481210587}
+  _soundSettings: {fileID: 7590339823417085646}
+--- !u!114 &7590339823417085646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506632320063387923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee84c31b93f7483db33142274df0432a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _musicToggle: {fileID: 584919954077283932}
   _sfxToggle: {fileID: 3506632320388067197}
 --- !u!1 &3506632320185286253
