@@ -21,12 +21,11 @@ namespace Code.Analytics.HandlersGeneration.SignalsBindingExtensions
 			var path = $@"{Directory.GetCurrentDirectory()}\Assets\{@namespace.Replace('.', '\\')}";
 			using var file = File.CreateText(path + @$"\{className}.cs");
 
-			var code = GenerateCode(@namespace, className);
-
+			var code = GenerateClass(@namespace, className);
 			file.Write(code);
 		}
 
-		private string GenerateCode(string @namespace, string className)
+		private string GenerateClass(string @namespace, string className)
 			=> BindingCodeTemplates.Class(@namespace, className, GenerateBindings());
 
 		private string GenerateBindings()
