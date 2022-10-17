@@ -3,9 +3,9 @@ using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 using Code.Analytics.HandlersGeneration.Handler;
 using Code.Analytics.HandlersGeneration.Signals;
 using Code.Analytics.HandlersGeneration.SignalsBindingExtensions;
-using Code.Inner;
 using UnityEditor;
 using UnityEngine;
+using static Code.Inner.Constants.Analytics;
 
 namespace Code.Analytics
 {
@@ -21,12 +21,7 @@ namespace Code.Analytics
 			Debug.Log("Generated");
 		}
 
-		private static HandlersLoader InitializeSheetLoader()
-		{
-			var csvLoader = new GoogleSheetAsCsvDownloader(Constants.Analytics.GoogleSheetId);
-
-			return new HandlersLoader(csvLoader);
-		}
+		private static HandlersLoader InitializeSheetLoader() => new(new GoogleSheetAsCsvDownloader(GoogleSheetId));
 
 		private static void SubscribeGenerators(HandlersLoader handlersLoader)
 		{
