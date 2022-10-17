@@ -1,10 +1,11 @@
-using System;
 using Code.DataStoring.Preferences;
 using Code.Generated.Analytics.Signals;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Zenject;
+using static Code.Inner.Constants.AudioSettings.ExposedParameter;
+using static Code.Inner.Constants.AudioSettings;
 
 namespace Code.UI.GameSettings
 {
@@ -12,12 +13,6 @@ namespace Code.UI.GameSettings
 	{
 		[SerializeField] private Toggle _musicToggle;
 		[SerializeField] private Toggle _sfxToggle;
-
-		private const int MaxAudioVolume = 0;
-		private const int MinAudioVolume = -80;
-
-		private const string MusicVolume = nameof(MusicVolume);
-		private const string SfxVolume = nameof(SfxVolume);
 
 		private AudioMixer _audioMixer;
 		private SignalBus _signalBus;
@@ -69,7 +64,7 @@ namespace Code.UI.GameSettings
 		private float SetMusicVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, MusicVolume);
 
 		private float SetSfxVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, SfxVolume);
-		
+
 		private float ToggleAudioMixerParameter(bool isEnabled, string nameOfMixer)
 		{
 			float volume = isEnabled ? MaxAudioVolume : MinAudioVolume;
@@ -77,12 +72,7 @@ namespace Code.UI.GameSettings
 			return volume;
 		}
 
-		private static float CalculatePercentage(float volume)
-		{
-			const int negativeOffsetCompensation = 80;
-			const int wholeValue = 80;
-
-			return (volume + negativeOffsetCompensation) / wholeValue * 100;
-		}
+		private static float CalculatePercentage(float volume) 
+			=> (volume + NegativeOffsetCompensation) / WholeValue * 100;
 	}
 }
