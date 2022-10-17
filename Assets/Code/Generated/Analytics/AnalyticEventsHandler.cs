@@ -36,5 +36,6 @@ namespace Code.Generated.Analytics
 		{
 			_analytics.HandleEvent("SoundChanged", (nameof(value), value));
 		}
+
 	}
 }

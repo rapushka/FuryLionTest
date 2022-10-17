@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using Code.Analytics.GoogleSheetsIntegration;
-using Code.Extensions.Generation;
 
 namespace Code.Analytics.HandlersGeneration.Handler
 {
@@ -25,25 +24,10 @@ namespace Code.Analytics.HandlersGeneration.Handler
 		}
 
 		private string GenerateClass(string @namespace, string className)
-			=> AnalyticEventHandlerCodeTemplates.Class(@namespace, className, GenerateMethods());
+			=> HandlerCodeTemplates.Class(@namespace, className, GenerateMethods());
 
-		private string GenerateMethods()
-		{
-			const int twoLineBreaks = 4;
+		private string GenerateMethods() => string.Join('\n', HandlersAsTemplates());
 
-			var result = new StringBuilder();
-
-			foreach (var handler in _handlers)
-			{
-				result.AppendLine(GenerateHandler(handler));
-			}
-
-			result.RemoveLasSymbols(twoLineBreaks);
-
-			return result.ToString();
-		}
-
-		private static string GenerateHandler(AnalyticEventHandler handler)
-			=> AnalyticEventHandlerCodeTemplates.Method(handler.Deconstruct());
+		private IEnumerable<string> HandlersAsTemplates() => _handlers.Select(HandlerCodeTemplates.Method);
 	}
 }

@@ -1,6 +1,8 @@
+using Code.Analytics.GoogleSheetsIntegration;
+
 namespace Code.Analytics.HandlersGeneration.Handler
 {
-	public static class AnalyticEventHandlerCodeTemplates
+	public static class HandlerCodeTemplates
 	{
 		public static string Class(string @namespace, string className, string handlers)
 			=> @$"// Generated
@@ -16,6 +18,8 @@ namespace {@namespace}
 	}}
 }}
 ";
+
+		public static string Method(AnalyticEventHandler handler) => Method(handler.Deconstruct());
 
 		public static string Method((string action, string @event, string methodParams, string invokeParams) items) 
 			=> Method(items.action, items.@event, items.methodParams, items.invokeParams);
