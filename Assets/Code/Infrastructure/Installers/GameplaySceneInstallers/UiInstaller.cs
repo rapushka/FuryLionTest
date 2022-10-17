@@ -12,7 +12,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 	public class UiInstaller : MonoInstaller
 	{
 		[SerializeField] private OpenSettingsButton _settingsButton;
-		[SerializeField] private SettingsWindow _settings;
+		[SerializeField] private SettingsWindow _settingsWindow;
+		[SerializeField] private SoundSettings _soundSettings;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
@@ -23,7 +24,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		public override void InstallBindings()
 		{
 			Container
-				.BindSingleFromInstance(_settings)
+				.BindSingleFromInstance(_settingsWindow)
+				.BindSingleFromInstance(_soundSettings)
 				.BindSingleFromInstance(_settingsButton)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_remainingActionsView)
