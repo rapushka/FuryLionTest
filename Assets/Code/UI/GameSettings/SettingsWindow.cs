@@ -24,7 +24,12 @@ namespace Code.UI.GameSettings
 			_storage = storage;
 		}
 
-		private void OnEnable() => LoadSettings();
+		private void OnEnable()
+		{
+			_buttonOK.onClick.AddListener(CloseWindow);
+
+			LoadSettings();
+		}
 
 		private void OnDisable()
 		{
@@ -41,9 +46,6 @@ namespace Code.UI.GameSettings
 
 		public void LoadSettings()
 		{
-			_buttonOK.onClick.AddListener(CloseWindow);
-			
-
 			var settings = _storage.Load(Settings.DefaultSettings);
 			_soundSettings.LoadSettings(settings);
 			_languageSelector.CurrentLocale = settings.Locale;

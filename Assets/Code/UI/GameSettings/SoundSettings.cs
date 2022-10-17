@@ -49,20 +49,27 @@ namespace Code.UI.GameSettings
 		{
 			_musicToggle.isOn = settings.PlayingMusic;
 			_sfxToggle.isOn = settings.PlayingSFX;
+
+			SetMusicVolume(settings.PlayingMusic);
+			SetSfxVolume(settings.PlayingSFX);
 		}
 
 		private void OnMusicToggle(bool isEnabled)
-			=> ToggleAudio(isEnabled, MusicVolume, (v) => new MusicChangedSignal(v));
-
-		private void OnSfxToggle(bool isEnabled)
-			=> ToggleAudio(isEnabled, SfxVolume, (v) => new SoundChangedSignal(v));
-
-		private void ToggleAudio(bool isEnabled, string nameOfMixer, Func<float, object> newSignal)
 		{
-			var volume = ToggleAudioMixerParameter(isEnabled, nameOfMixer);
-			_signalBus.Fire(newSignal.Invoke(CalculatePercentage(volume)));
+			var volume = SetMusicVolume(isEnabled);
+			_signalBus.Fire(new MusicChangedSignal(CalculatePercentage(volume)));
 		}
 
+		private void OnSfxToggle(bool isEnabled)
+		{
+			var volume = SetSfxVolume(isEnabled);
+			_signalBus.Fire(new SoundChangedSignal(CalculatePercentage(volume)));
+		}
+
+		private float SetMusicVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, MusicVolume);
+
+		private float SetSfxVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, SfxVolume);
+		
 		private float ToggleAudioMixerParameter(bool isEnabled, string nameOfMixer)
 		{
 			float volume = isEnabled ? MaxAudioVolume : MinAudioVolume;
