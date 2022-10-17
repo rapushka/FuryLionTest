@@ -12,6 +12,8 @@ namespace Code.Infrastructure.ScenesTransfers
 
 		[Inject] public SceneTransfer(SignalBus signalBus) => _signalBus = signalBus;
 
+		public int CurrentSceneIndex => SceneManager.GetActiveScene().buildIndex;
+
 		public void Initialize() => SceneManager.activeSceneChanged += OnSceneLoaded;
 
 		public void Dispose() => SceneManager.activeSceneChanged -= OnSceneLoaded;

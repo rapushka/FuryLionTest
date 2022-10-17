@@ -10,14 +10,10 @@ namespace Code.UI.GameSettings
 
 		private SettingsWindow _settingsWindow;
 
-		[Inject]
-		public void Construct(SettingsWindow settingsWindow)
-		{
-			_settingsWindow = settingsWindow;
-		}
+		[Inject] public void Construct(SettingsWindow settingsWindow) => _settingsWindow = settingsWindow;
 
-		private void OnEnable() => _buttonComponent.onClick.AddListener(_settingsWindow.OpenWindow);
+		private void OnEnable() => _buttonComponent.onClick.AddListener(() => _settingsWindow.OpenWindow());
 
-		private void OnDestroy() => _buttonComponent.onClick.RemoveListener(_settingsWindow.OpenWindow);
+		private void OnDestroy() => _buttonComponent.onClick.RemoveListener(() => _settingsWindow.OpenWindow());
 	}
 }
