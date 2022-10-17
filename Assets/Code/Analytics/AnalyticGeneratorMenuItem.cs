@@ -9,7 +9,7 @@ using static Code.Inner.Constants.Analytics;
 
 namespace Code.Analytics
 {
-	public static class AnalyticEventHandlersGenerator
+	public static class AnalyticGeneratorMenuItem
 	{
 		[MenuItem("Tools/Analytics/Generate handlers")]
 		public static void Generate()

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Code.Analytics.GoogleSheetsIntegration
+namespace Code.Analytics.GoogleSheetsIntegration.ForDebug
 {
-	public class CvsLoadedDebug
+	public class LogLoadedCsv
 	{
 		public void OnDataProcessed(List<AnalyticEventHandler> handlers)
 		{

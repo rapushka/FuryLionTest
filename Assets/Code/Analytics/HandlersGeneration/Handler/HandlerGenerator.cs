@@ -20,7 +20,8 @@ namespace Code.Analytics.HandlersGeneration.Handler
 			var path = $@"{Directory.GetCurrentDirectory()}\Assets\{@namespace.Replace('.', '\\')}";
 			using var file = File.CreateText(path + @$"\{className}.cs");
 
-			file.Write(GenerateClass(@namespace, className));
+			var code = GenerateClass(@namespace, className);
+			file.Write(code);
 		}
 
 		private string GenerateClass(string @namespace, string className)

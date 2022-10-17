@@ -1,9 +1,10 @@
 using System;
 using System.IO;
+using Code.Analytics.GoogleSheetsIntegration.CvsLoader;
 
-namespace Code.Analytics.GoogleSheetsIntegration.CvsLoader
+namespace Code.Analytics.GoogleSheetsIntegration.ForDebug
 {
-	public class LocalCsvLoaderForDebug : ICsvLoader
+	public class LocalCsvLoader : ICsvLoader
 	{
 		private static string Path => $@"{Directory.GetCurrentDirectory()}\Temp\Sheet.csv";
 
