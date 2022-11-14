@@ -43,6 +43,14 @@ MonoBehaviour:
     m_Key: GameOverVictory
     m_Metadata:
       m_Items: []
+  - m_Id: 12852490406150144
+    m_Key: ButtonRocket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12853245972267008
+    m_Key: ButtonBomb
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
