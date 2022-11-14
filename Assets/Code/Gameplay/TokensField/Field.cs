@@ -44,10 +44,7 @@ namespace Code.Gameplay.TokensField
 		
 		public Vector2Int GetIndexesFor(Token token) => _tokens.IndexesOf(token);
 
-		public void DestroyTokensInChain(IEnumerable<Token> chain)
-		{
-			chain.ForEach(DestroyToken);
-		}
+		public void DestroyTokensInChain(IEnumerable<Token> chain) => chain.ForEach(DestroyToken);
 
 		public void UpdateField()
 		{
@@ -72,14 +69,6 @@ namespace Code.Gameplay.TokensField
 			this[indexes] = null;
 		}
 
-		private void DestroyToken(Token token)
-		{
-			if (Contain(token))
-			{
-				DestroyTokenAt(GetIndexesFor(token));
-			}
-		}
-
 		public void SwitchTokenAt(Vector2Int indexes, TokenUnit to)
 		{
 			var gameObjectPosition = this[indexes].transform.position;
@@ -90,6 +79,16 @@ namespace Code.Gameplay.TokensField
 		public IEnumerable<Token> Where(Func<Token, bool> predicate) => _tokens.Where(predicate);
 
 		public int Count(Func<Token, bool> predicate) => _tokens.Where(predicate).Count();
+		
+		public Token GetRandomToken() => _tokens.PickRandom();
+
+		private void DestroyToken(Token token)
+		{
+			if (Contain(token))
+			{
+				DestroyTokenAt(GetIndexesFor(token));
+			}
+		}
 
 		private void ApplyGravity() => _tokens = _gravity.Apply(_tokens);
 

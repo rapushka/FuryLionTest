@@ -23,5 +23,12 @@ namespace Code.Extensions
 			var randomIndex = UnityEngine.Random.Range(0, array.Length);
 			return array[randomIndex];
 		}
+		
+		public static T PickRandom<T>(this T[,] @this)
+		{
+			var i = UnityEngine.Random.Range(0, @this.GetLength(0));
+			var j = UnityEngine.Random.Range(0, @this.GetLength(1));
+			return @this[i, j];
+		}
 	}
 }

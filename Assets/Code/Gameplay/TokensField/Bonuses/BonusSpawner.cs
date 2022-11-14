@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
@@ -19,6 +20,12 @@ namespace Code.Gameplay.TokensField.Bonuses
 			_field = field;
 			_signalBus = signalBus;
 		}
+
+		public void SpawnHorizontalRocket()
+			=> SpawnHorizontalRocket(Array.Empty<Token>(), _field.GetRandomToken().TokenUnit);
+
+		public void SpawnBomb()
+			=> SpawnBomb(Array.Empty<Token>(), _field.GetRandomToken().TokenUnit);
 
 		public void SpawnHorizontalRocket(Token[] chain, TokenUnit unit)
 			=> Spawn(chain, unit, BonusType.HorizontalRocket);
