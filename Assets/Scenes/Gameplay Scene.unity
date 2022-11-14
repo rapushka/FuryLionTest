@@ -685,6 +685,7 @@ MonoBehaviour:
   _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
   _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
   _languageSelector: {fileID: 1523846194}
+  _buttonSpawnRocket: {fileID: 0}
 --- !u!1 &786270577 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7463316426078285186, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
@@ -931,6 +932,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &980378945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354488, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 1887549030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1013220164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,6 +1666,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
   m_PrefabInstance: {fileID: 1386711115}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427543173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354470, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 1887549030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980378945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1492052026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,6 +2135,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1887549034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980378945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9eabe83a16a4a46860a41a02385b070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1427543173}
 --- !u!114 &1887549035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6285064905018356221, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}

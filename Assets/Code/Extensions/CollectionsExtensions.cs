@@ -30,5 +30,11 @@ namespace Code.Extensions
 			var j = UnityEngine.Random.Range(0, @this.GetLength(1));
 			return @this[i, j];
 		}
+		
+		public static T PickRandom<T>(this T[,] @this, Func<T, bool> where)
+		{
+			var array = @this.Cast<T>().Where(where).ToArray();
+			return array.PickRandom();
+		}
 	}
 }

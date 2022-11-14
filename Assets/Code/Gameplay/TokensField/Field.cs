@@ -80,7 +80,9 @@ namespace Code.Gameplay.TokensField
 
 		public int Count(Func<Token, bool> predicate) => _tokens.Where(predicate).Count();
 		
-		public Token GetRandomToken() => _tokens.PickRandom();
+		public Token GetRandomToken() => _tokens.PickRandom(where: IsColor);
+
+		private bool IsColor(Token t) => t != null && t.TokenUnit.IsColor();
 
 		private void DestroyToken(Token token)
 		{
