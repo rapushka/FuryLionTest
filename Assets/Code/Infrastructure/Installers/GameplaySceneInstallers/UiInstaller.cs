@@ -20,7 +20,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
 		[SerializeField] private LanguageSelector _languageSelector;
-		[SerializeField] private SpawnBonusButton _buttonSpawnRocket;
+		[SerializeField] private ButtonSpawnHorizontalRocket _buttonSpawnRocket;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()

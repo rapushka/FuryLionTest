@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Code.UI.BonusesSpawn
 {
-	public class SpawnBonusButton : MonoBehaviour
+	public class ButtonSpawnHorizontalRocket : MonoBehaviour
 	{
 		[SerializeField] private Button _button;
 

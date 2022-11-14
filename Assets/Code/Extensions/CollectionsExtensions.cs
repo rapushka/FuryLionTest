@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Code.Extensions
 {
@@ -33,8 +34,12 @@ namespace Code.Extensions
 		
 		public static T PickRandom<T>(this T[,] @this, Func<T, bool> where)
 		{
-			var array = @this.Cast<T>().Where(where).ToArray();
-			return array.PickRandom();
+			var value = @this.PickRandom();
+			while (where(value) == false)
+			{
+				value = @this.PickRandom();
+			}
+			return value;
 		}
 	}
 }
