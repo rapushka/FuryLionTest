@@ -1,6 +1,7 @@
 using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Goals;
+using Code.UI.BonusesSpawn;
 using Code.UI.GameSettings;
 using Code.UI.GoalViews;
 using Code.View;
@@ -19,6 +20,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
 		[SerializeField] private LanguageSelector _languageSelector;
+		[SerializeField] private SpawnBonusButton _buttonSpawnRocket;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()
@@ -32,6 +34,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingleFromInstance(_languageSelector)
+				.BindSingleFromInstance(_buttonSpawnRocket)
 				.BindSingleWithInterfaces<SettingsInitializer>()
 				;
 

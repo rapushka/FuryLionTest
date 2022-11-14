@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Gameplay.TokensField.Bonuses;
+﻿using Code.Gameplay.TokensField.Bonuses;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
