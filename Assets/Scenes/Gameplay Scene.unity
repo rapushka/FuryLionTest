@@ -686,6 +686,7 @@ MonoBehaviour:
   _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
   _languageSelector: {fileID: 1523846194}
   _buttonSpawnRocket: {fileID: 1599932148}
+  _buttonSpawnBomb: {fileID: 1516195428}
 --- !u!1 &786270577 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7463316426078285186, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
@@ -1710,6 +1711,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1516195424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354488, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 1386711115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1516195425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6285064905464354470, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
+  m_PrefabInstance: {fileID: 1386711115}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516195424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1516195428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516195424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67eadf8b0c074be6a1cd13a891a26864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1516195425}
 --- !u!1 &1523846192 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2825450923925746959, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}

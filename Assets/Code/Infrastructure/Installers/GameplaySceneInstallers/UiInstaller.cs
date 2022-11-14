@@ -21,6 +21,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
 		[SerializeField] private LanguageSelector _languageSelector;
 		[SerializeField] private ButtonSpawnHorizontalRocket _buttonSpawnRocket;
+		[SerializeField] private ButtonSpawnBomb _buttonSpawnBomb;
 
 		// ReSharper disable Unity.PerformanceAnalysis
 		public override void InstallBindings()
@@ -35,6 +36,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_buttonSpawnRocket)
+				.BindSingleFromInstance(_buttonSpawnBomb)
 				.BindSingleWithInterfaces<SettingsInitializer>()
 				;
 
