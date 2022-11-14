@@ -41,5 +41,8 @@ namespace Code.Extensions
 			}
 			return value;
 		}
+		
+		public static IEnumerable<T> NullIfEmpty<T>(this IEnumerable<T> @this)
+			=> @this.Any() ? @this : default;
 	}
 }

@@ -37,7 +37,7 @@ namespace Code.Gameplay.TokensField.Bonuses
 		{
 			_chain = chain;
 			_unit = unit;
-			var token = _field.Where(CasualTokenOfRightUnit)?.PickRandom();
+			var token = _field.Where(CasualTokenOfRightUnit).NullIfEmpty()?.PickRandom();
 
 			if (token == true)
 			{
