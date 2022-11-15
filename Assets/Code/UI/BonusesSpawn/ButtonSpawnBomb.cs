@@ -2,6 +2,6 @@
 {
 	public class ButtonSpawnBomb : ButtonSpawnBonus
 	{
-		protected override void Spawn() => Spawner.SpawnBomb();
+		protected override void Spawn() => Purchase.BuyBomb();
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Code.Gameplay.TokensField.Bonuses;
+﻿using Code.Gameplay.Coins;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,9 +9,9 @@ namespace Code.UI.BonusesSpawn
 	{
 		[SerializeField] private Button _button;
 		
-		protected BonusSpawner Spawner;
+		protected Purchase Purchase;
 
-		[Inject] public void Construct(BonusSpawner spawner) => Spawner = spawner;
+		[Inject] public void Construct(Purchase purchase) => Purchase = purchase;
 		
 		private void OnEnable() => _button.onClick.AddListener(Spawn);
 		

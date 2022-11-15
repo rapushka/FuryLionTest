@@ -8,5 +8,13 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 	public class SerializedCoinsConfig : ICoinsConfig
 	{
 		[field: SerializeField] public int CoinsPerToken { get; private set; } = 1;
+
+		[field: SerializeField] public int HorizontalRocketPrice { get; private set; } = 100;
+
+		[field: SerializeField] public int BombPrice { get; private set; } = 250;
+
+		[field: SerializeField] public int AdditionalActionPrice { get; private set; } = 10;
+
+		[field: SerializeField] public int ActionsPerPurchase { get; private set; } = 5;
 	}
 }

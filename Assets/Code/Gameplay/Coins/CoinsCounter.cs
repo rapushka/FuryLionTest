@@ -12,7 +12,7 @@ namespace Code.Gameplay.Coins
 		private readonly int _coinsPerToken;
 		private readonly SignalBus _signalBus;
 
-		private int _currentCoinsCount;
+		private int _coinsCount;
 
 		[Inject]
 		public CoinsCounter(ICoinsConfig coinsConfig, SignalBus signalBus)
@@ -21,12 +21,12 @@ namespace Code.Gameplay.Coins
 			_signalBus = signalBus;
 		}
 
-		private int CurrentCoinsCount
+		private int CoinsCount
 		{
-			get => _currentCoinsCount;
+			get => _coinsCount;
 			set
 			{
-				_currentCoinsCount = value;
+				_coinsCount = value;
 				InvokeValueUpdate();
 			}
 		}
@@ -37,8 +37,15 @@ namespace Code.Gameplay.Coins
 
 		public void OnTokensDestroyed(int count) => IncreaseCoinsCount(count);
 
-		private void IncreaseCoinsCount(int count) => CurrentCoinsCount += count * _coinsPerToken;
+		public bool TrySpent(int price)
+		{
+			var enough = CoinsCount >= price;
+			CoinsCount -= enough ? price : 0;
+			return enough;
+		}
 
-		private void InvokeValueUpdate() => _signalBus.Fire(new CoinsCountUpdateSignal(CurrentCoinsCount));
+		private void IncreaseCoinsCount(int count) => CoinsCount += count * _coinsPerToken;
+
+		private void InvokeValueUpdate() => _signalBus.Fire(new CoinsCountUpdateSignal(CoinsCount));
 	}
 }

@@ -53,10 +53,16 @@ MonoBehaviour:
   _serializedInputConfig:
     _cursorOverlapRadius: 0.01
   _serializedScoreConfig:
-    _scoreMultiplier: 150
-    _multiplierPerTokenInChain: 1.2
+    <ScoreMultiplier>k__BackingField: 150
+    <MultiplierPerTokenInChain>k__BackingField: 1.2
   _serializedBonusesConfig:
     _minValueForRocket: 5
     _maxValueForRocket: 7
     _minValueForBomb: 8
     _bombExplosionRange: 2
+  _coins:
+    <CoinsPerToken>k__BackingField: 1
+    <HorizontalRocketPrice>k__BackingField: 10
+    <BombPrice>k__BackingField: 25
+    <AdditionalActionPrice>k__BackingField: 10
+    <ActionsPerPurchase>k__BackingField: 5
