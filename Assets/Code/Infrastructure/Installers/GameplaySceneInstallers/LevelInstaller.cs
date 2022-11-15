@@ -61,6 +61,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<GoalViewsContainer>()
 				.BindSingleWithInterfaces<GameCycle>()
+				.BindSingleWithInterfaces<CoinsCounter>()
 				;
 
 			SubscribeSignals();
