@@ -14,7 +14,7 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private CoroutinesHandler _coroutinesHandlerPrefab;
 
-		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
+		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			var coroutinesHandler = Instantiate(_coroutinesHandlerPrefab);
