@@ -20,7 +20,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		Vector2 IFieldConfig.Offset => _serializedFieldConfig.Offset;
 
-		public Vector2Int FieldSizes => _serializedFieldConfig.FieldSizes;
+		Vector2Int IFieldConfig.FieldSizes => _serializedFieldConfig.FieldSizes;
 
 		int IScoreConfig.ScoreMultiplier => _serializedScoreConfig.ScoreMultiplier;
 
@@ -34,6 +34,14 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		int IBonusesConfig.BombExplosionRange => _serializedBonusesConfig.BombExplosionRange;
 
-		int ICoinsConfig.CoinsPerToken => _coins.CoinsPerToken;
+		int ICoinsConfig.CoinsPerToken         => _coins.CoinsPerToken;
+
+		int ICoinsConfig.HorizontalRocketPrice => _coins.HorizontalRocketPrice;
+
+		int ICoinsConfig.BombPrice => _coins.BombPrice;
+
+		int ICoinsConfig.AdditionalActionPrice => _coins.AdditionalActionPrice;
+
+		int ICoinsConfig.ActionsPerPurchase => _coins.ActionsPerPurchase;
 	}
 }
