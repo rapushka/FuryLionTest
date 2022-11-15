@@ -1,4 +1,5 @@
 using Code.Extensions.DiContainerExtensions;
+using Code.Gameplay.Coins;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Coins;
 using Code.Infrastructure.Signals.Goals;
@@ -41,6 +42,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_buttonSpawnRocket)
 				.BindSingleFromInstance(_buttonSpawnBomb)
 				.BindSingleWithInterfaces<SettingsInitializer>()
+				.BindSingleWithInterfaces<Purchase>()
 				;
 
 			SubscribeSignals();

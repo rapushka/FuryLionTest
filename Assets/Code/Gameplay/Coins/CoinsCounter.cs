@@ -21,7 +21,7 @@ namespace Code.Gameplay.Coins
 			_signalBus = signalBus;
 		}
 
-		public int CoinsCount
+		private int CoinsCount
 		{
 			get => _coinsCount;
 			set
@@ -44,7 +44,7 @@ namespace Code.Gameplay.Coins
 		public bool TrySpent(int price)
 		{
 			var enough = CoinsCount >= price;
-			_coinsCount -= enough ? price : 0;
+			CoinsCount -= enough ? price : 0;
 			return enough;
 		}
 	}
