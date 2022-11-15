@@ -10,6 +10,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 		[Space] [SerializeField] private SerializedInputConfig _serializedInputConfig;
 		[Space] [SerializeField] private SerializedScoreConfig _serializedScoreConfig;
 		[Space] [SerializeField] private SerializedBonusesConfig _serializedBonusesConfig;
+		[Space] [SerializeField] private SerializedCoinsConfig _coins;
 
 		int IChainConfig.MinTokensCountForChain => _serializedChainConfig.MinTokensCountForChain;
 
@@ -32,5 +33,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 		int IBonusesConfig.MinChainLenghtForBomb => _serializedBonusesConfig.MinChainLenghtForBomb;
 
 		int IBonusesConfig.BombExplosionRange => _serializedBonusesConfig.BombExplosionRange;
+
+		int ICoinsConfig.CoinsPerToken => _coins.CoinsPerToken;
 	}
 }

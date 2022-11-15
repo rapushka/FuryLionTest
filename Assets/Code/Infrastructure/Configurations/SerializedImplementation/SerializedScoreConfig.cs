@@ -7,10 +7,8 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 	[Serializable]
 	public class SerializedScoreConfig : IScoreConfig
 	{
-		[SerializeField] private int _scoreMultiplier = 150;
-		[SerializeField] private float _multiplierPerTokenInChain = 1.2f;
+		[field: SerializeField] public int ScoreMultiplier { get; private set; } = 150;
 
-		public int ScoreMultiplier => _scoreMultiplier;
-		public float MultiplierPerTokenInChain => _multiplierPerTokenInChain;
+		[field: SerializeField] public float MultiplierPerTokenInChain { get; private set; } = 1.2f;
 	}
 }

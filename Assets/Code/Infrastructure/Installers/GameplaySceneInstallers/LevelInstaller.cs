@@ -2,6 +2,7 @@ using Code.Extensions.DiContainerExtensions;
 using Code.GameLoop;
 using Code.GameLoop.Goals.Progress;
 using Code.Gameplay;
+using Code.Gameplay.Coins;
 using Code.Gameplay.ScoreSystem;
 using Code.Gameplay.Tokens;
 using Code.Gameplay.TokensField;
@@ -30,7 +31,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private SerializedConfig _serializedConfig;
 		[SerializeField] private TokensSpriteSheet _tokensSpriteSheet;
 
-		// ReSharper disable Unity.PerformanceAnalysis метод вызывается только на инициализации
+		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			Container
@@ -60,6 +61,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleWithInterfaces<Score>()
 				.BindSingleWithInterfaces<GoalViewsContainer>()
 				.BindSingleWithInterfaces<GameCycle>()
+				.BindSingleWithInterfaces<CoinsCounter>()
 				;
 
 			SubscribeSignals();
@@ -82,6 +84,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSignalTo<ChainComposedSignal, Field>((x, v) => x.DestroyTokensInChain(v.Value))
 				.BindSignalTo<ChainComposedSignal, Score>((x, v) => x.OnChainComposed(v.Value))
 				.BindSignalTo<TokensDestroyedByBonusSignal, Score>((x, v) => x.OnTokensDestroyed(v.Value))
+				.BindSignalTo<ChainComposedSignal, CoinsCounter>((x, v) => x.OnChainComposed(v.Value))
+				.BindSignalTo<TokensDestroyedByBonusSignal, CoinsCounter>((x, v) => x.OnTokensDestroyed(v.Value))
 				.BindSignalTo<ActionDoneSignal, ActionsRemaining>((x, _) => x.OnActionDone())
 				.BindSignalTo<ScoreUpdateSignal, GoalsProgress>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<TokenDestroyedSignal, TokenSpritesSwitcher>((x, v) => x.OnTokenDestroyed(v.Value))

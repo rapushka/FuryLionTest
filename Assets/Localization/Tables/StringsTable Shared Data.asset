@@ -51,6 +51,14 @@ MonoBehaviour:
     m_Key: ButtonBomb
     m_Metadata:
       m_Items: []
+  - m_Id: 13059677858512896
+    m_Key: ScoreCount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13060298951049216
+    m_Key: ActionsCounter
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
