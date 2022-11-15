@@ -37,15 +37,15 @@ namespace Code.Gameplay.Coins
 
 		public void OnTokensDestroyed(int count) => IncreaseCoinsCount(count);
 
-		private void IncreaseCoinsCount(int count) => CoinsCount += count * _coinsPerToken;
-
-		private void InvokeValueUpdate() => _signalBus.Fire(new CoinsCountUpdateSignal(CoinsCount));
-
 		public bool TrySpent(int price)
 		{
 			var enough = CoinsCount >= price;
 			CoinsCount -= enough ? price : 0;
 			return enough;
 		}
+
+		private void IncreaseCoinsCount(int count) => CoinsCount += count * _coinsPerToken;
+
+		private void InvokeValueUpdate() => _signalBus.Fire(new CoinsCountUpdateSignal(CoinsCount));
 	}
 }
