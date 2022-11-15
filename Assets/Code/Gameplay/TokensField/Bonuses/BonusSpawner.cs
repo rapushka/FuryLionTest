@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Code.Extensions;
 using Code.Gameplay.Tokens;
@@ -20,23 +22,36 @@ namespace Code.Gameplay.TokensField.Bonuses
 			_signalBus = signalBus;
 		}
 
+		public void SpawnHorizontalRocket()
+			=> SpawnHorizontalRocket(Array.Empty<Token>(), _field.GetRandomToken().TokenUnit);
+
+		public void SpawnBomb()
+			=> SpawnBomb(Array.Empty<Token>(), _field.GetRandomToken().TokenUnit);
+
 		public void SpawnHorizontalRocket(Token[] chain, TokenUnit unit)
-			=> Spawn(chain, unit, BonusType.HorizontalRocket);
+			=> TrySpawn(chain, unit, BonusType.HorizontalRocket);
 
 		public void SpawnBomb(Token[] chain, TokenUnit unit)
-			=> Spawn(chain, unit, BonusType.Bomb);
+			=> TrySpawn(chain, unit, BonusType.Bomb);
 
-		private void Spawn(Token[] chain, TokenUnit unit, BonusType bonusType)
+		private void TrySpawn(Token[] chain, TokenUnit unit, BonusType bonusType)
 		{
 			_chain = chain;
 			_unit = unit;
-			var token = _field.Where(CasualTokenOfRightUnit)?.PickRandom();
+			var tokens = _field.Where(CasualTokenOfRightUnit);
 
-			if (token == true)
+			// ReSharper disable PossibleMultipleEnumeration - There is no multiple enumeration
+			if (tokens.Any())
 			{
-				token.BonusType = bonusType;
-				_signalBus.Fire(new BonusSpawnedSignal(token));
+				Spawn(bonusType, tokens);
 			}
+		}
+
+		private void Spawn(BonusType bonusType, IEnumerable<Token> tokens)
+		{
+			var token = tokens.PickRandom();
+			token.BonusType = bonusType;
+			_signalBus.Fire(new BonusSpawnedSignal(token));
 		}
 
 		private bool CasualTokenOfRightUnit(Token token)
