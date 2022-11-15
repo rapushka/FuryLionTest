@@ -54,6 +54,14 @@ MonoBehaviour:
     m_Localized: Bomb
     m_Metadata:
       m_Items: []
+  - m_Id: 13059677858512896
+    m_Localized: 'Score:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13060298951049216
+    m_Localized: 'Actions:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

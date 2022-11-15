@@ -1,5 +1,6 @@
 using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
+using Code.Infrastructure.Signals.Coins;
 using Code.Infrastructure.Signals.Goals;
 using Code.UI.BonusesSpawn;
 using Code.UI.GameSettings;
@@ -16,6 +17,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		[SerializeField] private SettingsWindow _settingsWindow;
 		[SerializeField] private SoundSettings _soundSettings;
 		[SerializeField] private ScoreView _scoreView;
+		[SerializeField] private CoinsCountView _coinsCountView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
@@ -31,6 +33,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_soundSettings)
 				.BindSingleFromInstance(_settingsButton)
 				.BindSingleFromInstance(_scoreView)
+				.BindSingleFromInstance(_coinsCountView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
@@ -48,6 +51,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 			Container
 				.BindSignalTo<ScoreUpdateSignal, ScoreView>((x, v) => x.OnScoreUpdate(v.Value))
 				.BindSignalTo<ActionsLeftUpdateSignal, RemainingActionsView>((x, v) => x.UpdateView(v.Value))
+				.BindSignalTo<CoinsCountUpdateSignal, CoinsCountView>((x, v) => x.UpdateView(v.Value))
 				;
 		}
 	}

@@ -8,6 +8,7 @@ namespace Code.GameLoop
 	public class ActionsRemaining : IInitializable
 	{
 		private readonly SignalBus _signalBus;
+
 		private int _actionsRemain;
 
 		[Inject]
@@ -22,14 +23,14 @@ namespace Code.GameLoop
 		public void OnActionDone()
 		{
 			_actionsRemain--;
-			
+
 			InvokeValueUpdate();
 			CheckActionsOver();
 		}
 
 		private void InvokeValueUpdate() => _signalBus.Fire(new ActionsLeftUpdateSignal(_actionsRemain));
 
-		private void CheckActionsOver() 
+		private void CheckActionsOver()
 			=> _signalBus.Do((signalBus) => signalBus.Fire<ActionsOverSignal>(), @if: _actionsRemain <= 0);
 	}
 }
