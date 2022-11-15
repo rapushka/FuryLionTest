@@ -62,7 +62,7 @@ MonoBehaviour:
     _bombExplosionRange: 2
   _coins:
     <CoinsPerToken>k__BackingField: 1
-    <HorizontalRocketPrice>k__BackingField: 100
-    <BombPrice>k__BackingField: 250
+    <HorizontalRocketPrice>k__BackingField: 10
+    <BombPrice>k__BackingField: 25
     <AdditionalActionPrice>k__BackingField: 10
     <ActionsPerPurchase>k__BackingField: 5
