@@ -719,6 +719,7 @@ MonoBehaviour:
   _settingsWindow: {fileID: 215778728}
   _soundSettings: {fileID: 1175862737}
   _scoreView: {fileID: 5154984740560444959}
+  _coinsCountView: {fileID: 1358136559}
   _remainingActionsView: {fileID: 2559511329264655007}
   _reachScoreGoalViewPrefab: {fileID: 2019174002256677409, guid: 0898eec87ca27f447a562687af989b00, type: 3}
   _destroyTokensGoalViewPrefab: {fileID: 2069276241008988132, guid: da45db79cb997d342bee935ab14b9109, type: 3}
