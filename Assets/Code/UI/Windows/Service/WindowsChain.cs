@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.UI.Windows.Service
 {
-	public class WindowsService : MonoBehaviour
+	public class WindowsChain : MonoBehaviour
 	{
 		[SerializeField] private List<UnityWindow> _windows;
 
