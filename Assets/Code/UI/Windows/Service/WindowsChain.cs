@@ -14,9 +14,13 @@ namespace Code.UI.Windows.Service
 
 		private bool HasOpenedWindow => _windowsStack.Any();
 
-		private void OnEnable() => _windowsDictionary = _windows.ToDictionary((w) => w.GetType());
+		private void OnEnable()
+		{
+			_windowsDictionary = _windows.ToDictionary((w) => w.GetType());
+			_windowsStack = new Stack<UnityWindow>();
+		}
 
-		public void OpenNew<TWindow>(Action<TWindow> initializeWindow = null)
+		public void Open<TWindow>(Action<TWindow> initializeWindow = null)
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
