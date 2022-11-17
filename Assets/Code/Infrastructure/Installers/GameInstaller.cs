@@ -15,7 +15,6 @@ namespace Code.Infrastructure.Installers
 	{
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private CoroutinesHandler _coroutinesHandlerPrefab;
-		[SerializeField] private WindowsChain _windowsChainPrefab;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -23,10 +22,8 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleWithInterfaces<SceneTransfer>()
 				.BindSingleWithInterfaces<GameStarter>()
-				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_debugLevel)
 				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
-				.BindSinglePrefabAsDontDestroy(_windowsChainPrefab)
 				.BindSinglePrefabAsDontDestroy(_coroutinesHandlerPrefab)
 				;
 
