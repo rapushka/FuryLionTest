@@ -10,11 +10,13 @@ namespace Code.Infrastructure.Bootstrap
 
 		[Inject] public GameStarter(SceneTransfer sceneTransfer) => _sceneTransfer = sceneTransfer;
 
-		public void Initialize() => StartGame();
+		private bool IsDontOnBootstrapScene => _sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Bootstrap;
 		
-		private void StartGame()
+		public void Initialize() => StartGame();
+
+		public void StartGame()
 		{
-			if (_sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Bootstrap)
+			if (IsDontOnBootstrapScene)
 			{
 				_sceneTransfer.ToBootstrapScene();
 			}
