@@ -1,6 +1,5 @@
 using Code.DataStoring;
 using Code.Extensions.DiContainerExtensions;
-using Code.Infrastructure.Bootstrap;
 using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.Inner.CustomMonoBehaviours;
@@ -11,33 +10,37 @@ using Zenject;
 
 namespace Code.Infrastructure.Installers
 {
-	public class GameInstaller : MonoInstaller
+	public class GameInstaller : MonoInstaller, IInitializable
 	{
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private CoroutinesHandler _coroutinesHandlerPrefab;
 		[SerializeField] private WindowsChain _windowsChainPrefab;
-		[SerializeField] private GameStarter _gameStarter;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			var coroutinesHandler = InstantiateDontDestroy(_coroutinesHandlerPrefab);
 			var windowChain = InstantiateDontDestroy(_windowsChainPrefab);
-			var gameStarter = InstantiateDontDestroy(_gameStarter);
 
 			Container
+				.BindSingleFromInstanceWithInterfaces(this)
 				.BindSingleWithInterfaces<SceneTransfer>()
 				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_debugLevel)
 				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
 				.BindSingleFromInstance(coroutinesHandler)
 				.BindSingleFromInstance(windowChain)
-				.BindSingleFromInstanceWithInterfaces(gameStarter)
 				;
 
 			SignalBusInstaller.Install(Container);
 
 			SubscribeSignals();
+		}
+
+		public void Initialize()
+		{
+			var sceneTransfer = Container.Resolve<SceneTransfer>();
+			sceneTransfer.ToBootstrapScene();
 		}
 
 		private static TObject InstantiateDontDestroy<TObject>(TObject prefab)
