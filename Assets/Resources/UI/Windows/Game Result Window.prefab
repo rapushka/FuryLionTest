@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 390805432111527557}
   - component: {fileID: 390805432111527558}
   m_Layer: 5
-  m_Name: Game Result
+  m_Name: Game Result Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 390805432703970153}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: 
+        m_MethodName: set_text
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -607,7 +607,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6285064905018356221, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
       propertyPath: m_text
-      value: OK
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 6285064905018356221, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
       propertyPath: m_fontSize
@@ -744,7 +744,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:eecea88b0661cc04ea6a60f9a19b20e5
     m_TableEntryReference:
-      m_KeyId: 17437326262272
+      m_KeyId: 18347209211904
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
