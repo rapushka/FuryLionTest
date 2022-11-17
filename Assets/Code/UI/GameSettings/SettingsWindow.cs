@@ -1,13 +1,14 @@
 using Code.DataStoring;
 using Code.DataStoring.Preferences;
 using Code.Generated.Analytics.Signals;
+using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Code.UI.GameSettings
 {
-	public class SettingsWindow : MonoBehaviour
+	public class SettingsWindow : UnityWindow
 	{
 		[SerializeField] private Button _buttonOK;
 		[SerializeField] private SoundSettings _soundSettings;
@@ -16,7 +17,6 @@ namespace Code.UI.GameSettings
 		private LanguageSelector _languageSelector;
 		private SignalBus _signalBus;
 
-		[Inject]
 		public void Construct(IStorage storage, LanguageSelector language, SignalBus signalBus)
 		{
 			_signalBus = signalBus;

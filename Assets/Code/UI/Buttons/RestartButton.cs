@@ -2,5 +2,5 @@
 
 namespace Code.UI.Buttons
 {
-	public class RestartButton : UnityActionToSignalAdapter<RestartSignal> { }
+	public class RestartButton : MethodToSignalAdapter<RestartSignal> { }
 }

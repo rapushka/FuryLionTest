@@ -1,4 +1,5 @@
 ﻿using Code.Extensions.DiContainerExtensions;
+using Code.Generated.Analytics.Signals;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.UI.Buttons;
 using Code.UI.Windows.Service;
@@ -24,6 +25,7 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
 				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
+				.BindSignalTo<SettingsOpenedSignal, WindowsService>((x) => x.OpenSettings)
 				;
 		}
 	}

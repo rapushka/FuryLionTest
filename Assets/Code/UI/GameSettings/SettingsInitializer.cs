@@ -8,6 +8,9 @@ namespace Code.UI.GameSettings
 
 		[Inject] public SettingsInitializer(SettingsWindow settingsWindow) => _settingsWindow = settingsWindow;
 
-		public void Initialize() => _settingsWindow.LoadSettings();
+		public void Initialize()
+		{
+			// _settingsWindow.LoadSettings();
+		}
 	}
 }
