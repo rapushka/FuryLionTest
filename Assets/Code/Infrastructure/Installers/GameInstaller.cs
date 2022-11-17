@@ -20,9 +20,6 @@ namespace Code.Infrastructure.Installers
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			var coroutinesHandler = InstantiateDontDestroy(_coroutinesHandlerPrefab);
-			var windowChain = InstantiateDontDestroy(_windowsChainPrefab);
-
 			Container
 				.BindSingleFromInstanceWithInterfaces(this)
 				.BindSingleWithInterfaces<SceneTransfer>()
@@ -30,8 +27,8 @@ namespace Code.Infrastructure.Installers
 				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_debugLevel)
 				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
-				.BindSingleFromInstance(coroutinesHandler)
-				.BindSingleFromInstance(windowChain)
+				.BindSinglePrefabAsDontDestroy(_windowsChainPrefab)
+				.BindSinglePrefabAsDontDestroy(_coroutinesHandlerPrefab)
 				;
 
 			SignalBusInstaller.Install(Container);
@@ -42,14 +39,6 @@ namespace Code.Infrastructure.Installers
 		public void Initialize()
 		{
 			// TODO: instead InstantiateDontDestroy
-		}
-
-		private static TObject InstantiateDontDestroy<TObject>(TObject prefab)
-			where TObject : Object
-		{
-			var instance = Instantiate(prefab);
-			DontDestroyOnLoad(instance);
-			return instance;
 		}
 
 		private void SubscribeSignals()
