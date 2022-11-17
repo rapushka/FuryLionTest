@@ -11,7 +11,7 @@ using Zenject;
 
 namespace Code.Infrastructure.Installers
 {
-	public class GameInstaller : MonoInstaller, IInitializable
+	public class GameInstaller : MonoInstaller
 	{
 		[SerializeField] private Level _debugLevel;
 		[SerializeField] private CoroutinesHandler _coroutinesHandlerPrefab;
@@ -21,7 +21,6 @@ namespace Code.Infrastructure.Installers
 		public override void InstallBindings()
 		{
 			Container
-				.BindSingleFromInstanceWithInterfaces(this)
 				.BindSingleWithInterfaces<SceneTransfer>()
 				.BindSingleWithInterfaces<GameStarter>()
 				.BindSingle<WindowsService>()
@@ -32,13 +31,7 @@ namespace Code.Infrastructure.Installers
 				;
 
 			SignalBusInstaller.Install(Container);
-
 			SubscribeSignals();
-		}
-
-		public void Initialize()
-		{
-			// TODO: instead InstantiateDontDestroy
 		}
 
 		private void SubscribeSignals()
