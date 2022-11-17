@@ -35,6 +35,7 @@ namespace Code.Infrastructure.Installers
 			=> Container
 			   .BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
 			   .BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
-			   .BindSignalTo<SceneLoadedSignal, CoroutinesHandler>((x) => x.OnSceneChanged);
+			   .BindSignalTo<SceneLoadedSignal, CoroutinesHandler>((x) => x.OnSceneChanged)
+			   .BindSignalTo<RestartSignal, GameStarter>((x) => x.StartGame);
 	}
 }

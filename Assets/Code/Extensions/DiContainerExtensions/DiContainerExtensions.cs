@@ -39,9 +39,9 @@ namespace Code.Extensions.DiContainerExtensions
 		
 		public static DiContainer BindSinglePrefabAsDontDestroy<TContract>(this DiContainer @this, TContract prefab)
 			where TContract : Object
-			=> @this.BindSingleFromInstance(InstantiateDontDestroy(prefab));
+			=> @this.BindSingleFromInstance(prefab.InstantiateDontDestroy());
 
-		private static TObject InstantiateDontDestroy<TObject>(TObject prefab)
+		public static TObject InstantiateDontDestroy<TObject>(this TObject prefab)
 			where TObject : Object
 		{
 			var instance = Object.Instantiate(prefab);

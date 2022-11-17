@@ -1,4 +1,5 @@
 ﻿using Code.Extensions.DiContainerExtensions;
+using Code.UI.Buttons;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using Zenject;
@@ -12,8 +13,11 @@ namespace Code.Infrastructure.Installers
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
+			var windowsChain = _windowsChainPrefab.InstantiateDontDestroy();
+
 			Container
-				.BindSinglePrefabAsDontDestroy(_windowsChainPrefab)
+				.BindSingleFromInstance(windowsChain)
+				.BindSingleFromInstance(windowsChain.GetComponentInChildren<RestartButton>())
 				.BindSingle<WindowsService>()
 				;
 		}

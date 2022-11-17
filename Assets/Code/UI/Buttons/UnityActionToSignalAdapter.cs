@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Code.UI
+namespace Code.UI.Buttons
 {
 	public class UnityActionToSignalAdapter<T> : MonoBehaviour
 	{
