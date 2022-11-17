@@ -1,4 +1,5 @@
 ﻿using Code.Extensions.DiContainerExtensions;
+using Code.Infrastructure.Signals.GameLoop;
 using Code.UI.Buttons;
 using Code.UI.Windows.Service;
 using UnityEngine;
@@ -8,17 +9,21 @@ namespace Code.Infrastructure.Installers
 {
 	public class WindowsInstaller : MonoInstaller
 	{
-		[SerializeField] private WindowsChain _windowsChainPrefab;
+		[SerializeField] private WindowsChain _windowsChain;
+		[SerializeField] private RestartButton _restartButton;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
-			var windowsChain = _windowsChainPrefab.InstantiateDontDestroy();
+			Container
+				.BindSingleFromInstance(_windowsChain)
+				.BindSingleFromInstance(_restartButton)
+				.BindSingle<WindowsService>()
+				;
 
 			Container
-				.BindSingleFromInstance(windowsChain)
-				.BindSingleFromInstance(windowsChain.GetComponentInChildren<RestartButton>())
-				.BindSingle<WindowsService>()
+				.BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
+				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
 				;
 		}
 	}

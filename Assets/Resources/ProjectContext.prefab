@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3922909175941977727}
   - component: {fileID: 4584720028650714876}
   - component: {fileID: -7322591692326403415}
-  - component: {fileID: 2649538792163832576}
-  - component: {fileID: -4553032147020997400}
+  - component: {fileID: 9165850320885514615}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -50,8 +49,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: -7322591692326403415}
-  - {fileID: -4553032147020997400}
-  - {fileID: 2649538792163832576}
+  - {fileID: 9165850320885514615}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
@@ -80,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugLevel: {fileID: 11400000, guid: fa9c008e225e6194bb8b9e656a21eaa3, type: 2}
   _coroutinesHandlerPrefab: {fileID: 5996804090670529041, guid: 7cf8a11e7c2d9ef409264672c9ba238f, type: 3}
---- !u!114 &2649538792163832576
+--- !u!114 &9165850320885514615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,20 +87,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9058317839373361905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527b919dd32c4e10b5cc783f5cb16dd1, type: 3}
+  m_Script: {fileID: 11500000, guid: bb7856276769469fa8c9154ac1a4ddd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-4553032147020997400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9058317839373361905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fc4054237214258a992a7efedb4a652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowsChainPrefab: {fileID: 4584966497381279407, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
-  _restartButton: {fileID: 3250944843052512415, guid: f8921001ece15a94995016a19452f154, type: 3}
