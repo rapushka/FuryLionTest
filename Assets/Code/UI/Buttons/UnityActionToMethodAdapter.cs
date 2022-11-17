@@ -9,6 +9,7 @@ namespace Code.UI.Buttons
 		private void OnEnable() => _button.onClick.AddListener(OnClick);
 
 		private void OnDisable() => _button.onClick.RemoveListener(OnClick);
+
 		protected abstract void OnClick();
 	}
 }

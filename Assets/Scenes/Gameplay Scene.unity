@@ -307,6 +307,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &73702329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3506632320063387923, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+  m_PrefabInstance: {fileID: 407010930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &89699744
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +612,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3506632320063387935, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
+      propertyPath: _window
+      value: 
+      objectReference: {fileID: 73702329}
     - target: {fileID: 8313706329978746468, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -638,7 +647,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7590339823417085646, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
   m_PrefabInstance: {fileID: 407010930}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 73702329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee84c31b93f7483db33142274df0432a, type: 3}
@@ -649,7 +658,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3506632320063387935, guid: 25cdc5e1e0312e34cae5dc7f17b79961, type: 3}
   m_PrefabInstance: {fileID: 407010930}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 73702329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05e562f29f0040779bce2622d6ac4fab, type: 3}
@@ -1483,7 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da225bfefbfc49f9aba509c1ee4b84fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonComponent: {fileID: 1210347831}
+  _button: {fileID: 1210347831}
 --- !u!114 &1210347831 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6285064905464354470, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
@@ -2939,6 +2948,14 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4584966497381279407, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _windows.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584966497381279407, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _windows.Array.data[1]
+      value: 
+      objectReference: {fileID: 407010934}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
 --- !u!1 &2085728987

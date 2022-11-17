@@ -1,6 +1,5 @@
 using Code.DataStoring;
 using Code.DataStoring.Preferences;
-using Code.Generated.Analytics.Signals;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,17 +48,6 @@ namespace Code.UI.GameSettings
 			var settings = _storage.Load(SettingsModel.DefaultSettingsModel);
 			_soundSettings.LoadSettings(settings);
 			_languageSelector.CurrentLocale = settings.Locale;
-		}
-
-		public void OpenWindow()
-		{
-			if (gameObject.activeSelf)
-			{
-				return;
-			}
-
-			_signalBus.Fire<SettingsOpenedSignal>();
-			gameObject.SetActive(true);
 		}
 
 		private void CloseWindow() => gameObject.SetActive(false);
