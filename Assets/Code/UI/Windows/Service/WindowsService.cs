@@ -11,20 +11,17 @@ namespace Code.UI.Windows.Service
 
 		private readonly IStorage _storage;
 		private readonly LanguageSelector _languageSelector;
-		private readonly SignalBus _signalBus;
 
 		[Inject]
 		public WindowsService
 		(
 			WindowsChain windowsChain,
 			IStorage storage,
-			LanguageSelector languageSelector,
-			SignalBus signalBus
+			LanguageSelector languageSelector
 		)
 		{
 			_windowsChain = windowsChain;
 
-			_signalBus = signalBus;
 			_languageSelector = languageSelector;
 			_storage = storage;
 		}
@@ -41,7 +38,7 @@ namespace Code.UI.Windows.Service
 
 		public void OpenSettings()
 		{
-			_windowsChain.Open<SettingsWindow>((w) => w.Construct(_storage, _languageSelector, _signalBus));
+			_windowsChain.Open<SettingsWindow>((w) => w.Construct(_storage, _languageSelector));
 		}
 	}
 }

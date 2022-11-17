@@ -3,7 +3,6 @@ using Code.DataStoring.Preferences;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Code.UI.GameSettings
 {
@@ -14,11 +13,9 @@ namespace Code.UI.GameSettings
 
 		private IStorage _storage;
 		private LanguageSelector _languageSelector;
-		private SignalBus _signalBus;
 
-		public void Construct(IStorage storage, LanguageSelector language, SignalBus signalBus)
+		public void Construct(IStorage storage, LanguageSelector language)
 		{
-			_signalBus = signalBus;
 			_languageSelector = language;
 			_storage = storage;
 		}
