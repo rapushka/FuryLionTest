@@ -2,6 +2,7 @@ using Code.DataStoring;
 using Code.Extensions.DiContainerExtensions;
 using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
+using Code.Inner;
 using Code.Inner.CustomMonoBehaviours;
 using Code.Levels;
 using Code.UI.Windows.Service;
@@ -40,7 +41,10 @@ namespace Code.Infrastructure.Installers
 		public void Initialize()
 		{
 			var sceneTransfer = Container.Resolve<SceneTransfer>();
-			sceneTransfer.ToBootstrapScene();
+			if (sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Bootstrap)
+			{
+				sceneTransfer.ToBootstrapScene();
+			}
 		}
 
 		private static TObject InstantiateDontDestroy<TObject>(TObject prefab)
