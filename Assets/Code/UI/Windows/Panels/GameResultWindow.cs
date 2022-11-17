@@ -1,22 +1,21 @@
 ﻿using System;
 using Code.UI.Windows.Service;
-using TMPro;
 using UnityEngine;
 
 namespace Code.UI.Windows.Panels
 {
 	public class GameResultWindow : UnityWindow
 	{
-		[SerializeField] private TextMeshProUGUI _loseTextMesh;
-		[SerializeField] private TextMeshProUGUI _victoryTextMesh;
+		[SerializeField] private GameObject _loseView;
+		[SerializeField] private GameObject _victoryView;
 
-		public void Construct(SessionResult sessionResult) => ChoiceTextMesh(sessionResult).enabled = true;
-		
-		private TextMeshProUGUI ChoiceTextMesh(SessionResult sessionResult)
+		public void Construct(SessionResult sessionResult) => ChoiceTextMesh(sessionResult).SetActive(true);
+
+		private GameObject ChoiceTextMesh(SessionResult sessionResult)
 			=> sessionResult switch
 			{
-				SessionResult.Lose    => _loseTextMesh,
-				SessionResult.Victory => _victoryTextMesh,
+				SessionResult.Lose    => _loseView,
+				SessionResult.Victory => _victoryView,
 				_                     => throw new ArgumentException(nameof(sessionResult)),
 			};
 	}
