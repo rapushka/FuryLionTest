@@ -4,13 +4,13 @@ using Code.DataStoring.Localizations;
 namespace Code.DataStoring.Preferences
 {
 	[Serializable]
-	public class Settings
+	public class SettingsModel
 	{
 		public bool PlayingMusic;
 		public bool PlayingSFX;
 		public LanguageLocale Locale;
 
-		public static Settings DefaultSettings => new()
+		public static SettingsModel DefaultSettingsModel => new()
 		{
 			PlayingMusic = true,
 			PlayingSFX = true,

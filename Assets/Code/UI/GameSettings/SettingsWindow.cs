@@ -35,7 +35,7 @@ namespace Code.UI.GameSettings
 		{
 			_buttonOK.onClick.RemoveListener(CloseWindow);
 
-			var settings = new Settings
+			var settings = new SettingsModel
 			{
 				PlayingMusic = _soundSettings.MusicIsOn,
 				PlayingSFX = _soundSettings.SfxIsOn,
@@ -46,7 +46,7 @@ namespace Code.UI.GameSettings
 
 		public void LoadSettings()
 		{
-			var settings = _storage.Load(Settings.DefaultSettings);
+			var settings = _storage.Load(SettingsModel.DefaultSettingsModel);
 			_soundSettings.LoadSettings(settings);
 			_languageSelector.CurrentLocale = settings.Locale;
 		}

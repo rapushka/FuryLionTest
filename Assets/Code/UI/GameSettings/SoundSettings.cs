@@ -40,13 +40,13 @@ namespace Code.UI.GameSettings
 			_sfxToggle.onValueChanged.RemoveListener(OnSfxToggle);
 		}
 
-		public void LoadSettings(Settings settings)
+		public void LoadSettings(SettingsModel settingsModel)
 		{
-			_musicToggle.isOn = settings.PlayingMusic;
-			_sfxToggle.isOn = settings.PlayingSFX;
+			_musicToggle.isOn = settingsModel.PlayingMusic;
+			_sfxToggle.isOn = settingsModel.PlayingSFX;
 
-			SetMusicVolume(settings.PlayingMusic);
-			SetSfxVolume(settings.PlayingSFX);
+			SetMusicVolume(settingsModel.PlayingMusic);
+			SetSfxVolume(settingsModel.PlayingSFX);
 		}
 
 		private void OnMusicToggle(bool isEnabled)
