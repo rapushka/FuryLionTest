@@ -5,7 +5,6 @@ using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.Inner.CustomMonoBehaviours;
 using Code.Levels;
-using Code.UI.Windows.Service;
 using UnityEngine;
 using Zenject;
 
