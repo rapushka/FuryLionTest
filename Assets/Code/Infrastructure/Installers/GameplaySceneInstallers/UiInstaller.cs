@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_buttonSpawnRocket)
 				.BindSingleFromInstance(_buttonSpawnBomb)
-				.BindSingleWithInterfaces<SettingsInitializer>()
+				.BindSingleWithInterfaces<Settings>()
 				.BindSingleWithInterfaces<Purchase>()
 				;
 

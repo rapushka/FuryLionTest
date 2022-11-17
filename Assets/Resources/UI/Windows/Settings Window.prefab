@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e562f29f0040779bce2622d6ac4fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonOK: {fileID: 7463316425481210587}
+  _window: {fileID: 3506632320063387923}
   _soundSettings: {fileID: 7590339823417085646}
 --- !u!114 &7590339823417085646
 MonoBehaviour:
@@ -1083,17 +1083,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6285064905464354471, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
   m_PrefabInstance: {fileID: 3506632321541299325}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7463316425481210587 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6285064905464354470, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}
-  m_PrefabInstance: {fileID: 3506632321541299325}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7463316426078285184 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6285064905018356221, guid: 379abe1bb3fa0fa4dbfb3aba2303e850, type: 3}

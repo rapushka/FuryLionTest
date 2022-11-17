@@ -1,5 +1,4 @@
-﻿using Code.DataStoring;
-using Code.UI.GameSettings;
+﻿using Code.UI.GameSettings;
 using Code.UI.Windows.Panels;
 using Zenject;
 
@@ -8,22 +7,13 @@ namespace Code.UI.Windows.Service
 	public class WindowsService
 	{
 		private readonly WindowsChain _windowsChain;
-
-		private readonly IStorage _storage;
-		private readonly LanguageSelector _languageSelector;
+		private readonly Settings _settings;
 
 		[Inject]
-		public WindowsService
-		(
-			WindowsChain windowsChain,
-			IStorage storage,
-			LanguageSelector languageSelector
-		)
+		public WindowsService(WindowsChain windowsChain, Settings settings)
 		{
 			_windowsChain = windowsChain;
-
-			_languageSelector = languageSelector;
-			_storage = storage;
+			_settings = settings;
 		}
 
 		public void OnVictory() => OpenResultWindowWith(SessionResult.Victory);
@@ -36,9 +26,6 @@ namespace Code.UI.Windows.Service
 		private void Initialize(GameResultWindow window, SessionResult sessionResult)
 			=> window.Construct(sessionResult);
 
-		public void OpenSettings()
-		{
-			_windowsChain.Open<SettingsWindow>((w) => w.Construct(_storage, _languageSelector));
-		}
+		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Construct(_settings));
 	}
 }
