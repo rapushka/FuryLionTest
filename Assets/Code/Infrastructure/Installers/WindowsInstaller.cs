@@ -2,6 +2,7 @@
 using Code.Generated.Analytics.Signals;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.UI.Buttons;
+using Code.UI.GameSettings;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using Zenject;
@@ -12,14 +13,21 @@ namespace Code.Infrastructure.Installers
 	{
 		[SerializeField] private WindowsChain _windowsChain;
 		[SerializeField] private RestartButton _restartButton;
+		[SerializeField] private SettingsWindow _settingsWindow;
+		[SerializeField] private LanguageSelector _languageSelector;
+		[SerializeField] private SoundSettings _soundSettings;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
 			Container
+				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_windowsChain)
 				.BindSingleFromInstance(_restartButton)
-				.BindSingle<WindowsService>()
+				.BindSingleFromInstance(_settingsWindow)
+				.BindSingleWithInterfaces<Settings>()
+				.BindSingleFromInstance(_languageSelector)
+				.BindSingleFromInstance(_soundSettings)
 				;
 
 			Container

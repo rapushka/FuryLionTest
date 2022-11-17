@@ -11,9 +11,7 @@ namespace Code.UI.GameSettings
 	public class Settings : IInitializable
 	{
 		private readonly SettingsWindow _settingsWindow;
-
 		private readonly LanguageSelector _languageSelector;
-
 		private readonly AudioMixer _audioMixer;
 
 		[Inject]

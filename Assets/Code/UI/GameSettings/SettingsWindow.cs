@@ -18,7 +18,7 @@ namespace Code.UI.GameSettings
 			{
 				PlayingMusic = _soundSettings.MusicIsOn,
 				PlayingSFX = _soundSettings.SfxIsOn,
-				Locale = _settings.CurrentLocale
+				Locale = _settings.CurrentLocale,
 			};
 			_settings.Storage.Save(settings);
 		}
