@@ -1,8 +1,8 @@
 using Code.DataStoring;
 using Code.Extensions.DiContainerExtensions;
+using Code.Infrastructure.Bootstrap;
 using Code.Infrastructure.ScenesTransfers;
 using Code.Infrastructure.Signals.GameLoop;
-using Code.Inner;
 using Code.Inner.CustomMonoBehaviours;
 using Code.Levels;
 using Code.UI.Windows.Service;
@@ -26,6 +26,7 @@ namespace Code.Infrastructure.Installers
 			Container
 				.BindSingleFromInstanceWithInterfaces(this)
 				.BindSingleWithInterfaces<SceneTransfer>()
+				.BindSingleWithInterfaces<GameStarter>()
 				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_debugLevel)
 				.BindInterfaceSingleTo<IStorage, BinaryStorage>()
@@ -40,11 +41,7 @@ namespace Code.Infrastructure.Installers
 
 		public void Initialize()
 		{
-			var sceneTransfer = Container.Resolve<SceneTransfer>();
-			if (sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Bootstrap)
-			{
-				sceneTransfer.ToBootstrapScene();
-			}
+			// TODO: instead InstantiateDontDestroy
 		}
 
 		private static TObject InstantiateDontDestroy<TObject>(TObject prefab)

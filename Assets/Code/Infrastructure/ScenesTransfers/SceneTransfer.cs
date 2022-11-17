@@ -22,10 +22,6 @@ namespace Code.Infrastructure.ScenesTransfers
 
 		public void ToGameplayScene() => SceneManager.LoadScene(Constants.SceneIndex.Gameplay);
 
-		public void ToLoseScene() => SceneManager.LoadScene(Constants.SceneIndex.Lose);
-
-		public void ToVictoryScene() => SceneManager.LoadScene(Constants.SceneIndex.Victory);
-		
 		public void ToBootstrapScene() => SceneManager.LoadScene(Constants.SceneIndex.Bootstrap);
 	}
 }

@@ -1,15 +1,23 @@
 ﻿using Code.Infrastructure.ScenesTransfers;
-using UnityEngine;
+using Code.Inner;
 using Zenject;
 
 namespace Code.Infrastructure.Bootstrap
 {
-	public class GameStarter : MonoBehaviour, IInitializable
+	public class GameStarter : IInitializable
 	{
-		private SceneTransfer _sceneTransfer;
+		private readonly SceneTransfer _sceneTransfer;
 
-		[Inject] public void Construct(SceneTransfer sceneTransfer) => _sceneTransfer = sceneTransfer;
+		[Inject] public GameStarter(SceneTransfer sceneTransfer) => _sceneTransfer = sceneTransfer;
 
-		public void Initialize() => _sceneTransfer.ToBootstrapScene();
+		public void Initialize() => StartGame();
+		
+		private void StartGame()
+		{
+			if (_sceneTransfer.CurrentSceneIndex != Constants.SceneIndex.Bootstrap)
+			{
+				_sceneTransfer.ToBootstrapScene();
+			}
+		}
 	}
 }
