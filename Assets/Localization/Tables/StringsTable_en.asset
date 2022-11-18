@@ -62,6 +62,26 @@ MonoBehaviour:
     m_Localized: 'Actions:'
     m_Metadata:
       m_Items: []
+  - m_Id: 14211891524222976
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212080611835904
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212405162885120
+    m_Localized: Confirm Purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14226537463365632
+    m_Localized: 'You have:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14227125894856704
+    m_Localized: 'You need:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,8 +1,8 @@
 using Code.DataStoring.Preferences;
-using Code.UI.Windows.Service;
+using Code.UI.GameSettings;
 using UnityEngine;
 
-namespace Code.UI.GameSettings
+namespace Code.UI.Windows.Panels
 {
 	public class SettingsWindow : UnityWindow
 	{
@@ -10,7 +10,7 @@ namespace Code.UI.GameSettings
 		
 		private Settings _settings;
 
-		public void Construct(Settings settings) => _settings = settings;
+		public void Initialize(Settings settings) => _settings = settings;
 
 		private void OnDisable()
 		{

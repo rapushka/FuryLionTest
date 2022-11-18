@@ -59,6 +59,26 @@ MonoBehaviour:
     m_Key: ActionsCounter
     m_Metadata:
       m_Items: []
+  - m_Id: 14211891524222976
+    m_Key: ButtonYes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212080611835904
+    m_Key: ButtonNo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212405162885120
+    m_Key: ConfirmPurchaseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14226537463365632
+    m_Key: PurchaseYouHave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14227125894856704
+    m_Key: ConfirmPurchaseYouNeed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
