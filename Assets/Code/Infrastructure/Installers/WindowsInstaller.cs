@@ -6,6 +6,7 @@ using Code.Infrastructure.Signals.Ads;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.UI.Buttons;
 using Code.UI.GameSettings;
+using Code.UI.Windows.Panels;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using Zenject;

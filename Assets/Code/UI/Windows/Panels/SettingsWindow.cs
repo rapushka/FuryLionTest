@@ -1,8 +1,9 @@
 using Code.DataStoring.Preferences;
+using Code.UI.GameSettings;
 using Code.UI.Windows.Service;
 using UnityEngine;
 
-namespace Code.UI.GameSettings
+namespace Code.UI.Windows.Panels
 {
 	public class SettingsWindow : UnityWindow
 	{

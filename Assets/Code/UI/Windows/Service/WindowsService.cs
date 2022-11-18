@@ -30,5 +30,10 @@ namespace Code.UI.Windows.Service
 			=> window.Construct(sessionResult, _adsService);
 
 		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Construct(_settings));
+
+		public void ShowBonusWindow(int price)
+		{
+			
+		}
 	}
 }
