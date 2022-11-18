@@ -39,10 +39,21 @@ namespace Code.UI.Windows.Service
 			var window = _windowsStack.Pop();
 			window.Hide();
 			WindowClose?.Invoke(window.Result);
+			ClearWindowCloseSubscribers();
 
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();
+			}
+		}
+
+		private void ClearWindowCloseSubscribers()
+		{
+			var subscribers = WindowClose?.GetInvocationList()
+				?? Array.Empty<Delegate>();
+			foreach (var @delegate in subscribers)
+			{
+				WindowClose -= (Action<WindowResult>)@delegate;
 			}
 		}
 

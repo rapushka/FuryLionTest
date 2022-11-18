@@ -14,8 +14,6 @@ namespace Code.UI.Windows.Service
 		private readonly Settings _settings;
 		private readonly AdsService _adsService;
 		private readonly CoinsCounter _coins;
-		private int _price;
-		private Action _spawn;
 
 		[Inject]
 		public WindowsService(WindowsChain windowsChain, Settings settings, AdsService adsService, CoinsCounter coins)
@@ -40,28 +38,27 @@ namespace Code.UI.Windows.Service
 
 		public void ShowConfirmPurchaseWindow(int price, Action spawn)
 		{
-			_spawn = spawn;
-			_price = price;
 			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price));
-			_windowsChain.WindowClose += OnWindowClose;
+			_windowsChain.WindowClose += (r) => OnWindowClose(r, price, spawn);
 		}
 
-		private void OnWindowClose(WindowResult result)
+		private void OnWindowClose(WindowResult result, int price, Action spawn)
 		{
-			_windowsChain.WindowClose -= OnWindowClose;
-
-			if (result is not WindowResult.Yes)
+			if (result is WindowResult.Yes)
 			{
-				return;
+				BuyBonus(price, spawn);
 			}
+		}
 
-			if (_coins.TrySpent(_price))
+		private void BuyBonus(int price, Action spawn)
+		{
+			if (_coins.TrySpent(price))
 			{
-				_spawn.Invoke();
+				spawn.Invoke();
 			}
 			else
 			{
-				// Show not enough coins window
+				// TODO: Show not enough coins window
 				Debug.Log("Not enough coins");
 			}
 		}
