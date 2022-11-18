@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.Ads;
-using Code.UI.Windows.Service;
 using UnityEngine;
 
 namespace Code.UI.Windows.Panels

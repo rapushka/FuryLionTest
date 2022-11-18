@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.UI.Windows.Panels;
 using UnityEngine;
 
 namespace Code.UI.Windows.Service

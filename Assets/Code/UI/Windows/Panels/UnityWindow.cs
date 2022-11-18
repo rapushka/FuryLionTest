@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Code.UI.Windows.Service;
+using UnityEngine;
 
-namespace Code.UI.Windows.Service
+namespace Code.UI.Windows.Panels
 {
 	public abstract class UnityWindow : MonoBehaviour
 	{
