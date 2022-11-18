@@ -71,6 +71,14 @@ MonoBehaviour:
     m_Key: ConfirmPurchaseTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 14226537463365632
+    m_Key: PurchaseYouHave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14227125894856704
+    m_Key: ConfirmPurchaseYouNeed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

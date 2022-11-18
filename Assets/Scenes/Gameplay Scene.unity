@@ -2857,6 +2857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Result Window
       objectReference: {fileID: 0}
+    - target: {fileID: 3450986910684667909, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3450986910684667911, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: _ads
       value: 
@@ -2864,6 +2868,10 @@ PrefabInstance:
     - target: {fileID: 3584458142117787858, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342580679442423555, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5812616026213846179, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AnchoredPosition.x
