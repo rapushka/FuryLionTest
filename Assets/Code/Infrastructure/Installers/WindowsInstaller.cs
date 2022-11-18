@@ -18,7 +18,7 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private SettingsWindow _settingsWindow;
 		[SerializeField] private LanguageSelector _languageSelector;
 		[SerializeField] private SoundSettings _soundSettings;
-		[SerializeField] private AdsInitializer _adsInitializer;
+		[SerializeField] private AdsService _adsService;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -31,14 +31,14 @@ namespace Code.Infrastructure.Installers
 				.BindSingleWithInterfaces<Settings>()
 				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_soundSettings)
-				.BindSingleFromInstance(_adsInitializer)
+				.BindSingleFromInstance(_adsService)
 				;
 
 			Container
 				.BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
 				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
 				.BindSignalTo<SettingsOpenedSignal, WindowsService>((x) => x.OpenSettings)
-				.BindSignalTo<ShowAdSignal, AdsInitializer>((x) => x.ShowAd)
+				.BindSignalTo<ShowAdSignal, AdsService>((x) => x.ShowAd)
 				;
 		}
 	}

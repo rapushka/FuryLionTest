@@ -3,7 +3,7 @@ using UnityEngine.Advertisements;
 
 namespace Code.Ads
 {
-	public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
+	public class AdsService : MonoBehaviour, IUnityAdsInitializationListener
 	{
 		[SerializeField] private string _androidGameId = "4965819";
 		[SerializeField] private string _iOSGameId = "4965818";

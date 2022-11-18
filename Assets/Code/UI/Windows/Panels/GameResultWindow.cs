@@ -9,22 +9,11 @@ namespace Code.UI.Windows.Panels
 	{
 		[SerializeField] private GameObject _loseView;
 		[SerializeField] private GameObject _victoryView;
-		[SerializeField] private AdsInitializer _ads;
 
-		public void Construct(SessionResult sessionResult)
+		public void Construct(SessionResult result, AdsService adsService)
 		{
-			ChoiceTextMesh(sessionResult).SetActive(true);
-			ShowAdOnLose(sessionResult);
-		}
-
-		private void ShowAdOnLose(SessionResult result)
-		{
-			if (result != SessionResult.Lose)
-			{
-				return;
-			}
-			
-			_ads.ShowAd();
+			ChoiceTextMesh(result).SetActive(true);
+			ShowAdOnLose(result, adsService);
 		}
 
 		private GameObject ChoiceTextMesh(SessionResult sessionResult)
@@ -34,5 +23,13 @@ namespace Code.UI.Windows.Panels
 				SessionResult.Victory => _victoryView,
 				_                     => throw new ArgumentException(nameof(sessionResult)),
 			};
+
+		private void ShowAdOnLose(SessionResult result, AdsService adsService)
+		{
+			if (result is SessionResult.Lose)
+			{
+				adsService.ShowAd();
+			}
+		}
 	}
 }
