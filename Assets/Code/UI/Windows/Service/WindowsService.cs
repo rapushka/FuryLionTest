@@ -35,8 +35,6 @@ namespace Code.UI.Windows.Service
 		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Initialize(_settings));
 
 		public void ShowConfirmPurchaseWindow(int price)
-		{
-			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(price, _coins.CoinsCount));
-		}
+			=> _windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price));
 	}
 }
