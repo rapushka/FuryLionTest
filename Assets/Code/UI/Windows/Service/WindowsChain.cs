@@ -13,6 +13,8 @@ namespace Code.UI.Windows.Service
 		private Dictionary<Type, UnityWindow> _windowsDictionary;
 		private Stack<UnityWindow> _windowsStack;
 
+		public event Action<WindowResult> WindowClose;
+		
 		private bool HasOpenedWindow => _windowsStack.Any();
 
 		private void OnEnable()
@@ -32,11 +34,11 @@ namespace Code.UI.Windows.Service
 			window.Open();
 		}
 
-		public void Close(Action<WindowResult> onClosed = null)
+		public void Close()
 		{
 			var window = _windowsStack.Pop();
 			window.Hide();
-			onClosed?.Invoke(window.Result);
+			WindowClose?.Invoke(window.Result);
 
 			if (HasOpenedWindow)
 			{
