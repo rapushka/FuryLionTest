@@ -2857,6 +2857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Result Window
       objectReference: {fileID: 0}
+    - target: {fileID: 3450986910684667911, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _ads
+      value: 
+      objectReference: {fileID: 1727769176}
     - target: {fileID: 3584458142117787858, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25

@@ -31,6 +31,7 @@ namespace Code.Infrastructure.Installers
 				.BindSingleWithInterfaces<Settings>()
 				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_soundSettings)
+				.BindSingleFromInstance(_adsInitializer)
 				;
 
 			Container
