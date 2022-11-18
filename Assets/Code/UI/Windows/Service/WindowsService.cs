@@ -14,11 +14,12 @@ namespace Code.UI.Windows.Service
 		private readonly CoinsCounter _coins;
 
 		[Inject]
-		public WindowsService(WindowsChain windowsChain, Settings settings, AdsService adsService)
+		public WindowsService(WindowsChain windowsChain, Settings settings, AdsService adsService, CoinsCounter coins)
 		{
 			_windowsChain = windowsChain;
 			_settings = settings;
 			_adsService = adsService;
+			_coins = coins;
 		}
 
 		public void OnVictory() => OpenResultWindowWith(SessionResult.Victory);
