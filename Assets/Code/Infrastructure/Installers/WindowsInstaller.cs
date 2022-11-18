@@ -1,5 +1,8 @@
 ﻿using Code.Ads;
+using Code.Analytics;
+using Code.Extensions.Analytics;
 using Code.Extensions.DiContainerExtensions;
+using Code.Generated.Analytics;
 using Code.Generated.Analytics.Signals;
 using Code.Infrastructure.Signals.Ads;
 using Code.Infrastructure.Signals.GameLoop;
@@ -23,6 +26,12 @@ namespace Code.Infrastructure.Installers
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
 		{
+			BindContracts();
+			BindSignals();
+		}
+
+		private void BindContracts()
+		{
 			Container
 				.BindSingle<WindowsService>()
 				.BindSingleFromInstance(_windowsChain)
@@ -33,12 +42,16 @@ namespace Code.Infrastructure.Installers
 				.BindSingleFromInstance(_soundSettings)
 				.BindSingleFromInstance(_adsService)
 				;
+		}
 
+		private void BindSignals()
+		{
 			Container
 				.BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
 				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
 				.BindSignalTo<SettingsOpenedSignal, WindowsService>((x) => x.OpenSettings)
 				.BindSignalTo<ShowAdSignal, AdsService>((x) => x.ShowAd)
+				.BindAnalyticsSignals()
 				;
 		}
 	}

@@ -2925,7 +2925,7 @@ MonoBehaviour:
   _settingsWindow: {fileID: 860967587}
   _languageSelector: {fileID: 671529045}
   _soundSettings: {fileID: 860967586}
-  _adsInitializer: {fileID: 1727769176}
+  _adsService: {fileID: 1727769176}
 --- !u!1 &2134682170
 GameObject:
   m_ObjectHideFlags: 0
