@@ -1,5 +1,7 @@
-﻿using Code.Extensions.DiContainerExtensions;
+﻿using Code.Ads;
+using Code.Extensions.DiContainerExtensions;
 using Code.Generated.Analytics.Signals;
+using Code.Infrastructure.Signals.Ads;
 using Code.Infrastructure.Signals.GameLoop;
 using Code.UI.Buttons;
 using Code.UI.GameSettings;
@@ -16,6 +18,7 @@ namespace Code.Infrastructure.Installers
 		[SerializeField] private SettingsWindow _settingsWindow;
 		[SerializeField] private LanguageSelector _languageSelector;
 		[SerializeField] private SoundSettings _soundSettings;
+		[SerializeField] private AdsService _adsService;
 
 		// ReSharper disable Unity.PerformanceAnalysis - метод вызывается только на инициализации
 		public override void InstallBindings()
@@ -28,12 +31,14 @@ namespace Code.Infrastructure.Installers
 				.BindSingleWithInterfaces<Settings>()
 				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_soundSettings)
+				.BindSingleFromInstance(_adsService)
 				;
 
 			Container
 				.BindSignalTo<GameVictorySignal, WindowsService>((x) => x.OnVictory)
 				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
 				.BindSignalTo<SettingsOpenedSignal, WindowsService>((x) => x.OpenSettings)
+				.BindSignalTo<ShowAdSignal, AdsService>((x) => x.ShowAd)
 				;
 		}
 	}

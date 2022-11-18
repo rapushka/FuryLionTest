@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Ads;
 using Code.UI.Windows.Service;
 using UnityEngine;
 
@@ -9,7 +10,11 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private GameObject _loseView;
 		[SerializeField] private GameObject _victoryView;
 
-		public void Construct(SessionResult sessionResult) => ChoiceTextMesh(sessionResult).SetActive(true);
+		public void Construct(SessionResult result, AdsService adsService)
+		{
+			ChoiceTextMesh(result).SetActive(true);
+			ShowAdOnLose(result, adsService);
+		}
 
 		private GameObject ChoiceTextMesh(SessionResult sessionResult)
 			=> sessionResult switch
@@ -18,5 +23,13 @@ namespace Code.UI.Windows.Panels
 				SessionResult.Victory => _victoryView,
 				_                     => throw new ArgumentException(nameof(sessionResult)),
 			};
+
+		private void ShowAdOnLose(SessionResult result, AdsService adsService)
+		{
+			if (result is SessionResult.Lose)
+			{
+				adsService.ShowAd();
+			}
+		}
 	}
 }

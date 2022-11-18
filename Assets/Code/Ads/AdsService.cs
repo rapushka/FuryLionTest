@@ -3,7 +3,7 @@ using UnityEngine.Advertisements;
 
 namespace Code.Ads
 {
-	public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
+	public class AdsService : MonoBehaviour, IUnityAdsInitializationListener
 	{
 		[SerializeField] private string _androidGameId = "4965819";
 		[SerializeField] private string _iOSGameId = "4965818";
@@ -13,6 +13,13 @@ namespace Code.Ads
 		private string _gameId;
 
 		private void Awake() => InitializeAds();
+
+		public void OnInitializationComplete() => _adsOnLose.LoadAd();
+
+		public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+			=> Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+		
+		public void ShowAd() => _adsOnLose.ShowAd();
 
 		private void InitializeAds()
 		{
@@ -25,14 +32,5 @@ namespace Code.Ads
 			=> _gameId = Application.platform == RuntimePlatform.IPhonePlayer
 				? _iOSGameId
 				: _androidGameId;
-
-		public void OnInitializationComplete()
-		{
-			_adsOnLose.LoadAd();
-			_adsOnLose.ShowAd();
-		}
-
-		public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-			=> Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
 	}
 }

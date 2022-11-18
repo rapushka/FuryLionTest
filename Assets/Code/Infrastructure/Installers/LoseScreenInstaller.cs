@@ -11,13 +11,13 @@ namespace Code.Infrastructure.Installers
 	public class LoseScreenInstaller : MonoInstaller
 	{
 		[SerializeField] private ResetButton _resetButton;
-		[SerializeField] private AdsInitializer _adsInitializer;
+		[SerializeField] private AdsService _adsService;
 
 		public override void InstallBindings()
 		{
 			Container
 				.BindSingleFromInstance(_resetButton)
-				.BindSingleFromInstance(_adsInitializer)
+				.BindSingleFromInstance(_adsService)
 				;
 
 			Container.BindSignalTo<ResetButtonClickSignal, SceneTransfer>((x) => x.ToGameplayScene);
