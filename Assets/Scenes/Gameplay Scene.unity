@@ -2849,6 +2849,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 967337979748901612, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _chain
+      value: 
+      objectReference: {fileID: 799459208}
     - target: {fileID: 1375861870524009191, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_Name
       value: Windows
@@ -2868,6 +2872,14 @@ PrefabInstance:
     - target: {fileID: 3584458142117787858, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050960311644648237, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _chain
+      value: 
+      objectReference: {fileID: 799459208}
+    - target: {fileID: 5122771129866750821, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5342580679442423555, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_IsActive
@@ -2896,6 +2908,18 @@ PrefabInstance:
     - target: {fileID: 7758168332287822701, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.49999428
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377882646607027421, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377882646607027421, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377882646607027421, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
