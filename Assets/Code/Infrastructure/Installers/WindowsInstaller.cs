@@ -1,8 +1,6 @@
 ﻿using Code.Ads;
-using Code.Analytics;
 using Code.Extensions.Analytics;
 using Code.Extensions.DiContainerExtensions;
-using Code.Generated.Analytics;
 using Code.Generated.Analytics.Signals;
 using Code.Infrastructure.Signals.Ads;
 using Code.Infrastructure.Signals.GameLoop;
