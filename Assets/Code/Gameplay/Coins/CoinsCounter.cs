@@ -39,9 +39,9 @@ namespace Code.Gameplay.Coins
 
 		public bool TrySpent(int price)
 		{
-			var enough = CoinsCount >= price;
-			CoinsCount -= enough ? price : 0;
-			return enough;
+			var isEnough = CoinsCount >= price;
+			CoinsCount -= isEnough ? price : 0;
+			return isEnough;
 		}
 
 		private void IncreaseCoinsCount(int count) => CoinsCount += count * _coinsPerToken;
