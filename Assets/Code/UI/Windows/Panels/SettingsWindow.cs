@@ -10,7 +10,7 @@ namespace Code.UI.Windows.Panels
 		
 		private Settings _settings;
 
-		public void Construct(Settings settings) => _settings = settings;
+		public void Initialize(Settings settings) => _settings = settings;
 
 		private void OnDisable()
 		{

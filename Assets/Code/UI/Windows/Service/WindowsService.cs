@@ -1,4 +1,5 @@
 ﻿using Code.Ads;
+using Code.Gameplay.Coins;
 using Code.UI.GameSettings;
 using Code.UI.Windows.Panels;
 using Zenject;
@@ -10,6 +11,7 @@ namespace Code.UI.Windows.Service
 		private readonly WindowsChain _windowsChain;
 		private readonly Settings _settings;
 		private readonly AdsService _adsService;
+		private readonly CoinsCounter _coins;
 
 		[Inject]
 		public WindowsService(WindowsChain windowsChain, Settings settings, AdsService adsService)
@@ -27,13 +29,13 @@ namespace Code.UI.Windows.Service
 			=> _windowsChain.Open<GameResultWindow>((w) => Initialize(w, sessionResult));
 
 		private void Initialize(GameResultWindow window, SessionResult sessionResult)
-			=> window.Construct(sessionResult, _adsService);
+			=> window.Initialize(sessionResult, _adsService);
 
-		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Construct(_settings));
+		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Initialize(_settings));
 
-		public void ShowBonusWindow(int price)
+		public void ShowConfirmPurchaseWindow(int price)
 		{
-			
+			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(price, _coins.CoinsCount));
 		}
 	}
 }

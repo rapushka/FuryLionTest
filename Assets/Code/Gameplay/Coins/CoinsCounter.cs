@@ -21,10 +21,10 @@ namespace Code.Gameplay.Coins
 			_signalBus = signalBus;
 		}
 
-		private int CoinsCount
+		public int CoinsCount
 		{
 			get => _coinsCount;
-			set
+			private set
 			{
 				_coinsCount = value;
 				InvokeValueUpdate();

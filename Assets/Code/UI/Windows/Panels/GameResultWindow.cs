@@ -9,7 +9,7 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private GameObject _loseView;
 		[SerializeField] private GameObject _victoryView;
 
-		public void Construct(SessionResult result, AdsService adsService)
+		public void Initialize(SessionResult result, AdsService adsService)
 		{
 			ChoiceTextMesh(result).SetActive(true);
 			ShowAdOnLose(result, adsService);
