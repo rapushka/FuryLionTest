@@ -5,8 +5,8 @@ namespace Code.Ads
 {
 	public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 	{
-		[SerializeField] private string _androidGameId;
-		[SerializeField] private string _iOSGameId;
+		[SerializeField] private string _androidGameId = "4965819";
+		[SerializeField] private string _iOSGameId = "4965818";
 		[SerializeField] private bool _testMode = true;
 		[SerializeField] private AdsOnLose _adsOnLose;
 
