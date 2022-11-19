@@ -58,8 +58,7 @@ namespace Code.UI.Windows.Service
 			}
 			else
 			{
-				// TODO: Show not enough coins window
-				Debug.Log("Not enough coins");
+				_windowsChain.Open<NotEnoughMoneyWindow>();
 			}
 		}
 	}
