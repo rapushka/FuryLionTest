@@ -99,6 +99,10 @@ MonoBehaviour:
     m_Key: DestroyNTokensOfTypeText
     m_Metadata:
       m_Items: []
+  - m_Id: 14665721634308096
+    m_Key: ReachedScoreText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

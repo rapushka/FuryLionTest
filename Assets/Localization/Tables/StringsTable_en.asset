@@ -99,7 +99,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14655784875147264
-    m_Localized: reached score {0}
+    m_Localized: Destroyed {0} Tokens Of Type {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14665721634308096
+    m_Localized: Reached Score {0}
     m_Metadata:
       m_Items: []
   references:
