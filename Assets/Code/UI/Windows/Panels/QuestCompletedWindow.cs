@@ -1,4 +1,5 @@
 ﻿using Code.GameLoop.Goals.Conditions;
+using Code.GameLoop.Goals.Progress.ProgressObservers;
 using TMPro;
 using UnityEngine;
 
@@ -31,5 +32,7 @@ namespace Code.UI.Windows.Panels
 			_reachScoreValueView.gameObject.SetActive(true);
 			_reachScoreValueView.text = string.Format(_reachScoreValueView.text, targetScore);
 		}
+
+		public void Initialize(ProgressObserver progressObserver) => progressObserver.Goal.Accept(this);
 	}
 }

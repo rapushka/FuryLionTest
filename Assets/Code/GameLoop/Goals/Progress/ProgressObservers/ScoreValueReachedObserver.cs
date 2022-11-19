@@ -7,6 +7,7 @@ namespace Code.GameLoop.Goals.Progress.ProgressObservers
 		public int TargetScoreValue { get; }
 
 		public ScoreValueReachedObserver(ReachScoreValue goal)
+			: base(goal)
 		{
 			TargetScoreValue = goal.TargetScoreValue;
 		}

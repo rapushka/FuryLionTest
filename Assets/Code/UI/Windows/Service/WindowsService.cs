@@ -64,7 +64,7 @@ namespace Code.UI.Windows.Service
 
 		public void OnGoalReached(ProgressObserver progressObserver)
 		{
-				// _windowsChain.Open<GoalCompletedWindow>((w) => w.Initialize(progressObserver));
+			_windowsChain.Open<QuestCompletedWindow>((w) => w.Initialize(progressObserver));
 		}
 	}
 }
