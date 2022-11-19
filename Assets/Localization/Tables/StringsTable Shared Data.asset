@@ -87,6 +87,10 @@ MonoBehaviour:
     m_Key: ButtonOK
     m_Metadata:
       m_Items: []
+  - m_Id: 14649250799632384
+    m_Key: QuestCompletedTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

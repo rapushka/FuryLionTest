@@ -90,6 +90,10 @@ MonoBehaviour:
     m_Localized: OK
     m_Metadata:
       m_Items: []
+  - m_Id: 14649250799632384
+    m_Localized: Quest Completed!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
