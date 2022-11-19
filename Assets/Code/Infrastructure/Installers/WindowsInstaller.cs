@@ -51,7 +51,7 @@ namespace Code.Infrastructure.Installers
 				.BindSignalTo<GameLoseSignal, WindowsService>((x) => x.OnLose)
 				.BindSignalTo<SettingsOpenedSignal, WindowsService>((x) => x.OpenSettings)
 				.BindSignalTo<ShowAdSignal, AdsService>((x) => x.ShowAd)
-				.BindSignalTo<GoalReachedSignal, WindowsService>((x) => x.OnGoalReached)
+				.BindSignalTo<GoalReachedSignal, WindowsService>((x, v) => x.OnGoalReached(v.Value))
 				.BindAnalyticsSignals()
 				;
 		}

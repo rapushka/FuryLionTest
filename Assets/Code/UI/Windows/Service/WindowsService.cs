@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Ads;
+using Code.GameLoop.Goals.Progress.ProgressObservers;
 using Code.Gameplay.Coins;
 using Code.UI.GameSettings;
 using Code.UI.Windows.Panels;
@@ -62,9 +63,9 @@ namespace Code.UI.Windows.Service
 			}
 		}
 
-		public void OnGoalReached()
+		public void OnGoalReached(ProgressObserver progressObserver)
 		{
-			Debug.Log("Window service: goal reached");
+			Debug.Log($"Window service: goal reached of type {progressObserver.GetType().Name}");
 		}
 	}
 }
