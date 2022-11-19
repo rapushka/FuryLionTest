@@ -3,7 +3,6 @@ using Code.Ads;
 using Code.Gameplay.Coins;
 using Code.UI.GameSettings;
 using Code.UI.Windows.Panels;
-using UnityEngine;
 using Zenject;
 
 namespace Code.UI.Windows.Service
@@ -58,8 +57,7 @@ namespace Code.UI.Windows.Service
 			}
 			else
 			{
-				// TODO: Show not enough coins window
-				Debug.Log("Not enough coins");
+				_windowsChain.Open<NotEnoughMoneyWindow>();
 			}
 		}
 	}
