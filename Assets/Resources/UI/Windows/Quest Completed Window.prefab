@@ -1042,7 +1042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7143932500341756674, guid: 81f350f065cdc1e4a9668f0858998b38, type: 3}
       propertyPath: m_text
-      value: Destroy {0} Tokens Of Color {1}
+      value: destroy {0} Tokens Of Color {1}
       objectReference: {fileID: 0}
     - target: {fileID: 7143932500341756674, guid: 81f350f065cdc1e4a9668f0858998b38, type: 3}
       propertyPath: m_fontSize

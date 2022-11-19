@@ -15,7 +15,10 @@ namespace Code.UI.Windows.Panels
 		{
 			var tokenUnit = goal.Type;
 			_destroyAllObstaclesOfTypeView.gameObject.SetActive(true);
-			_destroyAllObstaclesOfTypeView.text = string.Format(_destroyAllObstaclesOfTypeView.text, tokenUnit);
+			var text = _destroyAllObstaclesOfTypeView.text;
+			
+			// replace {0} with variable
+			_destroyAllObstaclesOfTypeView.text = string.Format(text, tokenUnit);
 		}
 
 		public void Visit(DestroyNTokensOfColor goal)
@@ -23,14 +26,27 @@ namespace Code.UI.Windows.Panels
 			var targetCount = goal.TargetCount;
 			var color = goal.Color;
 			_destroyNTokensOfColorView.gameObject.SetActive(true);
-			_destroyNTokensOfColorView.text = string.Format(_destroyNTokensOfColorView.text, targetCount, color);
+			
+			var text = _destroyNTokensOfColorView.text;
+			// replace {0} and {1} with variables
+			_destroyNTokensOfColorView.text = string.Format(text, targetCount, color);
 		}
 
 		public void Visit(ReachScoreValue goal)
 		{
 			var targetScore = goal.TargetScoreValue;
 			_reachScoreValueView.gameObject.SetActive(true);
-			_reachScoreValueView.text = string.Format(_reachScoreValueView.text, targetScore);
+			
+			var text = _reachScoreValueView.text;
+			// replace {0} with variable
+			_reachScoreValueView.text = string.Format(text, targetScore);
+		}
+
+		private void OnDisable()
+		{
+			_destroyAllObstaclesOfTypeView.gameObject.SetActive(false);
+			_destroyNTokensOfColorView.gameObject.SetActive(false);
+			_reachScoreValueView.gameObject.SetActive(false);
 		}
 
 		public void Initialize(ProgressObserver progressObserver) => progressObserver.Goal.Accept(this);
