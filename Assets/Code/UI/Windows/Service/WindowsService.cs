@@ -3,7 +3,6 @@ using Code.Ads;
 using Code.Gameplay.Coins;
 using Code.UI.GameSettings;
 using Code.UI.Windows.Panels;
-using UnityEngine;
 using Zenject;
 
 namespace Code.UI.Windows.Service
