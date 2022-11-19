@@ -94,6 +94,14 @@ MonoBehaviour:
     m_Localized: Quest Completed!
     m_Metadata:
       m_Items: []
+  - m_Id: 14655003673444352
+    m_Localized: destroyed all obstacles {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655784875147264
+    m_Localized: reached score {0}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
