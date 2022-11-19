@@ -1,30 +1,18 @@
-﻿using System;
-using Code.GameLoop.Goals.Conditions;
+﻿using Code.GameLoop.Goals.Conditions;
+using UnityEngine;
 
 namespace Code.UI.Windows.Panels
 {
 	public class QuestCompletedWindow : UnityWindow, IGoalVisitor
 	{
-		public string Visit(DestroyAllObstaclesOfType goal)
-		{
-			throw new NotImplementedException();
-		}
+		[SerializeField] private GameObject _destroyAllObstaclesOfTypeView;
+		[SerializeField] private GameObject _destroyNTokensOfColorView;
+		[SerializeField] private GameObject _reachScoreValueView;
+		
+		public void Visit(DestroyAllObstaclesOfType goal) => _destroyAllObstaclesOfTypeView.SetActive(true);
 
-		public string Visit(DestroyNTokensOfColor goal)
-		{
-			throw new NotImplementedException();
-		}
+		public void Visit(DestroyNTokensOfColor goal) => _destroyNTokensOfColorView.SetActive(true);
 
-		public string Visit(ReachScoreValue goal)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	public interface IGoalVisitor
-	{
-		string Visit(DestroyAllObstaclesOfType goal);
-		string Visit(DestroyNTokensOfColor goal);
-		string Visit(ReachScoreValue goal);
+		public void Visit(ReachScoreValue goal) => _reachScoreValueView.SetActive(true);
 	}
 }
