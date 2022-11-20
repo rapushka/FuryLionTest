@@ -1,6 +1,6 @@
-using Code.Extensions;
 using Code.Infrastructure.Signals.Input;
 using Zenject;
+using UnityEngine.EventSystems;
 
 namespace Code.Input
 {
@@ -10,8 +10,19 @@ namespace Code.Input
 
 		[Inject] public InputService(SignalBus signalBus) => _signalBus = signalBus;
 
+		private static bool MouseNotOverUI => EventSystem.current.IsPointerOverGameObject() == false;
+
 		public void Tick()
-			=> _signalBus.Do((s) => s.Fire<MouseDownSignal>(), @if: UnityEngine.Input.GetMouseButtonDown(0))
-			             .Do((s) => s.Fire<MouseUpSignal>(), @if: UnityEngine.Input.GetMouseButtonUp(0));
+		{
+			if (UnityEngine.Input.GetMouseButtonDown(0) && MouseNotOverUI)
+			{
+				_signalBus.Fire<MouseDownSignal>();
+			}
+
+			if (UnityEngine.Input.GetMouseButtonUp(0) && MouseNotOverUI)
+			{
+				_signalBus.Fire<MouseUpSignal>();
+			}
+		}
 	}
 }

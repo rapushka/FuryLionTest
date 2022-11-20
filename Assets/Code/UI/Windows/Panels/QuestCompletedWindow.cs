@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Code.DataStoring.Localizations.LocalsVariables;
-using Code.Extensions;
 using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using TMPro;
@@ -44,7 +42,7 @@ namespace Code.UI.Windows.Panels
 		}
 
 		public void Visit(DestroyAllObstaclesOfType goal)
-			=> _stack.Push(_obstaclesString.GetLocalizedString(goal.Type.GetName()));
+			=> _stack.Push(_obstaclesString.GetLocalizedString(goal.Type));
 
 		public void Visit(DestroyNTokensOfColor goal)
 			=> _stack.Push(_tokensString.GetLocalizedString(_values.Set(goal.TargetCount, goal.Color)));
