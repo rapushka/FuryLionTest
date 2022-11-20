@@ -1,54 +1,53 @@
-﻿using Code.GameLoop.Goals.Conditions;
+﻿using Code.Extensions;
+using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Code.UI.Windows.Panels
 {
 	public class QuestCompletedWindow : UnityWindow, IGoalVisitor
 	{
-		[SerializeField] private TextMeshProUGUI _destroyAllObstaclesOfTypeView;
-		[SerializeField] private TextMeshProUGUI _destroyNTokensOfColorView;
-		[SerializeField] private TextMeshProUGUI _reachScoreValueView;
-		
-		public void Visit(DestroyAllObstaclesOfType goal)
-		{
-			var tokenUnit = goal.Type;
-			_destroyAllObstaclesOfTypeView.gameObject.SetActive(true);
-			var text = _destroyAllObstaclesOfTypeView.text;
-			
-			// replace {0} with variable
-			_destroyAllObstaclesOfTypeView.text = string.Format(text, tokenUnit);
-		}
+		[SerializeField] private TextMeshProUGUI _textMesh;
+		[SerializeField] private LocalizedString _obstaclesLocalizedString;
+		[SerializeField] private LocalizedString _tokensLocalizedString;
+		[SerializeField] private LocalizedString _scoreLocalizedString;
 
-		public void Visit(DestroyNTokensOfColor goal)
+		private void OnEnable()
 		{
-			var targetCount = goal.TargetCount;
-			var color = goal.Color;
-			_destroyNTokensOfColorView.gameObject.SetActive(true);
-			
-			var text = _destroyNTokensOfColorView.text;
-			// replace {0} and {1} with variables
-			_destroyNTokensOfColorView.text = string.Format(text, targetCount, color);
-		}
-
-		public void Visit(ReachScoreValue goal)
-		{
-			var targetScore = goal.TargetScoreValue;
-			_reachScoreValueView.gameObject.SetActive(true);
-			
-			var text = _reachScoreValueView.text;
-			// replace {0} with variable
-			_reachScoreValueView.text = string.Format(text, targetScore);
+			_obstaclesLocalizedString.StringChanged += UpdateText;
+			_tokensLocalizedString.StringChanged += UpdateText;
+			_scoreLocalizedString.StringChanged += UpdateText;
 		}
 
 		private void OnDisable()
 		{
-			_destroyAllObstaclesOfTypeView.gameObject.SetActive(false);
-			_destroyNTokensOfColorView.gameObject.SetActive(false);
-			_reachScoreValueView.gameObject.SetActive(false);
+			_obstaclesLocalizedString.StringChanged -= UpdateText;
+			_tokensLocalizedString.StringChanged -= UpdateText;
+			_scoreLocalizedString.StringChanged -= UpdateText;
 		}
 
 		public void Initialize(ProgressObserver progressObserver) => progressObserver.Goal.Accept(this);
+
+		public void Visit(DestroyAllObstaclesOfType goal)
+			=> _obstaclesLocalizedString.RefreshTextWithArguments(goal.Type.GetName());
+
+		public void Visit(DestroyNTokensOfColor goal)
+			=> _tokensLocalizedString.RefreshTextWithArguments(goal.TargetCount, goal.Color.GetName());
+
+		public void Visit(ReachScoreValue goal)
+			=> _scoreLocalizedString.RefreshTextWithArguments(goal.TargetScoreValue);
+
+		private void UpdateText(string value) => _textMesh.text = value;
+	}
+
+	public static class LocalizedStringExtensions
+	{
+		public static void RefreshTextWithArguments(this LocalizedString @this, params object[] args)
+		{
+			@this.Arguments = args;
+			@this.RefreshString();
+		}
 	}
 }
