@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: eecea88b0661cc04ea6a60f9a19b20e5, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5238293758569873409
   m_TableData:
   - m_Id: 7816524021760
     m_Localized: Settings
@@ -90,6 +91,29 @@ MonoBehaviour:
     m_Localized: OK
     m_Metadata:
       m_Items: []
+  - m_Id: 14649250799632384
+    m_Localized: Quest Completed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655003673444352
+    m_Localized: Destroyed All Obstacles {0}
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873409
+  - m_Id: 14655784875147264
+    m_Localized: Destroyed {Values.Count} Tokens Of Type {Values.Color}
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873409
+  - m_Id: 14665721634308096
+    m_Localized: Reached Score {0}
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873409
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5238293758569873409
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00406368651a3400004063d35b113400004023f0a5103400

@@ -87,6 +87,22 @@ MonoBehaviour:
     m_Key: ButtonOK
     m_Metadata:
       m_Items: []
+  - m_Id: 14649250799632384
+    m_Key: QuestCompletedTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655003673444352
+    m_Key: DestroyAllObstaclesOfTypeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655784875147264
+    m_Key: DestroyNTokensOfTypeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14665721634308096
+    m_Key: ReachedScoreText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

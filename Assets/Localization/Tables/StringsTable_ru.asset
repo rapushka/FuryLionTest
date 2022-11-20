@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: ru
   m_SharedData: {fileID: 11400000, guid: eecea88b0661cc04ea6a60f9a19b20e5, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5238293758569873408
   m_TableData:
   - m_Id: 7816524021760
     m_Localized: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -92,6 +93,32 @@ MonoBehaviour:
     m_Localized: "\u041E\u043A"
     m_Metadata:
       m_Items: []
+  - m_Id: 14649250799632384
+    m_Localized: "\u041A\u0432\u0435\u0441\u0442 \u0437\u0430\u0432\u0451\u0440\u0448\u0451\u043D!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655003673444352
+    m_Localized: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D\u044B \u0432\u0441\u0435
+      \u043F\u0440\u0435\u043F\u044F\u0442\u0441\u0442\u0432\u0438\u044F {0}"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873408
+  - m_Id: 14655784875147264
+    m_Localized: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D\u043E {Count}
+      \u0442\u043E\u043A\u0435\u043D\u043E\u0432 \u0442\u0438\u043F\u0430 {Color}"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873408
+  - m_Id: 14665721634308096
+    m_Localized: "\u0414\u043E\u0441\u0442\u0438\u0433\u043D\u0443\u0442 \u0440\u0435\u043A\u043E\u0440\u0434
+      {0}"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873408
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5238293758569873408
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00406368651a3400004063d35b113400004023f0a5103400

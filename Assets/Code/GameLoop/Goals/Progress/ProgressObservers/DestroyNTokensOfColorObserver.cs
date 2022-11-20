@@ -5,6 +5,6 @@ namespace Code.GameLoop.Goals.Progress.ProgressObservers
 	public class DestroyNTokensOfColorObserver : DestroyTokensOfTypeObserver
 	{
 		public DestroyNTokensOfColorObserver(DestroyNTokensOfColor goal)
-			: base(goal.TargetCount, goal.Color) { }
+			: base(goal, goal.TargetCount, goal.Color) { }
 	}
 }
