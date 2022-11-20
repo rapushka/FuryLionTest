@@ -34,7 +34,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		int IBonusesConfig.BombExplosionRange => _bonus.BombExplosionRange;
 
-		int ICoinsConfig.CoinsPerToken         => _coins.CoinsPerToken;
+		int ICoinsConfig.CoinsPerToken => _coins.CoinsPerToken;
 
 		int ICoinsConfig.HorizontalRocketPrice => _coins.HorizontalRocketPrice;
 
