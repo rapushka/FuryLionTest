@@ -10,9 +10,10 @@ namespace Code.Inner
 
 		public static class SceneIndex
 		{
-			public const int Gameplay = 0;
-			public const int Lose = 1;
-			public const int Victory = 2;
+			public const int Bootstrap = 0;
+			public const int Gameplay = 1;
+			public const int Lose = 2;
+			public const int Victory = 3;
 		}
 
 		public static class Analytics

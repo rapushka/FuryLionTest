@@ -12,17 +12,14 @@ using Zenject;
 
 namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 {
-	public class UiInstaller : MonoInstaller
+	public class HudInstaller : MonoInstaller
 	{
 		[SerializeField] private OpenSettingsButton _settingsButton;
-		[SerializeField] private SettingsWindow _settingsWindow;
-		[SerializeField] private SoundSettings _soundSettings;
 		[SerializeField] private ScoreView _scoreView;
 		[SerializeField] private CoinsCountView _coinsCountView;
 		[SerializeField] private RemainingActionsView _remainingActionsView;
 		[SerializeField] private ReachScoreGoalView _reachScoreGoalViewPrefab;
 		[SerializeField] private DestroyTokensGoalView _destroyTokensGoalViewPrefab;
-		[SerializeField] private LanguageSelector _languageSelector;
 		[SerializeField] private ButtonSpawnHorizontalRocket _buttonSpawnRocket;
 		[SerializeField] private ButtonSpawnBomb _buttonSpawnBomb;
 
@@ -30,18 +27,14 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 		public override void InstallBindings()
 		{
 			Container
-				.BindSingleFromInstance(_settingsWindow)
-				.BindSingleFromInstance(_soundSettings)
 				.BindSingleFromInstance(_settingsButton)
 				.BindSingleFromInstance(_scoreView)
 				.BindSingleFromInstance(_coinsCountView)
 				.BindSingleFromInstance(_remainingActionsView)
 				.BindSingleFromInstance(_reachScoreGoalViewPrefab)
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
-				.BindSingleFromInstance(_languageSelector)
 				.BindSingleFromInstance(_buttonSpawnRocket)
 				.BindSingleFromInstance(_buttonSpawnBomb)
-				.BindSingleWithInterfaces<SettingsInitializer>()
 				.BindSingleWithInterfaces<Purchase>()
 				;
 

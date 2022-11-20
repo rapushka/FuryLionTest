@@ -1,10 +1,8 @@
 using Code.DataStoring.Preferences;
 using Code.Generated.Analytics.Signals;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using Zenject;
-using static Code.Inner.Constants.AudioSettings.ExposedParameter;
 using static Code.Inner.Constants.AudioSettings;
 
 namespace Code.UI.GameSettings
@@ -14,17 +12,17 @@ namespace Code.UI.GameSettings
 		[SerializeField] private Toggle _musicToggle;
 		[SerializeField] private Toggle _sfxToggle;
 
-		private AudioMixer _audioMixer;
 		private SignalBus _signalBus;
+		private Settings _settings;
 
 		public bool MusicIsOn => _musicToggle.isOn;
 
 		public bool SfxIsOn => _sfxToggle.isOn;
 
 		[Inject]
-		public void Construct(AudioMixer audioMixer, SignalBus signalBus)
+		public void Construct(Settings settings, SignalBus signalBus)
 		{
-			_audioMixer = audioMixer;
+			_settings = settings;
 			_signalBus = signalBus;
 		}
 
@@ -40,39 +38,25 @@ namespace Code.UI.GameSettings
 			_sfxToggle.onValueChanged.RemoveListener(OnSfxToggle);
 		}
 
-		public void LoadSettings(Settings settings)
+		public void LoadSettings(SettingsModel settingsModel)
 		{
-			_musicToggle.isOn = settings.PlayingMusic;
-			_sfxToggle.isOn = settings.PlayingSFX;
-
-			SetMusicVolume(settings.PlayingMusic);
-			SetSfxVolume(settings.PlayingSFX);
+			_musicToggle.isOn = settingsModel.PlayingMusic;
+			_sfxToggle.isOn = settingsModel.PlayingSFX;
 		}
 
 		private void OnMusicToggle(bool isEnabled)
 		{
-			var volume = SetMusicVolume(isEnabled);
+			var volume = _settings.SetMusicVolume(isEnabled);
 			_signalBus.Fire(new MusicChangedSignal(CalculatePercentage(volume)));
 		}
 
 		private void OnSfxToggle(bool isEnabled)
 		{
-			var volume = SetSfxVolume(isEnabled);
+			var volume = _settings.SetSfxVolume(isEnabled);
 			_signalBus.Fire(new SoundChangedSignal(CalculatePercentage(volume)));
 		}
 
-		private float SetMusicVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, MusicVolume);
-
-		private float SetSfxVolume(bool isEnabled) => ToggleAudioMixerParameter(isEnabled, SfxVolume);
-
-		private float ToggleAudioMixerParameter(bool isEnabled, string nameOfMixer)
-		{
-			float volume = isEnabled ? MaxAudioVolume : MinAudioVolume;
-			_audioMixer.SetFloat(nameOfMixer, volume);
-			return volume;
-		}
-
-		private static float CalculatePercentage(float volume) 
+		private static float CalculatePercentage(float volume)
 			=> (volume + NegativeOffsetCompensation) / WholeValue * 100;
 	}
 }
