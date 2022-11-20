@@ -48,8 +48,7 @@ namespace Code.GameLoop.Goals.Progress
 
 		private void Unsubscribe() => _progressObservers.ForEach((o) => o.GoalReached -= OnGoalReached);
 
-		private void CheckObserversOfType<TObserver, TParam>
-			(TParam param, Action<TObserver, TParam> action)
+		private void CheckObserversOfType<TObserver, TParam>(TParam param, Action<TObserver, TParam> action)
 		{
 			foreach (var observer in _progressObservers)
 			{
@@ -70,7 +69,7 @@ namespace Code.GameLoop.Goals.Progress
 
 		private void OnGoalReached(ProgressObserver sender)
 		{
-			_signalBus.Fire<GoalReachedSignal>();
+			_signalBus.Fire(new GoalReachedSignal(sender));
 			_markForDeleting.Add(sender);
 		}
 
