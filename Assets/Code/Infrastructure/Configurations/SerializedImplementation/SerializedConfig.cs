@@ -9,7 +9,7 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 		[Space] [SerializeField] private SerializedChainConfig _chain;
 		[Space] [SerializeField] private SerializedInputConfig _input;
 		[Space] [SerializeField] private SerializedScoreConfig _score;
-		[Space] [SerializeField] private SerializedBonusesConfig _bonuses;
+		[Space] [SerializeField] private SerializedBonusConfig _bonus;
 		[Space] [SerializeField] private SerializedCoinsConfig _coins;
 
 		int IChainConfig.MinTokensCountForChain => _chain.MinTokensCountForChain;
@@ -26,13 +26,13 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		float IScoreConfig.MultiplierPerTokenInChain => _score.MultiplierPerTokenInChain;
 
-		int IBonusesConfig.MinChainLenghtForRocket => _bonuses.MinChainLenghtForRocket;
+		int IBonusesConfig.MinChainLenghtForRocket => _bonus.MinChainLenghtForRocket;
 
-		int IBonusesConfig.MaxChainLenghtForRocket => _bonuses.MaxChainLenghtForRocket;
+		int IBonusesConfig.MaxChainLenghtForRocket => _bonus.MaxChainLenghtForRocket;
 
-		int IBonusesConfig.MinChainLenghtForBomb => _bonuses.MinChainLenghtForBomb;
+		int IBonusesConfig.MinChainLenghtForBomb => _bonus.MinChainLenghtForBomb;
 
-		int IBonusesConfig.BombExplosionRange => _bonuses.BombExplosionRange;
+		int IBonusesConfig.BombExplosionRange => _bonus.BombExplosionRange;
 
 		int ICoinsConfig.CoinsPerToken         => _coins.CoinsPerToken;
 
