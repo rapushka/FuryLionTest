@@ -40,8 +40,8 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		int ICoinsConfig.BombPrice => _coins.BombPrice;
 
-		int ICoinsConfig.AdditionalActionPrice => _coins.AdditionalActionPrice;
+		int ICoinsConfig.AdditionalActionsPrice => _coins.AdditionalActionsPrice;
 
-		int ICoinsConfig.ActionsPerPurchase => _coins.ActionsPerPurchase;
+		int ICoinsConfig.ActionsCountPerPurchase => _coins.ActionsCountPerPurchase;
 	}
 }

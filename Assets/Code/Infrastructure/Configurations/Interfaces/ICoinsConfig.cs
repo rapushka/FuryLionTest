@@ -8,8 +8,8 @@
 		
 		int BombPrice { get; }
 		
-		int AdditionalActionPrice { get; }
+		int AdditionalActionsPrice { get; }
 		
-		int ActionsPerPurchase { get; }
+		int ActionsCountPerPurchase { get; }
 	}
 }
