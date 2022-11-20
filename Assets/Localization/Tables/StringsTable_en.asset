@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5238293758569873409
   - m_Id: 14655784875147264
-    m_Localized: Destroyed {0} Tokens Of Type {0}
+    m_Localized: Destroyed {Values.Count} Tokens Of Type {Values.Color}
     m_Metadata:
       m_Items:
       - rid: 5238293758569873409

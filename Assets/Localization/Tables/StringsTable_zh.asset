@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5238293758569873410
   - m_Id: 14655784875147264
-    m_Localized: "\u5DF2\u9500\u6BC1 {0} \u7C7B\u578B\u7684 {0} \u4E2A\u4EE4\u724C"
+    m_Localized: "\u5DF2\u9500\u6BC1 {Color} \u7C7B\u578B\u7684 {Count} \u4E2A\u4EE4\u724C"
     m_Metadata:
       m_Items:
       - rid: 5238293758569873410

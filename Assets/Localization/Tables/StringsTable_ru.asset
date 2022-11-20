@@ -104,8 +104,8 @@ MonoBehaviour:
       m_Items:
       - rid: 5238293758569873408
   - m_Id: 14655784875147264
-    m_Localized: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D\u043E {0}
-      \u0442\u043E\u043A\u0435\u043D\u043E\u0432 \u0442\u0438\u043F\u0430 {0}"
+    m_Localized: "\u0423\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D\u043E {Count}
+      \u0442\u043E\u043A\u0435\u043D\u043E\u0432 \u0442\u0438\u043F\u0430 {Color}"
     m_Metadata:
       m_Items:
       - rid: 5238293758569873408
