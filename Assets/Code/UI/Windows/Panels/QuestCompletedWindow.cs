@@ -1,7 +1,9 @@
-﻿using Code.Extensions;
+﻿using System;
+using Code.Extensions;
 using Code.GameLoop.Goals.Conditions;
 using Code.GameLoop.Goals.Progress.ProgressObservers;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -17,21 +19,12 @@ namespace Code.UI.Windows.Panels
 		public void Initialize(ProgressObserver progressObserver) => progressObserver.Goal.Accept(this);
 
 		public void Visit(DestroyAllObstaclesOfType goal)
-		{
-			_obstaclesLocalizedString.Arguments = new object[] { goal.Type.GetName() };
-			_textMesh.text = _obstaclesLocalizedString.GetLocalizedString();
-		}
+			=> _textMesh.text = _obstaclesLocalizedString.GetLocalizedString(goal.Type.GetName());
 
 		public void Visit(DestroyNTokensOfColor goal)
-		{
-			_tokensLocalizedString.Arguments = new object[] { goal.TargetCount, goal.Color.GetName() };
-			_textMesh.text = _tokensLocalizedString.GetLocalizedString();
-		}
+			=> _textMesh.text = _tokensLocalizedString.GetLocalizedString(goal.TargetCount, goal.Color.GetName());
 
 		public void Visit(ReachScoreValue goal)
-		{
-			_scoreLocalizedString.Arguments = new object[] { goal.TargetScoreValue };
-			_textMesh.text = _scoreLocalizedString.GetLocalizedString();
-		}
+			=> _textMesh.text = _scoreLocalizedString.GetLocalizedString(goal.TargetScoreValue);
 	}
 }

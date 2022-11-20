@@ -2895,7 +2895,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5821381450309223605, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: _localizedString.m_TableEntryReference.m_KeyId
-      value: 14655784875147264
+      value: 14655003673444352
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821381450309223605, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _obstaclesLocalizedString.m_TableEntryReference.m_KeyId
+      value: 14655003673444352
       objectReference: {fileID: 0}
     - target: {fileID: 6840403230937179123, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AnchoredPosition.y
