@@ -245,8 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _window: {fileID: 4627277728590780118}
+  _buttonClose: {fileID: 1661385884493060031}
   _textMesh: {fileID: 3883538490148054535}
-  _obstaclesLocalizedString:
+  _obstaclesString:
     m_TableReference:
       m_TableCollectionName: GUID:eecea88b0661cc04ea6a60f9a19b20e5
     m_TableEntryReference:
@@ -255,7 +256,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _tokensLocalizedString:
+  _tokensString:
     m_TableReference:
       m_TableCollectionName: GUID:eecea88b0661cc04ea6a60f9a19b20e5
     m_TableEntryReference:
@@ -266,8 +267,8 @@ MonoBehaviour:
     m_LocalVariables:
     - name: Values
       variable:
-        rid: 5238293758569873424
-  _scoreLocalizedString:
+        rid: 5238293758569873425
+  _scoreString:
     m_TableReference:
       m_TableCollectionName: GUID:eecea88b0661cc04ea6a60f9a19b20e5
     m_TableEntryReference:
@@ -280,7 +281,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5238293758569873424
+    - rid: 5238293758569873425
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: {fileID: 6804276238378628325}

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d81f074d0b3426c80dd96fad4fe3288, type: 3}
   m_Name: Level Fast Victory or Lose
   m_EditorClassIdentifier: 
-  _actionsCount: 10
+  _actionsCount: 100
   _goals:
   - {fileID: 11400000, guid: a46cb8932d63271448a2ba220b778260, type: 2}
+  - {fileID: 11400000, guid: 57aaff3be83502a4e9a555157f66b49c, type: 2}
   - {fileID: 11400000, guid: 05801be017ca25e40acc546d61ae9a70, type: 2}
   - {fileID: 11400000, guid: 9903841860af25f4eb89a219ea3d0fdf, type: 2}
   - {fileID: 11400000, guid: 5d03598607204164899ed030077c2733, type: 2}
+  - {fileID: 11400000, guid: 1d03f1046c6014e47b0d96c8c81eab25, type: 2}
   _tokens:
     Rows:
     - Value: 00000000000000000000000000000000000000000000000000000000
