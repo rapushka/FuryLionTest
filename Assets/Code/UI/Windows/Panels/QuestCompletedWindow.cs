@@ -14,40 +14,24 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private LocalizedString _tokensLocalizedString;
 		[SerializeField] private LocalizedString _scoreLocalizedString;
 
-		private void OnEnable()
-		{
-			_obstaclesLocalizedString.StringChanged += UpdateText;
-			_tokensLocalizedString.StringChanged += UpdateText;
-			_scoreLocalizedString.StringChanged += UpdateText;
-		}
-
-		private void OnDisable()
-		{
-			_obstaclesLocalizedString.StringChanged -= UpdateText;
-			_tokensLocalizedString.StringChanged -= UpdateText;
-			_scoreLocalizedString.StringChanged -= UpdateText;
-		}
-
 		public void Initialize(ProgressObserver progressObserver) => progressObserver.Goal.Accept(this);
 
 		public void Visit(DestroyAllObstaclesOfType goal)
-			=> _obstaclesLocalizedString.RefreshTextWithArguments(goal.Type.GetName());
+		{
+			_obstaclesLocalizedString.Arguments = new object[] { goal.Type.GetName() };
+			_textMesh.text = _obstaclesLocalizedString.GetLocalizedString();
+		}
 
 		public void Visit(DestroyNTokensOfColor goal)
-			=> _tokensLocalizedString.RefreshTextWithArguments(goal.TargetCount, goal.Color.GetName());
+		{
+			_tokensLocalizedString.Arguments = new object[] { goal.TargetCount, goal.Color.GetName() };
+			_textMesh.text = _tokensLocalizedString.GetLocalizedString();
+		}
 
 		public void Visit(ReachScoreValue goal)
-			=> _scoreLocalizedString.RefreshTextWithArguments(goal.TargetScoreValue);
-
-		private void UpdateText(string value) => _textMesh.text = value;
-	}
-
-	public static class LocalizedStringExtensions
-	{
-		public static void RefreshTextWithArguments(this LocalizedString @this, params object[] args)
 		{
-			@this.Arguments = args;
-			@this.RefreshString();
+			_scoreLocalizedString.Arguments = new object[] { goal.TargetScoreValue };
+			_textMesh.text = _scoreLocalizedString.GetLocalizedString();
 		}
 	}
 }
