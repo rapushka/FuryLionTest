@@ -14,7 +14,6 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private Button _buttonYes;
 		[SerializeField] private Button _buttonNo;
 
-		private int _coinsCount;
 		private int _price;
 		private CoinsCounter _coins;
 		private WindowsChain _windowsChain;
@@ -38,13 +37,12 @@ namespace Code.UI.Windows.Panels
 			_windowsChain = windowsChain;
 		}
 
-		public void Initialize(int coinsCount, int price)
+		public void Initialize(int price)
 		{
-			_coinsCount = coinsCount;
 			_price = price;
 
-			_coinsCountTextMesh.text = _coinsCount.ToString();
 			_priceTextMesh.text = _price.ToString();
+			_coinsCountTextMesh.text = _coins.CoinsCount.ToString();
 		}
 
 		private void OnButtonYesClick()

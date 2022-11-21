@@ -20,7 +20,7 @@ namespace Code.UI.Windows.Panels
 			{
 				SessionResult.Lose    => _loseView,
 				SessionResult.Victory => _victoryView,
-				_                     => throw new ArgumentException(nameof(sessionResult)),
+				var _                 => throw new ArgumentException(nameof(sessionResult)),
 			};
 
 		private void ShowAdOnLose(SessionResult result, AdsService adsService)

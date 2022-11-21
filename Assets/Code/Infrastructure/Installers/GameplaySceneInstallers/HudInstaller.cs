@@ -35,7 +35,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSingleFromInstance(_destroyTokensGoalViewPrefab)
 				.BindSingleFromInstance(_buttonSpawnRocket)
 				.BindSingleFromInstance(_buttonSpawnBomb)
-				.BindSingleWithInterfaces<Purchase>()
+				.BindSingleWithInterfaces<PurchaseBonus>()
 				;
 
 			SubscribeSignals();

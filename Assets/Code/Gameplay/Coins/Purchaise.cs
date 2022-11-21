@@ -1,27 +1,28 @@
 ﻿using System;
 using Code.Gameplay.TokensField.Bonuses;
 using Code.Infrastructure.Configurations.Interfaces;
+using Code.UI.Windows.Panels;
 using Code.UI.Windows.Service;
 using Zenject;
 
 namespace Code.Gameplay.Coins
 {
-	public class Purchase
+	public class PurchaseBonus
 	{
 		private readonly ICoinsConfig _coinsConfig;
-		private readonly WindowsService _windowsService;
+		private readonly WindowsChain _windowsChain;
 		private readonly BonusSpawner _spawner;
 
 		[Inject]
-		public Purchase
+		public PurchaseBonus
 		(
 			ICoinsConfig coinsConfig,
-			WindowsService windowsService,
+			WindowsChain windowsChain,
 			BonusSpawner spawner
 		)
 		{
 			_coinsConfig = coinsConfig;
-			_windowsService = windowsService;
+			_windowsChain = windowsChain;
 			_spawner = spawner;
 		}
 
@@ -33,6 +34,18 @@ namespace Code.Gameplay.Coins
 
 		private void SpawnBomb() => _spawner.SpawnBomb();
 
-		private void BuyBonus(int price, Action spawn) => _windowsService.ShowConfirmBonusPurchaseWindow(price, spawn);
+		private void BuyBonus(int price, Action spawn)
+		{
+			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(price));
+			_windowsChain.WindowClose += (result) => Spawn(result, spawn);
+		}
+
+		private void Spawn(WindowResult result, Action spawn)
+		{
+			if (result is WindowResult.Yes)
+			{
+				spawn.Invoke();
+			}
+		}
 	}
 }

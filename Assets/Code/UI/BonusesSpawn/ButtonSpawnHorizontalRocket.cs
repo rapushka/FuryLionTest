@@ -2,6 +2,6 @@
 {
 	public class ButtonSpawnHorizontalRocket : ButtonSpawnBonus
 	{
-		protected override void Spawn() => Purchase.BuyHorizontalRocket();
+		protected override void Spawn() => PurchaseBonus.BuyHorizontalRocket();
 	}
 }
