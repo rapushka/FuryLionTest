@@ -16,13 +16,12 @@ namespace Code.UI.Windows.Panels
 		private ICoinsConfig _coinsConfig;
 
 		[Inject]
-		public void Construct(ICoinsConfig coinsConfig, WindowsChain windowsChain)
+		public void Construct(ICoinsConfig coinsConfig, WindowsChain windowsChain, WindowsService windowsService)
 		{
 			_coinsConfig = coinsConfig;
 			_windowsChain = windowsChain;
+			_windowsService = windowsService;
 		}
-
-		public void Initialize(WindowsService windowsService) => _windowsService = windowsService;
 
 		private void OnEnable()
 		{

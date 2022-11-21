@@ -12,7 +12,7 @@ namespace Code.UI.Windows.Service
 
 		public void OnVictory() => OpenResultWindowWith(SessionResult.Victory);
 
-		public void OnLose() => _windowsChain.Open<AddExtraActionsWindow>((w) => w.Initialize(this));
+		public void OnLose() => _windowsChain.Open<AddExtraActionsWindow>();
 
 		public void Lose() => OpenResultWindowWith(SessionResult.Lose);
 
