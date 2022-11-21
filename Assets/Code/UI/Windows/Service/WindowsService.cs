@@ -28,12 +28,6 @@ namespace Code.UI.Windows.Service
 
 		public void OnLose() => OpenResultWindowWith(SessionResult.Lose);
 
-		private void OpenResultWindowWith(SessionResult sessionResult)
-			=> _windowsChain.Open<GameResultWindow>((w) => Initialize(w, sessionResult));
-
-		private void Initialize(GameResultWindow window, SessionResult sessionResult)
-			=> window.Initialize(sessionResult, _adsService);
-
 		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Initialize(_settings));
 
 		public void ShowConfirmPurchaseWindow(int price, Action spawn)
@@ -41,6 +35,17 @@ namespace Code.UI.Windows.Service
 			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price));
 			_windowsChain.WindowClose += (r) => OnWindowClose(r, price, spawn);
 		}
+
+		public void OnGoalReached(ProgressObserver progressObserver)
+		{
+			_windowsChain.Open<QuestCompletedWindow>((w) => w.Initialize(progressObserver));
+		}
+
+		private void OpenResultWindowWith(SessionResult sessionResult)
+			=> _windowsChain.Open<GameResultWindow>((w) => Initialize(w, sessionResult));
+
+		private void Initialize(GameResultWindow window, SessionResult sessionResult)
+			=> window.Initialize(sessionResult, _adsService);
 
 		private void OnWindowClose(WindowResult result, int price, Action spawn)
 		{
@@ -60,11 +65,6 @@ namespace Code.UI.Windows.Service
 			{
 				_windowsChain.Open<NotEnoughMoneyWindow>();
 			}
-		}
-
-		public void OnGoalReached(ProgressObserver progressObserver)
-		{
-			_windowsChain.Open<QuestCompletedWindow>((w) => w.Initialize(progressObserver));
 		}
 	}
 }

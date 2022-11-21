@@ -9,4 +9,14 @@ namespace Code.UI.Buttons
 
 		protected override void OnClick() => _chain.Close();
 	}
+
+	public class TryBuyButton : ButtonClose
+	{
+		protected override void OnClick()
+		{
+			
+			
+			base.OnClick();
+		}
+	}
 }

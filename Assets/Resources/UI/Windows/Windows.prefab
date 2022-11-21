@@ -472,6 +472,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 260404506606271050}
     m_Modifications:
+    - target: {fileID: 540256607927298873, guid: c168ce096bea55448a36bd1c86ae5db6, type: 3}
+      propertyPath: _chain
+      value: 
+      objectReference: {fileID: 4584966497381279407}
+    - target: {fileID: 3613059742659115768, guid: c168ce096bea55448a36bd1c86ae5db6, type: 3}
+      propertyPath: _chain
+      value: 
+      objectReference: {fileID: 4584966497381279407}
     - target: {fileID: 4627277728590780118, guid: c168ce096bea55448a36bd1c86ae5db6, type: 3}
       propertyPath: m_Name
       value: Buy Actions Window
