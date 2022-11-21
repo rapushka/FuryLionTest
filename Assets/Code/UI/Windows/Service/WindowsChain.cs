@@ -11,36 +11,33 @@ namespace Code.UI.Windows.Service
 		[SerializeField] private List<UnityWindow> _windows;
 
 		private Dictionary<Type, UnityWindow> _windowsDictionary;
-		private Stack<UnityWindow> _windowsStack;
+		private Stack<WindowContainer> _windowsStack;
 
 		private bool HasOpenedWindow => _windowsStack.Any();
 
 		private void OnEnable()
 		{
 			_windowsDictionary = _windows.ToDictionary((w) => w.GetType());
-			_windowsStack = new Stack<UnityWindow>();
+			_windowsStack = new Stack<WindowContainer>();
 		}
 
-		public void Open<TWindow>(Action<TWindow> onWindowOpen = null, Action<WindowResult> onWindowClose = null)
+		public void Open<TWindow>(Action<TWindow> onOpen = null, Action<WindowResult> onClose = null)
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
-			if (onWindowClose != null)
-			{
-				window.OnClose = onWindowClose;
-			}
+
+			var container = new WindowContainer(window, (w) => onOpen?.Invoke((TWindow)w), onClose);
 			HideOpenedWindow();
 
-			_windowsStack.Push(window);
-			onWindowOpen?.Invoke((TWindow)window);
-			window.Open();
+			_windowsStack.Push(container);
+			container.Open();
 		}
 
 		public void Close()
 		{
-			var window = _windowsStack.Pop();
-			window.Hide();
-			
+			var container = _windowsStack.Pop();
+			container.Close();
+
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();
@@ -62,7 +59,7 @@ namespace Code.UI.Windows.Service
 		{
 			if (HasOpenedWindow)
 			{
-				_windowsStack.Peek().Hide();
+				_windowsStack.Peek().Close();
 			}
 		}
 	}
