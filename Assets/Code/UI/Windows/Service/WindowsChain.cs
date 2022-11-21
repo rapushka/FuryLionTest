@@ -59,7 +59,7 @@ namespace Code.UI.Windows.Service
 		{
 			if (HasOpenedWindow)
 			{
-				_windowsStack.Peek().Close();
+				_windowsStack.Peek().Hide();
 			}
 		}
 	}

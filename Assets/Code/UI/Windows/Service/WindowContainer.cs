@@ -22,6 +22,11 @@ namespace Code.UI.Windows.Service
 			_window.Open();
 		}
 
+		public void Hide()
+		{
+			_window.Close();
+		}
+		
 		public void Close()
 		{
 			_onClose?.Invoke(_window.Result);
