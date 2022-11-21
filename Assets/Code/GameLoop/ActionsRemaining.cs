@@ -27,6 +27,13 @@ namespace Code.GameLoop
 			InvokeValueUpdate();
 			CheckActionsOver();
 		}
+		
+		public void BuyActions(int count)
+		{
+			_actionsRemain += count;
+
+			InvokeValueUpdate();
+		}
 
 		private void InvokeValueUpdate() => _signalBus.Fire(new ActionsLeftUpdateSignal(_actionsRemain));
 

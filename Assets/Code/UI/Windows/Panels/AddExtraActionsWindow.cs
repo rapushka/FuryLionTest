@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Configurations.Interfaces;
+﻿using Code.GameLoop;
+using Code.Infrastructure.Configurations.Interfaces;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,13 +15,21 @@ namespace Code.UI.Windows.Panels
 		private WindowsService _windowsService;
 		private WindowsChain _windowsChain;
 		private ICoinsConfig _coinsConfig;
+		private ActionsRemaining _actionsRemaining;
 
 		[Inject]
-		public void Construct(ICoinsConfig coinsConfig, WindowsChain windowsChain, WindowsService windowsService)
+		public void Construct
+		(
+			ICoinsConfig coinsConfig,
+			WindowsChain windowsChain,
+			WindowsService windowsService,
+			ActionsRemaining actionsRemaining
+		)
 		{
 			_coinsConfig = coinsConfig;
 			_windowsChain = windowsChain;
 			_windowsService = windowsService;
+			_actionsRemaining = actionsRemaining;
 		}
 
 		private void OnEnable()
@@ -45,7 +54,7 @@ namespace Code.UI.Windows.Panels
 		{
 			if (result is WindowResult.Yes)
 			{
-				Debug.Log("Purchase confirmed");
+				_actionsRemaining.BuyActions(_coinsConfig.ActionsCountPerPurchase);
 				_windowsChain.Close();
 			}
 			else
