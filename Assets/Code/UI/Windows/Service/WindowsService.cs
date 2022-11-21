@@ -69,5 +69,7 @@ namespace Code.UI.Windows.Service
 				_windowsChain.Open<NotEnoughMoneyWindow>();
 			}
 		}
+
+		public void Close() => _windowsChain.Close();
 	}
 }

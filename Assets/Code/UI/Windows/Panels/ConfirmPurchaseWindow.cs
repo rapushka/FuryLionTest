@@ -7,6 +7,7 @@ namespace Code.UI.Windows.Panels
 {
 	public class ConfirmPurchaseWindow : UnityWindow
 	{
+		[SerializeField] private WindowsChain _windowsChain;
 		[SerializeField] private TextMeshProUGUI _coinsCountTextMesh;
 		[SerializeField] private TextMeshProUGUI _priceTextMesh;
 		[SerializeField] private Button _buttonYes;
@@ -36,8 +37,14 @@ namespace Code.UI.Windows.Panels
 			_priceTextMesh.text = _price.ToString();
 		}
 
-		private void OnButtonYesClick() => Result = WindowResult.Yes;
+		private void OnButtonYesClick() => CloseWithResult(WindowResult.Yes);
 
-		private void OnButtonNoClick() => Result = WindowResult.No;
+		private void OnButtonNoClick() => CloseWithResult(WindowResult.No);
+
+		private void CloseWithResult(WindowResult windowResult)
+		{
+			Result = windowResult;
+			_windowsChain.Close();
+		}
 	}
 }

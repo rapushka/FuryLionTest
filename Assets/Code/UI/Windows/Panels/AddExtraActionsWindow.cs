@@ -36,14 +36,13 @@ namespace Code.UI.Windows.Panels
 
 		private void OnWindowClose(WindowResult result)
 		{
-			if (result is not WindowResult.Yes)
+			if (result is WindowResult.Yes)
 			{
-				Close();
-				return;
+				_windowsService.Close();
+				// TODO: Add extra actions
+				Debug.Log("Extra actions added");
 			}
-			
-			// TODO: Add extra actions
-			Close();
+			// Close();
 		}
 
 		private void Close() => _windowsService.Lose();
