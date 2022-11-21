@@ -12,9 +12,8 @@ namespace Code.UI.Windows.Service
 
 		private Dictionary<Type, UnityWindow> _windowsDictionary;
 		private Stack<UnityWindow> _windowsStack;
+		private Action<WindowResult> _onWindowClose;
 
-		public event Action<WindowResult> WindowClose;
-		
 		private bool HasOpenedWindow => _windowsStack.Any();
 
 		private void OnEnable()
@@ -23,14 +22,15 @@ namespace Code.UI.Windows.Service
 			_windowsStack = new Stack<UnityWindow>();
 		}
 
-		public void Open<TWindow>(Action<TWindow> initializeWindow = null)
+		public void Open<TWindow>(Action<TWindow> onWindowOpen = null, Action<WindowResult> onWindowClose = null)
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
 			HideOpenedWindow();
 
 			_windowsStack.Push(window);
-			initializeWindow?.Invoke((TWindow)window);
+			onWindowOpen?.Invoke((TWindow)window);
+			_onWindowClose = onWindowClose;
 			window.Open();
 		}
 
@@ -38,25 +38,14 @@ namespace Code.UI.Windows.Service
 		{
 			var window = _windowsStack.Pop();
 			window.Hide();
-			WindowClose?.Invoke(window.Result);
-			ClearWindowCloseSubscribers();
+			_onWindowClose?.Invoke(window.Result);
 
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();
 			}
 		}
-
-		private void ClearWindowCloseSubscribers()
-		{
-			var subscribers = WindowClose?.GetInvocationList()
-				?? Array.Empty<Delegate>();
-			foreach (var @delegate in subscribers)
-			{
-				WindowClose -= (Action<WindowResult>)@delegate;
-			}
-		}
-
+		
 		private UnityWindow GetWindowOfType<TWindow>()
 			where TWindow : UnityWindow
 		{

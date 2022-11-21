@@ -35,12 +35,9 @@ namespace Code.Gameplay.Coins
 		private void SpawnBomb() => _spawner.SpawnBomb();
 
 		private void BuyBonus(int price, Action spawn)
-		{
-			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(price));
-			_windowsChain.WindowClose += (result) => Spawn(result, spawn);
-		}
+			=> _windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(price), (result) => Spawn(result, spawn));
 
-		private void Spawn(WindowResult result, Action spawn)
+		private static void Spawn(WindowResult result, Action spawn)
 		{
 			if (result is WindowResult.Yes)
 			{

@@ -63,6 +63,6 @@ MonoBehaviour:
   _coins:
     <CoinsPerToken>k__BackingField: 1
     <HorizontalRocketPrice>k__BackingField: 10
-    <BombPrice>k__BackingField: 25
+    <BombPrice>k__BackingField: 30
     <ExtraActionsPrice>k__BackingField: 1
     <ActionsCountPerPurchase>k__BackingField: 5

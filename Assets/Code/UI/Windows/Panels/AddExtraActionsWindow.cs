@@ -45,10 +45,10 @@ namespace Code.UI.Windows.Panels
 		}
 
 		private void OnButtonYesClick()
-		{
-			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coinsConfig.ExtraActionsPrice));
-			_windowsChain.WindowClose += OnWindowClose;
-		}
+			=> _windowsChain.Open<ConfirmPurchaseWindow>(InitializePurchaseWindow, OnWindowClose);
+
+		private void InitializePurchaseWindow(ConfirmPurchaseWindow window)
+			=> window.Initialize(_coinsConfig.ExtraActionsPrice);
 
 		private void OnWindowClose(WindowResult result)
 		{
