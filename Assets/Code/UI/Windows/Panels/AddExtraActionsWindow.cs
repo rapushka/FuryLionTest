@@ -1,6 +1,7 @@
 ﻿using Code.Infrastructure.Configurations.Interfaces;
 using Code.Infrastructure.Signals.Coins;
 using Code.UI.Windows.Service;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,6 +12,7 @@ namespace Code.UI.Windows.Panels
 	{
 		[SerializeField] private Button _buttonYes;
 		[SerializeField] private Button _buttonNo;
+		[SerializeField] private TextMeshProUGUI _priceTextMesh;
 
 		private WindowsService _windowsService;
 		private WindowsChain _windowsChain;
@@ -36,6 +38,8 @@ namespace Code.UI.Windows.Panels
 		{
 			_buttonYes.onClick.AddListener(OnButtonYesClick);
 			_buttonNo.onClick.AddListener(Lose);
+			
+			_priceTextMesh.text = _coinsConfig.ExtraActionsPrice.ToString();
 		}
 
 		private void OnDisable()

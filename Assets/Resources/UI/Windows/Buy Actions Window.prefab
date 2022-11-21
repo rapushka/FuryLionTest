@@ -594,6 +594,7 @@ MonoBehaviour:
   _window: {fileID: 4627277728590780118}
   _buttonYes: {fileID: 1661385884493060031}
   _buttonNo: {fileID: 7955942263808781672}
+  _priceTextMesh: {fileID: 6347783291514095356}
 --- !u!1 &4871625125386068905
 GameObject:
   m_ObjectHideFlags: 0
