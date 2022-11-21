@@ -2857,6 +2857,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Windows
       objectReference: {fileID: 0}
+    - target: {fileID: 3450986910461282066, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 338.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450986910461282066, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 169.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3450986910684667909, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_Name
       value: Game Result Window
