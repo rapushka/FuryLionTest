@@ -1,16 +1,17 @@
 using Code.DataStoring.Preferences;
 using Code.UI.GameSettings;
 using UnityEngine;
+using Zenject;
 
 namespace Code.UI.Windows.Panels
 {
 	public class SettingsWindow : UnityWindow
 	{
 		[SerializeField] private SoundSettings _soundSettings;
-		
+
 		private Settings _settings;
 
-		public void Initialize(Settings settings) => _settings = settings;
+		[Inject] public void Construct(Settings settings) => _settings = settings;
 
 		private void OnDisable()
 		{
