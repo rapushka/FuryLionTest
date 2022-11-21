@@ -25,7 +25,10 @@ namespace Code.UI.Windows.Service
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
-			window.OnClose = onWindowClose;
+			if (onWindowClose != null)
+			{
+				window.OnClose = onWindowClose;
+			}
 			HideOpenedWindow();
 
 			_windowsStack.Push(window);
@@ -37,10 +40,7 @@ namespace Code.UI.Windows.Service
 		{
 			var window = _windowsStack.Pop();
 			window.Hide();
-
-			window.OnClose?.Invoke(window.Result);
-			window.OnClose = null;
-
+			
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();

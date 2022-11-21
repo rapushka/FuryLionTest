@@ -8,11 +8,30 @@ namespace Code.UI.Windows.Panels
 	{
 		[SerializeField] private GameObject _window;
 
-		public WindowResult Result { get; protected set; }
-		
-		public Action<WindowResult> OnClose { get; set; }
-		
+		protected WindowResult Result;
+		private Action<WindowResult> _onClose;
+
+		public Action<WindowResult> OnClose
+		{
+			set
+			{
+				if (_onClose != null)
+				{
+					throw new InvalidOperationException("OnClose already set");
+				}
+
+				_onClose = value ?? throw new InvalidOperationException("Cannot reset to null from outside");
+			}
+		}
+
 		public virtual void Open() => _window.SetActive(true);
-		public virtual void Hide() => _window.SetActive(false);
+
+		public virtual void Hide()
+		{
+			_window.SetActive(false);
+
+			_onClose?.Invoke(Result);
+			_onClose = null;
+		}
 	}
 }
