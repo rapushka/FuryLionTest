@@ -13,6 +13,7 @@ using Code.Infrastructure.Configurations.SerializedImplementation;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
 using Code.Infrastructure.Signals.Bonuses;
 using Code.Infrastructure.Signals.Chain;
+using Code.Infrastructure.Signals.Coins;
 using Code.Infrastructure.Signals.Goals;
 using Code.Infrastructure.Signals.Input;
 using Code.Infrastructure.Signals.Tokens;
@@ -94,6 +95,8 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSignalTo<BonusSpawnedSignal, BonusAnimator>((x, v) => x.OnBonusSpawned(v.Value))
 				.BindSignalTo<AllGoalsReachedSignal, GameCycle>((x) => x.OnAllGoalsReached)
 				.BindSignalTo<ActionsOverSignal, GameCycle>((x) => x.OnActionsOver)
+				.BindSignalTo<ActionsBoughtSignal, ActionsRemaining>((x, v) => x.OnActionsBought(v.Value))
+				.BindSignalTo<ActionsBoughtSignal, GameCycle>((x) => x.OnActionsBought)
 				;
 		}
 	}

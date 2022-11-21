@@ -1,5 +1,5 @@
-﻿using Code.GameLoop;
-using Code.Infrastructure.Configurations.Interfaces;
+﻿using Code.Infrastructure.Configurations.Interfaces;
+using Code.Infrastructure.Signals.Coins;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +15,7 @@ namespace Code.UI.Windows.Panels
 		private WindowsService _windowsService;
 		private WindowsChain _windowsChain;
 		private ICoinsConfig _coinsConfig;
-		private ActionsRemaining _actionsRemaining;
+		private SignalBus _signalBus;
 
 		[Inject]
 		public void Construct
@@ -23,13 +23,13 @@ namespace Code.UI.Windows.Panels
 			ICoinsConfig coinsConfig,
 			WindowsChain windowsChain,
 			WindowsService windowsService,
-			ActionsRemaining actionsRemaining
+			SignalBus signalBus
 		)
 		{
 			_coinsConfig = coinsConfig;
 			_windowsChain = windowsChain;
 			_windowsService = windowsService;
-			_actionsRemaining = actionsRemaining;
+			_signalBus = signalBus;
 		}
 
 		private void OnEnable()
@@ -54,7 +54,8 @@ namespace Code.UI.Windows.Panels
 		{
 			if (result is WindowResult.Yes)
 			{
-				_actionsRemaining.BuyActions(_coinsConfig.ActionsCountPerPurchase);
+				Result = WindowResult.Yes;
+				_signalBus.Fire(new ActionsBoughtSignal(_coinsConfig.ActionsCountPerPurchase));
 				_windowsChain.Close();
 			}
 			else

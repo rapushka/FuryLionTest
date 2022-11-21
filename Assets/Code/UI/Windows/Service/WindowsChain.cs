@@ -38,14 +38,17 @@ namespace Code.UI.Windows.Service
 		{
 			var window = _windowsStack.Pop();
 			window.Hide();
-			_onWindowClose?.Invoke(window.Result);
+
+			var onWindowClose = _onWindowClose;
+			_onWindowClose = null;
+			onWindowClose?.Invoke(window.Result);
 
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();
 			}
 		}
-		
+
 		private UnityWindow GetWindowOfType<TWindow>()
 			where TWindow : UnityWindow
 		{

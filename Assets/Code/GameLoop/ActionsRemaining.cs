@@ -28,7 +28,7 @@ namespace Code.GameLoop
 			CheckActionsOver();
 		}
 		
-		public void BuyActions(int count)
+		public void OnActionsBought(int count)
 		{
 			_actionsRemain += count;
 
