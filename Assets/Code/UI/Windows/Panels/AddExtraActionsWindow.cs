@@ -1,5 +1,4 @@
-﻿using Code.Gameplay.Coins;
-using Code.Infrastructure.Configurations.Interfaces;
+﻿using Code.Infrastructure.Configurations.Interfaces;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;

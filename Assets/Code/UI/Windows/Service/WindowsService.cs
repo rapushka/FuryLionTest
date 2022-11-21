@@ -37,7 +37,7 @@ namespace Code.UI.Windows.Service
 
 		public void ShowConfirmPurchaseWindow(int price, Action<WindowResult> callback)
 		{
-			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price, true));
+			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price));
 			_windowsChain.WindowClose += callback;
 		}
 

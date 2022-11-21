@@ -16,7 +16,6 @@ namespace Code.UI.Windows.Panels
 
 		private int _coinsCount;
 		private int _price;
-		private bool _tryBuy;
 		private CoinsCounter _coins;
 		private WindowsChain _windowsChain;
 
@@ -39,11 +38,10 @@ namespace Code.UI.Windows.Panels
 			_windowsChain = windowsChain;
 		}
 
-		public void Initialize(int coinsCount, int price, bool tryBuy = false)
+		public void Initialize(int coinsCount, int price)
 		{
 			_coinsCount = coinsCount;
 			_price = price;
-			_tryBuy = tryBuy;
 
 			_coinsCountTextMesh.text = _coinsCount.ToString();
 			_priceTextMesh.text = _price.ToString();
@@ -51,20 +49,13 @@ namespace Code.UI.Windows.Panels
 
 		private void OnButtonYesClick()
 		{
-			if (_tryBuy == false)
+			if (_coins.TrySpent(_price))
 			{
 				CloseWithResult(WindowResult.Yes);
 			}
 			else
 			{
-				if (_coins.TrySpent(_price))
-				{
-					CloseWithResult(WindowResult.Yes);
-				}
-				else
-				{
-					_windowsChain.Open<NotEnoughMoneyWindow>();
-				}
+				_windowsChain.Open<NotEnoughMoneyWindow>();
 			}
 		}
 
