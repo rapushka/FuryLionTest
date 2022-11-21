@@ -12,7 +12,6 @@ namespace Code.UI.Windows.Service
 
 		private Dictionary<Type, UnityWindow> _windowsDictionary;
 		private Stack<UnityWindow> _windowsStack;
-		private Action<WindowResult> _onWindowClose;
 
 		private bool HasOpenedWindow => _windowsStack.Any();
 
@@ -26,11 +25,11 @@ namespace Code.UI.Windows.Service
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
+			window.OnClose = onWindowClose;
 			HideOpenedWindow();
 
 			_windowsStack.Push(window);
 			onWindowOpen?.Invoke((TWindow)window);
-			_onWindowClose = onWindowClose;
 			window.Open();
 		}
 
@@ -39,9 +38,8 @@ namespace Code.UI.Windows.Service
 			var window = _windowsStack.Pop();
 			window.Hide();
 
-			var onWindowClose = _onWindowClose;
-			_onWindowClose = null;
-			onWindowClose?.Invoke(window.Result);
+			window.OnClose?.Invoke(window.Result);
+			window.OnClose = null;
 
 			if (HasOpenedWindow)
 			{
