@@ -2909,6 +2909,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000005722046
       objectReference: {fileID: 0}
+    - target: {fileID: 7271916106706457891, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
+      propertyPath: _windowsChain
+      value: 
+      objectReference: {fileID: 799459208}
     - target: {fileID: 7758168332287822701, guid: 243498c41ed51c04391b31b898f47fab, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -7.5

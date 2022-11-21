@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Configurations.Interfaces;
+﻿using Code.Gameplay.Coins;
+using Code.Infrastructure.Configurations.Interfaces;
 using Code.UI.Windows.Service;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,6 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private Button _buttonNo;
 
 		private WindowsService _windowsService;
-
 		private ICoinsConfig _coinsConfig;
 
 		[Inject] public void Construct(ICoinsConfig coinsConfig) => _coinsConfig = coinsConfig;
@@ -31,7 +31,7 @@ namespace Code.UI.Windows.Panels
 			_buttonNo.onClick.RemoveListener(Close);
 		}
 
-		private void OnButtonYesClick() 
+		private void OnButtonYesClick()
 			=> _windowsService.ShowConfirmPurchaseWindow(_coinsConfig.ExtraActionsPrice, OnWindowClose);
 
 		private void OnWindowClose(WindowResult result)
@@ -39,8 +39,6 @@ namespace Code.UI.Windows.Panels
 			if (result is WindowResult.Yes)
 			{
 				_windowsService.Close();
-				// TODO: Add extra actions
-				Debug.Log("Extra actions added");
 			}
 			// Close();
 		}
