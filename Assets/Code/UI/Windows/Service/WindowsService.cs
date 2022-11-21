@@ -26,20 +26,23 @@ namespace Code.UI.Windows.Service
 
 		public void OnVictory() => OpenResultWindowWith(SessionResult.Victory);
 
-		public void OnLose() => OpenResultWindowWith(SessionResult.Lose);
+		public void OnLose() => _windowsChain.Open<AddExtraActionsWindow>((w) => w.Initialize(this));
+
+		public void Lose() => OpenResultWindowWith(SessionResult.Lose);
 
 		public void OpenSettings() => _windowsChain.Open<SettingsWindow>((w) => w.Initialize(_settings));
 
-		public void ShowConfirmPurchaseWindow(int price, Action spawn)
+		public void ShowConfirmBonusPurchaseWindow(int price, Action spawn)
+			=> ShowConfirmPurchaseWindow(price, (r) => OnWindowClose(r, price, spawn));
+
+		public void ShowConfirmPurchaseWindow(int price, Action<WindowResult> callback)
 		{
 			_windowsChain.Open<ConfirmPurchaseWindow>((w) => w.Initialize(_coins.CoinsCount, price));
-			_windowsChain.WindowClose += (r) => OnWindowClose(r, price, spawn);
+			_windowsChain.WindowClose += callback;
 		}
 
 		public void OnGoalReached(ProgressObserver progressObserver)
-		{
-			_windowsChain.Open<QuestCompletedWindow>((w) => w.Initialize(progressObserver));
-		}
+			=> _windowsChain.Open<QuestCompletedWindow>((w) => w.Initialize(progressObserver));
 
 		private void OpenResultWindowWith(SessionResult sessionResult)
 			=> _windowsChain.Open<GameResultWindow>((w) => Initialize(w, sessionResult));

@@ -33,6 +33,6 @@ namespace Code.Gameplay.Coins
 
 		private void SpawnBomb() => _spawner.SpawnBomb();
 
-		private void BuyBonus(int price, Action spawn) => _windowsService.ShowConfirmPurchaseWindow(price, spawn);
+		private void BuyBonus(int price, Action spawn) => _windowsService.ShowConfirmBonusPurchaseWindow(price, spawn);
 	}
 }
