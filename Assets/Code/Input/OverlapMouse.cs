@@ -53,8 +53,8 @@ namespace Code.Input
 
 		public void FixedTick() => _signalBus.Do(FireHitSignal, @if: _isPressed && AnyColliderHit());
 
-		private void FireHitSignal(SignalBus signalBus)
-			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.GetComponent<Token>())));
+		private void FireHitSignal()
+			=> _overlapResults.ForEach((r) => _signalBus.Fire(new TokenHitSignal(r.GetComponent<Token>())));
 
 		private void FirePressSignal() => FireSignalForToken((t) => new TokenPressSignal(t));
 

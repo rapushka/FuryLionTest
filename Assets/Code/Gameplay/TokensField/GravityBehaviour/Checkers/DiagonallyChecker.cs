@@ -26,13 +26,12 @@ namespace Code.Gameplay.TokensField.GravityBehaviour.Checkers
 			          .ToDictionary((p) => p, GetDirection);
 
 		protected override Vector3 GetDirection(int x, int y)
-			=> IsOnBottomBorder(y) ? Vector3.zero
-				: CanMoveBottomLeft(x, y) ? Vector3.left
+			=> IsOnBottomBorder(y)         ? Vector3.zero
+				: CanMoveBottomLeft(x, y)  ? Vector3.left
 				: CanMoveBottomRight(x, y) ? Vector3.right
-				: Vector3.zero;
+				                             : Vector3.zero;
 
-		protected override bool TokenOnDirectionIsEmpty(int x, int y)
-			=> GetDirection(x, y) != Vector3.zero;
+		protected override bool TokenOnDirectionIsEmpty(int x, int y) => GetDirection(x, y) != Vector3.zero;
 
 		private static bool IsOnBottomBorder(int y) => y <= 0;
 

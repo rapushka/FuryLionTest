@@ -26,5 +26,15 @@ namespace Code.Extensions
 				[getKey(@this)] = getValue(@this)
 			};
 		}
+
+		public static T Do<T>(this T @this, Action action, bool @if)
+		{
+			if (@if)
+			{
+				action.Invoke();
+			}
+
+			return @this;
+		}
 	}
 }
