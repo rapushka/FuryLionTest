@@ -9,9 +9,9 @@ namespace Code.UI.BonusesSpawn
 	{
 		[SerializeField] private Button _button;
 		
-		protected Purchase Purchase;
+		protected PurchaseBonus PurchaseBonus;
 
-		[Inject] public void Construct(Purchase purchase) => Purchase = purchase;
+		[Inject] public void Construct(PurchaseBonus purchaseBonus) => PurchaseBonus = purchaseBonus;
 		
 		private void OnEnable() => _button.onClick.AddListener(Spawn);
 		

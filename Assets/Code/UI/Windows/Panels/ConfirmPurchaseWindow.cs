@@ -1,7 +1,9 @@
-﻿using Code.UI.Windows.Service;
+﻿using Code.Gameplay.Coins;
+using Code.UI.Windows.Service;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Code.UI.Windows.Panels
 {
@@ -12,8 +14,9 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private Button _buttonYes;
 		[SerializeField] private Button _buttonNo;
 
-		private int _coinsCount;
 		private int _price;
+		private CoinsCounter _coins;
+		private WindowsChain _windowsChain;
 
 		private void OnEnable()
 		{
@@ -27,17 +30,39 @@ namespace Code.UI.Windows.Panels
 			_buttonNo.onClick.RemoveListener(OnButtonNoClick);
 		}
 
-		public void Initialize(int coinsCount, int price)
+		[Inject]
+		public void Construct(CoinsCounter coins, WindowsChain windowsChain)
 		{
-			_coinsCount = coinsCount;
-			_price = price;
-			
-			_coinsCountTextMesh.text = _coinsCount.ToString();
-			_priceTextMesh.text = _price.ToString();
+			_coins = coins;
+			_windowsChain = windowsChain;
 		}
 
-		private void OnButtonYesClick() => Result = WindowResult.Yes;
+		public void Initialize(int price)
+		{
+			_price = price;
 
-		private void OnButtonNoClick() => Result = WindowResult.No;
+			_priceTextMesh.text = _price.ToString();
+			_coinsCountTextMesh.text = _coins.CoinsCount.ToString();
+		}
+
+		private void OnButtonYesClick()
+		{
+			if (_coins.TrySpent(_price))
+			{
+				CloseWithResult(WindowResult.Yes);
+			}
+			else
+			{
+				_windowsChain.Open<NotEnoughMoneyWindow>();
+			}
+		}
+
+		private void OnButtonNoClick() => CloseWithResult(WindowResult.No);
+
+		private void CloseWithResult(WindowResult windowResult)
+		{
+			Result = windowResult;
+			_windowsChain.Close();
+		}
 	}
 }

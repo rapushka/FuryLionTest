@@ -13,8 +13,8 @@ namespace Code.Infrastructure.Configurations.SerializedImplementation
 
 		[field: SerializeField] public int BombPrice { get; private set; } = 250;
 
-		[field: SerializeField] public int AdditionalActionPrice { get; private set; } = 10;
+		[field: SerializeField] public int ExtraActionsPrice { get; private set; } = 10;
 
-		[field: SerializeField] public int ActionsPerPurchase { get; private set; } = 5;
+		[field: SerializeField] public int ActionsCountPerPurchase { get; private set; } = 5;
 	}
 }

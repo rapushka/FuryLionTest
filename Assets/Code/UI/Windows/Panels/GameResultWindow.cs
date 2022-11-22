@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.Ads;
 using UnityEngine;
+using Zenject;
 
 namespace Code.UI.Windows.Panels
 {
@@ -8,11 +9,14 @@ namespace Code.UI.Windows.Panels
 	{
 		[SerializeField] private GameObject _loseView;
 		[SerializeField] private GameObject _victoryView;
+		private AdsService _adsService;
 
-		public void Initialize(SessionResult result, AdsService adsService)
+		[Inject] public void Construct(AdsService adsService) => _adsService = adsService;
+
+		public void Initialize(SessionResult result)
 		{
 			ChoiceTextMesh(result).SetActive(true);
-			ShowAdOnLose(result, adsService);
+			ShowAdOnLose(result);
 		}
 
 		private GameObject ChoiceTextMesh(SessionResult sessionResult)
@@ -20,14 +24,14 @@ namespace Code.UI.Windows.Panels
 			{
 				SessionResult.Lose    => _loseView,
 				SessionResult.Victory => _victoryView,
-				_                     => throw new ArgumentException(nameof(sessionResult)),
+				var _                 => throw new ArgumentException(nameof(sessionResult)),
 			};
 
-		private void ShowAdOnLose(SessionResult result, AdsService adsService)
+		private void ShowAdOnLose(SessionResult result)
 		{
 			if (result is SessionResult.Lose)
 			{
-				adsService.ShowAd();
+				_adsService.ShowAd();
 			}
 		}
 	}

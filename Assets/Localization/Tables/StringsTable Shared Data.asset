@@ -103,6 +103,14 @@ MonoBehaviour:
     m_Key: ReachedScoreText
     m_Metadata:
       m_Items: []
+  - m_Id: 14938179180380160
+    m_Key: BuyActionsWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14938752705314816
+    m_Key: BuyAdditionalActionsText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

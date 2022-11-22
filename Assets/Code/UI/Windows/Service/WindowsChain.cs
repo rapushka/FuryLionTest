@@ -11,49 +11,36 @@ namespace Code.UI.Windows.Service
 		[SerializeField] private List<UnityWindow> _windows;
 
 		private Dictionary<Type, UnityWindow> _windowsDictionary;
-		private Stack<UnityWindow> _windowsStack;
+		private Stack<WindowContainer> _windowsStack;
 
-		public event Action<WindowResult> WindowClose;
-		
 		private bool HasOpenedWindow => _windowsStack.Any();
 
 		private void OnEnable()
 		{
 			_windowsDictionary = _windows.ToDictionary((w) => w.GetType());
-			_windowsStack = new Stack<UnityWindow>();
+			_windowsStack = new Stack<WindowContainer>();
 		}
 
-		public void Open<TWindow>(Action<TWindow> initializeWindow = null)
+		public void Open<TWindow>(Action<TWindow> onOpen = null, Action<WindowResult> onClose = null)
 			where TWindow : UnityWindow
 		{
 			var window = GetWindowOfType<TWindow>();
+
+			var container = new WindowContainer(window, (w) => onOpen?.Invoke((TWindow)w), onClose);
 			HideOpenedWindow();
 
-			_windowsStack.Push(window);
-			initializeWindow?.Invoke((TWindow)window);
-			window.Open();
+			_windowsStack.Push(container);
+			container.Open();
 		}
 
 		public void Close()
 		{
-			var window = _windowsStack.Pop();
-			window.Hide();
-			WindowClose?.Invoke(window.Result);
-			ClearWindowCloseSubscribers();
+			var container = _windowsStack.Pop();
+			container.Close();
 
 			if (HasOpenedWindow)
 			{
 				_windowsStack.Peek().Open();
-			}
-		}
-
-		private void ClearWindowCloseSubscribers()
-		{
-			var subscribers = WindowClose?.GetInvocationList()
-				?? Array.Empty<Delegate>();
-			foreach (var @delegate in subscribers)
-			{
-				WindowClose -= (Action<WindowResult>)@delegate;
 			}
 		}
 

@@ -8,7 +8,10 @@ namespace Code.UI.Windows.Panels
 		[SerializeField] private GameObject _window;
 
 		public WindowResult Result { get; protected set; }
+
+
 		public virtual void Open() => _window.SetActive(true);
-		public virtual void Hide() => _window.SetActive(false);
+
+		public virtual void Close() => _window.SetActive(false);
 	}
 }

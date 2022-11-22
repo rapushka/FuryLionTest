@@ -110,6 +110,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5238293758569873409
+  - m_Id: 14938179180380160
+    m_Localized: You are close to lose!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14938752705314816
+    m_Localized: Buy additional actions for
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
