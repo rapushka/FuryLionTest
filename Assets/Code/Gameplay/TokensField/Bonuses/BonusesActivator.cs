@@ -3,6 +3,7 @@ using Code.Extensions;
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.Configurations.Interfaces;
 using Code.Infrastructure.Signals.ActionsLeftSignals;
+using Code.Infrastructure.Signals.Input;
 using Code.Infrastructure.Signals.Tokens;
 using UnityEngine;
 using Zenject;
@@ -45,6 +46,7 @@ namespace Code.Gameplay.TokensField.Bonuses
 
 			InvokeTokensDestroyed();
 			_signalBus.Fire<ActionDoneSignal>();
+			_signalBus.Fire<MouseUpSignal>();
 		}
 
 		private void InvokeTokensDestroyed()
