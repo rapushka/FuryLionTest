@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: zh
   m_SharedData: {fileID: 11400000, guid: eecea88b0661cc04ea6a60f9a19b20e5, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5238293758569873410
   m_TableData:
   - m_Id: 7816524021760
     m_Localized: "\u8BBE\u7F6E"
@@ -46,6 +47,81 @@ MonoBehaviour:
     m_Localized: "\u606D\u559C\uFF01"
     m_Metadata:
       m_Items: []
+  - m_Id: 12852490406150144
+    m_Localized: "\u706B\u7BAD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12853245972267008
+    m_Localized: "\u70B8\u5F39"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13059677858512896
+    m_Localized: "\u5206\u6570\uFF1A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13060298951049216
+    m_Localized: "\u52A8\u4F5C\u4F9D\u7136\uFF1A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14211891524222976
+    m_Localized: "\u662F\u7684"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212080611835904
+    m_Localized: "\u4E0D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212405162885120
+    m_Localized: "\u786E\u8BA4\u8D2D\u4E70"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14226537463365632
+    m_Localized: "\u4F60\u6709\uFF1A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14227125894856704
+    m_Localized: "\u4F60\u9700\u8981\uFF1A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14613371905327104
+    m_Localized: "\u91D1\u5E01\u4E0D\u591F\uFF01"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14613999599697920
+    m_Localized: "\u597D\u7684"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14649250799632384
+    m_Localized: "\u4EFB\u52A1\u5B8C\u6210\uFF01"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655003673444352
+    m_Localized: "\u6467\u6BC1\u6240\u6709\u969C\u788D {0}"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873410
+  - m_Id: 14655784875147264
+    m_Localized: "\u5DF2\u9500\u6BC1 {Color} \u7C7B\u578B\u7684 {Count} \u4E2A\u4EE4\u724C"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873410
+  - m_Id: 14665721634308096
+    m_Localized: "\u8FBE\u5230\u5206\u6570 {0}"
+    m_Metadata:
+      m_Items:
+      - rid: 5238293758569873410
+  - m_Id: 14938179180380160
+    m_Localized: "\u4F60\u5FEB\u8981\u8F93\u4E86\uFF01"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14938752705314816
+    m_Localized: "\u8D2D\u4E70\u989D\u5916\u7684\u884C\u52A8"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5238293758569873410
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00406368651a3400004063d35b113400004023f0a5103400

@@ -18,12 +18,10 @@ namespace Code.Infrastructure.ScenesTransfers
 
 		public void Dispose() => SceneManager.activeSceneChanged -= OnSceneLoaded;
 
-		private void OnSceneLoaded(Scene arg0, Scene scene) => _signalBus.Fire<SceneLoadedSignal>();
+		private void OnSceneLoaded(Scene prevScene, Scene newScene) => _signalBus.Fire<SceneLoadedSignal>();
 
 		public void ToGameplayScene() => SceneManager.LoadScene(Constants.SceneIndex.Gameplay);
 
-		public void ToLoseScene() => SceneManager.LoadScene(Constants.SceneIndex.Lose);
-
-		public void ToVictoryScene() => SceneManager.LoadScene(Constants.SceneIndex.Victory);
+		public void ToBootstrapScene() => SceneManager.LoadScene(Constants.SceneIndex.Bootstrap);
 	}
 }

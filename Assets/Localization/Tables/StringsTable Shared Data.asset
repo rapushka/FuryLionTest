@@ -43,6 +43,74 @@ MonoBehaviour:
     m_Key: GameOverVictory
     m_Metadata:
       m_Items: []
+  - m_Id: 12852490406150144
+    m_Key: ButtonRocket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12853245972267008
+    m_Key: ButtonBomb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13059677858512896
+    m_Key: ScoreCount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13060298951049216
+    m_Key: ActionsCounter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14211891524222976
+    m_Key: ButtonYes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212080611835904
+    m_Key: ButtonNo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14212405162885120
+    m_Key: ConfirmPurchaseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14226537463365632
+    m_Key: PurchaseYouHave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14227125894856704
+    m_Key: ConfirmPurchaseYouNeed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14613371905327104
+    m_Key: NotEnoughMoneyTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14613999599697920
+    m_Key: ButtonOK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14649250799632384
+    m_Key: QuestCompletedTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655003673444352
+    m_Key: DestroyAllObstaclesOfTypeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14655784875147264
+    m_Key: DestroyNTokensOfTypeText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14665721634308096
+    m_Key: ReachedScoreText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14938179180380160
+    m_Key: BuyActionsWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14938752705314816
+    m_Key: BuyAdditionalActionsText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

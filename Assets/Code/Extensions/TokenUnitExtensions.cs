@@ -21,5 +21,21 @@ namespace Code.Extensions
 				TokenUnit.Border     => Color.black,
 				_                    => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
 			};
+		
+		public static bool IsColor(this TokenUnit @this)
+			=> @this switch
+			{
+				TokenUnit.Empty      => false,
+				TokenUnit.Red        => true,
+				TokenUnit.Green      => true,
+				TokenUnit.Blue       => true,
+				TokenUnit.Yellow     => true,
+				TokenUnit.Pink       => true,
+				TokenUnit.RockLevel1 => false,
+				TokenUnit.RockLevel2 => false,
+				TokenUnit.Ice        => false,
+				TokenUnit.Border     => false,
+				_                    => throw new ArgumentOutOfRangeException(nameof(@this), @this, null)
+			};
 	}
 }

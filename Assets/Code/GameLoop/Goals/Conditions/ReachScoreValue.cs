@@ -1,3 +1,4 @@
+using Code.UI.Windows.Panels;
 using UnityEngine;
 
 namespace Code.GameLoop.Goals.Conditions
@@ -8,5 +9,7 @@ namespace Code.GameLoop.Goals.Conditions
 		[SerializeField] private int _targetScoreValue;
 
 		public int TargetScoreValue => _targetScoreValue;
+
+		public override void Accept(IGoalVisitor goalVisitor) => goalVisitor.Visit(this);
 	}
 }

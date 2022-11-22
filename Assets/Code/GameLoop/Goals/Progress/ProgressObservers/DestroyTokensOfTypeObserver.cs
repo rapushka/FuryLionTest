@@ -1,3 +1,4 @@
+using Code.GameLoop.Goals.Conditions;
 using Code.Gameplay.Tokens;
 
 namespace Code.GameLoop.Goals.Progress.ProgressObservers
@@ -6,7 +7,8 @@ namespace Code.GameLoop.Goals.Progress.ProgressObservers
 	{
 		private int _destroyedCount;
 
-		protected DestroyTokensOfTypeObserver(int targetCount, TokenUnit targetUnit)
+		protected DestroyTokensOfTypeObserver(Goal goal, int targetCount, TokenUnit targetUnit)
+			: base(goal)
 		{
 			TargetCount = targetCount;
 			TargetUnit = targetUnit;

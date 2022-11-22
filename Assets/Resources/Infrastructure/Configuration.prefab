@@ -44,19 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7495555ded4a41cda71ddcbaeddec0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serializedFieldConfig:
+  _field:
     _step: 1
     _offset: {x: 0.5, y: 0.5}
     _fieldSizes: {x: 7, y: 11}
-  _serializedChainConfig:
+  _chain:
     _minTokensCountForChain: 3
-  _serializedInputConfig:
+  _input:
     _cursorOverlapRadius: 0.01
-  _serializedScoreConfig:
-    _scoreMultiplier: 150
-    _multiplierPerTokenInChain: 1.2
-  _serializedBonusesConfig:
+  _score:
+    <ScoreMultiplier>k__BackingField: 150
+    <MultiplierPerTokenInChain>k__BackingField: 1.2
+  _bonus:
     _minValueForRocket: 5
     _maxValueForRocket: 7
     _minValueForBomb: 8
     _bombExplosionRange: 2
+  _coins:
+    <CoinsPerToken>k__BackingField: 1
+    <HorizontalRocketPrice>k__BackingField: 10
+    <BombPrice>k__BackingField: 30
+    <ExtraActionsPrice>k__BackingField: 10
+    <ActionsCountPerPurchase>k__BackingField: 5
