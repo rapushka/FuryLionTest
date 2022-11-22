@@ -75,7 +75,7 @@ namespace Code.Infrastructure.Installers.GameplaySceneInstallers
 				.BindSignalTo<MouseUpSignal, OverlapMouse>((x) => x.DisableOverlapping)
 				.BindSignalTo<MouseUpSignal, Chain>((x) => x.EndComposing)
 				.BindSignalTo<TokenHitSignal, Chain>((x, v) => x.NextToken(v.Value))
-				.BindSignalTo<TokenClickSignal, Chain>((x, v) => x.StartComposing(v.Value))
+				.BindSignalTo<TokenPressSignal, Chain>((x, v) => x.StartComposing(v.Value))
 				.BindSignalTo<TokenClickSignal, BonusesActivator>((x, v) => x.OnTokenClick(v.Value))
 				.BindSignalTo<ChainEndedSignal, CompletedChain>((x, v) => x.OnChainEnded(v.Value))
 				.BindSignalTo<ChainEndedSignal, Field>((x, _) => x.UpdateField())

@@ -26,10 +26,14 @@ namespace Code.Input
 		public void EnableOverlapping()
 		{
 			_isPressed = true;
-			_signalBus.Do(FireClickSignal, @if: AnyColliderHit());
+			_signalBus.Do(FirePressSignal, @if: AnyColliderHit());
 		}
 
-		public void DisableOverlapping() => _isPressed = false;
+		public void DisableOverlapping()
+		{
+			_isPressed = false;
+			_signalBus.Do(FireClickSignal, @if: AnyColliderHit());
+		}
 
 		public void Initialize()
 		{
@@ -42,6 +46,9 @@ namespace Code.Input
 		private void FireHitSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenHitSignal(r.GetComponent<Token>())));
 
+		private void FirePressSignal(SignalBus signalBus)
+			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenPressSignal(r.GetComponent<Token>())));
+		
 		private void FireClickSignal(SignalBus signalBus)
 			=> _overlapResults.ForEach((r) => signalBus.Fire(new TokenClickSignal(r.GetComponent<Token>())));
 
