@@ -1,4 +1,4 @@
-// ReSharper disable ClassNeverInstantiated.Global класс создаются Zenject-ом
+// ReSharper disable ClassNeverInstantiated.Global класс создаётся Zenject-ом
 using Code.Gameplay.Tokens;
 using Code.Infrastructure.BaseSignals;
 
